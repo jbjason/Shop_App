@@ -1,0 +1,159 @@
+import 'package:Shop_App/models/http_exception.dart';
+import 'package:flutter/material.dart';
+import './product.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+class Products with ChangeNotifier {
+  String authToken, userId;
+  Products(
+    this.authToken,
+    this.userId,
+    this._items,
+  );
+  List<Product> _items = [
+    // Product(
+    //   id: 'p1',
+    //   title: 'Red Shirt',
+    //   description: 'A red shirt - it is pretty red!',
+    //   price: 29.99,
+    //   imageUrl:
+    //       'https://images-na.ssl-images-amazon.com/images/I/51c%2BT7XynwL._AC_UX679_.jpg',
+    // ),
+    // Product(
+    //   id: 'p2',
+    //   title: 'Trowser',
+    //   description: 'this is a pan for helping home chores',
+    //   price: 20.45,
+    //   imageUrl:
+    //       'https://i.pinimg.com/474x/e4/ed/45/e4ed45ddf937abb7c3862469a15372c8.jpg',
+    // ),
+    // Product(
+    //   id: 'p3',
+    //   title: 'Yellow Scarf',
+    //   description: 'this is a pan for helping home chores',
+    //   price: 20.45,
+    //   imageUrl:
+    //       'https://www.grandrivershotokan.ca/wp-content/uploads/2018/12/1029.40.png',
+    // ),
+    // Product(
+    //   id: 'p4',
+    //   title: 'A Pan',
+    //   description: 'this is a pan for helping home chores',
+    //   price: 20.45,
+    //   imageUrl:
+    //       'https://static01.nyt.com/images/2011/01/26/business/pan2/pan2-blog480.jpg',
+    // ),
+  ];
+  //Getter method in flutter
+  List<Product> get items {
+    return [..._items];
+  }
+
+  List<Product> get favoriteItems {
+    return _items.where((element) => element.isFavorite).toList();
+  }
+
+  Product findById(String id) {
+    return _items.firstWhere((element) => element.id == id);
+  }
+
+  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+    String filterString =
+        filterByUser ? '&orderBy="creatorId"&equalTo="$userId"' : '';
+    var url =
+        'https://flutter-update-67f54.firebaseio.com/products.json?auth=$authToken$filterString';
+    try {
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final List<Product> loadedProducts = [];
+      if (extractedData == null) return;
+      url =
+          'https://flutter-update-67f54.firebaseio.com/userFavorites/$userId.json?auth=$authToken';
+      final favoriteResponse = await http.get(url);
+      final favoriteData = json.decode(favoriteResponse.body);
+
+      extractedData.forEach((proId, prodData) {
+        loadedProducts.add(Product(
+          id: proId,
+          title: prodData['title'],
+          description: prodData['description'],
+          price: prodData['price'],
+          imageUrl: prodData['imageUrl'],
+          // if favoriteData or no_entry_for_this_user then return false(unchecked)
+          isFavorite:
+              favoriteData == null ? false : favoriteData[proId] ?? false,
+        ));
+      });
+      _items = loadedProducts;
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> addProduct(Product product) async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/products.json?auth=$authToken';
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode({
+          'title': product.title,
+          'description': product.description,
+          'price': product.price,
+          'imageUrl': product.imageUrl,
+          'creatorId': userId,
+        }),
+      );
+      final newProduct = Product(
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+        // this give access code of (.post's) body as Map like
+        // {name: -MMU-mCP6SqbQBL5yZFB} so to use this as Unique id we can....
+        id: json.decode(response.body)['name'],
+      );
+      // adding
+      _items.add(newProduct);
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw error;
+    }
+  }
+
+  Future<void> deleteProduct(String id) async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/products/$id.jsonauth=$authToken';
+    final exIndex = _items.indexWhere((element) => element.id == id);
+    var exProduct = _items[exIndex];
+    _items.removeAt(exIndex);
+    notifyListeners();
+    final response = await http.delete(url);
+    // 400 er upore means Error occurs
+    if (response.statusCode >= 400) {
+      _items.insert(exIndex, exProduct);
+      notifyListeners();
+      // its additional
+      throw HttpException('Could not delete product');
+    }
+    exProduct = null;
+  }
+
+  Future<void> updateProduct(String id, Product newProduct) async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/products/$id.jsonauth=$authToken';
+    await http.patch(url,
+        body: json.encode({
+          'title': newProduct.title,
+          'description': newProduct.description,
+          'price': newProduct.price,
+          'imageUrl': newProduct.imageUrl,
+        }));
+    final prodIndex = _items.indexWhere((element) => element.id == id);
+    _items[prodIndex] = newProduct;
+    notifyListeners();
+  }
+}
