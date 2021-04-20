@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/cart.dart';
 
-class CartItem extends StatelessWidget {
-  final String id, title, productId;
+class CartItem extends StatefulWidget {
+  final String id, title, productId, imageUrl;
   final int quantity;
   final double price;
+  final Function updateFunction;
+  CartItem(this.id, this.productId, this.title, this.price, this.quantity,
+      this.imageUrl, this.updateFunction);
+  @override
+  _CartItemState createState() => _CartItemState();
+}
 
-  CartItem(this.id, this.productId, this.title, this.price, this.quantity);
-
+class _CartItemState extends State<CartItem> {
+  int count = 1;
   @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: ValueKey(id),
+      key: ValueKey(widget.id),
       background: Container(
         color: Theme.of(context).errorColor,
         child: Icon(
@@ -49,7 +55,7 @@ class CartItem extends StatelessWidget {
         );
       },
       onDismissed: (direction) {
-        Provider.of<Cart>(context, listen: false).removeItem(productId);
+        Provider.of<Cart>(context, listen: false).removeItem(widget.productId);
       },
       child: Card(
         elevation: 3,
@@ -59,28 +65,64 @@ class CartItem extends StatelessWidget {
           child: ListTile(
             leading: Padding(
               padding: EdgeInsets.all(5),
-              // box er vhitor er things fit kore
               child: FittedBox(
-                // price er jonno soto khato circleBox
-                child: CircleAvatar(
-                  child: Text(
-                    '\$$price',
-                    style: TextStyle(fontSize: 10),
+                child: FittedBox(
+                  fit: BoxFit.cover,
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      widget.imageUrl,
+                    ),
                   ),
                 ),
               ),
             ),
-            title: Text(
-              title,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(
-              'Total: \$${(price * quantity).toStringAsFixed(2)}',
-              style: TextStyle(fontSize: 15, color: Colors.black87),
-            ),
-            trailing: Text(
-              '$quantity *',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            title: Text(widget.title),
+            subtitle: Text('Price : \$ ${(widget.price)}'),
+            trailing: Container(
+              width: 80,
+              child: Row(
+                children: [
+                  SizedBox(
+                    height: 24,
+                    width: 24,
+                    child: OutlineButton(
+                      padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Icon(Icons.remove),
+                      onPressed: () {
+                        if (count <= 1) {
+                        } else {
+                          setState(() {
+                            count--;
+                            widget.updateFunction(widget.productId, count);
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                  SizedBox(width: 3),
+                  Text(count.toString().padLeft(2, '0')),
+                  SizedBox(width: 3),
+                  SizedBox(
+                    height: 23,
+                    width: 25,
+                    child: OutlineButton(
+                      padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Icon(Icons.add),
+                      onPressed: () {
+                        setState(() {
+                          count++;
+                          widget.updateFunction(widget.productId, count);
+                        });
+                      },
+                    ),
+                  ),
+                  //SizedBox(width: 10),
+                ],
+              ),
             ),
           ),
         ),

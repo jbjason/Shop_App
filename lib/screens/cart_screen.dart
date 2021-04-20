@@ -4,8 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/cart_item.dart';
 
-class CartScreen extends StatelessWidget {
+class CartScreen extends StatefulWidget {
   static const routeName = '/cart';
+  @override
+  _CartScreenState createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
+  void updateCart(String idd, int count) {
+    setState(() {
+      Provider.of<Cart>(context, listen: false).update(idd, count);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
@@ -55,6 +66,8 @@ class CartScreen extends StatelessWidget {
               cart.items.values.toList()[i].title,
               cart.items.values.toList()[i].price,
               cart.items.values.toList()[i].quantity,
+              cart.items.values.toList()[i].imageUrl,
+              updateCart,
             ),
             itemCount: cart.itemCount,
           )),

@@ -56,7 +56,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       loadedProduct.id,
                       loadedProduct.price,
                       loadedProduct.title,
-                      //loadedProduct.imageUrl,
+                      loadedProduct.imageUrl,
                       2.toString(),
                       count,
                     );

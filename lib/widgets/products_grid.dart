@@ -94,7 +94,8 @@ class _ProductsGridState extends State<ProductsGrid> {
 
           // GridView Container
           Container(
-            height: heightOfScreen - 100.0,
+            height: 380,
+            margin: EdgeInsets.only(bottom: 5),
             child: GridView.builder(
               padding: const EdgeInsets.all(10.0),
               itemCount: products.length,

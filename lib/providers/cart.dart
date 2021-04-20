@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class CartItem {
-  final String id, title;
+  final String id, title, imageUrl;
   final int quantity;
   final double price;
   CartItem({
@@ -9,6 +9,7 @@ class CartItem {
     @required this.title,
     @required this.quantity,
     @required this.price,
+    @required this.imageUrl,
   });
 }
 
@@ -30,15 +31,15 @@ class Cart with ChangeNotifier {
     return a;
   }
 
-  void addItem(
-      String productId, double price, String title, String keyId, int quan) {
+  void addItem(String productId, double price, String imageUrl, String title,
+      String keyId, int quan) {
     if (_items.containsKey(productId) && keyId == 2.toString()) {
       _items.update(
         productId,
         (existingItem) => CartItem(
           id: existingItem.id,
           title: existingItem.title,
-          //imageUrl: existingItem.imageUrl,
+          imageUrl: existingItem.imageUrl,
           price: existingItem.price,
           quantity: quan,
         ),
@@ -51,12 +52,26 @@ class Cart with ChangeNotifier {
         () => CartItem(
           id: DateTime.now().toString(),
           title: title,
-          //imageUrl: imageUrl,
+          imageUrl: imageUrl,
           price: price,
           quantity: quan,
         ),
       );
     }
+    notifyListeners();
+  }
+
+  void update(String productId, int quan) {
+    _items.update(
+      productId,
+      (existingItem) => CartItem(
+        id: existingItem.id,
+        title: existingItem.title,
+        imageUrl: existingItem.imageUrl,
+        price: existingItem.price,
+        quantity: quan,
+      ),
+    );
     notifyListeners();
   }
 
@@ -74,6 +89,7 @@ class Cart with ChangeNotifier {
           (value) => CartItem(
               id: value.id,
               title: value.title,
+              imageUrl: value.imageUrl,
               quantity: value.quantity - 1,
               price: value.price));
     } else {

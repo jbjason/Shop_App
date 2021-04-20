@@ -39,11 +39,12 @@ class Orders with ChangeNotifier {
         id: orderId,
         amount: orderData['amount'],
         dateTime: DateTime.parse(orderData['dateTime']),
-        // products come from Cart(which stored in CardItem)
+        // products come from Cart(which stored in CartItem)
         products: (orderData['products'] as List<dynamic>)
             .map((item) => CartItem(
                 id: item['id'],
                 title: item['title'],
+                imageUrl: item['imageUrl'],
                 quantity: item['quantity'],
                 price: item['price']))
             .toList(),
