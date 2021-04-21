@@ -33,6 +33,8 @@ class Cart with ChangeNotifier {
 
   void addItem(String productId, double price, String imageUrl, String title,
       String keyId, int quan) {
+    // keyID == 2 means req from productDetailsScreen
+    // keyID == 1 means req from productOverviewScreen & which have to be ignore cz this item already in cart.
     if (_items.containsKey(productId) && keyId == 2.toString()) {
       _items.update(
         productId,

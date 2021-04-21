@@ -6,20 +6,23 @@ import '../widgets/cart_item.dart';
 
 class CartScreen extends StatefulWidget {
   static const routeName = '/cart';
+  int count = 1;
   @override
   _CartScreenState createState() => _CartScreenState();
 }
 
 class _CartScreenState extends State<CartScreen> {
-  void updateCart(String idd, int count) {
+  void updateCart(String idd, int countt) {
     setState(() {
-      Provider.of<Cart>(context, listen: false).update(idd, count);
+      Provider.of<Cart>(context, listen: false).update(idd, countt);
+      widget.count = countt;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context);
+    print(' screen ${widget.count} ');
 
     return Scaffold(
       appBar: AppBar(
@@ -68,6 +71,7 @@ class _CartScreenState extends State<CartScreen> {
               cart.items.values.toList()[i].quantity,
               cart.items.values.toList()[i].imageUrl,
               updateCart,
+              widget.count,
             ),
             itemCount: cart.itemCount,
           )),
