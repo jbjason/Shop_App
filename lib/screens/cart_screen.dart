@@ -1,3 +1,5 @@
+import 'package:Shop_App/screens/orderDetailsScreen.dart';
+
 import '../providers/orders.dart';
 import '../providers/cart.dart' show Cart;
 import 'package:flutter/material.dart';
@@ -52,7 +54,15 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     backgroundColor: Theme.of(context).primaryColor,
                   ),
-                  OrderButton(cart: cart),
+                  //OrderButton(cart: cart),
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushNamed(OrderDetailsScreen.routeName);
+                    },
+                    child: Text('Order Now'),
+                    textColor: Theme.of(context).primaryColor,
+                  )
                 ],
               ),
             ),
