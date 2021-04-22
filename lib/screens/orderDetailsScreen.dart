@@ -1,4 +1,7 @@
+import 'package:Shop_App/providers/cart.dart';
+import 'package:Shop_App/providers/orders.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
   static const routeName = '/orderDetailsScreen';
@@ -11,6 +14,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   final _numberFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _detailsFocusNode = FocusNode();
+  var _isLoading = false;
   Map<String, String> _info = {
     'name': '',
     'email': '',
@@ -26,13 +30,29 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     super.dispose();
   }
 
-  void submit() {
+  Future<void> submit() async {
     if (!_form.currentState.validate()) return;
     _form.currentState.save();
-    print(_info['name']);
-    print(_info['email']);
-    print(_info['contact']);
-    print(_info['details']);
+    setState(() {
+      _isLoading = true;
+    });
+    final cart = Provider.of<Cart>(context, listen: false);
+    await Provider.of<Orders>(context, listen: false).customerOrdersOnServer(
+      _info['name'],
+      _info['email'],
+      _info['contact'],
+      _info['details'],
+      cart.items.values.toList(),
+      cart.totalAmount,
+    );
+    await Provider.of<Orders>(context, listen: false).addOrder(
+      cart.items.values.toList(),
+      cart.totalAmount,
+    );
+    setState(() {
+      _isLoading = false;
+    });
+    cart.clear();
   }
 
   @override
@@ -99,6 +119,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       return 'Please enter a contact number !';
                     } else if (value.length < 11) {
                       return 'Should be at least 11 characters';
+                    } else if (double.tryParse(value) == null) {
+                      return 'Please enter a valid number';
                     }
                     return null;
                   },
@@ -127,7 +149,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
                 FlatButton(
                   onPressed: submit,
-                  child: Text('Submit'),
+                  child: Text(_isLoading
+                      ? CircularProgressIndicator()
+                      : 'Commit to purchase'),
                   textColor: Colors.green,
                 ),
               ],

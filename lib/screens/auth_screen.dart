@@ -103,8 +103,9 @@ class _AuthCardState extends State<AuthCard>
   var _isLoading = false;
   final _passwordController = TextEditingController();
   AnimationController _controller;
-  Animation<Size> _heightAnimation;
   Animation<double> _opacityAnimation;
+  Animation<Size> _heightAnimation;
+
   @override
   void initState() {
     // this makes sure what to control

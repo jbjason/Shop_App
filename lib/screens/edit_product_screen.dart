@@ -140,11 +140,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 child: ListView(
                   children: [
                     TextFormField(
-                      // page load howar sathe sathe Title TextField e ki thakbe
                       initialValue: _initValues['title'],
-                      decoration: InputDecoration(
-                        labelText: 'Title',
-                      ),
+                      decoration: InputDecoration(labelText: 'Title'),
+                      textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) {
                         FocusScope.of(context).requestFocus(_priceFocusNode);
                       },
@@ -165,17 +163,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           isFavorite: _editedProduct.isFavorite,
                         );
                       },
-                      //textInputAction: TextInputAction.next,
                     ),
                     TextFormField(
-                      // page load howar sathe sathe Title TextField e ki thakbe
                       initialValue: _initValues['price'],
                       decoration: InputDecoration(labelText: 'Price'),
                       keyboardType: TextInputType.number,
-                      // first way to go to next TextFormField .
-                      /* textInputAction: TextInputAction.previous, */
-                      // FocusNode & onFieldSubmitted is the 2nd way to go new line
                       focusNode: _priceFocusNode,
+                      textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) {
                         FocusScope.of(context)
                             .requestFocus(_descriptionFocusNode);
@@ -232,7 +226,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           isFavorite: _editedProduct.isFavorite,
                         );
                       },
-                      //textInputAction: TextInputAction.next,
                     ),
                     Row(
                       // make all children starting from very below of the row's height
@@ -257,7 +250,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         Expanded(
                           child: TextFormField(
                             // Image field e Control & initialValue options je kono 1ta thakte pare eksathe
-                            /*initialValue: _initValues['imageUrl'],*/
+                            initialValue: _initValues['imageUrl'],
                             decoration: InputDecoration(labelText: 'Image Url'),
                             keyboardType: TextInputType.url,
                             controller: _imageUrlController,
