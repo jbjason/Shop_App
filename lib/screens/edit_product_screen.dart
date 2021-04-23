@@ -140,7 +140,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 child: ListView(
                   children: [
                     TextFormField(
-                      initialValue: _initValues['title'],
+                      // initialValue: _initValues['title'],
                       decoration: InputDecoration(labelText: 'Title'),
                       textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) {
@@ -165,7 +165,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                     ),
                     TextFormField(
-                      initialValue: _initValues['price'],
+                      //initialValue: _initValues['price'],
                       decoration: InputDecoration(labelText: 'Price'),
                       keyboardType: TextInputType.number,
                       focusNode: _priceFocusNode,
@@ -200,7 +200,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                     ),
                     TextFormField(
-                      initialValue: _initValues['description'],
+                      //initialValue: _initValues['description'],
                       decoration: InputDecoration(labelText: 'Description'),
                       maxLines: 3,
                       keyboardType: TextInputType.multiline,
@@ -250,7 +250,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         Expanded(
                           child: TextFormField(
                             // Image field e Control & initialValue options je kono 1ta thakte pare eksathe
-                            initialValue: _initValues['imageUrl'],
+                            // initialValue: _initValues['imageUrl'],
                             decoration: InputDecoration(labelText: 'Image Url'),
                             keyboardType: TextInputType.url,
                             controller: _imageUrlController,
