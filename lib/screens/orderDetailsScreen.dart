@@ -56,8 +56,11 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     setState(() {
       _isLoading = false;
     });
-
-    Navigator.of(context).pop();
+    // for popping 2page at a time
+    int count = 0;
+    Navigator.popUntil(context, (route) {
+      return count++ == 2;
+    });
   }
 
   @override
