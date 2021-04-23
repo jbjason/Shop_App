@@ -14,7 +14,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   final _numberFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _detailsFocusNode = FocusNode();
-  var _isLoading = false;
+  var _isLoading = false, _isInit2 = false;
   var _isInit = true, _isLoading2 = true;
   Map<String, String> _info = {
     'name': '',
@@ -46,7 +46,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     super.dispose();
   }
 
-  Future<void> submit() async {
+  Future<void> submit(bool _checking, int point) async {
     if (!_form.currentState.validate()) return;
     _form.currentState.save();
     setState(() {
@@ -63,10 +63,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     );
     await Provider.of<Orders>(context, listen: false).addOrder(
       cart.items.values.toList(),
-      cart.totalAmount,
+      _checking ? cart.totalAmount - point : cart.totalAmount,
     );
     await Provider.of<Orders>(context, listen: false)
-        .addBonusPoint(cart.totalAmount)
+        .addBonusPoint(_checking ? cart.totalAmount - point : cart.totalAmount)
         .then((value) => cart.clear());
     setState(() {
       _isLoading = false;
@@ -178,11 +178,33 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         },
                       ),
                       Container(
-                        margin: EdgeInsets.only(top: 40),
+                        margin: EdgeInsets.only(top: 20, bottom: 40),
                         child: Text(fp.pointt.toString()),
                       ),
+                      Container(
+                        height: 40,
+                        width: 80,
+                        //padding: EdgeInsets.all(20),
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text('Voucher code:   '),
+                              Expanded(
+                                child: TextFormField(
+                                  decoration: InputDecoration(
+                                    labelText: '     Y / N',
+                                  ),
+                                  onSaved: (value) {
+                                    if (value == 'Y' || value == 'y') {
+                                      _isInit2 = true;
+                                    }
+                                  },
+                                ),
+                              )
+                            ]),
+                      ),
                       FlatButton(
-                        onPressed: submit,
+                        onPressed: () => submit(_isInit2, fp.pointt),
                         child: _isLoading
                             ? CircularProgressIndicator(
                                 backgroundColor: Colors.pink,

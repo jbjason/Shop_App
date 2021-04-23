@@ -142,7 +142,5 @@ class Orders with ChangeNotifier {
     final response = await http.get(url);
     final extract = json.decode(response.body);
     _pointt = extract['M1234567'];
-    print(pointt);
-    //print(extract['M1234567']);
   }
 }
