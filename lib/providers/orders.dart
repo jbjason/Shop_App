@@ -19,10 +19,18 @@ class OrderItem {
 
 class Orders with ChangeNotifier {
   final String authToken, userId;
+  double _pointt;
   Orders(this.authToken, this.userId, this._orders);
   List<OrderItem> _orders = [];
   List<OrderItem> get orders {
     return [..._orders];
+  }
+
+  int get pointt {
+    if (_pointt != null) {
+      return _pointt.toInt();
+    }
+    return 0;
   }
 
   Future<void> fetchAndSetOrders() async {
@@ -115,14 +123,26 @@ class Orders with ChangeNotifier {
 
   Future<void> addBonusPoint(double amount) async {
     final url =
-        'https://flutter-update-67f54.firebaseio.com/bonusPoint/$userId.json?auth=$authToken';
-    int point = amount.toInt(), p = 100.toInt();
+        'https://flutter-update-67f54.firebaseio.com/bonusPoint/$userId/M1234567.json?auth=$authToken';
+    double point = amount / 100;
+
     try {
-      await http.put(url, body: json.encode(point / p));
+      await http.put(url,
+          body: json.encode(
+            point,
+          ));
     } catch (error) {
       throw error;
     }
   }
 
-  Future<void> fetchPoint() async {}
+  Future<void> fetchPoint() async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/bonusPoint/$userId.json?auth=$authToken';
+    final response = await http.get(url);
+    final extract = json.decode(response.body);
+    _pointt = extract['M1234567'];
+    print(pointt);
+    //print(extract['M1234567']);
+  }
 }
