@@ -44,7 +44,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
         child: AppBar(
           backgroundColor: Color(0xFFC8E6C9),
           centerTitle: true,
-          //leading: IconButton(icon: Icon(Icons.menu), onPressed: () {}),
           title: Row(
             children: [
               Text(
@@ -103,9 +102,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           ? Center(
               child: CircularProgressIndicator(),
             )
-          :
-          //  AppDrawer(),
-          ProductsGrid(_showOnlyFavorites),
+          : ProductsGrid(_showOnlyFavorites),
     );
   }
 }

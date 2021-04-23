@@ -88,24 +88,41 @@ class Orders with ChangeNotifier {
     final url =
         'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken';
     final timeStop = DateTime.now();
-    await http.post(
-      url,
-      body: json.encode({
-        'dateTime': timeStop.toIso8601String(),
-        'name': name,
-        'email': email,
-        'contact': contact,
-        'address': address,
-        'amount': total,
-        'products': cartProducts
-            .map((cp) => {
-                  'id': cp.id,
-                  'title': cp.title,
-                  'quantity': cp.quantity,
-                  'price': cp.price,
-                })
-            .toList(),
-      }),
-    );
+    try {
+      await http.post(
+        url,
+        body: json.encode({
+          'dateTime': timeStop.toIso8601String(),
+          'name': name,
+          'email': email,
+          'contact': contact,
+          'address': address,
+          'amount': total,
+          'products': cartProducts
+              .map((cp) => {
+                    'id': cp.id,
+                    'title': cp.title,
+                    'quantity': cp.quantity,
+                    'price': cp.price,
+                  })
+              .toList(),
+        }),
+      );
+    } catch (error) {
+      throw error;
+    }
   }
+
+  Future<void> addBonusPoint(double amount) async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/bonusPoint/$userId.json?auth=$authToken';
+    int point = amount.toInt(), p = 100.toInt();
+    try {
+      await http.put(url, body: json.encode(point / p));
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> fetchPoint() async {}
 }

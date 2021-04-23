@@ -1,5 +1,6 @@
 import 'package:Shop_App/providers/cart.dart';
 import 'package:Shop_App/providers/orders.dart';
+import 'package:Shop_App/screens/products_overview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -49,10 +50,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       cart.items.values.toList(),
       cart.totalAmount,
     );
+    await Provider.of<Orders>(context, listen: false)
+        .addBonusPoint(cart.totalAmount)
+        .then((value) => cart.clear());
     setState(() {
       _isLoading = false;
     });
-    cart.clear();
+
+    Navigator.of(context).pop();
   }
 
   @override
@@ -146,12 +151,17 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     _info['details'] = value;
                   },
                 ),
-
+                Container(
+                  margin: EdgeInsets.only(top: 40),
+                  child: Text('data'),
+                ),
                 FlatButton(
                   onPressed: submit,
-                  child: Text(_isLoading
-                      ? CircularProgressIndicator()
-                      : 'Commit to purchase'),
+                  child: _isLoading
+                      ? CircularProgressIndicator(
+                          backgroundColor: Colors.pink,
+                        )
+                      : Text('Commit to purchase'),
                   textColor: Colors.green,
                 ),
               ],

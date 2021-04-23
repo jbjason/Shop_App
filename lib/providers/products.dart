@@ -45,7 +45,7 @@ class Products with ChangeNotifier {
     //       'https://static01.nyt.com/images/2011/01/26/business/pan2/pan2-blog480.jpg',
     // ),
   ];
-  //Getter method in flutter
+
   List<Product> get items {
     return [..._items];
   }

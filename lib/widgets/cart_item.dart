@@ -7,17 +7,17 @@ class CartItem extends StatefulWidget {
   final int quantity;
   final double price;
   final Function updateFunction;
-  int count;
+
   CartItem(this.id, this.productId, this.title, this.price, this.quantity,
-      this.imageUrl, this.updateFunction, this.count);
+      this.imageUrl, this.updateFunction);
   @override
   _CartItemState createState() => _CartItemState();
 }
 
 class _CartItemState extends State<CartItem> {
+  int count = 1;
   @override
   Widget build(BuildContext context) {
-    print(' item   ${widget.count}');
     return Dismissible(
       key: ValueKey(widget.id),
       background: Container(
@@ -92,19 +92,18 @@ class _CartItemState extends State<CartItem> {
                           borderRadius: BorderRadius.circular(10)),
                       child: Icon(Icons.remove),
                       onPressed: () {
-                        if (widget.count <= 1) {
+                        if (count <= 1) {
                         } else {
                           setState(() {
-                            widget.count--;
-                            widget.updateFunction(
-                                widget.productId, widget.count);
+                            count--;
+                            widget.updateFunction(widget.productId, count);
                           });
                         }
                       },
                     ),
                   ),
                   SizedBox(width: 3),
-                  Text(widget.count.toString().padLeft(2, '0')),
+                  Text(count.toString().padLeft(2, '0')),
                   SizedBox(width: 3),
                   SizedBox(
                     height: 23,
@@ -116,8 +115,8 @@ class _CartItemState extends State<CartItem> {
                       child: Icon(Icons.add),
                       onPressed: () {
                         setState(() {
-                          widget.count++;
-                          widget.updateFunction(widget.productId, widget.count);
+                          count++;
+                          widget.updateFunction(widget.productId, count);
                         });
                       },
                     ),

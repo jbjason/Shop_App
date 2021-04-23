@@ -1,6 +1,4 @@
 import 'package:Shop_App/screens/orderDetailsScreen.dart';
-
-import '../providers/orders.dart';
 import '../providers/cart.dart' show Cart;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +6,7 @@ import '../widgets/cart_item.dart';
 
 class CartScreen extends StatefulWidget {
   static const routeName = '/cart';
-  int count = 1;
+
   @override
   _CartScreenState createState() => _CartScreenState();
 }
@@ -17,14 +15,12 @@ class _CartScreenState extends State<CartScreen> {
   void updateCart(String idd, int countt) {
     setState(() {
       Provider.of<Cart>(context, listen: false).update(idd, countt);
-      widget.count = countt;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context, listen: false);
-
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Color(0xFFC8E6C9),
@@ -82,7 +78,6 @@ class _CartScreenState extends State<CartScreen> {
               cart.items.values.toList()[i].quantity,
               cart.items.values.toList()[i].imageUrl,
               updateCart,
-              widget.count,
             ),
             itemCount: cart.itemCount,
           )),
