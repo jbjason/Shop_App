@@ -43,21 +43,23 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     setState(() {
       _isLoading = true;
     });
+
     final cart = Provider.of<Cart>(context, listen: false);
+    double amount = cart.totalAmount;
+    double cutAmount = amount - point;
+    //print('amount = ${amount.toString()} \n ${cutAmount.toString()}');
     await Provider.of<Orders>(context, listen: false).customerOrdersOnServer(
       _info['name'],
       _info['email'],
       _info['contact'],
       _info['details'],
       cart.items.values.toList(),
-      cart.totalAmount,
-    );
-    await Provider.of<Orders>(context, listen: false).addOrder(
-      cart.items.values.toList(),
-      _checking ? cart.totalAmount - point : cart.totalAmount,
+      _checking ? cutAmount : amount,
     );
     await Provider.of<Orders>(context, listen: false)
-        .addBonusPoint(_checking ? cart.totalAmount - point : cart.totalAmount)
+        .addOrder(cart.items.values.toList(), amount);
+    await Provider.of<Orders>(context, listen: false)
+        .addBonusPoint(amount)
         .then((value) => cart.clear());
     setState(() {
       _isLoading = false;
@@ -196,7 +198,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         ),
                         onSaved: (value) {
                           if (value == 'Y' || value == 'y') {
-                            _isInit2 = true;
+                            setState(() {
+                              _isInit2 = true;
+                            });
                           }
                         },
                       ),
