@@ -7,6 +7,8 @@ import '../providers/cart.dart';
 
 class ProductDetailScreen extends StatefulWidget {
   static const routeName = '/product-detail';
+  String currentImageUrl;
+  int _isInit = 1;
   @override
   _ProductDetailScreenState createState() => _ProductDetailScreenState();
 }
@@ -15,6 +17,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   List<String> _locations = ['M', 'L', 'XL', 'XXL'];
   String _selectedLocation;
   int count = 1;
+
+  void currentimage(String url) {
+    setState(() {
+      widget.currentImageUrl = url;
+      widget._isInit++;
+    });
+  }
 
   Widget countButton(Icon iconn, Function f) {
     return SizedBox(
@@ -34,7 +43,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     final cart = Provider.of<Cart>(context, listen: false);
     final productId = ModalRoute.of(context).settings.arguments as String;
     final loadedProduct = Provider.of<Products>(context).findById(productId);
-
     return Scaffold(
       backgroundColor: Color(0xFFFFE0B2),
       appBar: PreferredSize(
@@ -56,7 +64,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       loadedProduct.id,
                       loadedProduct.price,
                       loadedProduct.title,
-                      loadedProduct.imageUrl,
+                      loadedProduct.imageUrl1,
                       2.toString(),
                       count,
                     );
@@ -99,9 +107,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       fit: BoxFit.cover,
                       child: Hero(
                         tag: loadedProduct.id,
-                        child: Image.network(
-                          loadedProduct.imageUrl,
-                        ),
+                        child: Image.network(widget._isInit == 1
+                            ? loadedProduct.imageUrl1
+                            : widget.currentImageUrl),
                       ),
                     ),
                   ),
@@ -112,9 +120,24 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       // color widget
-                      ColorPin(c: Color(0xFFD50000)),
-                      ColorPin(c: Color(0xFF009688)),
-                      ColorPin(c: Color(0xFF1565C0))
+                      GestureDetector(
+                        onTap: () {
+                          currentimage(loadedProduct.imageUrl1);
+                        },
+                        child: ColorPin(c: Color(0xFFD50000)),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          currentimage(loadedProduct.imageUrl2);
+                        },
+                        child: ColorPin(c: Color(0xFF009688)),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          currentimage(loadedProduct.imageUrl3);
+                        },
+                        child: ColorPin(c: Color(0xFF1565C0)),
+                      )
                     ],
                   ),
                   SizedBox(height: 20),
@@ -266,17 +289,20 @@ class ColorPin extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 5, left: 5),
-      padding: EdgeInsets.all(2.5),
-      height: 20,
-      width: 20,
-      decoration: BoxDecoration(
-          color: c,
-          shape: BoxShape.circle,
-          border: Border.all(width: 2, color: c)),
-      child: DecoratedBox(
-        decoration: BoxDecoration(color: c, shape: BoxShape.circle),
+    return GestureDetector(
+      //onTap: () => ,
+      child: Container(
+        margin: EdgeInsets.only(top: 5, left: 5),
+        padding: EdgeInsets.all(2.5),
+        height: 20,
+        width: 20,
+        decoration: BoxDecoration(
+            color: c,
+            shape: BoxShape.circle,
+            border: Border.all(width: 2, color: c)),
+        child: DecoratedBox(
+          decoration: BoxDecoration(color: c, shape: BoxShape.circle),
+        ),
       ),
     );
   }

@@ -13,16 +13,30 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _priceFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _imageUrlFocusNode = FocusNode();
+  final _imageUrlFocusNode2 = FocusNode();
+  final _imageUrlFocusNode3 = FocusNode();
+
   final _imageUrlController = TextEditingController();
+  final _imageUrlController2 = TextEditingController();
+  final _imageUrlController3 = TextEditingController();
   // Gloabally key declare for Form widget's children can be accessible
   final _form = GlobalKey<FormState>();
-  var _editedProduct =
-      Product(id: null, title: '', description: '', price: 0, imageUrl: '');
+  var _editedProduct = Product(
+    id: null,
+    title: '',
+    description: '',
+    price: 0,
+    imageUrl1: '',
+    imageUrl2: '',
+    imageUrl3: '',
+  );
   var _initValues = {
     'title': '',
     'description': '',
     'price': '',
-    'imageUrl': '',
+    'imageUrl1': '',
+    'imageUrl2': '',
+    'imageUrl3': '',
   };
   var _isInit = true;
   var isLoading = false;
@@ -30,6 +44,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   @override
   void initState() {
     _imageUrlFocusNode.addListener(_updateImageUrl);
+    _imageUrlFocusNode2.addListener(_updateImageUrl);
+    _imageUrlFocusNode3.addListener(_updateImageUrl);
     super.initState();
   }
 
@@ -44,9 +60,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
           'title': _editedProduct.title,
           'description': _editedProduct.description,
           'price': _editedProduct.price.toString(),
-          'imageUrl': '',
+          'imageUrl1': '',
+          'imageUrl2': '',
+          'imageUrl3': '',
         };
-        _imageUrlController.text = _editedProduct.imageUrl;
+        _imageUrlController.text = _editedProduct.imageUrl1;
+        _imageUrlController2.text = _editedProduct.imageUrl2;
+        _imageUrlController3.text = _editedProduct.imageUrl3;
       }
     }
     _isInit = false;
@@ -60,8 +80,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _descriptionFocusNode.dispose();
     _imageUrlController.dispose();
     _imageUrlFocusNode.dispose();
-    // initState er listener ke dispose korte hole
+    _imageUrlFocusNode2.dispose();
+    _imageUrlFocusNode3.dispose();
+
     _imageUrlFocusNode.removeListener(_updateImageUrl);
+    _imageUrlFocusNode2.removeListener(_updateImageUrl);
+    _imageUrlFocusNode3.removeListener(_updateImageUrl);
     super.dispose();
   }
 
@@ -159,7 +183,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           title: value,
                           description: _editedProduct.description,
                           price: _editedProduct.price,
-                          imageUrl: _editedProduct.imageUrl,
+                          imageUrl1: _editedProduct.imageUrl1,
+                          imageUrl2: _editedProduct.imageUrl2,
+                          imageUrl3: _editedProduct.imageUrl3,
                           isFavorite: _editedProduct.isFavorite,
                         );
                       },
@@ -193,7 +219,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           title: _editedProduct.title,
                           description: _editedProduct.description,
                           price: double.parse(value),
-                          imageUrl: _editedProduct.imageUrl,
+                          imageUrl1: _editedProduct.imageUrl1,
+                          imageUrl2: _editedProduct.imageUrl2,
+                          imageUrl3: _editedProduct.imageUrl3,
                           id: _editedProduct.id,
                           isFavorite: _editedProduct.isFavorite,
                         );
@@ -221,7 +249,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           title: _editedProduct.title,
                           description: value,
                           price: _editedProduct.price,
-                          imageUrl: _editedProduct.imageUrl,
+                          imageUrl1: _editedProduct.imageUrl1,
+                          imageUrl2: _editedProduct.imageUrl2,
+                          imageUrl3: _editedProduct.imageUrl3,
                           id: _editedProduct.id,
                           isFavorite: _editedProduct.isFavorite,
                         );
@@ -275,7 +305,127 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 title: _editedProduct.title,
                                 description: _editedProduct.description,
                                 price: _editedProduct.price,
-                                imageUrl: value,
+                                imageUrl1: value,
+                                imageUrl2: _editedProduct.imageUrl2,
+                                imageUrl3: _editedProduct.imageUrl3,
+                                id: _editedProduct.id,
+                                isFavorite: _editedProduct.isFavorite,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      // make all children starting from very below of the row's height
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          margin: EdgeInsets.only(top: 8, right: 10),
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 2, color: Colors.green),
+                          ),
+                          child: _imageUrlController2.text.isEmpty
+                              ? Text('Enter a URL')
+                              : FittedBox(
+                                  child: Image.network(
+                                    _imageUrlController2.text,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            // Image field e Control & initialValue options je kono 1ta thakte pare eksathe
+                            // initialValue: _initValues['imageUrl'],
+                            decoration: InputDecoration(labelText: 'Image Url'),
+                            keyboardType: TextInputType.url,
+                            controller: _imageUrlController2,
+                            textInputAction: TextInputAction.done,
+                            focusNode: _imageUrlFocusNode2,
+                            onFieldSubmitted: (_) {
+                              _saveForm();
+                            },
+                            validator: (value) {
+                              // if (value.isEmpty) {
+                              //   return 'Please enter a Url';
+                              // } else if ((!value.startsWith('http') &&
+                              //         !value.startsWith('https')) ||
+                              //     (!value.endsWith('.jpg') &&
+                              //         !value.endsWith('.png'))) {
+                              //   return 'Please enter a valid Url';
+                              // }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _editedProduct = Product(
+                                title: _editedProduct.title,
+                                description: _editedProduct.description,
+                                price: _editedProduct.price,
+                                imageUrl1: _editedProduct.imageUrl1,
+                                imageUrl2: value,
+                                imageUrl3: _editedProduct.imageUrl3,
+                                id: _editedProduct.id,
+                                isFavorite: _editedProduct.isFavorite,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      // make all children starting from very below of the row's height
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          height: 100,
+                          width: 100,
+                          margin: EdgeInsets.only(top: 8, right: 10),
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 2, color: Colors.green),
+                          ),
+                          child: _imageUrlController3.text.isEmpty
+                              ? Text('Enter a URL')
+                              : FittedBox(
+                                  child: Image.network(
+                                    _imageUrlController3.text,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                        ),
+                        Expanded(
+                          child: TextFormField(
+                            // Image field e Control & initialValue options je kono 1ta thakte pare eksathe
+                            // initialValue: _initValues['imageUrl'],
+                            decoration: InputDecoration(labelText: 'Image Url'),
+                            keyboardType: TextInputType.url,
+                            controller: _imageUrlController3,
+                            textInputAction: TextInputAction.done,
+                            focusNode: _imageUrlFocusNode3,
+                            onFieldSubmitted: (_) {
+                              _saveForm();
+                            },
+                            validator: (value) {
+                              // if (value.isEmpty) {
+                              //   return 'Please enter a Url';
+                              // } else if ((!value.startsWith('http') &&
+                              //         !value.startsWith('https')) ||
+                              //     (!value.endsWith('.jpg') &&
+                              //         !value.endsWith('.png'))) {
+                              //   return 'Please enter a valid Url';
+                              // }
+                              return null;
+                            },
+                            onSaved: (value) {
+                              _editedProduct = Product(
+                                title: _editedProduct.title,
+                                description: _editedProduct.description,
+                                price: _editedProduct.price,
+                                imageUrl1: _editedProduct.imageUrl1,
+                                imageUrl2: _editedProduct.imageUrl2,
+                                imageUrl3: value,
                                 id: _editedProduct.id,
                                 isFavorite: _editedProduct.isFavorite,
                               );

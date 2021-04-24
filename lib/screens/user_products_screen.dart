@@ -14,7 +14,6 @@ class UserProductsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final productData = Provider.of<Products>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
@@ -47,7 +46,7 @@ class UserProductsScreen extends StatelessWidget {
                             UserProductItem(
                               productData.items[i].id,
                               productData.items[i].title,
-                              productData.items[i].imageUrl,
+                              productData.items[i].imageUrl1,
                             ),
                           ]),
                           itemCount: productData.items.length,

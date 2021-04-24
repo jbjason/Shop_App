@@ -79,7 +79,9 @@ class Products with ChangeNotifier {
           title: prodData['title'],
           description: prodData['description'],
           price: prodData['price'],
-          imageUrl: prodData['imageUrl'],
+          imageUrl1: prodData['imageUrl1'],
+          imageUrl2: prodData['imageUrl2'] == null ? '' : prodData['imageUrl2'],
+          imageUrl3: prodData['imageUrl3'] == null ? '' : prodData['imageUrl3'],
           // if favoriteData or no_entry_for_this_user then return false(unchecked)
           isFavorite:
               favoriteData == null ? false : favoriteData[proId] ?? false,
@@ -102,7 +104,9 @@ class Products with ChangeNotifier {
           'title': product.title,
           'description': product.description,
           'price': product.price,
-          'imageUrl': product.imageUrl,
+          'imageUrl1': product.imageUrl1,
+          'imageUrl2': product.imageUrl2,
+          'imageUrl3': product.imageUrl3,
           'creatorId': userId,
         }),
       );
@@ -110,7 +114,9 @@ class Products with ChangeNotifier {
         title: product.title,
         description: product.description,
         price: product.price,
-        imageUrl: product.imageUrl,
+        imageUrl1: product.imageUrl1,
+        imageUrl2: product.imageUrl2,
+        imageUrl3: product.imageUrl3,
         // this give access code of (.post's) body as Map like
         // {name: -MMU-mCP6SqbQBL5yZFB} so to use this as Unique id we can....
         id: json.decode(response.body)['name'],
@@ -150,7 +156,7 @@ class Products with ChangeNotifier {
           'title': newProduct.title,
           'description': newProduct.description,
           'price': newProduct.price,
-          'imageUrl': newProduct.imageUrl,
+          //'imageUrl': newProduct.imageUrl,
         }));
     final prodIndex = _items.indexWhere((element) => element.id == id);
     _items[prodIndex] = newProduct;

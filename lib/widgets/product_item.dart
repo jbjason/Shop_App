@@ -26,7 +26,7 @@ class ProductItem extends StatelessWidget {
             tag: product.id,
             child: FadeInImage(
               placeholder: AssetImage('assets/images/product-placeholder.png'),
-              image: NetworkImage(product.imageUrl),
+              image: NetworkImage(product.imageUrl1),
               fit: BoxFit.cover,
             ),
           ),
@@ -50,7 +50,7 @@ class ProductItem extends StatelessWidget {
           trailing: IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
-              cart.addItem(product.id, product.price, product.imageUrl,
+              cart.addItem(product.id, product.price, product.imageUrl1,
                   product.title, 1.toString(), 1);
               Scaffold.of(context).hideCurrentSnackBar();
               Scaffold.of(context).showSnackBar(SnackBar(

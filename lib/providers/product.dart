@@ -4,7 +4,7 @@ import 'dart:convert';
 
 class Product with ChangeNotifier {
   final String id, title, description;
-  final String imageUrl;
+  final String imageUrl1, imageUrl2, imageUrl3;
   final double price;
   bool isFavorite;
   Product({
@@ -12,7 +12,9 @@ class Product with ChangeNotifier {
     @required this.title,
     @required this.description,
     @required this.price,
-    @required this.imageUrl,
+    @required this.imageUrl1,
+    this.imageUrl2,
+    this.imageUrl3,
     this.isFavorite = false,
   });
 
