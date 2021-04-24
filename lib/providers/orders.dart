@@ -1,3 +1,5 @@
+import 'package:Shop_App/models/http_exception.dart';
+
 import './cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -134,13 +136,21 @@ class Orders with ChangeNotifier {
     } catch (error) {
       throw error;
     }
+    notifyListeners();
   }
 
   Future<void> fetchPoint() async {
     final url =
         'https://flutter-update-67f54.firebaseio.com/bonusPoint/$userId.json?auth=$authToken';
-    final response = await http.get(url);
-    final extract = json.decode(response.body);
-    _pointt = extract['M1234567'];
+    try {
+      final response = await http.get(url);
+      final extract = json.decode(response.body);
+      _pointt = extract['M1234567'];
+    } catch (error) {
+      _pointt = 0;
+      print(_pointt.toString());
+      throw HttpException('Error occurs');
+    }
+    notifyListeners();
   }
 }

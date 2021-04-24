@@ -53,9 +53,7 @@ class AppDrawer extends StatelessWidget {
               leading: Icon(Icons.exit_to_app),
               title: Text('LogOut',
                   style: TextStyle(
-                      fontSize: 25,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w700)),
+                      color: Colors.black87, fontWeight: FontWeight.w700)),
               onTap: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacementNamed('/');

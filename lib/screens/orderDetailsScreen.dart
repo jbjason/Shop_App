@@ -14,6 +14,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   final _numberFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _detailsFocusNode = FocusNode();
+  final _voucherFocusNode = FocusNode();
   var _isLoading = false, _isInit2 = false;
   var _isInit = true, _isLoading2 = true;
   Map<String, String> _info = {
@@ -26,13 +27,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      Provider.of<Orders>(context).fetchPoint().then((value) {
-        setState(() {
-          _isLoading2 = false;
-        });
-      });
+      Provider.of<Orders>(context).fetchPoint();
     }
     setState(() {
+      _isLoading2 = false;
       _isInit = false;
     });
     super.didChangeDependencies();
@@ -43,6 +41,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     _numberFocusNode.dispose();
     _emailFocusNode.dispose();
     _detailsFocusNode.dispose();
+    _voucherFocusNode.dispose();
     super.dispose();
   }
 
@@ -78,9 +77,28 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     });
   }
 
+  Widget pointBar(int p) {
+    RangeValues values = RangeValues(0, p.toDouble());
+
+    return Container(
+      margin: EdgeInsets.only(top: 20, bottom: 20),
+      //child: Text(fp.pointt.toString()),
+      child: RangeSlider(
+          values: values,
+          min: 0,
+          max: 100,
+          divisions: 50,
+          labels: RangeLabels(
+            values.start.round().toString(),
+            values.end.round().toString(),
+          ),
+          onChanged: (_) {}),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final fp = Provider.of<Orders>(context);
+    final fp = Provider.of<Orders>(context, listen: false).pointt;
     return Scaffold(
       appBar: AppBar(
         title: Text('Confirm ur details'),
@@ -177,12 +195,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           _info['details'] = value;
                         },
                       ),
+                      pointBar(fp),
                       Container(
-                        margin: EdgeInsets.only(top: 20, bottom: 40),
-                        child: Text(fp.pointt.toString()),
-                      ),
-                      Container(
-                        height: 40,
+                        height: 20,
                         width: 80,
                         //padding: EdgeInsets.all(20),
                         child: Row(
@@ -194,6 +209,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                   decoration: InputDecoration(
                                     labelText: '     Y / N',
                                   ),
+                                  focusNode: _voucherFocusNode,
                                   onSaved: (value) {
                                     if (value == 'Y' || value == 'y') {
                                       _isInit2 = true;
@@ -203,13 +219,19 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               )
                             ]),
                       ),
+                      SizedBox(height: 20),
                       FlatButton(
-                        onPressed: () => submit(_isInit2, fp.pointt),
+                        onPressed: () => submit(_isInit2, fp),
                         child: _isLoading
                             ? CircularProgressIndicator(
                                 backgroundColor: Colors.pink,
                               )
-                            : Text('Commit to purchase'),
+                            : Text(
+                                'Commit to purchase',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                         textColor: Colors.green,
                       ),
                     ],
