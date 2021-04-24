@@ -14,6 +14,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   final _numberFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _detailsFocusNode = FocusNode();
+  final _voucherFocusNode = FocusNode();
   var _isLoading = false, _isInit2 = false;
   Map<String, String> _info = {
     'name': '',
@@ -34,6 +35,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     _numberFocusNode.dispose();
     _emailFocusNode.dispose();
     _detailsFocusNode.dispose();
+    _voucherFocusNode.dispose();
     super.dispose();
   }
 
@@ -59,7 +61,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     await Provider.of<Orders>(context, listen: false)
         .addOrder(cart.items.values.toList(), amount);
     await Provider.of<Orders>(context, listen: false)
-        .addBonusPoint(amount)
+        .addBonusPoint(amount, point)
         .then((value) => cart.clear());
     setState(() {
       _isLoading = false;

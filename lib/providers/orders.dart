@@ -123,7 +123,7 @@ class Orders with ChangeNotifier {
     }
   }
 
-  Future<void> addBonusPoint(double amount) async {
+  Future<void> addBonusPoint(double amount, int previousPoint) async {
     final url =
         'https://flutter-update-67f54.firebaseio.com/bonusPoint/$userId/M1234567.json?auth=$authToken';
     double point = amount / 100;
@@ -131,7 +131,7 @@ class Orders with ChangeNotifier {
     try {
       await http.put(url,
           body: json.encode(
-            point,
+            point + previousPoint.toDouble(),
           ));
     } catch (error) {
       throw error;
