@@ -145,10 +145,15 @@ class Orders with ChangeNotifier {
     try {
       final response = await http.get(url);
       final extract = json.decode(response.body);
-      _pointt = extract['M1234567'];
+      print(extract);
+      print(extract);
+      if (extract == null) {
+        _pointt = 0;
+      } else {
+        _pointt = extract['M1234567'];
+      }
     } catch (error) {
       _pointt = 0;
-      print(_pointt.toString());
       throw HttpException('Error occurs');
     }
     notifyListeners();

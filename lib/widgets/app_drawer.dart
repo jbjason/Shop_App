@@ -1,3 +1,4 @@
+import 'package:Shop_App/providers/cart.dart';
 import 'package:provider/provider.dart';
 import '../screens/user_products_screen.dart';
 import '../screens/orders_screen.dart';
@@ -58,6 +59,7 @@ class AppDrawer extends StatelessWidget {
                 Navigator.of(context).pop();
                 Navigator.of(context).pushReplacementNamed('/');
                 Provider.of<Auth>(context, listen: false).logout();
+                Provider.of<Cart>(context, listen: false).clear();
               },
             ),
           ],
