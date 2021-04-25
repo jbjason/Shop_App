@@ -39,7 +39,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     super.dispose();
   }
 
-  Future<void> submit(bool _checking, int point) async {
+  Future<void> submit(int point) async {
     if (!_form.currentState.validate()) return;
     _form.currentState.save();
     setState(() {
@@ -49,14 +49,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     final cart = Provider.of<Cart>(context, listen: false);
     double amount = cart.totalAmount;
     double cutAmount = amount - point;
-    //print('amount = ${amount.toString()} \n ${cutAmount.toString()}');
     await Provider.of<Orders>(context, listen: false).customerOrdersOnServer(
       _info['name'],
       _info['email'],
       _info['contact'],
       _info['details'],
       cart.items.values.toList(),
-      _checking ? cutAmount : amount,
+      _isInit2 ? cutAmount : amount,
     );
     await Provider.of<Orders>(context, listen: false)
         .addOrder(cart.items.values.toList(), amount);
@@ -199,7 +198,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           labelText: '     Y / N',
                         ),
                         onSaved: (value) {
-                          if (value == 'Y' || value == 'y') {
+                          if (value == "y" || value == "Y") {
                             setState(() {
                               _isInit2 = true;
                             });
@@ -211,7 +210,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 ),
 
                 FlatButton(
-                  onPressed: () => submit(_isInit2, fp),
+                  onPressed: () => submit(fp),
                   child: _isLoading
                       ? CircularProgressIndicator(
                           backgroundColor: Colors.pink,
