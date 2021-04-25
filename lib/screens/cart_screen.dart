@@ -1,4 +1,4 @@
-import 'package:Shop_App/screens/order_details_screen.dart';
+import 'package:Shop_App/screens/orderDetailsScreen.dart';
 import '../providers/cart.dart' show Cart;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
