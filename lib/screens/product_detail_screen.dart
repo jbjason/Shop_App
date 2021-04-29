@@ -40,11 +40,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final cart = Provider.of<Cart>(context, listen: false);
     final productId = ModalRoute.of(context).settings.arguments as String;
     final loadedProduct = Provider.of<Products>(context).findById(productId);
     return Scaffold(
-      backgroundColor: Color(0xFFFFE0B2),
+      //backgroundColor: Color(0xFFFFE0B2),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(45),
         child: AppBar(
@@ -81,15 +82,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
       body: SingleChildScrollView(
         child: Stack(
+          //fit: StackFit.expand,
           children: [
-            // Upper Container of the Stack
             Container(
-              height: 400,
+              height: size.height,
+              width: size.width,
               decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(60),
-                    bottomRight: Radius.circular(60)),
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 10),
+                    blurRadius: 60,
+                  ),
+                ],
+                image: DecorationImage(
+                  //alignment: Alignment.centerLeft,
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/Bitmap.png'),
+                ),
               ),
             ),
 
@@ -116,30 +125,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   SizedBox(height: 10),
 
                   // color Button
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // color widget
-                      GestureDetector(
-                        onTap: () {
-                          currentimage(loadedProduct.imageUrl1);
-                        },
-                        child: ColorPin(c: Color(0xFFD50000)),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          currentimage(loadedProduct.imageUrl2);
-                        },
-                        child: ColorPin(c: Color(0xFF009688)),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          currentimage(loadedProduct.imageUrl3);
-                        },
-                        child: ColorPin(c: Color(0xFF1565C0)),
-                      )
-                    ],
-                  ),
+
                   SizedBox(height: 20),
 
                   // Title Text
@@ -280,30 +266,30 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
   }
 }
 
-// Color widget
-class ColorPin extends StatelessWidget {
-  final Color c;
-  const ColorPin({
-    this.c,
-    Key key,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      //onTap: () => ,
-      child: Container(
-        margin: EdgeInsets.only(top: 5, left: 5),
-        padding: EdgeInsets.all(2.5),
-        height: 20,
-        width: 20,
-        decoration: BoxDecoration(
-            color: c,
-            shape: BoxShape.circle,
-            border: Border.all(width: 2, color: c)),
-        child: DecoratedBox(
-          decoration: BoxDecoration(color: c, shape: BoxShape.circle),
-        ),
-      ),
-    );
-  }
-}
+// // Color widget
+// class ColorPin extends StatelessWidget {
+//   final Color c;
+//   const ColorPin({
+//     this.c,
+//     Key key,
+//   }) : super(key: key);
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       //onTap: () => ,
+//       child: Container(
+//         margin: EdgeInsets.only(top: 5, left: 5),
+//         padding: EdgeInsets.all(2.5),
+//         height: 20,
+//         width: 20,
+//         decoration: BoxDecoration(
+//             color: c,
+//             shape: BoxShape.circle,
+//             border: Border.all(width: 2, color: c)),
+//         child: DecoratedBox(
+//           decoration: BoxDecoration(color: c, shape: BoxShape.circle),
+//         ),
+//       ),
+//     );
+//   }
+// }
