@@ -45,7 +45,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     final productId = ModalRoute.of(context).settings.arguments as String;
     final loadedProduct = Provider.of<Products>(context).findById(productId);
     return Scaffold(
-      //backgroundColor: Color(0xFFFFE0B2),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(45),
         child: AppBar(
@@ -82,18 +81,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       ),
       body: SingleChildScrollView(
         child: Stack(
-          //fit: StackFit.expand,
           children: [
             Container(
               height: size.height,
               width: size.width,
               decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    offset: Offset(0, 10),
-                    blurRadius: 60,
-                  ),
-                ],
                 image: DecorationImage(
                   //alignment: Alignment.centerLeft,
                   fit: BoxFit.cover,
