@@ -63,10 +63,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     cart.addItem(
                       loadedProduct.id,
                       loadedProduct.price,
-                      loadedProduct.title,
                       loadedProduct.imageUrl1,
-                      2.toString(),
-                      count,
+                      loadedProduct.title,
+                      1,
                     );
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text('Added item to Cart!'),
@@ -174,29 +173,6 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Row(
-                        children: [
-                          countButton(Icon(Icons.remove), () {
-                            setState(() {
-                              count--;
-                            });
-                          }),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          Text(count.toString().padLeft(2, '0'),
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold)),
-                          SizedBox(
-                            width: 8,
-                          ),
-                          countButton(Icon(Icons.add), () {
-                            setState(() {
-                              count++;
-                            });
-                          }),
-                        ],
-                      ),
                       DropdownButton(
                           hint: Text(
                             'Choose Size',
