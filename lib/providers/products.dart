@@ -58,6 +58,7 @@ class Products with ChangeNotifier {
     return _items.firstWhere((element) => element.id == id);
   }
 
+  // imageUrl2 & imageUrl3 empty return korbe jodi url insert kora kisu na thake
   Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
     String filterString =
         filterByUser ? '&orderBy="creatorId"&equalTo="$userId"' : '';
