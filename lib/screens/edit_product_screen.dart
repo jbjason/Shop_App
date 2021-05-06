@@ -284,7 +284,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             decoration: InputDecoration(labelText: 'Image Url'),
                             keyboardType: TextInputType.url,
                             controller: _imageUrlController,
-                            textInputAction: TextInputAction.done,
+                            textInputAction: TextInputAction.next,
                             focusNode: _imageUrlFocusNode,
                             onFieldSubmitted: (_) {
                               _saveForm();
@@ -343,7 +343,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             decoration: InputDecoration(labelText: 'Image Url'),
                             keyboardType: TextInputType.url,
                             controller: _imageUrlController2,
-                            textInputAction: TextInputAction.done,
+                            textInputAction: TextInputAction.next,
                             focusNode: _imageUrlFocusNode2,
                             onFieldSubmitted: (_) {
                               _saveForm();

@@ -80,8 +80,8 @@ class Products with ChangeNotifier {
           description: prodData['description'],
           price: prodData['price'],
           imageUrl1: prodData['imageUrl1'],
-          imageUrl2: prodData['imageUrl2'] == null ? '' : prodData['imageUrl2'],
-          imageUrl3: prodData['imageUrl3'] == null ? '' : prodData['imageUrl3'],
+          imageUrl2: prodData['imageUrl2'],
+          imageUrl3: prodData['imageUrl3'],
           // if favoriteData or no_entry_for_this_user then return false(unchecked)
           isFavorite:
               favoriteData == null ? false : favoriteData[proId] ?? false,
