@@ -20,7 +20,7 @@ class _CartScreenState extends State<CartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<Cart>(context, listen: false);
+    final cart = Provider.of<Cart>(context);
     return Scaffold(
       appBar: AppBar(
           backgroundColor: Color(0xFFC8E6C9),
