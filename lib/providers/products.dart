@@ -58,12 +58,11 @@ class Products with ChangeNotifier {
     return _items.firstWhere((element) => element.id == id);
   }
 
-  // imageUrl2 & imageUrl3 empty return korbe jodi url insert kora kisu na thake
-  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
-    String filterString =
-        filterByUser ? '&orderBy="creatorId"&equalTo="$userId"' : '';
+  // imageUrl2 & imageUrl3 empty return korbe jodi url insert kora na thake
+  Future<void> fetchAndSetProducts() async {
+    //String filterString =filterByUser ? '&orderBy="creatorId"&equalTo="$userId"' : '';
     var url =
-        'https://flutter-update-67f54.firebaseio.com/products.json?auth=$authToken$filterString';
+        'https://flutter-update-67f54.firebaseio.com/products.json?auth=$authToken';
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
