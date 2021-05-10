@@ -67,8 +67,17 @@ class AppDrawer extends StatelessWidget {
             ),
             Container(
               margin: EdgeInsets.only(top: 20, bottom: 40),
-              child: pointBar(0),
+              child: Column(
+                children: [
+                  Text(
+                    'Sort By (Price)',
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  ),
+                  pointBar(20),
+                ],
+              ),
             ),
+            Divider(),
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('LogOut',
