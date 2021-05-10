@@ -1,3 +1,5 @@
+import 'package:Shop_App/widgets/chart.dart';
+
 import '../widgets/app_drawer.dart';
 import '../providers/orders.dart' show Orders;
 import 'package:flutter/material.dart';
@@ -30,10 +32,22 @@ class OrderScreen extends StatelessWidget {
                 child: Text('An error occured'),
               );
             } else {
-              return Consumer<Orders>(
-                builder: (ctx, orderData, child) => ListView.builder(
-                  itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
-                  itemCount: orderData.orders.length,
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height * .27,
+                      child: Chart(),
+                    ),
+                    Consumer<Orders>(
+                      builder: (ctx, orderData, child) => ListView.builder(
+                        itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
+                        itemCount: orderData.orders.length,
+                      ),
+                    ),
+                  ],
                 ),
               );
             }
