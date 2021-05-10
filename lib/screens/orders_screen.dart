@@ -40,10 +40,14 @@ class OrderScreen extends StatelessWidget {
                     height: MediaQuery.of(context).size.height * .27,
                     child: Chart(),
                   ),
-                  Consumer<Orders>(
-                    builder: (ctx, orderData, child) => ListView.builder(
-                      itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
-                      itemCount: orderData.orders.length,
+                  Container(
+                    height: MediaQuery.of(context).size.height * .6,
+                    width: double.infinity,
+                    child: Consumer<Orders>(
+                      builder: (ctx, orderData, child) => ListView.builder(
+                        itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
+                        itemCount: orderData.orders.length,
+                      ),
                     ),
                   ),
                 ],
