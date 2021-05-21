@@ -21,7 +21,7 @@ class _CommentsState extends State<Comments> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 550),
+      margin: EdgeInsets.only(top: 100),
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
