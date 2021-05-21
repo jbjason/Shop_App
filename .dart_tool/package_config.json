@@ -152,6 +152,12 @@
       "languageVersion": "2.1"
     },
     {
+      "name": "pinch_zoom",
+      "rootUri": "file:///E:/Programs/flutter/.pub-cache/hosted/pub.dartlang.org/pinch_zoom-0.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "platform",
       "rootUri": "file:///E:/Programs/flutter/.pub-cache/hosted/pub.dartlang.org/platform-2.2.1",
       "packageUri": "lib/",
@@ -290,7 +296,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-04-28T09:34:15.605624Z",
+  "generated": "2021-05-21T19:31:34.575046Z",
   "generator": "pub",
   "generatorVersion": "2.12.2"
 }
