@@ -13,7 +13,6 @@ class ProductDetailScreen extends StatefulWidget {
 class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<Cart>(context, listen: false);
     final productId = ModalRoute.of(context).settings.arguments as String;
     final loadedProduct = Provider.of<Products>(context).findById(productId);
     return Scaffold(
@@ -51,6 +50,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       //   ),
       // ),
       body: ProductDetailScreenItem(
+        loadedProduct.id,
         loadedProduct.title,
         loadedProduct.description,
         loadedProduct.price,

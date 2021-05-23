@@ -1,16 +1,18 @@
+import 'package:Shop_App/providers/cart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:Shop_App/widgets/comments.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
 
 class ProductDetailScreenItem extends StatefulWidget {
-  final String image2, image1, image3;
+  final String image2, image1, image3, id;
   final String _title, _description;
   final double price;
   String currentImageUrl;
   int _isInit = 1;
 
-  ProductDetailScreenItem(this._title, this._description, this.price,
+  ProductDetailScreenItem(this.id, this._title, this._description, this.price,
       this.image1, this.image2, this.image3);
   @override
   _ProductDetailScreenItemState createState() =>
@@ -63,6 +65,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
 
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<Cart>(context, listen: false);
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
@@ -257,28 +260,37 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               style: TextStyle(height: 1.8),
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: size.height * 0.1),
-            padding: EdgeInsets.all(20),
-            width: size.width * 0.7,
-            decoration: BoxDecoration(
-              color: Colors.amber,
-              borderRadius: BorderRadius.circular(10),
+          GestureDetector(
+            onTap: () => cart.addItem(
+              widget.id,
+              widget.price,
+              widget.image1,
+              widget._title,
+              1,
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.shopping_bag),
-                SizedBox(width: 10),
-                Text(
-                  'Add  to  Cart',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
+            child: Container(
+              margin: EdgeInsets.only(top: size.height * 0.1),
+              padding: EdgeInsets.all(20),
+              width: size.width * 0.7,
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.shopping_bag),
+                  SizedBox(width: 10),
+                  Text(
+                    'Add  to  Cart',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           Container(
