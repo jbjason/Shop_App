@@ -50,7 +50,14 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
       //     ],
       //   ),
       // ),
-      body: ProductDetailScreenItem(),
+      body: ProductDetailScreenItem(
+        loadedProduct.title,
+        loadedProduct.description,
+        loadedProduct.price,
+        loadedProduct.imageUrl1,
+        loadedProduct.imageUrl2,
+        loadedProduct.imageUrl3,
+      ),
     );
   }
 }
