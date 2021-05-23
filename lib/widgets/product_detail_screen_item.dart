@@ -87,7 +87,10 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                         Align(
                           //alignment: Alignment.topLeft,
                           child: IconButton(
-                              icon: Icon(Icons.arrow_back), onPressed: () {}),
+                              icon: Icon(Icons.arrow_back),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              }),
                         ),
                         //SizedBox(height: 30),
                         _iconWidget(widget.image1),
