@@ -261,13 +261,19 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
             ),
           ),
           GestureDetector(
-            onTap: () => cart.addItem(
-              widget.id,
-              widget.price,
-              widget.image1,
-              widget._title,
-              1,
-            ),
+            onTap: () => {
+              cart.addItem(
+                widget.id,
+                widget.price,
+                widget.image1,
+                widget._title,
+                1,
+              ),
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text('Added item to Cart!'),
+                duration: Duration(seconds: 1),
+              )),
+            },
             child: Container(
               margin: EdgeInsets.only(top: size.height * 0.1),
               padding: EdgeInsets.all(20),
