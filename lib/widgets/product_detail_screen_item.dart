@@ -20,8 +20,8 @@ class ProductDetailScreenItem extends StatefulWidget {
 }
 
 class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
-  final primaryColor = Color(0xFF0C9869);
-  final backgroundColor = Color(0xFFF9F8FD);
+  final primaryColor = const Color(0xFF0C9869);
+  final backgroundColor = const Color(0xFFF9F8FD);
   List<String> _locations = ['M', 'L', 'XL', 'XXL'];
   String _selectedLocation;
   void currentimage(String url) {
