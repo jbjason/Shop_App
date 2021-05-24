@@ -2,15 +2,10 @@ import 'package:Shop_App/widgets/product_detail_screen_item.dart';
 import '../providers/products.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/cart.dart';
 
-class ProductDetailScreen extends StatefulWidget {
+class ProductDetailScreen extends StatelessWidget {
   static const routeName = '/product-detail';
-  @override
-  _ProductDetailScreenState createState() => _ProductDetailScreenState();
-}
 
-class _ProductDetailScreenState extends State<ProductDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final productId = ModalRoute.of(context).settings.arguments as String;
