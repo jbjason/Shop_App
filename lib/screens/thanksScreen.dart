@@ -27,11 +27,11 @@ class ThanksScreen extends StatelessWidget {
                 style: TextStyle(color: Colors.black54, fontSize: 15),
               ),
               SizedBox(height: 12),
-              // Image.asset(
-              //   'assets/images/success.png',
-              //   fit: BoxFit.fill,
-              //   height: 200,
-              // ),
+              Image.asset(
+                'assets/images/success.png',
+                fit: BoxFit.fill,
+                height: 200,
+              ),
               SizedBox(height: 20),
               Text('Estimated Delivary in 7days',
                   style: TextStyle(
@@ -73,15 +73,13 @@ class ThanksScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      // Container(
-                      //   child: Image.asset(
-                      //     'assets/images/back_arrow_1.jpg',
-                      //     fit: BoxFit.fill,
-                      //     height: 32,
-                      //   ),
-                      // ),
-                      // size: 30,
-
+                      Container(
+                        child: Image.asset(
+                          'assets/images/back_arrow_1.jpg',
+                          fit: BoxFit.fill,
+                          height: 32,
+                        ),
+                      ),
                       SizedBox(width: 14),
                       SizedBox(child: Text('|')),
                       SizedBox(width: 20),
