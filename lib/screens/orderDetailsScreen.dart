@@ -1,5 +1,6 @@
 import 'package:Shop_App/providers/cart.dart';
 import 'package:Shop_App/providers/orders.dart';
+import 'package:Shop_App/screens/thanksScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -65,11 +66,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     setState(() {
       _isLoading = false;
     });
-    // for popping 2page at a time
-    int count = 0;
-    Navigator.popUntil(context, (route) {
-      return count++ == 2;
-    });
+    Navigator.of(context).pushNamed(ThanksScreen.routeName);
   }
 
   Widget pointBar(int p) {
