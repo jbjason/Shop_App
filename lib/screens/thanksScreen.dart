@@ -4,6 +4,8 @@ class ThanksScreen extends StatelessWidget {
   static const routeName = '/thanks-screen';
   @override
   Widget build(BuildContext context) {
+    final loadedProduct =
+        ModalRoute.of(context).settings.arguments as List<String>;
     final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
@@ -44,8 +46,8 @@ class ThanksScreen extends StatelessWidget {
                 thickness: 2,
               ),
               SizedBox(height: 25),
-              Text('{7} items will delivery at'),
-              Text('Mirpur Dhaka Eastern housing -1216'),
+              Text('{ ${loadedProduct[0]} } items will delivery at'),
+              Text('${loadedProduct[1]}'),
               SizedBox(height: 25),
               Divider(
                 color: Colors.green,

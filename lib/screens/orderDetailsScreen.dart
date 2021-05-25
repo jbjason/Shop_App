@@ -50,6 +50,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     final cart = Provider.of<Cart>(context, listen: false);
     double amount = cart.totalAmount;
     double cutAmount = amount - point;
+    String totalCartItems = cart.itemCount.toString();
     await Provider.of<Orders>(context, listen: false).customerOrdersOnServer(
       _info['name'],
       _info['email'],
@@ -66,7 +67,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     setState(() {
       _isLoading = false;
     });
-    Navigator.of(context).pushNamed(ThanksScreen.routeName);
+    Navigator.of(context).pushNamed(ThanksScreen.routeName,
+        arguments: [totalCartItems, _info['details']]);
   }
 
   Widget pointBar(int p) {
