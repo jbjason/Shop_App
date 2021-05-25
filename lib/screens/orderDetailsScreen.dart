@@ -205,7 +205,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     )
                   ]),
                 ),
-
+                SizedBox(height: 20),
                 FlatButton(
                   onPressed: () => submit(fp),
                   child: _isLoading
