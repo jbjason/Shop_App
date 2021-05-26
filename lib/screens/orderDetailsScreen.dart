@@ -16,7 +16,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   final _emailFocusNode = FocusNode();
   final _detailsFocusNode = FocusNode();
   final _voucherFocusNode = FocusNode();
-  var _isLoading = false, _isInit2 = false;
+  var _isLoading = false, _isVoucherYes = false;
   Map<String, String> _info = {
     'name': '',
     'email': '',
@@ -57,7 +57,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       _info['contact'],
       _info['details'],
       cart.items.values.toList(),
-      _isInit2 ? cutAmount : amount,
+      _isVoucherYes ? cutAmount : amount,
     );
     await Provider.of<Orders>(context, listen: false)
         .addOrder(cart.items.values.toList(), amount);
@@ -199,7 +199,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         onSaved: (value) {
                           if (value == "y" || value == "Y") {
                             setState(() {
-                              _isInit2 = true;
+                              _isVoucherYes = true;
                             });
                           }
                         },
