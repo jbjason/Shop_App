@@ -388,14 +388,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               _saveForm();
                             },
                             validator: (value) {
-                              // if (value.isEmpty) {
-                              //   return 'Please enter a Url';
-                              // } else if ((!value.startsWith('http') &&
-                              //         !value.startsWith('https')) ||
-                              //     (!value.endsWith('.jpg') &&
-                              //         !value.endsWith('.png'))) {
-                              //   return 'Please enter a valid Url';
-                              // }
                               return null;
                             },
                             onSaved: (value) {
@@ -448,14 +440,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               _saveForm();
                             },
                             validator: (value) {
-                              // if (value.isEmpty) {
-                              //   return 'Please enter a Url';
-                              // } else if ((!value.startsWith('http') &&
-                              //         !value.startsWith('https')) ||
-                              //     (!value.endsWith('.jpg') &&
-                              //         !value.endsWith('.png'))) {
-                              //   return 'Please enter a valid Url';
-                              // }
                               return null;
                             },
                             onSaved: (value) {
