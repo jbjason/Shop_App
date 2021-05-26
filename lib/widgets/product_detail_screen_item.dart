@@ -153,7 +153,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
-                                              text: '4.5 /',
+                                              text: '${widget.rating} /',
                                               style: TextStyle(
                                                   fontSize: 16,
                                                   color: Colors.black,
@@ -224,7 +224,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                               fontSize: 35,
                             ),
                       ),
-                      Text(' ${widget.review}'),
+                      Text(' ${widget.review} reviews'),
                     ],
                   ),
                 ),
