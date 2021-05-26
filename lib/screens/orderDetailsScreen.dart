@@ -185,12 +185,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     _info['details'] = value;
                   },
                 ),
-                SizedBox(height: 10),
+                SizedBox(height: 40),
                 Text('Your Bonus Points',
                     style: TextStyle(fontWeight: FontWeight.bold)),
                 // pointBar
                 Container(
-                  margin: EdgeInsets.only(top: 20, bottom: 40),
+                  margin: EdgeInsets.only(bottom: 20),
                   child: pointBar(fp),
                 ),
                 //voucher code
