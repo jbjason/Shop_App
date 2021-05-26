@@ -85,6 +85,9 @@ class Products with ChangeNotifier {
           // if favoriteData or no_entry_for_this_user then return false(unchecked)
           isFavorite:
               favoriteData == null ? false : favoriteData[proId] ?? false,
+          isRating: prodData['isRating'],
+          isReview: prodData['isReview'],
+          category: prodData['category'],
         ));
       });
       _items = loadedProducts;
@@ -108,6 +111,9 @@ class Products with ChangeNotifier {
           'imageUrl2': product.imageUrl2,
           'imageUrl3': product.imageUrl3,
           'creatorId': userId,
+          'isRating': product.isRating,
+          'isReview': product.isReview,
+          'category': product.category,
         }),
       );
       final newProduct = Product(
@@ -120,6 +126,9 @@ class Products with ChangeNotifier {
         // this give access code of (.post's) body as Map like
         // {name: -MMU-mCP6SqbQBL5yZFB} so to use this as Unique id we can....
         id: json.decode(response.body)['name'],
+        isRating: product.isRating,
+        isReview: product.isReview,
+        category: product.category,
       );
       // adding
       _items.add(newProduct);

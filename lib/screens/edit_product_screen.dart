@@ -15,6 +15,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _imageUrlFocusNode = FocusNode();
   final _imageUrlFocusNode2 = FocusNode();
   final _imageUrlFocusNode3 = FocusNode();
+  final _titleFocusNode = FocusNode();
 
   final _imageUrlController = TextEditingController();
   final _imageUrlController2 = TextEditingController();
@@ -29,6 +30,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     imageUrl1: '',
     imageUrl2: '',
     imageUrl3: '',
+    category: '',
   );
   var _initValues = {
     'title': '',
@@ -165,8 +167,37 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   children: [
                     TextFormField(
                       // initialValue: _initValues['title'],
+                      decoration: InputDecoration(labelText: 'Category'),
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (_) {
+                        FocusScope.of(context).requestFocus(_titleFocusNode);
+                      },
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please provide a value';
+                        }
+                        // return null means valid number
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _editedProduct = Product(
+                          id: _editedProduct.id,
+                          title: value,
+                          description: _editedProduct.description,
+                          price: _editedProduct.price,
+                          imageUrl1: _editedProduct.imageUrl1,
+                          imageUrl2: _editedProduct.imageUrl2,
+                          imageUrl3: _editedProduct.imageUrl3,
+                          isFavorite: _editedProduct.isFavorite,
+                          category: value,
+                        );
+                      },
+                    ),
+                    TextFormField(
+                      // initialValue: _initValues['title'],
                       decoration: InputDecoration(labelText: 'Title'),
                       textInputAction: TextInputAction.next,
+                      focusNode: _titleFocusNode,
                       onFieldSubmitted: (_) {
                         FocusScope.of(context).requestFocus(_priceFocusNode);
                       },
@@ -187,6 +218,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           imageUrl2: _editedProduct.imageUrl2,
                           imageUrl3: _editedProduct.imageUrl3,
                           isFavorite: _editedProduct.isFavorite,
+                          category: _editedProduct.category,
                         );
                       },
                     ),
@@ -224,6 +256,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           imageUrl3: _editedProduct.imageUrl3,
                           id: _editedProduct.id,
                           isFavorite: _editedProduct.isFavorite,
+                          category: _editedProduct.category,
                         );
                       },
                     ),
@@ -254,6 +287,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           imageUrl3: _editedProduct.imageUrl3,
                           id: _editedProduct.id,
                           isFavorite: _editedProduct.isFavorite,
+                          category: _editedProduct.category,
                         );
                       },
                     ),
@@ -310,6 +344,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 imageUrl3: _editedProduct.imageUrl3,
                                 id: _editedProduct.id,
                                 isFavorite: _editedProduct.isFavorite,
+                                category: _editedProduct.category,
                               );
                             },
                           ),
@@ -369,6 +404,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 imageUrl3: _editedProduct.imageUrl3,
                                 id: _editedProduct.id,
                                 isFavorite: _editedProduct.isFavorite,
+                                category: _editedProduct.category,
                               );
                             },
                           ),
@@ -428,6 +464,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 imageUrl3: value,
                                 id: _editedProduct.id,
                                 isFavorite: _editedProduct.isFavorite,
+                                category: _editedProduct.category,
                               );
                             },
                           ),

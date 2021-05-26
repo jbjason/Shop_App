@@ -3,9 +3,11 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Product with ChangeNotifier {
-  final String id, title, description;
+  final String id, title, description, category;
   final String imageUrl1, imageUrl2, imageUrl3;
   final double price;
+  double isRating;
+  int isReview;
   bool isFavorite;
   Product({
     @required this.id,
@@ -16,6 +18,9 @@ class Product with ChangeNotifier {
     this.imageUrl2,
     this.imageUrl3,
     this.isFavorite = false,
+    this.isRating = 5.0,
+    this.isReview = 10,
+    @required this.category,
   });
 
   Future<void> toggleFavoriteStatus(String token, String userId) async {
