@@ -16,6 +16,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _imageUrlFocusNode2 = FocusNode();
   final _imageUrlFocusNode3 = FocusNode();
   final _titleFocusNode = FocusNode();
+  final _categoryFocusNode = FocusNode();
 
   final _imageUrlController = TextEditingController();
   final _imageUrlController2 = TextEditingController();
@@ -85,6 +86,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _imageUrlFocusNode2.dispose();
     _imageUrlFocusNode3.dispose();
     _titleFocusNode.dispose();
+    _categoryFocusNode.dispose();
 
     _imageUrlFocusNode.removeListener(_updateImageUrl);
     _imageUrlFocusNode2.removeListener(_updateImageUrl);
@@ -170,6 +172,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       // initialValue: _initValues['title'],
                       decoration: InputDecoration(labelText: 'Category'),
                       textInputAction: TextInputAction.next,
+                      focusNode: _categoryFocusNode,
                       onFieldSubmitted: (_) {
                         FocusScope.of(context).requestFocus(_titleFocusNode);
                       },
