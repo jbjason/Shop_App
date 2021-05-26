@@ -9,11 +9,13 @@ class ProductDetailScreenItem extends StatefulWidget {
   final String image2, image1, image3, id;
   final String _title, _description;
   final double price;
+  double rating;
+  int review;
   String currentImageUrl;
   int _isInit = 1;
 
   ProductDetailScreenItem(this.id, this._title, this._description, this.price,
-      this.image1, this.image2, this.image3);
+      this.image1, this.image2, this.image3, this.rating, this.review);
   @override
   _ProductDetailScreenItemState createState() =>
       _ProductDetailScreenItemState();
@@ -222,7 +224,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                               fontSize: 35,
                             ),
                       ),
-                      Text(': 112 reviews'),
+                      Text(' ${widget.review}'),
                     ],
                   ),
                 ),

@@ -52,6 +52,8 @@ class ProductDetailScreen extends StatelessWidget {
         loadedProduct.imageUrl1,
         loadedProduct.imageUrl2,
         loadedProduct.imageUrl3,
+        loadedProduct.isRating,
+        loadedProduct.isReview,
       ),
     );
   }
