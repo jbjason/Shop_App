@@ -187,7 +187,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 ),
                 SizedBox(height: 40),
                 Text('Your Bonus Points',
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.red)),
                 // pointBar
                 Container(
                   margin: EdgeInsets.only(bottom: 20),
