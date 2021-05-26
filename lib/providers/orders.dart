@@ -1,5 +1,4 @@
 import 'package:Shop_App/models/http_exception.dart';
-
 import './cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
