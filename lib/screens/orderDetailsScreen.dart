@@ -49,7 +49,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
     final cart = Provider.of<Cart>(context, listen: false);
     double amount = cart.totalAmount;
-    double cutAmount = amount - point;
+    double cutAmount;
+    if (point >= amount) {
+      cutAmount = point - amount;
+      point = cutAmount.toInt();
+    } else {
+      cutAmount = amount - point;
+      point = 1;
+    }
     String totalCartItems = cart.itemCount.toString();
     await Provider.of<Orders>(context, listen: false).customerOrdersOnServer(
       _info['name'],
