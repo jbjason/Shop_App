@@ -131,7 +131,7 @@ class Orders with ChangeNotifier {
     try {
       await http.put(url,
           body: json.encode(
-            point + previousPoint.toDouble(),
+            point.toInt() + previousPoint,
           ));
     } catch (error) {
       throw error;
