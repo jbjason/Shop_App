@@ -176,7 +176,7 @@ class Products with ChangeNotifier {
     final int index = _items.indexWhere((element) => element.id == id);
     final double oldRating = _items[index].isRating;
     newRating = (oldRating + newRating) / 2.0;
-    final newReview = _items[index].isRating + 1;
+    final int newReview = _items[index].isReview + 1.toInt();
     final url =
         'https://flutter-update-67f54.firebaseio.com/products/$id.jsonauth=$authToken';
     try {
@@ -184,7 +184,7 @@ class Products with ChangeNotifier {
         url,
         body: json.encode({
           'isRating': newRating,
-          'isReview': newReview.toInt(),
+          'isReview': newReview,
         }),
       );
       if (response.statusCode >= 400) {
