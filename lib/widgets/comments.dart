@@ -50,9 +50,7 @@ class _CommentsState extends State<Comments> {
           ),
           SizedBox(height: 15),
           Row(children: [
-            Container(
-              color: Colors.white,
-              width: 240,
+            Expanded(
               child: TextField(
                 decoration: InputDecoration(labelText: '   Title'),
                 controller: _titleController,
