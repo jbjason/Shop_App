@@ -94,16 +94,6 @@ class _CommentsState extends State<Comments> {
                   ),
                 ]),
               ),
-              // ListTile(
-              //   leading: Text(
-              //     email,
-              //     style: TextStyle(
-              //       backgroundColor: Colors.black45,
-              //       color: Colors.white,
-              //     ),
-              //   ),
-              //   title: Text(comments[index]),
-              // ),
               itemCount: comments.length,
             )),
           ),
