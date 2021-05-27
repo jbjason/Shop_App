@@ -6,21 +6,6 @@ import 'package:flutter/material.dart';
 import '../providers/auth.dart';
 
 class AppDrawer extends StatelessWidget {
-  Widget pointBar(int p) {
-    RangeValues values = RangeValues(0, p.toDouble());
-    return RangeSlider(
-      values: values,
-      min: 0,
-      max: 100,
-      divisions: 50,
-      labels: RangeLabels(
-        values.start.round().toString(),
-        values.end.round().toString(),
-      ),
-      onChanged: (_) {},
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -60,22 +45,6 @@ class AppDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushNamed(UserProductsScreen.routeName);
               },
-            ),
-            Divider(),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 20, bottom: 40),
-              child: Column(
-                children: [
-                  Text(
-                    'Sort By (Price)',
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                  ),
-                  pointBar(20),
-                ],
-              ),
             ),
             Divider(),
             ListTile(
