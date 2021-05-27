@@ -141,7 +141,7 @@ class Products with ChangeNotifier {
 
   Future<void> deleteProduct(String id) async {
     final url =
-        'https://flutter-update-67f54.firebaseio.com/products/$id.jsonauth=$authToken';
+        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken';
     final exIndex = _items.indexWhere((element) => element.id == id);
     var exProduct = _items[exIndex];
     _items.removeAt(exIndex);
@@ -159,7 +159,7 @@ class Products with ChangeNotifier {
 
   Future<void> updateProduct(String id, Product newProduct) async {
     final url =
-        'https://flutter-update-67f54.firebaseio.com/products/$id.jsonauth=$authToken';
+        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken';
     await http.patch(url,
         body: json.encode({
           'title': newProduct.title,
@@ -178,7 +178,7 @@ class Products with ChangeNotifier {
     newRating = (oldRating + newRating) / 2.0;
     final int newReview = _items[index].isReview + 1.toInt();
     final url =
-        'https://flutter-update-67f54.firebaseio.com/products/$id.jsonauth=$authToken';
+        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken';
     try {
       final response = await http.patch(
         url,
@@ -190,6 +190,7 @@ class Products with ChangeNotifier {
       if (response.statusCode >= 400) {
         _items[index].isRating = oldRating;
         print('no error ${newRating.toString()}');
+        print(id);
       }
     } catch (error) {
       _items[index].isRating = oldRating;
