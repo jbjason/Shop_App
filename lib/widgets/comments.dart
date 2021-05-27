@@ -76,16 +76,34 @@ class _CommentsState extends State<Comments> {
             color: Colors.amber,
             child: Card(
                 child: ListView.builder(
-              itemBuilder: (context, index) => ListTile(
-                leading: Text(
-                  email,
-                  style: TextStyle(
-                    backgroundColor: Colors.black45,
-                    color: Colors.white,
+              itemBuilder: (context, index) => RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                    text: '  $email',
+                    style: TextStyle(
+                      backgroundColor: Colors.black54,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                title: Text(comments[index]),
+                  TextSpan(
+                    text: '   ${comments[index]}\n',
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
+                ]),
               ),
+              // ListTile(
+              //   leading: Text(
+              //     email,
+              //     style: TextStyle(
+              //       backgroundColor: Colors.black45,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              //   title: Text(comments[index]),
+              // ),
               itemCount: comments.length,
             )),
           ),
