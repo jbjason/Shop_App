@@ -192,6 +192,7 @@ class Products with ChangeNotifier {
       }
     } catch (error) {
       _items[index].isRating = oldRating;
+      print('error');
     }
     notifyListeners();
   }
