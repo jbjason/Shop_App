@@ -11,6 +11,7 @@ class ProductDetailScreen extends StatelessWidget {
     final productId = ModalRoute.of(context).settings.arguments as String;
     final loadedProduct = Provider.of<Products>(context).findById(productId);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       // appBar: PreferredSize(
       //   preferredSize: Size.fromHeight(45),
       //   child: AppBar(
