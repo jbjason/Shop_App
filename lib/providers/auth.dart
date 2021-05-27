@@ -66,6 +66,7 @@ class Auth with ChangeNotifier {
         'token': _token,
         'userId': _userId,
         'expiryDate': _expiryDate.toIso8601String(),
+        'userEmail': _userEmail,
       });
       prefs.setString('userData', userData);
     } catch (error) {
@@ -94,6 +95,7 @@ class Auth with ChangeNotifier {
     _token = extractedUserData['token'];
     _userId = extractedUserData['userId'];
     _expiryDate = expiryDate;
+    _userEmail = extractedUserData['userEmail'];
     notifyListeners();
     _autoLogout();
     return true;
