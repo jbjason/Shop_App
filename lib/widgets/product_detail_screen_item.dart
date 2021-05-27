@@ -1,4 +1,5 @@
 import 'package:Shop_App/providers/cart.dart';
+import 'package:Shop_App/providers/products.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -97,8 +98,10 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                         ),
                         //SizedBox(height: 30),
                         _iconWidget(widget.image1),
-                        if (!widget.image2.isEmpty) _iconWidget(widget.image2),
-                        if (!widget.image3.isEmpty) _iconWidget(widget.image3),
+                        if (widget.image2.isNotEmpty)
+                          _iconWidget(widget.image2),
+                        if (widget.image3.isNotEmpty)
+                          _iconWidget(widget.image3),
                       ],
                     ),
                   ),
@@ -186,10 +189,12 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                                       borderColor: Colors.white,
                                       color: Colors.amber,
                                       spacing: 2.0,
-                                      //rating: ratingg,
-                                      // onRated: (value) {
-                                      //   ratingg = (ratingg + value) / 2;
-                                      // },
+                                      onRated: (value) {
+                                        Provider.of<Products>(context,
+                                                listen: false)
+                                            .updateRatingAndReview(
+                                                widget.id, value);
+                                      },
                                     ),
                                     Text('Rate Us',
                                         style: TextStyle(

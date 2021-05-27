@@ -171,4 +171,28 @@ class Products with ChangeNotifier {
     _items[prodIndex] = newProduct;
     notifyListeners();
   }
+
+  Future<void> updateRatingAndReview(String id, double newRating) async {
+    final int index = _items.indexWhere((element) => element.id == id);
+    final double oldRating = _items[index].isRating;
+    newRating = (oldRating + newRating) / 2.0;
+    final newReview = _items[index].isRating + 1;
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/products/$id.jsonauth=$authToken';
+    try {
+      final response = await http.patch(
+        url,
+        body: json.encode({
+          'isRating': newRating,
+          'isReview': newReview.toInt(),
+        }),
+      );
+      if (response.statusCode >= 400) {
+        _items[index].isRating = oldRating;
+      }
+    } catch (error) {
+      _items[index].isRating = oldRating;
+    }
+    notifyListeners();
+  }
 }
