@@ -1,4 +1,6 @@
+import 'package:Shop_App/providers/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Comments extends StatefulWidget {
   @override
@@ -20,6 +22,7 @@ class _CommentsState extends State<Comments> {
 
   @override
   Widget build(BuildContext context) {
+    String email = Provider.of<Auth>(context, listen: false).userEmail;
     return Container(
       margin: EdgeInsets.only(top: 80),
       padding: EdgeInsets.all(10),
@@ -77,7 +80,7 @@ class _CommentsState extends State<Comments> {
                 child: ListView.builder(
               itemBuilder: (context, index) => ListTile(
                 leading: Text(
-                  ' # ${index + 1}',
+                  email,
                   style: TextStyle(
                     backgroundColor: Colors.black45,
                     color: Colors.white,

@@ -8,7 +8,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Auth with ChangeNotifier {
-  String _token, _userId;
+  String _token, _userId, _userEmail;
   DateTime _expiryDate;
   // have to import 'dart:async';
   Timer _authTimer;
@@ -20,6 +20,10 @@ class Auth with ChangeNotifier {
       return _token;
     }
     return null;
+  }
+
+  String get userEmail {
+    return _userEmail;
   }
 
   bool get isAuth {
@@ -51,6 +55,7 @@ class Auth with ChangeNotifier {
       }
       _token = responseData['idToken'];
       _userId = responseData['localId'];
+      _userEmail = responseData['email'];
       _expiryDate = DateTime.now()
           .add(Duration(seconds: int.parse(responseData['expiresIn'])));
       _autoLogout();
