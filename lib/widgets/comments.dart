@@ -21,7 +21,7 @@ class _CommentsState extends State<Comments> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 100),
+      margin: EdgeInsets.only(top: 80),
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
@@ -57,7 +57,7 @@ class _CommentsState extends State<Comments> {
             ),
             Container(
               width: 80,
-              color: Colors.black26,
+              color: Colors.black54,
               child: FlatButton(
                 onPressed: submitData,
                 child: Text(
@@ -76,9 +76,12 @@ class _CommentsState extends State<Comments> {
             child: Card(
                 child: ListView.builder(
               itemBuilder: (context, index) => ListTile(
-                leading: CircleAvatar(
-                  backgroundColor: Colors.pink,
-                  child: Text(' # ${index + 1}'),
+                leading: Text(
+                  ' # ${index + 1}',
+                  style: TextStyle(
+                    backgroundColor: Colors.black45,
+                    color: Colors.white,
+                  ),
                 ),
                 title: Text(comments[index]),
               ),
