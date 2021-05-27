@@ -72,6 +72,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
     return SingleChildScrollView(
       child: Column(
         children: [
+          // Pic & ratings part
           Container(
             height: size.height * .8,
             width: size.width,
@@ -206,6 +207,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               ),
             ),
           ),
+          // Title , reviews , Price_Clipper
           Container(
             color: Color(0xFFE8F5E9).withOpacity(0.5),
             margin: EdgeInsets.symmetric(vertical: 15),
@@ -257,6 +259,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               ],
             ),
           ),
+          // description
           Container(
             color: Color(0xFFE8F5E9).withOpacity(0.5),
             padding: EdgeInsets.all(10),
@@ -265,6 +268,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               style: TextStyle(height: 1.8),
             ),
           ),
+          // add_to_cart button
           GestureDetector(
             onTap: () => {
               cart.addItem(
@@ -304,6 +308,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               ),
             ),
           ),
+          // colors demo (circle)
           Container(
             margin: EdgeInsets.only(top: 20, left: 35),
             height: 30,
@@ -319,6 +324,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               ],
             ),
           ),
+          // choose color & size
           Container(
             width: double.infinity,
             margin: EdgeInsets.only(top: 5, left: 35, bottom: 15, right: 35),
@@ -380,6 +386,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               ],
             ),
           ),
+          // comments
           Comments(),
         ],
       ),
