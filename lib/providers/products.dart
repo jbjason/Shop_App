@@ -189,6 +189,7 @@ class Products with ChangeNotifier {
       );
       if (response.statusCode >= 400) {
         _items[index].isRating = oldRating;
+        print('no error ${newRating}');
       }
     } catch (error) {
       _items[index].isRating = oldRating;
