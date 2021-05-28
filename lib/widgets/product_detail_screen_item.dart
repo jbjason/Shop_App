@@ -107,105 +107,111 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                   ),
 
                   // right side
-                  Container(
-                    width: size.width * .78,
-                    child: Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(63),
-                            bottomLeft: Radius.circular(63),
-                          ),
-                          child: PinchZoom(
-                            image: Image.network(
-                              widget._isInit == 1
-                                  ? widget.image1
-                                  : widget.currentImageUrl,
-                              height: size.height,
-                              width: size.width,
-                              fit: BoxFit.cover,
+                  Hero(
+                    tag: widget.id,
+                    child: Container(
+                      width: size.width * .78,
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(63),
+                              bottomLeft: Radius.circular(63),
                             ),
-                            zoomedBackgroundColor: Colors.grey.shade300,
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            height: size.height * .1,
-                            width: size.width * .55,
-                            // color: Colors.amber,
-                            decoration: BoxDecoration(
-                              color: Colors.lightGreen[300],
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(63),
-                                bottomLeft: Radius.circular(63),
+                            child: PinchZoom(
+                              image: Image.network(
+                                widget._isInit == 1
+                                    ? widget.image1
+                                    : widget.currentImageUrl,
+                                height: size.height,
+                                width: size.width,
+                                fit: BoxFit.cover,
                               ),
+                              zoomedBackgroundColor: Colors.grey.shade300,
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(height: 3),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.red,
-                                    ),
-                                    RichText(
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                              text: '${widget.rating} /',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold)),
-                                          TextSpan(
-                                              text: '5\n',
-                                              style: TextStyle(
-                                                //fontSize: 16,
-                                                color: Colors.black,
-                                                //fontWeight: FontWeight.bold
-                                              )),
-                                          TextSpan(
-                                              text: 'Ratings',
-                                              style: TextStyle(
+                          ),
+                          Positioned(
+                            bottom: 0,
+                            right: 0,
+                            child: Container(
+                              height: size.height * .1,
+                              width: size.width * .55,
+                              // color: Colors.amber,
+                              decoration: BoxDecoration(
+                                color: Colors.lightGreen[300],
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(63),
+                                  bottomLeft: Radius.circular(63),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(height: 3),
+                                      Icon(
+                                        Icons.star,
+                                        color: Colors.red,
+                                      ),
+                                      RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                                text: '${widget.rating} /',
+                                                style: TextStyle(
+                                                    fontSize: 16,
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                            TextSpan(
+                                                text: '5\n',
+                                                style: TextStyle(
                                                   //fontSize: 16,
                                                   color: Colors.black,
-                                                  fontWeight: FontWeight.bold)),
-                                        ],
+                                                  //fontWeight: FontWeight.bold
+                                                )),
+                                            TextSpan(
+                                                text: 'Ratings',
+                                                style: TextStyle(
+                                                    //fontSize: 16,
+                                                    color: Colors.black,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(height: 3),
-                                    SmoothStarRating(
-                                      size: 26,
-                                      borderColor: Colors.white,
-                                      color: Colors.amber,
-                                      spacing: 2.0,
-                                      onRated: (value) {
-                                        Provider.of<Products>(context,
-                                                listen: false)
-                                            .updateRatingAndReview(
-                                                widget.id, value);
-                                      },
-                                    ),
-                                    Text('Rate Us',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                  ],
-                                ),
-                              ],
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(height: 3),
+                                      SmoothStarRating(
+                                        size: 26,
+                                        borderColor: Colors.white,
+                                        color: Colors.amber,
+                                        spacing: 2.0,
+                                        onRated: (value) {
+                                          Provider.of<Products>(context,
+                                                  listen: false)
+                                              .updateRatingAndReview(
+                                                  widget.id, value);
+                                        },
+                                      ),
+                                      Text('Rate Us',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold)),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        )
-                      ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ],
