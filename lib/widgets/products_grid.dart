@@ -44,17 +44,24 @@ class _ProductsGridState extends State<ProductsGrid> {
             margin: EdgeInsets.only(right: 12, left: 12, top: 5),
             decoration: BoxDecoration(
                 color: Colors.white, borderRadius: BorderRadius.circular(20)),
-            child: TextField(
-              style: TextStyle(color: Color(0xFF0277BD)),
-              textInputAction: TextInputAction.done,
-              decoration: InputDecoration(
-                focusColor: Colors.white,
-                enabledBorder: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                icon: Icon(Icons.search),
-                hintText: 'Search a product',
-                hintStyle: TextStyle(color: Color(0xFF00838F)),
-              ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    style: TextStyle(color: Color(0xFF0277BD)),
+                    textInputAction: TextInputAction.done,
+                    decoration: InputDecoration(
+                      focusColor: Colors.white,
+                      enabledBorder: InputBorder.none,
+                      focusedBorder: InputBorder.none,
+                      icon: Icon(Icons.search),
+                      hintText: 'Search a product',
+                      hintStyle: TextStyle(color: Color(0xFF00838F)),
+                    ),
+                  ),
+                ),
+                Icon(Icons.settings),
+              ],
             ),
           ),
 
