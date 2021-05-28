@@ -8,19 +8,31 @@ import '../providers/auth.dart';
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String emailName = Provider.of<Auth>(context).userEmail;
     return Drawer(
       child: Container(
         //color: Colors.blueAccent,
         child: Column(
           children: [
-            AppBar(
-              title: Text(
-                'Hello Friend !',
-                style: TextStyle(fontSize: 20),
+            UserAccountsDrawerHeader(
+              accountName: Text('Jb Jason'),
+              accountEmail: Text(emailName),
+              currentAccountPicture: CircleAvatar(
+                child: ClipOval(
+                  child: FlutterLogo(
+                    size: 90,
+                  ),
+                ),
               ),
-              // back button disable
-              automaticallyImplyLeading: false,
             ),
+            // AppBar(
+            //   title: Text(
+            //     'Hello Friend !',
+            //     style: TextStyle(fontSize: 20),
+            //   ),
+            //   // back button disable
+            //   automaticallyImplyLeading: false,
+            // ),
             // simply Horizontal Line
             Divider(),
             ListTile(
