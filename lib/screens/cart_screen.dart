@@ -71,7 +71,7 @@ class _CartScreenState extends State<CartScreen> {
               // if we wanna fetch a value from selected Map item then we
               // need to add .values.toList()
               cart.items.values.toList()[i].id,
-              // special keyword to get the selected id's random key
+              // special keyword to get the selected id's random key ,which will be needed to update,delete the cart items
               cart.items.keys.toList()[i],
               cart.items.values.toList()[i].title,
               cart.items.values.toList()[i].price,
