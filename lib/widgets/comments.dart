@@ -11,24 +11,20 @@ class Comments extends StatefulWidget {
 }
 
 class _CommentsState extends State<Comments> {
-  List<String> comments = [];
-
   final _titleController = TextEditingController();
 
-  void submitData(String _email) {
-    final enteredTitle = _titleController.text;
-    final String _comment = _email + ' -: ' + enteredTitle;
+  @override
+  void initState() {
     Provider.of<Products>(context, listen: false)
-        .addComments(widget.id, _comment);
-    setState(() {
-      comments.add(enteredTitle);
-    });
-    _titleController.clear();
+        .fetchAndSetComments(widget.id);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     String email = Provider.of<Auth>(context, listen: false).userEmail;
+    final product = Provider.of<Products>(context, listen: false);
+    List<String> comments = product.commentsList;
     return Container(
       padding: EdgeInsets.all(10),
       child: Column(
@@ -45,7 +41,15 @@ class _CommentsState extends State<Comments> {
               width: 80,
               color: Colors.black54,
               child: FlatButton(
-                onPressed: () => submitData(email),
+                onPressed: () {
+                  final enteredTitle = _titleController.text;
+                  final String _comment = email + ' -: ' + enteredTitle;
+                  product.addComments(widget.id, _comment);
+                  setState(() {
+                    comments.add(enteredTitle);
+                  });
+                  _titleController.clear();
+                },
                 child: Text(
                   'Submit',
                   style: TextStyle(
