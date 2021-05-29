@@ -32,25 +32,11 @@ class OrderScreen extends StatelessWidget {
                 child: Text('An error occured'),
               );
             } else {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height * .27,
-                    child: Chart(),
-                  ),
-                  Container(
-                    height: MediaQuery.of(context).size.height * .6,
-                    width: double.infinity,
-                    child: Consumer<Orders>(
-                      builder: (ctx, orderData, child) => ListView.builder(
-                        itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
-                        itemCount: orderData.orders.length,
-                      ),
-                    ),
-                  ),
-                ],
+              return Consumer<Orders>(
+                builder: (ctx, orderData, child) => ListView.builder(
+                  itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
+                  itemCount: orderData.orders.length,
+                ),
               );
             }
           }
