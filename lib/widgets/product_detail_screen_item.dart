@@ -13,7 +13,7 @@ class ProductDetailScreenItem extends StatefulWidget {
   double rating;
   int review;
   String currentImageUrl;
-  int _isInit = 1, _isComment = 1;
+  int _isInit = 1;
 
   ProductDetailScreenItem(this.id, this._title, this._description, this.price,
       this.image1, this.image2, this.image3, this.rating, this.review);
@@ -27,6 +27,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
   final backgroundColor = const Color(0xFFF9F8FD);
   List<String> _locations = ['M', 'L', 'XL', 'XXL'];
   String _selectedLocation;
+  int _isComment = 1;
   void currentimage(String url) {
     setState(() {
       widget.currentImageUrl = url;
@@ -395,7 +396,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           GestureDetector(
             onTap: () {
               setState(() {
-                widget._isComment = 0;
+                _isComment = 0;
               });
             },
             child: Container(
@@ -417,7 +418,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               ),
             ),
           ),
-          widget._isComment != 1 ? Comments(widget.id) : null,
+          _isComment != 1 ? Comments(widget.id) : Text(''),
         ],
       ),
     );
