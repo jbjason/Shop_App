@@ -223,7 +223,10 @@ class Products with ChangeNotifier {
       final response = await http.get(url);
       final extractedComments =
           json.decode(response.body) as Map<String, dynamic>;
-      if (extractedComments == null) return;
+      if (extractedComments == null) {
+        _commentsList = [];
+        return;
+      }
       final List<String> loadedComments = [];
       extractedComments.forEach((productId, productValue) {
         loadedComments.add(productValue['comment']);
