@@ -392,7 +392,26 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
             ),
           ),
           // comments
-          Comments(widget.id),
+          GestureDetector(
+            onTap: () => Comments(widget.id),
+            child: Container(
+              width: double.infinity,
+              color: Colors.black12,
+              // comment section Row
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    'Comments section',
+                    style: TextStyle(
+                      fontSize: 23,
+                    ),
+                  ),
+                  Icon(Icons.comment),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
     );

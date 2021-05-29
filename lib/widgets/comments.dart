@@ -34,26 +34,6 @@ class _CommentsState extends State<Comments> {
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
-          Container(
-            //height: 300,
-            child: Container(
-              width: double.infinity,
-              color: Colors.black12,
-              // comment section Row
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'Comments section',
-                    style: TextStyle(
-                      fontSize: 23,
-                    ),
-                  ),
-                  Icon(Icons.comment),
-                ],
-              ),
-            ),
-          ),
           SizedBox(height: 15),
           Row(children: [
             Expanded(
