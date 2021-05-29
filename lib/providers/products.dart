@@ -11,6 +11,7 @@ class Products with ChangeNotifier {
     this.userId,
     this._items,
   );
+  List<String> _commentsList = [];
   List<Product> _items = [
     // Product(
     //   id: 'p1',
@@ -48,6 +49,10 @@ class Products with ChangeNotifier {
 
   List<Product> get items {
     return [..._items];
+  }
+
+  List<String> get commentsList {
+    return [..._commentsList];
   }
 
   List<Product> get favoriteItems {
@@ -202,9 +207,28 @@ class Products with ChangeNotifier {
           'https://flutter-update-67f54.firebaseio.com/comments/$id.json?auth=$authToken');
       await http.post(url,
           body: json.encode({
-            'commentt': s,
+            'comment': s,
           }));
       //_commentsList.add(s);
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> fetchAndSetComments(String id) async {
+    try {
+      var url = Uri.parse(
+          'https://flutter-update-67f54.firebaseio.com/comments/$id.json?auth=$authToken');
+      final response = await http.get(url);
+      final extractedComments =
+          json.decode(response.body) as Map<String, dynamic>;
+      if (extractedComments == null) return;
+      final List<String> loadedComments = [];
+      extractedComments.forEach((productId, productValue) {
+        loadedComments.add(productValue['comment']);
+      });
+      _commentsList = loadedComments;
       notifyListeners();
     } catch (error) {
       throw error;
