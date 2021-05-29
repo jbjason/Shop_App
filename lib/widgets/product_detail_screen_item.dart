@@ -13,7 +13,7 @@ class ProductDetailScreenItem extends StatefulWidget {
   double rating;
   int review;
   String currentImageUrl;
-  int _isInit = 1;
+  int _isInit = 1, _isComment = 1;
 
   ProductDetailScreenItem(this.id, this._title, this._description, this.price,
       this.image1, this.image2, this.image3, this.rating, this.review);
@@ -393,7 +393,11 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           ),
           // comments
           GestureDetector(
-            onTap: () => Comments(widget.id),
+            onTap: () {
+              setState(() {
+                widget._isComment = 0;
+              });
+            },
             child: Container(
               margin: EdgeInsets.only(top: 80),
               width: double.infinity,
@@ -413,6 +417,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               ),
             ),
           ),
+          widget._isComment != 1 ? Comments(widget.id) : null,
         ],
       ),
     );
