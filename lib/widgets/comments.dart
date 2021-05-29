@@ -1,4 +1,5 @@
 import 'package:Shop_App/providers/auth.dart';
+import 'package:Shop_App/providers/products.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -12,8 +13,10 @@ class _CommentsState extends State<Comments> {
 
   final _titleController = TextEditingController();
 
-  void submitData() {
+  void submitData(String id, String _email) {
     final enteredTitle = _titleController.text;
+    final String _comment = _email + '|: ' + enteredTitle;
+    Provider.of<Products>(context, listen: false).addComments('', _comment);
     setState(() {
       comments.add(enteredTitle);
     });
@@ -60,7 +63,7 @@ class _CommentsState extends State<Comments> {
               width: 80,
               color: Colors.black54,
               child: FlatButton(
-                onPressed: submitData,
+                onPressed: () => submitData('', email),
                 child: Text(
                   'Submit',
                   style: TextStyle(
