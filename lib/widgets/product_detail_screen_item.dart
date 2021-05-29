@@ -392,7 +392,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
             ),
           ),
           // comments
-          Comments(),
+          Comments(widget.id),
         ],
       ),
     );

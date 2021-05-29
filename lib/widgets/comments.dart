@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Comments extends StatefulWidget {
+  final String id;
+  Comments(this.id);
   @override
   _CommentsState createState() => _CommentsState();
 }
@@ -13,10 +15,11 @@ class _CommentsState extends State<Comments> {
 
   final _titleController = TextEditingController();
 
-  void submitData(String id, String _email) {
+  void submitData(String _email) {
     final enteredTitle = _titleController.text;
     final String _comment = _email + '|: ' + enteredTitle;
-    Provider.of<Products>(context, listen: false).addComments('', _comment);
+    Provider.of<Products>(context, listen: false)
+        .addComments(widget.id, _comment);
     setState(() {
       comments.add(enteredTitle);
     });
@@ -63,7 +66,7 @@ class _CommentsState extends State<Comments> {
               width: 80,
               color: Colors.black54,
               child: FlatButton(
-                onPressed: () => submitData('', email),
+                onPressed: () => submitData(email),
                 child: Text(
                   'Submit',
                   style: TextStyle(
