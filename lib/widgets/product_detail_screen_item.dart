@@ -79,7 +79,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context, listen: false);
     final size = MediaQuery.of(context).size;
-    final product = Provider.of<Products>(context, listen: false);
+    final product = Provider.of<Products>(context);
     _comments = product.commentsList;
     return SingleChildScrollView(
       child: Column(
