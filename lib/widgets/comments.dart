@@ -42,11 +42,11 @@ class _CommentsState extends State<Comments> {
               color: Colors.black54,
               child: FlatButton(
                 onPressed: () {
-                  final enteredTitle = _titleController.text;
-                  final String _comment = email + ' -: ' + enteredTitle;
+                  final String _comment =
+                      email + '_:  ' + _titleController.text;
                   product.addComments(widget.id, _comment);
                   setState(() {
-                    comments.add(enteredTitle);
+                    comments.add(_comment);
                   });
                   _titleController.clear();
                 },
@@ -68,15 +68,15 @@ class _CommentsState extends State<Comments> {
               itemBuilder: (context, index) => RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                    text: '${index + 1}.  $email',
+                    text: '${index + 1}.  ',
                     style: TextStyle(
-                      backgroundColor: Colors.black54,
+                      backgroundColor: Colors.red,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   TextSpan(
-                    text: ' -:  ${comments[index]}\n',
+                    text: '${comments[index]}\n',
                     style: TextStyle(
                       color: Colors.black,
                     ),
