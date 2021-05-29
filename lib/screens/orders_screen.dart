@@ -1,5 +1,3 @@
-import 'package:Shop_App/widgets/chart.dart';
-
 import '../widgets/app_drawer.dart';
 import '../providers/orders.dart' show Orders;
 import 'package:flutter/material.dart';
