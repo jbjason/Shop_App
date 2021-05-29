@@ -17,7 +17,7 @@ class _CommentsState extends State<Comments> {
 
   void submitData(String _email) {
     final enteredTitle = _titleController.text;
-    final String _comment = _email + '|: ' + enteredTitle;
+    final String _comment = _email + ' -: ' + enteredTitle;
     Provider.of<Products>(context, listen: false)
         .addComments(widget.id, _comment);
     setState(() {
@@ -93,7 +93,7 @@ class _CommentsState extends State<Comments> {
                     ),
                   ),
                   TextSpan(
-                    text: '|:  ${comments[index]}\n',
+                    text: ' -:  ${comments[index]}\n',
                     style: TextStyle(
                       color: Colors.black,
                     ),
