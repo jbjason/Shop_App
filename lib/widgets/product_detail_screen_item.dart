@@ -28,6 +28,14 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
   List<String> _locations = ['M', 'L', 'XL', 'XXL'];
   String _selectedLocation;
   int _isComment = 1;
+  List<String> _comments = [];
+  @override
+  void initState() {
+    Provider.of<Products>(context, listen: false)
+        .fetchAndSetComments(widget.id);
+    super.initState();
+  }
+
   void currentimage(String url) {
     setState(() {
       widget.currentImageUrl = url;
@@ -71,6 +79,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
   Widget build(BuildContext context) {
     final cart = Provider.of<Cart>(context, listen: false);
     final size = MediaQuery.of(context).size;
+    final product = Provider.of<Products>(context, listen: false);
+    _comments = product.commentsList;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -418,7 +428,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               ),
             ),
           ),
-          _isComment != 1 ? Comments(widget.id) : Text(''),
+          _isComment != 1 ? Comments(widget.id, _comments) : Text(''),
         ],
       ),
     );

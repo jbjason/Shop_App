@@ -5,28 +5,19 @@ import 'package:provider/provider.dart';
 
 class Comments extends StatefulWidget {
   final String id;
-  Comments(this.id);
+  List<String> comments;
+  Comments(this.id, this.comments);
   @override
   _CommentsState createState() => _CommentsState();
 }
 
 class _CommentsState extends State<Comments> {
   final _titleController = TextEditingController();
-  var _isInit = true;
-  @override
-  void didChangeDependencies() {
-    if (!_isInit) return;
-    Provider.of<Products>(context, listen: false)
-        .fetchAndSetComments(widget.id);
-    _isInit = false;
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
     String email = Provider.of<Auth>(context, listen: false).userEmail;
-    final product = Provider.of<Products>(context);
-    List<String> comments = product.commentsList;
+    final product = Provider.of<Products>(context, listen: false);
     return Container(
       padding: EdgeInsets.all(10),
       child: Column(
@@ -48,7 +39,7 @@ class _CommentsState extends State<Comments> {
                       email + '_:  ' + _titleController.text;
                   product.addComments(widget.id, _comment);
                   setState(() {
-                    comments.add(_comment);
+                    widget.comments.add(_comment);
                   });
                   _titleController.clear();
                 },
@@ -78,14 +69,14 @@ class _CommentsState extends State<Comments> {
                     ),
                   ),
                   TextSpan(
-                    text: '${comments[index]}\n',
+                    text: '${widget.comments[index]}\n',
                     style: TextStyle(
                       color: Colors.black,
                     ),
                   ),
                 ]),
               ),
-              itemCount: comments.length,
+              itemCount: widget.comments.length,
             )),
           ),
         ],
