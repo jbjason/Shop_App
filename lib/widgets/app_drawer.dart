@@ -18,10 +18,8 @@ class AppDrawer extends StatelessWidget {
               accountName: Text('Jb Jason'),
               accountEmail: Text(emailName),
               currentAccountPicture: CircleAvatar(
-                child: ClipOval(
-                  child: FlutterLogo(
-                    size: 90,
-                  ),
+                child: FlutterLogo(
+                  size: 90,
                 ),
               ),
             ),
