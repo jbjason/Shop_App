@@ -12,11 +12,13 @@ class Comments extends StatefulWidget {
 
 class _CommentsState extends State<Comments> {
   final _titleController = TextEditingController();
-
+  var _isInit = true;
   @override
-  void initState() {
+  void didChangeDependencies() {
+    if (!_isInit) return;
     Provider.of<Products>(context).fetchAndSetComments(widget.id);
-    super.initState();
+    _isInit = false;
+    super.didChangeDependencies();
   }
 
   @override
