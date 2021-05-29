@@ -195,4 +195,19 @@ class Products with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  Future<void> addComments(String id, String s) async {
+    try {
+      var url = Uri.parse(
+          'https://flutter-update-67f54.firebaseio.com/comments/$id.json?auth=$authToken');
+      await http.post(url,
+          body: json.encode({
+            'commentt': s,
+          }));
+      //_commentsList.add(s);
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
 }
