@@ -16,7 +16,8 @@ class _CommentsState extends State<Comments> {
   @override
   void didChangeDependencies() {
     if (!_isInit) return;
-    Provider.of<Products>(context).fetchAndSetComments(widget.id);
+    Provider.of<Products>(context, listen: false)
+        .fetchAndSetComments(widget.id);
     _isInit = false;
     super.didChangeDependencies();
   }
