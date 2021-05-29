@@ -30,7 +30,6 @@ class _CommentsState extends State<Comments> {
   Widget build(BuildContext context) {
     String email = Provider.of<Auth>(context, listen: false).userEmail;
     return Container(
-      margin: EdgeInsets.only(top: 80),
       padding: EdgeInsets.all(10),
       child: Column(
         children: [

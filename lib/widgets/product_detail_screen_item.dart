@@ -395,6 +395,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           GestureDetector(
             onTap: () => Comments(widget.id),
             child: Container(
+              margin: EdgeInsets.only(top: 80),
               width: double.infinity,
               color: Colors.black12,
               // comment section Row
