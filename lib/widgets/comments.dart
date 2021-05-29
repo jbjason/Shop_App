@@ -15,15 +15,14 @@ class _CommentsState extends State<Comments> {
 
   @override
   void initState() {
-    Provider.of<Products>(context, listen: false)
-        .fetchAndSetComments(widget.id);
+    Provider.of<Products>(context).fetchAndSetComments(widget.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     String email = Provider.of<Auth>(context, listen: false).userEmail;
-    final product = Provider.of<Products>(context);
+    final product = Provider.of<Products>(context, listen: false);
     List<String> comments = product.commentsList;
     return Container(
       padding: EdgeInsets.all(10),
