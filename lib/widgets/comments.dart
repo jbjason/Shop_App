@@ -85,7 +85,7 @@ class _CommentsState extends State<Comments> {
               itemBuilder: (context, index) => RichText(
                 text: TextSpan(children: [
                   TextSpan(
-                    text: '${index + 1}.  $email ',
+                    text: '${index + 1}.  $email',
                     style: TextStyle(
                       backgroundColor: Colors.black54,
                       color: Colors.white,
@@ -93,7 +93,7 @@ class _CommentsState extends State<Comments> {
                     ),
                   ),
                   TextSpan(
-                    text: '   ${comments[index]}\n',
+                    text: '|:  ${comments[index]}\n',
                     style: TextStyle(
                       color: Colors.black,
                     ),
