@@ -209,7 +209,7 @@ class Products with ChangeNotifier {
           body: json.encode({
             'comment': s,
           }));
-      //_commentsList.add(s);
+      _commentsList.add(s);
       notifyListeners();
     } catch (error) {
       throw error;
