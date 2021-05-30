@@ -17,7 +17,7 @@ class _CommentsState extends State<Comments> {
   @override
   Widget build(BuildContext context) {
     String email = Provider.of<Auth>(context, listen: false).userEmail;
-    final product = Provider.of<Products>(context, listen: false);
+    final product = Provider.of<Products>(context);
     return Container(
       padding: EdgeInsets.all(10),
       child: Column(
