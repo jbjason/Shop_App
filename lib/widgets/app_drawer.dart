@@ -45,7 +45,8 @@ class AppDrawer extends StatelessWidget {
               leading: Icon(Icons.people_alt_outlined),
               title: Text('Profile'),
               onTap: () {
-                Navigator.of(context).pushNamed('/');
+                Navigator.of(context).pushNamed(OrderScreen.routeName,
+                    arguments: ["profile", "Your Profile"]);
               },
             ),
             Divider(),
@@ -53,7 +54,8 @@ class AppDrawer extends StatelessWidget {
               leading: Icon(Icons.payment),
               title: Text('Orders'),
               onTap: () {
-                Navigator.of(context).pushNamed(OrderScreen.routeName);
+                Navigator.of(context).pushNamed(OrderScreen.routeName,
+                    arguments: ["order", "Your Orders"]);
               },
             ),
             Divider(),

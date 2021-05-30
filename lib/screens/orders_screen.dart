@@ -9,11 +9,14 @@ class OrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final orderData = Provider.of<Orders>(context);
+    final connection =
+        ModalRoute.of(context).settings.arguments as List<String>;
+    final matchKey = connection[0];
+    final titleName = connection[1];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
-        title: Text('Your Orders'),
+        title: Text(titleName),
       ),
       drawer: AppDrawer(),
       body: FutureBuilder(
@@ -29,6 +32,8 @@ class OrderScreen extends StatelessWidget {
               return Center(
                 child: Text('An error occured'),
               );
+            } else if (matchKey == "profile") {
+              return Container(child: Text('jb is a  loser'));
             } else {
               return Consumer<Orders>(
                 builder: (ctx, orderData, child) => ListView.builder(
