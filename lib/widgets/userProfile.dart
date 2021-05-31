@@ -2,6 +2,8 @@ import 'package:Shop_App/widgets/chart.dart';
 import 'package:flutter/material.dart';
 
 class UserProfile extends StatelessWidget {
+  final String email, userId;
+  UserProfile(this.email, this.userId);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -39,7 +41,8 @@ class UserProfile extends StatelessWidget {
                 SizedBox(width: size.width * .05),
                 Expanded(
                   child: TextFormField(
-                    initialValue: '  123jbjason57#9',
+                    initialValue: "  " + userId,
+                    onTap: () => null,
                   ),
                 ),
                 SizedBox(width: size.width * .1),
@@ -65,7 +68,7 @@ class UserProfile extends StatelessWidget {
                 SizedBox(width: size.width * .05),
                 Expanded(
                   child: TextFormField(
-                    initialValue: '  itisjubayer@gmail.com',
+                    initialValue: "  " + email,
                   ),
                 ),
                 SizedBox(width: size.width * .1),

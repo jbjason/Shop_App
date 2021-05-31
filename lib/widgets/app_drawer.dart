@@ -8,7 +8,7 @@ import '../providers/auth.dart';
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    String emailName = Provider.of<Auth>(context).userEmail;
+    final auth = Provider.of<Auth>(context);
     return Drawer(
       child: Container(
         //color: Colors.blueAccent,
@@ -16,7 +16,7 @@ class AppDrawer extends StatelessWidget {
           children: [
             UserAccountsDrawerHeader(
               accountName: Text('Jb Jason'),
-              accountEmail: Text(emailName),
+              accountEmail: Text(auth.userEmail),
               currentAccountPicture: CircleAvatar(
                 child: FlutterLogo(
                   size: 90,
@@ -46,7 +46,12 @@ class AppDrawer extends StatelessWidget {
               title: Text('Profile'),
               onTap: () {
                 Navigator.of(context).pushNamed(OrderScreen.routeName,
-                    arguments: ["profile", "Your Profile"]);
+                    arguments: [
+                      "profile",
+                      "Your Profile",
+                      auth.userEmail,
+                      auth.userId
+                    ]);
               },
             ),
             Divider(),

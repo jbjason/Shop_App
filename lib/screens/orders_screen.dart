@@ -1,5 +1,4 @@
 import 'package:Shop_App/widgets/userProfile.dart';
-
 import '../widgets/app_drawer.dart';
 import '../providers/orders.dart' show Orders;
 import 'package:flutter/material.dart';
@@ -35,7 +34,8 @@ class OrderScreen extends StatelessWidget {
                 child: Text('An error occured'),
               );
             } else if (matchKey == "profile") {
-              return Container(child: UserProfile());
+              return Container(
+                  child: UserProfile(connection[2], connection[3]));
             } else {
               return Consumer<Orders>(
                 builder: (ctx, orderData, child) => ListView.builder(
