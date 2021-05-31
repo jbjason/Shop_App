@@ -5,8 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/order_item.dart';
 
-class OrderScreen extends StatelessWidget {
+class OrderScreen extends StatefulWidget {
   static const routeName = '/orders';
+  @override
+  _OrderScreenState createState() => _OrderScreenState();
+}
+
+class _OrderScreenState extends State<OrderScreen> {
+  bool _showAll = true;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +24,40 @@ class OrderScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
         title: Text(titleName),
+        actions: [
+          PopupMenuButton(
+            onSelected: (int selectedIndex) {
+              if (selectedIndex == 0) {
+                setState(() {
+                  _showAll = false;
+                });
+              } else if (selectedIndex == 3) {
+                setState(() {
+                  _showAll = true;
+                });
+              }
+            },
+            icon: Icon(Icons.more_vert),
+            itemBuilder: (_) => [
+              PopupMenuItem(
+                child: Text('Last Five Orders'),
+                value: 0,
+              ),
+              PopupMenuItem(
+                child: Text('Last 15 days'),
+                value: 1,
+              ),
+              PopupMenuItem(
+                child: Text('Last 30 days'),
+                value: 2,
+              ),
+              PopupMenuItem(
+                child: Text('Last 30 days'),
+                value: 3,
+              ),
+            ],
+          ),
+        ],
       ),
       drawer: AppDrawer(),
       body: FutureBuilder(
@@ -40,7 +80,7 @@ class OrderScreen extends StatelessWidget {
               return Consumer<Orders>(
                 builder: (ctx, orderData, child) => ListView.builder(
                   itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
-                  itemCount: orderData.orders.length,
+                  itemCount: _showAll == false ? 1 : orderData.orders.length,
                 ),
               );
             }
