@@ -15,6 +15,7 @@ class UserProfile extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         children: [
+          //profile image
           Container(
             height: 150,
             width: 150,
@@ -30,6 +31,7 @@ class UserProfile extends StatelessWidget {
               ),
             ),
           ),
+          // Local Id
           Container(
             width: size.width,
             child: Row(
@@ -54,6 +56,7 @@ class UserProfile extends StatelessWidget {
               ],
             ),
           ),
+          // User Email
           Container(
             width: double.infinity,
             child: Row(
@@ -81,6 +84,7 @@ class UserProfile extends StatelessWidget {
               ],
             ),
           ),
+          // History text
           Container(
             //height: 300,
             child: Container(
@@ -112,11 +116,13 @@ class UserProfile extends StatelessWidget {
               ),
             ),
           ),
+          // Chart Bar
           Container(
             width: double.infinity,
             height: MediaQuery.of(context).size.height * .27,
-            child: Chart(),
+            child: Chart(_userTransactions),
           ),
+          // Chart List
           Container(
             height: 400,
             child: ListView.builder(

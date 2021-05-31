@@ -1,11 +1,11 @@
-import 'package:Shop_App/providers/transaction.dart';
+import 'package:Shop_App/providers/orders.dart';
 import 'package:Shop_App/widgets/chart_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
-  final List<Transaction> recentTransactions = [];
-  // Chart(this.recentTransactions);
+  final List<OrderItem> recentTransactions;
+  Chart(this.recentTransactions);
 
   List<Map<String, Object>> get groupedTransactionValues {
     // 1ta list generate korbe where 7 items available
@@ -17,9 +17,9 @@ class Chart extends StatelessWidget {
       // recentTransaction e joto gula transaction thakbe,
       // protitar jonno days for loop er maddhome select kore sum calculate korbe
       for (int i = 0; i < recentTransactions.length; i++) {
-        if (recentTransactions[i].date.day == weekDay.day &&
-            recentTransactions[i].date.month == weekDay.month &&
-            recentTransactions[i].date.year == weekDay.year) {
+        if (recentTransactions[i].dateTime.day == weekDay.day &&
+            recentTransactions[i].dateTime.month == weekDay.month &&
+            recentTransactions[i].dateTime.year == weekDay.year) {
           totalSum += recentTransactions[i].amount;
         }
       }
