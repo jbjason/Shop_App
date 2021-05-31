@@ -27,7 +27,6 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
-  List<OrderItem> _recentTransactions = [];
   List<OrderItem> get recentTransactions {
     return _orders.where((element) {
       return element.dateTime
