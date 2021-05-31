@@ -8,7 +8,7 @@ import '../providers/auth.dart';
 class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final auth = Provider.of<Auth>(context);
+    final auth = Provider.of<Auth>(context, listen: false);
     return Drawer(
       child: Container(
         //color: Colors.blueAccent,
