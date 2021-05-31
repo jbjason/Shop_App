@@ -52,7 +52,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 value: 2,
               ),
               PopupMenuItem(
-                child: Text('Last 30 days'),
+                child: Text('All'),
                 value: 3,
               ),
             ],
@@ -80,7 +80,7 @@ class _OrderScreenState extends State<OrderScreen> {
               return Consumer<Orders>(
                 builder: (ctx, orderData, child) => ListView.builder(
                   itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
-                  itemCount: _showAll == false ? 1 : orderData.orders.length,
+                  itemCount: _showAll == false ? 5 : orderData.orders.length,
                 ),
               );
             }
