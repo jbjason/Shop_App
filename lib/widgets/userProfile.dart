@@ -1,11 +1,14 @@
+import 'package:Shop_App/providers/orders.dart';
 import 'package:Shop_App/widgets/chart.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class UserProfile extends StatelessWidget {
   final String email, userId;
   UserProfile(this.email, this.userId);
   @override
   Widget build(BuildContext context) {
+    final _userTransactions = Provider.of<Orders>(context).recentTransactions;
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
