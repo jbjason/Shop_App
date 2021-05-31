@@ -4,12 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class Chart extends StatelessWidget {
-  // final List<Transaction> recentTransactions;
+  final List<Transaction> recentTransactions = [];
   // Chart(this.recentTransactions);
-  final List<Transaction> recentTransactions = [
-    //Transaction(id: 't1', title: 'shoes', amount: 60.79, date: DateTime.now()),
-    // Transaction(id: 't2', title: 'bag', amount: 70.79, date: DateTime.now()),
-  ];
 
   List<Map<String, Object>> get groupedTransactionValues {
     // 1ta list generate korbe where 7 items available
