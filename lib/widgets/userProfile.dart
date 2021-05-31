@@ -42,7 +42,7 @@ class UserProfile extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     initialValue: "  " + userId,
-                    onTap: () => null,
+                    readOnly: true,
                   ),
                 ),
                 SizedBox(width: size.width * .1),
@@ -69,6 +69,7 @@ class UserProfile extends StatelessWidget {
                 Expanded(
                   child: TextFormField(
                     initialValue: "  " + email,
+                    readOnly: true,
                   ),
                 ),
                 SizedBox(width: size.width * .1),
