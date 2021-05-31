@@ -34,7 +34,7 @@ class UserProfile extends StatelessWidget {
                   // color: Colors.amber,
                   alignment: Alignment.centerRight,
                   child: Text(
-                    'LocalId  :',
+                    'Local_Id  :',
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                   ),
                 ),
