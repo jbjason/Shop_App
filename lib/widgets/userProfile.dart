@@ -117,9 +117,12 @@ class UserProfile extends StatelessWidget {
             height: MediaQuery.of(context).size.height * .27,
             child: Chart(),
           ),
-          ListView.builder(
-            itemBuilder: (ctx, i) => OrderItem(_userTransactions[i]),
-            itemCount: _userTransactions.length,
+          Container(
+            height: 400,
+            child: ListView.builder(
+              itemBuilder: (ctx, i) => OrderItem(_userTransactions[i]),
+              itemCount: _userTransactions.length,
+            ),
           ),
         ],
       ),
