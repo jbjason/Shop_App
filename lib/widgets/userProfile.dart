@@ -124,7 +124,7 @@ class UserProfile extends StatelessWidget {
           ),
           // Chart List
           Container(
-            height: 400,
+            height: 300,
             child: ListView.builder(
               itemBuilder: (ctx, i) => OrderItem(_userTransactions[i]),
               itemCount: _userTransactions.length,
