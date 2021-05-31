@@ -11,7 +11,7 @@ class UserProfile extends StatelessWidget {
           Container(
             height: 150,
             width: 150,
-            margin: EdgeInsets.only(top: 20),
+            margin: EdgeInsets.only(top: 20, bottom: 15),
             child: CircleAvatar(
               child: ClipOval(
                 child: Image.asset(
@@ -77,6 +77,7 @@ class UserProfile extends StatelessWidget {
             child: Container(
               width: double.infinity,
               color: Colors.black12,
+              margin: EdgeInsets.only(top: 30),
               padding: EdgeInsets.all(20),
               // comment section Row
               child: Column(
