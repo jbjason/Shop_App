@@ -1,14 +1,16 @@
-import 'package:Shop_App/providers/orders.dart';
+import '../providers/orders.dart' show Orders;
 import 'package:Shop_App/widgets/chart.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../widgets/order_item.dart';
 
 class UserProfile extends StatelessWidget {
   final String email, userId;
   UserProfile(this.email, this.userId);
   @override
   Widget build(BuildContext context) {
-    final _userTransactions = Provider.of<Orders>(context).recentTransactions;
+    final _userTransactions =
+        Provider.of<Orders>(context, listen: false).recentTransactions;
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
@@ -114,6 +116,10 @@ class UserProfile extends StatelessWidget {
             width: double.infinity,
             height: MediaQuery.of(context).size.height * .27,
             child: Chart(),
+          ),
+          ListView.builder(
+            itemBuilder: (ctx, i) => OrderItem(_userTransactions[i]),
+            itemCount: _userTransactions.length,
           ),
         ],
       ),
