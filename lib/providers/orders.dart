@@ -27,6 +27,11 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
+  List<OrderItem> _recentTransactions = [];
+  List<OrderItem> get recentTransactions {
+    return _recentTransactions;
+  }
+
   int get pointt {
     if (_pointt != null) {
       return _pointt.toInt();
