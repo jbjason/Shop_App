@@ -30,6 +30,7 @@ class _OrderScreenState extends State<OrderScreen> {
               if (selectedIndex == 0) {
                 setState(() {
                   widget._showAll = false;
+                  // checking orders.length is lesser than 5 or not
                   int _existingOrders =
                       Provider.of<Orders>(context, listen: false).orders.length;
                   if (widget._selectCount > _existingOrders) {
