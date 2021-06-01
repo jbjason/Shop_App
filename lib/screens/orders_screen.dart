@@ -9,6 +9,7 @@ class OrderScreen extends StatefulWidget {
   static const routeName = '/orders';
   int _selectCount = 5;
   bool _showAll = true;
+  int _existingOrders = 0;
   @override
   _OrderScreenState createState() => _OrderScreenState();
 }
@@ -18,12 +19,11 @@ class _OrderScreenState extends State<OrderScreen> {
   Widget build(BuildContext context) {
     final connection =
         ModalRoute.of(context).settings.arguments as List<String>;
-    final matchKey = connection[0];
-    final titleName = connection[1];
+    final product = Provider.of<Orders>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
-        title: Text(titleName),
+        title: Text(connection[1]),
         actions: [
           PopupMenuButton(
             onSelected: (int selectedIndex) {
@@ -31,10 +31,9 @@ class _OrderScreenState extends State<OrderScreen> {
                 setState(() {
                   widget._showAll = false;
                   // checking orders.length is lesser than 5 or not
-                  int _existingOrders =
-                      Provider.of<Orders>(context, listen: false).orders.length;
-                  if (widget._selectCount > _existingOrders) {
-                    widget._selectCount = _existingOrders;
+
+                  if (widget._selectCount > widget._existingOrders) {
+                    widget._selectCount = widget._existingOrders;
                   }
                 });
               } else if (selectedIndex == 3) {
@@ -75,7 +74,7 @@ class _OrderScreenState extends State<OrderScreen> {
       ),
       drawer: AppDrawer(),
       body: FutureBuilder(
-        future: Provider.of<Orders>(context, listen: false).fetchAndSetOrders(),
+        future: product.fetchAndSetOrders(),
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             return Center(
@@ -87,7 +86,7 @@ class _OrderScreenState extends State<OrderScreen> {
               return Center(
                 child: Text('An error occured'),
               );
-            } else if (matchKey == "profile") {
+            } else if (connection[0] == "profile") {
               return Container(
                   child: UserProfile(connection[2], connection[3]));
             } else {
