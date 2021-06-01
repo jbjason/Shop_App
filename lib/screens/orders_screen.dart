@@ -17,12 +17,9 @@ class OrderScreen extends StatefulWidget {
 class _OrderScreenState extends State<OrderScreen> {
   @override
   void initState() {
-    final product = Provider.of<Orders>(context, listen: false);
     if (widget._selectDays == 0) {
-      widget._length = product.orders.length;
-    } else {
-      widget._userTransaction = product.recentTransactions(widget._selectDays);
-      widget._length = widget._userTransaction.length;
+      widget._length =
+          Provider.of<Orders>(context, listen: false).orders.length;
     }
     super.initState();
   }
@@ -53,14 +50,19 @@ class _OrderScreenState extends State<OrderScreen> {
                 setState(() {
                   widget._showAll = true;
                   widget._selectDays = 0;
+                  widget._length = product.orders.length;
                 });
               } else if (selectedIndex == 2) {
                 setState(() {
                   widget._selectDays = 15;
+                  widget._userTransaction = product.recentTransactions(15);
+                  widget._length = widget._userTransaction.length;
                 });
               } else {
                 setState(() {
-                  widget._selectCount = 30;
+                  widget._selectDays = 30;
+                  widget._userTransaction = product.recentTransactions(30);
+                  widget._length = widget._userTransaction.length;
                 });
               }
             },
