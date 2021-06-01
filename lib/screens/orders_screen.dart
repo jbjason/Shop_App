@@ -13,7 +13,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   bool _showAll = true;
-
+  int _selectDays = 0;
   @override
   Widget build(BuildContext context) {
     final connection =
@@ -34,6 +34,14 @@ class _OrderScreenState extends State<OrderScreen> {
               } else if (selectedIndex == 3) {
                 setState(() {
                   _showAll = true;
+                });
+              } else if (selectedIndex == 2) {
+                setState(() {
+                  _selectDays = 15;
+                });
+              } else {
+                setState(() {
+                  _selectDays = 30;
                 });
               }
             },
