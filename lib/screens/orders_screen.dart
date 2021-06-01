@@ -7,9 +7,9 @@ import '../widgets/order_item.dart';
 
 class OrderScreen extends StatefulWidget {
   static const routeName = '/orders';
-  int _selectCount = 5;
+  int _selectCount = 5, _selectDays = 0;
   bool _showAll = true;
-  int _existingOrders = 0;
+
   @override
   _OrderScreenState createState() => _OrderScreenState();
 }
@@ -31,9 +31,9 @@ class _OrderScreenState extends State<OrderScreen> {
                 setState(() {
                   widget._showAll = false;
                   // checking orders.length is lesser than 5 or not
-                  widget._existingOrders = product.orders.length;
-                  if (widget._selectCount > widget._existingOrders) {
-                    widget._selectCount = widget._existingOrders;
+                  int _existingOrders = product.orders.length;
+                  if (widget._selectCount > _existingOrders) {
+                    widget._selectCount = _existingOrders;
                   }
                 });
               } else if (selectedIndex == 3) {
@@ -42,15 +42,16 @@ class _OrderScreenState extends State<OrderScreen> {
                 });
               } else if (selectedIndex == 2) {
                 setState(() {
-                  //_selectCount = 15;
+                  widget._selectDays = 15;
                 });
               } else {
                 setState(() {
-                  //_selectCount = 30;
+                  widget._selectCount = 30;
                 });
               }
             },
-            icon: Icon(Icons.more_vert),
+            icon:
+                connection[0] == "profile" ? Icon(null) : Icon(Icons.more_vert),
             itemBuilder: (_) => [
               PopupMenuItem(
                 child: Text('Last Five Orders'),
