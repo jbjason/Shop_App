@@ -27,10 +27,10 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
-  List<OrderItem> get recentTransactions {
+  List<OrderItem> recentTransactions(int _day) {
     return _orders.where((element) {
       return element.dateTime
-          .isAfter(DateTime.now().subtract(Duration(days: 7)));
+          .isAfter(DateTime.now().subtract(Duration(days: _day)));
     }).toList();
   }
 

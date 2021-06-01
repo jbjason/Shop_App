@@ -10,7 +10,7 @@ class UserProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _userTransactions =
-        Provider.of<Orders>(context, listen: false).recentTransactions;
+        Provider.of<Orders>(context, listen: false).recentTransactions(7);
     final size = MediaQuery.of(context).size;
     return SingleChildScrollView(
       child: Column(
