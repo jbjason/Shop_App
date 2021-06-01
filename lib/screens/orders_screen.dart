@@ -16,15 +16,6 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   @override
-  void initState() {
-    if (widget._selectDays == 0) {
-      widget._length =
-          Provider.of<Orders>(context, listen: false).orders.length;
-    }
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final connection =
         ModalRoute.of(context).settings.arguments as List<String>;
@@ -93,6 +84,10 @@ class _OrderScreenState extends State<OrderScreen> {
       body: FutureBuilder(
         future: product.fetchAndSetOrders(),
         builder: (ctx, dataSnapshot) {
+          if (widget._selectDays == 0) {
+            widget._length = product.orders.length;
+            print('${widget._length}  jb  ');
+          }
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             return Center(
               child: CircularProgressIndicator(),
