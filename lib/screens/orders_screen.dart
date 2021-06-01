@@ -31,7 +31,7 @@ class _OrderScreenState extends State<OrderScreen> {
                 setState(() {
                   widget._showAll = false;
                   // checking orders.length is lesser than 5 or not
-
+                  widget._existingOrders = product.orders.length;
                   if (widget._selectCount > widget._existingOrders) {
                     widget._selectCount = widget._existingOrders;
                   }
