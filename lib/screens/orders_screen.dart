@@ -37,11 +37,11 @@ class _OrderScreenState extends State<OrderScreen> {
                 });
               } else if (selectedIndex == 2) {
                 setState(() {
-                  _selectCount = 15;
+                  //_selectCount = 15;
                 });
               } else {
                 setState(() {
-                  _selectCount = 30;
+                  //_selectCount = 30;
                 });
               }
             },
