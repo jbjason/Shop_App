@@ -32,7 +32,7 @@ class _OrderScreenState extends State<OrderScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
-        title: Text(connection[1]),
+        title: Text(connection[1] == null ? '' : connection[1]),
         actions: [
           PopupMenuButton(
             onSelected: (int selectedIndex) {
