@@ -11,7 +11,7 @@ class AppDrawer extends StatelessWidget {
     final auth = Provider.of<Auth>(context, listen: false);
     return Drawer(
       child: Container(
-        //color: Colors.blueAccent,
+        color: Color(0xFF4A4A58),
         child: Column(
           children: [
             UserAccountsDrawerHeader(
