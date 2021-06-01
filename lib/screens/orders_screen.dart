@@ -7,7 +7,7 @@ import '../widgets/order_item.dart';
 
 class OrderScreen extends StatefulWidget {
   static const routeName = '/orders';
-  int _selectCount = 5, _selectDays = 0, _length = 0;
+  int _selectCount = 2, _selectDays = 0, _length = 0;
   bool _showAll = true;
   List<dynamic> _userTransaction = [];
   @override
