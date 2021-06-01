@@ -13,7 +13,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   bool _showAll = true;
-  int _selectDays = 0;
+  int _selectCount = 5;
   @override
   Widget build(BuildContext context) {
     final connection =
@@ -37,11 +37,11 @@ class _OrderScreenState extends State<OrderScreen> {
                 });
               } else if (selectedIndex == 2) {
                 setState(() {
-                  _selectDays = 15;
+                  _selectCount = 15;
                 });
               } else {
                 setState(() {
-                  _selectDays = 30;
+                  _selectCount = 30;
                 });
               }
             },
@@ -88,7 +88,9 @@ class _OrderScreenState extends State<OrderScreen> {
               return Consumer<Orders>(
                 builder: (ctx, orderData, child) => ListView.builder(
                   itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
-                  itemCount: _showAll == false ? 5 : orderData.orders.length,
+                  itemCount: _showAll == false
+                      ? _selectCount
+                      : orderData.orders.length,
                 ),
               );
             }
