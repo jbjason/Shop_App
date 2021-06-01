@@ -7,14 +7,26 @@ import '../widgets/order_item.dart';
 
 class OrderScreen extends StatefulWidget {
   static const routeName = '/orders';
-  int _selectCount = 5, _selectDays = 0;
+  int _selectCount = 5, _selectDays = 0, _length = 0;
   bool _showAll = true;
-
+  List<dynamic> _userTransaction = [];
   @override
   _OrderScreenState createState() => _OrderScreenState();
 }
 
 class _OrderScreenState extends State<OrderScreen> {
+  @override
+  void initState() {
+    final product = Provider.of<Orders>(context, listen: false);
+    if (widget._selectDays == 0) {
+      widget._length = product.orders.length;
+    } else {
+      widget._userTransaction = product.recentTransactions(widget._selectDays);
+      widget._length = widget._userTransaction.length;
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final connection =
@@ -35,10 +47,12 @@ class _OrderScreenState extends State<OrderScreen> {
                   if (widget._selectCount > _existingOrders) {
                     widget._selectCount = _existingOrders;
                   }
+                  widget._selectDays = 0;
                 });
               } else if (selectedIndex == 3) {
                 setState(() {
                   widget._showAll = true;
+                  widget._selectDays = 0;
                 });
               } else if (selectedIndex == 2) {
                 setState(() {
@@ -93,11 +107,12 @@ class _OrderScreenState extends State<OrderScreen> {
             } else {
               return Consumer<Orders>(
                 builder: (ctx, orderData, child) => ListView.builder(
-                  itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
-                  itemCount: widget._showAll == false
-                      ? widget._selectCount
-                      : orderData.orders.length,
-                ),
+                    itemBuilder: (ctx, i) => OrderItem(widget._selectDays == 0
+                        ? orderData.orders[i]
+                        : widget._userTransaction[i]),
+                    itemCount: widget._showAll == false
+                        ? widget._selectCount
+                        : widget._length),
               );
             }
           }
