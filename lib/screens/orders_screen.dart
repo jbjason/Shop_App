@@ -7,13 +7,13 @@ import '../widgets/order_item.dart';
 
 class OrderScreen extends StatefulWidget {
   static const routeName = '/orders';
+  int _selectCount = 5;
+  bool _showAll = true;
   @override
   _OrderScreenState createState() => _OrderScreenState();
 }
 
 class _OrderScreenState extends State<OrderScreen> {
-  bool _showAll = true;
-  int _selectCount = 5;
   @override
   Widget build(BuildContext context) {
     final connection =
@@ -29,11 +29,16 @@ class _OrderScreenState extends State<OrderScreen> {
             onSelected: (int selectedIndex) {
               if (selectedIndex == 0) {
                 setState(() {
-                  _showAll = false;
+                  widget._showAll = false;
+                  int _existingOrders =
+                      Provider.of<Orders>(context, listen: false).orders.length;
+                  if (widget._selectCount > _existingOrders) {
+                    widget._selectCount = _existingOrders;
+                  }
                 });
               } else if (selectedIndex == 3) {
                 setState(() {
-                  _showAll = true;
+                  widget._showAll = true;
                 });
               } else if (selectedIndex == 2) {
                 setState(() {
@@ -88,8 +93,8 @@ class _OrderScreenState extends State<OrderScreen> {
               return Consumer<Orders>(
                 builder: (ctx, orderData, child) => ListView.builder(
                   itemBuilder: (ctx, i) => OrderItem(orderData.orders[i]),
-                  itemCount: _showAll == false
-                      ? _selectCount
+                  itemCount: widget._showAll == false
+                      ? widget._selectCount
                       : orderData.orders.length,
                 ),
               );
