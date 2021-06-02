@@ -221,14 +221,15 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 ),
                 SizedBox(height: 20),
                 RaisedButton.icon(
-                    color: Colors.amber[200],
-                    onPressed: () {
-                      setState(() {
-                        _isInit = true;
-                      });
-                    },
-                    icon: Icon(Icons.shopping_bag),
-                    label: Text('    Comit to purchase    ')),
+                  color: Colors.amber[200],
+                  onPressed: () {
+                    setState(() {
+                      _isInit = true;
+                    });
+                  },
+                  icon: Icon(Icons.shopping_bag),
+                  label: Text('Comit to purchase'),
+                ),
                 _isInit == false
                     ? Icon(null)
                     : Container(
