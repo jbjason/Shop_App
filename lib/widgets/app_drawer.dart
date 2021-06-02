@@ -72,6 +72,7 @@ class AppDrawer extends StatelessWidget {
               },
             ),
             Divider(),
+            Spacer(),
             ListTile(
               leading: Icon(Icons.exit_to_app),
               title: Text('LogOut',
