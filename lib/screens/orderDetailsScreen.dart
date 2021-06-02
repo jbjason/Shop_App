@@ -230,87 +230,25 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   icon: Icon(Icons.shopping_bag),
                   label: Text('Comit to purchase'),
                 ),
-                _isInit == false
-                    ? Icon(null)
-                    : Container(
-                        height: 470,
-                        width: double.infinity,
-                        child: Card(
-                          color: Colors.blueGrey[900],
-                          child: RichText(
-                              text: TextSpan(children: [
-                            TextSpan(
-                                text: ' Terms & Conditions\n\n\n',
-                                style: TextStyle(
-                                  fontSize: 25,
+                _isInit == false ? Icon(null) : TermsAndCondition(),
+                Container(
+                  padding: EdgeInsets.all(6),
+                  width: double.infinity,
+                  color: Colors.lightGreen[50],
+                  child: RaisedButton(
+                      onPressed: () => submit(fp),
+                      child: _isLoading
+                          ? CircularProgressIndicator(
+                              backgroundColor: Colors.pink,
+                            )
+                          : Text(
+                              'Confirm Order',
+                              style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                )),
-                            WidgetSpan(
-                                child: Icon(Icons.donut_small,
-                                    size: 16, color: Colors.deepOrange)),
-                            TextSpan(
-                                text:
-                                    '   Delivery of the product will be completed within approximately 7 working days.\n\n'),
-                            WidgetSpan(
-                                child: Icon(Icons.donut_small,
-                                    size: 16, color: Colors.deepOrange)),
-                            TextSpan(
-                                text:
-                                    '   Delivered products can be returned within 7 days.\n\n'),
-                            WidgetSpan(
-                                child: Icon(Icons.donut_small,
-                                    size: 16, color: Colors.deepOrange)),
-                            TextSpan(
-                                text:
-                                    '   You can return or compain by filling up the form from your profile page.\n\n'),
-                            WidgetSpan(
-                                child: Icon(Icons.donut_small,
-                                    size: 16, color: Colors.deepOrange)),
-                            TextSpan(text: '    Vat won\'t be included.\n\n'),
-                            WidgetSpan(
-                                child: Icon(Icons.donut_small,
-                                    size: 16, color: Colors.deepOrange)),
-                            TextSpan(
-                                text:
-                                    '   Delivery charge ${35}.tk will be included.\n\n\n'),
-                            TextSpan(text: '  Shipping Method  :   '),
-                            WidgetSpan(
-                                child: Icon(Icons.car_rental,
-                                    size: 24, color: Colors.white)),
-                            TextSpan(text: '\n\n  Payment Method  :   '),
-                            WidgetSpan(
-                                child: Icon(Icons.money,
-                                    size: 24, color: Colors.white)),
-                            TextSpan(text: '  ( cash in Delivery )\n\n\n'),
-                            TextSpan(
-                                text:
-                                    ' I agree to the Terms & Conditions...\n\n',
-                                style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.lightGreen[200])),
-                            WidgetSpan(
-                              child: Container(
-                                padding: EdgeInsets.all(6),
-                                width: double.infinity,
-                                color: Colors.lightGreen[50],
-                                child: RaisedButton(
-                                    onPressed: () => submit(fp),
-                                    child: _isLoading
-                                        ? CircularProgressIndicator(
-                                            backgroundColor: Colors.pink,
-                                          )
-                                        : Text(
-                                            'Confirm Order',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 20,
-                                                color: Colors.red),
-                                          )),
-                              ),
-                            ),
-                          ])),
-                        ),
-                      ),
+                                  fontSize: 20,
+                                  color: Colors.red),
+                            )),
+                ),
                 // FlatButton(
                 //   onPressed: () => submit(fp),
                 //   child: _isLoading
@@ -322,6 +260,66 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 // ),
               ],
             )),
+      ),
+    );
+  }
+}
+
+class TermsAndCondition extends StatelessWidget {
+  const TermsAndCondition({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 470,
+      width: double.infinity,
+      child: Card(
+        color: Colors.blueGrey[900],
+        child: RichText(
+            text: TextSpan(children: [
+          TextSpan(
+              text: ' Terms & Conditions\n\n\n',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+              )),
+          WidgetSpan(
+              child:
+                  Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
+          TextSpan(
+              text:
+                  '   Delivery of the product will be completed within approximately 7 working days.\n\n'),
+          WidgetSpan(
+              child:
+                  Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
+          TextSpan(
+              text: '   Delivered products can be returned within 7 days.\n\n'),
+          WidgetSpan(
+              child:
+                  Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
+          TextSpan(
+              text:
+                  '   You can return or compain by filling up the form from your profile page.\n\n'),
+          WidgetSpan(
+              child:
+                  Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
+          TextSpan(text: '    Vat won\'t be included.\n\n'),
+          WidgetSpan(
+              child:
+                  Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
+          TextSpan(text: '   Delivery charge ${35}.tk will be included.\n\n\n'),
+          TextSpan(text: '  Shipping Method  :   '),
+          WidgetSpan(
+              child: Icon(Icons.car_rental, size: 24, color: Colors.white)),
+          TextSpan(text: '\n\n  Payment Method  :   '),
+          WidgetSpan(child: Icon(Icons.money, size: 24, color: Colors.white)),
+          TextSpan(text: '  ( cash in Delivery )\n\n\n'),
+          TextSpan(
+              text: ' I agree to the Terms & Conditions...\n\n',
+              style: TextStyle(fontSize: 18, color: Colors.lightGreen[200])),
+        ])),
       ),
     );
   }
