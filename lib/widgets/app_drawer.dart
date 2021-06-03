@@ -112,110 +112,7 @@ class AppDrawer extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            content: RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: 'Supervisor :\n\n',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        color: Colors.black),
-                                  ),
-                                  WidgetSpan(
-                                    child: Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image.asset(
-                                          'assets/images/shamim.jpg',
-                                          fit: BoxFit.cover,
-                                        )),
-                                  ),
-                                  TextSpan(
-                                    text: '     Email: ',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  TextSpan(
-                                    text: 'shamim.a@bubt.edu.bd\n\n\n\n',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline,
-                                        //fontSize: 16,
-                                        color: Colors.black),
-                                  ),
-                                  TextSpan(
-                                    text: 'Developers :\n\n',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                        color: Colors.black),
-                                  ),
-                                  WidgetSpan(
-                                    child: Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image.asset(
-                                          'assets/images/jb.jpg',
-                                          fit: BoxFit.cover,
-                                        )),
-                                  ),
-                                  TextSpan(
-                                    text: '     Email: ',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  TextSpan(
-                                    text: 'itisjubayer@gmail.com\n\n',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        decoration: TextDecoration.underline,
-                                        //fontSize: 16,
-                                        color: Colors.black),
-                                  ),
-                                  WidgetSpan(
-                                    child: Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image.asset(
-                                          'assets/images/tahmina.jpg',
-                                          fit: BoxFit.cover,
-                                        )),
-                                  ),
-                                  TextSpan(
-                                    text: '     Email: ',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  TextSpan(
-                                    text: 'tahminasorovi95@gmail\n\n',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        fontWeight: FontWeight.bold,
-                                        // fontSize: 16,
-                                        color: Colors.black),
-                                  ),
-                                  WidgetSpan(
-                                    child: Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image.asset(
-                                          'assets/images/tanmoy.jpg',
-                                          fit: BoxFit.cover,
-                                        )),
-                                  ),
-                                  TextSpan(
-                                    text: '     Email: ',
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  TextSpan(
-                                    text: 'tanmoysarker233@gmail',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        fontWeight: FontWeight.bold,
-                                        //fontSize: 16,
-                                        color: Colors.black),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            content: AboutUsMessages(),
                           ));
                 },
               ),
@@ -235,6 +132,116 @@ class AppDrawer extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class AboutUsMessages extends StatelessWidget {
+  const AboutUsMessages({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: 'Supervisor :\n\n',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black),
+          ),
+          WidgetSpan(
+            child: Container(
+                height: 50,
+                width: 50,
+                child: Image.asset(
+                  'assets/images/shamim.jpg',
+                  fit: BoxFit.cover,
+                )),
+          ),
+          TextSpan(
+            text: '     Email: ',
+            style: TextStyle(color: Colors.black),
+          ),
+          TextSpan(
+            text: 'shamim.a@bubt.edu.bd\n\n\n\n',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+                //fontSize: 16,
+                color: Colors.black),
+          ),
+          TextSpan(
+            text: 'Developers :\n\n',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black),
+          ),
+          WidgetSpan(
+            child: Container(
+                height: 50,
+                width: 50,
+                child: Image.asset(
+                  'assets/images/jb.jpg',
+                  fit: BoxFit.cover,
+                )),
+          ),
+          TextSpan(
+            text: '     Email: ',
+            style: TextStyle(color: Colors.black),
+          ),
+          TextSpan(
+            text: 'itisjubayer@gmail.com\n\n',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+                //fontSize: 16,
+                color: Colors.black),
+          ),
+          WidgetSpan(
+            child: Container(
+                height: 50,
+                width: 50,
+                child: Image.asset(
+                  'assets/images/tahmina.jpg',
+                  fit: BoxFit.cover,
+                )),
+          ),
+          TextSpan(
+            text: '     Email: ',
+            style: TextStyle(color: Colors.black),
+          ),
+          TextSpan(
+            text: 'tahminasorovi95@gmail\n\n',
+            style: TextStyle(
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold,
+                // fontSize: 16,
+                color: Colors.black),
+          ),
+          WidgetSpan(
+            child: Container(
+                height: 50,
+                width: 50,
+                child: Image.asset(
+                  'assets/images/tanmoy.jpg',
+                  fit: BoxFit.cover,
+                )),
+          ),
+          TextSpan(
+            text: '     Email: ',
+            style: TextStyle(color: Colors.black),
+          ),
+          TextSpan(
+            text: 'tanmoysarker233@gmail',
+            style: TextStyle(
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold,
+                //fontSize: 16,
+                color: Colors.black),
+          ),
+        ],
       ),
     );
   }
