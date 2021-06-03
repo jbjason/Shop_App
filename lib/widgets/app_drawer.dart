@@ -11,92 +11,103 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     return Drawer(
-      child: Container(
-        //color: Color(0xFF4A4A58),
-        child: Column(
-          children: [
-            UserAccountsDrawerHeader(
-              accountName: Text('Jb Jason'),
-              accountEmail: Text(auth.userEmail),
-              currentAccountPicture: CircleAvatar(
-                child: FlutterLogo(
-                  size: 70,
+      child: SingleChildScrollView(
+        child: Container(
+          //color: Color(0xFF4A4A58),
+          child: Column(
+            children: [
+              UserAccountsDrawerHeader(
+                accountName: Text(''),
+                accountEmail: Text(auth.userEmail),
+                currentAccountPicture: CircleAvatar(
+                  child: FlutterLogo(
+                    size: 40,
+                  ),
                 ),
               ),
-            ),
-            // AppBar(
-            //   title: Text(
-            //     'Hello Friend !',
-            //     style: TextStyle(fontSize: 20),
-            //   ),
-            //   // back button disable
-            //   automaticallyImplyLeading: false,
-            // ),
-            // simply Horizontal Line
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.shop),
-              title: Text('Shop'),
-              onTap: () {
-                Navigator.of(context).pushNamed('/');
-              },
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.people_alt_outlined),
-              title: Text('Profile'),
-              onTap: () {
-                Navigator.of(context).pushNamed(OrderScreen.routeName,
-                    arguments: [
-                      "profile",
-                      "Your Profile",
-                      auth.userEmail,
-                      auth.userId
-                    ]);
-              },
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.payment),
-              title: Text('Orders'),
-              onTap: () {
-                Navigator.of(context).pushNamed(OrderScreen.routeName,
-                    arguments: ["order", "Your Orders"]);
-              },
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.edit),
-              title: Text('Manage Products'),
-              onTap: () {
-                Navigator.of(context).pushNamed(UserProductsScreen.routeName);
-              },
-            ),
-            Divider(),
-            ListTile(
-              leading: Icon(Icons.edit),
-              title: Text('Suggestion or Report'),
-              onTap: () {
-                Navigator.of(context).pushNamed(
-                    SuggestionReportScreen.routeName,
-                    arguments: [auth.userEmail]);
-              },
-            ),
-            Divider(),
-            Spacer(),
-            ListTile(
-              leading: Icon(Icons.exit_to_app),
-              title: Text('LogOut',
-                  style: TextStyle(
-                      color: Colors.black87, fontWeight: FontWeight.w700)),
-              onTap: () {
-                Navigator.of(context).pop();
-                Navigator.of(context).pushReplacementNamed('/');
-                Provider.of<Auth>(context, listen: false).logout();
-                Provider.of<Cart>(context, listen: false).clear();
-              },
-            ),
-          ],
+              // AppBar(
+              //   title: Text(
+              //     'Hello Friend !',
+              //     style: TextStyle(fontSize: 20),
+              //   ),
+              //   // back button disable
+              //   automaticallyImplyLeading: false,
+              // ),
+              // simply Horizontal Line
+              ListTile(
+                leading: Icon(Icons.shop),
+                title: Text('Shop'),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/');
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.people_alt_outlined),
+                title: Text('Profile'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(OrderScreen.routeName,
+                      arguments: [
+                        "profile",
+                        "Your Profile",
+                        auth.userEmail,
+                        auth.userId
+                      ]);
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.payment),
+                title: Text('Orders'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(OrderScreen.routeName,
+                      arguments: ["order", "Your Orders"]);
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text('Manage Products'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(UserProductsScreen.routeName);
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text('Suggestion or Report'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                      SuggestionReportScreen.routeName,
+                      arguments: [auth.userEmail]);
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text('Return Product'),
+                onTap: () {
+                  // Navigator.of(context).pushNamed(
+                  //     SuggestionReportScreen.routeName,
+                  //     arguments: [auth.userEmail]);
+                },
+              ),
+              Divider(),
+              //Spacer(),
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text('LogOut',
+                    style: TextStyle(
+                        color: Colors.black87, fontWeight: FontWeight.w700)),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushReplacementNamed('/');
+                  Provider.of<Auth>(context, listen: false).logout();
+                  Provider.of<Cart>(context, listen: false).clear();
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
