@@ -1,4 +1,6 @@
+import 'package:Shop_App/providers/orders.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SuggestionReportScreen extends StatefulWidget {
   static const routeName = '/suggestion-report-screen';
@@ -26,9 +28,8 @@ class _SuggestionReportScreenState extends State<SuggestionReportScreen> {
       return;
     }
     _form.currentState.save();
-    print(email);
-    print(subject);
-    print(description);
+    Provider.of<Orders>(context, listen: false)
+        .addSuggestionReport(email, subject, description);
     Navigator.of(context).pop();
   }
 
