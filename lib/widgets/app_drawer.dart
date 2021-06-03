@@ -18,11 +18,11 @@ class AppDrawer extends StatelessWidget {
           child: Column(
             children: [
               UserAccountsDrawerHeader(
-                accountName: Text(''),
+                accountName: Text('Jb Jason'),
                 accountEmail: Text(auth.userEmail),
                 currentAccountPicture: CircleAvatar(
                   child: FlutterLogo(
-                    size: 40,
+                    size: 50,
                   ),
                 ),
               ),
@@ -104,7 +104,7 @@ class AppDrawer extends StatelessWidget {
                               width: double.infinity,
                               alignment: Alignment.center,
                               child: Text(
-                                '  About Us  ',
+                                ' About Us ',
                                 style: TextStyle(
                                   decoration: TextDecoration.underline,
                                   fontWeight: FontWeight.bold,
