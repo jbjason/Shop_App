@@ -162,4 +162,6 @@ class Orders with ChangeNotifier {
     }
     notifyListeners();
   }
+
+  Future<void> addSuggestionReport() async {}
 }
