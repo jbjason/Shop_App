@@ -122,22 +122,23 @@ class AppDrawer extends StatelessWidget {
                 title: Text('HelpLine..'),
                 onTap: () {
                   return showDialog(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                            title: Container(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              child: Text(
-                                'HELPLINE',
-                                style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
-                                ),
-                              ),
-                            ),
-                            content: HelpLineContacts(),
-                          ));
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: Text(
+                          'HELPLINE',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      content: HelpLineContacts(),
+                    ),
+                  );
                 },
               ),
               Divider(),
