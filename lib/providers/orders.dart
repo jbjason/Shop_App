@@ -163,5 +163,10 @@ class Orders with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addSuggestionReport() async {}
+  Future<void> addSuggestionReport(
+      String email, String subject, String description) async {
+    print(email);
+    print(subject);
+    print(description);
+  }
 }
