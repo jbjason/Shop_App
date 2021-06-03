@@ -120,7 +120,25 @@ class AppDrawer extends StatelessWidget {
               ListTile(
                 leading: Icon(Icons.mediation),
                 title: Text('HelpLine..'),
-                onTap: () {},
+                onTap: () {
+                  return showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                            title: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: Text(
+                                'HELPLINE',
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                ),
+                              ),
+                            ),
+                            content: HelpLineContacts(),
+                          ));
+                },
               ),
               Divider(),
               ListTile(
@@ -138,6 +156,93 @@ class AppDrawer extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class HelpLineContacts extends StatelessWidget {
+  const HelpLineContacts({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RichText(
+      text: TextSpan(
+        children: [
+          TextSpan(
+            text: 'Developers :\n\n',
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 18, color: Colors.black),
+          ),
+          TextSpan(
+            text: '   -   Email:    ',
+            style: TextStyle(color: Colors.black),
+          ),
+          TextSpan(
+            text: 'itisjubayer@gmail.com\n',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+                color: Colors.black),
+          ),
+          TextSpan(
+            text: '   -   Contact:  ',
+            style: TextStyle(color: Colors.black),
+          ),
+          TextSpan(
+            text: '0162843****\n\n',
+            style: TextStyle(
+                fontWeight: FontWeight.bold,
+                decoration: TextDecoration.underline,
+                color: Colors.black),
+          ),
+          TextSpan(
+            text: '   -  Email:   ',
+            style: TextStyle(color: Colors.black),
+          ),
+          TextSpan(
+            text: 'tahminasorovi95@gmail\n',
+            style: TextStyle(
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold,
+                color: Colors.black),
+          ),
+          TextSpan(
+            text: '   -  Contact:   ',
+            style: TextStyle(color: Colors.black),
+          ),
+          TextSpan(
+            text: '0191050****\n\n',
+            style: TextStyle(
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold,
+                color: Colors.black),
+          ),
+          TextSpan(
+            text: '   -  Email:   ',
+            style: TextStyle(color: Colors.black),
+          ),
+          TextSpan(
+            text: 'tanmoysarker233@gmail.com\n',
+            style: TextStyle(
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold,
+                color: Colors.black),
+          ),
+          TextSpan(
+            text: '   -  Contact:   ',
+            style: TextStyle(color: Colors.black),
+          ),
+          TextSpan(
+            text: '0176264****\n\n',
+            style: TextStyle(
+                decoration: TextDecoration.underline,
+                fontWeight: FontWeight.bold,
+                color: Colors.black),
+          ),
+        ],
       ),
     );
   }
