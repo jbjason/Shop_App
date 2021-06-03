@@ -34,7 +34,7 @@ class _SuggestionReportScreenState extends State<SuggestionReportScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final userEmail = ModalRoute.of(context).settings.arguments as String;
     return Padding(
       padding: EdgeInsets.all(16.0),
       child: Form(
@@ -42,7 +42,7 @@ class _SuggestionReportScreenState extends State<SuggestionReportScreen> {
         child: ListView(
           children: [
             TextFormField(
-              initialValue: 'itisjubayer',
+              initialValue: userEmail[0],
               readOnly: true,
               decoration: InputDecoration(labelText: 'Email'),
               textInputAction: TextInputAction.next,
