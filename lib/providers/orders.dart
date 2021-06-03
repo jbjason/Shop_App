@@ -169,4 +169,14 @@ class Orders with ChangeNotifier {
     print(subject);
     print(description);
   }
+
+  Future<void> addReturnForm(String email, String productId, String contact,
+      String subject, String address, String description) async {
+    print(email);
+    print(productId);
+    print(contact);
+    print(subject);
+    print(description);
+    print(address);
+  }
 }

@@ -12,16 +12,18 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
   final _productIdFocusNode = FocusNode();
   final _contactFocusNode = FocusNode();
   final _subjectFocusNode = FocusNode();
+  final _addressFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _form = GlobalKey<FormState>();
   bool _isInit = false;
-  String email, _productId, _description, _contact;
+  String _productId, _description, _contact, _address, _subject;
 
   @override
   void dispose() {
     _productIdFocusNode.dispose();
     _subjectFocusNode.dispose();
     _contactFocusNode.dispose();
+    _addressFocusNode.dispose();
     _descriptionFocusNode.dispose();
     super.dispose();
   }
@@ -52,6 +54,7 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
           key: _form,
           child: ListView(
             children: [
+              // email
               TextFormField(
                 initialValue: userEmail[0],
                 readOnly: true,
@@ -64,6 +67,7 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
                   return null;
                 },
               ),
+              // product-id
               TextFormField(
                 decoration: InputDecoration(labelText: 'product-id'),
                 textInputAction: TextInputAction.next,
@@ -79,24 +83,56 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
                 },
                 onSaved: (value) => _productId = value,
               ),
+              // contact no
               TextFormField(
-                decoration: InputDecoration(labelText: 'contact-no'),
+                decoration: InputDecoration(labelText: 'contact number'),
                 textInputAction: TextInputAction.next,
                 focusNode: _contactFocusNode,
                 keyboardType: TextInputType.number,
                 onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_descriptionFocusNode);
+                  FocusScope.of(context).requestFocus(_subjectFocusNode);
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please provide contact no';
+                    return 'Please provide contact number';
                   }
                   return null;
                 },
-                onSaved: (value) => _productId = value,
+                onSaved: (value) => _contact = value,
               ),
+              // subject
               TextFormField(
-                  decoration: InputDecoration(labelText: 'Whole in Details'),
+                decoration: InputDecoration(labelText: 'subject'),
+                textInputAction: TextInputAction.next,
+                focusNode: _subjectFocusNode,
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_addressFocusNode);
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please provide the subject';
+                  }
+                  return null;
+                },
+                onSaved: (value) => _subject = value,
+              ),
+              // address
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Address details'),
+                textInputAction: TextInputAction.newline,
+                focusNode: _addressFocusNode,
+                maxLines: 2,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please provide current address in details';
+                  }
+                  return null;
+                },
+                onSaved: (value) => _address = value,
+              ),
+              // problem details
+              TextFormField(
+                  decoration: InputDecoration(labelText: 'Problem in Details'),
                   textInputAction: TextInputAction.newline,
                   focusNode: _descriptionFocusNode,
                   maxLines: 7,
