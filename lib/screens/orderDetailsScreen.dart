@@ -26,9 +26,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   };
   @override
   void initState() {
-    Provider.of<Orders>(context, listen: false).fetchPoint().then((value) {
-      setState(() {});
-    });
+    Provider.of<Orders>(context, listen: false).fetchPoint();
     super.initState();
   }
 
@@ -80,6 +78,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   }
 
   Widget pointBar(int p) {
+    if (p == 0 || p == null) p = 2;
     RangeValues values = RangeValues(0, p.toDouble());
     return RangeSlider(
       values: values,
