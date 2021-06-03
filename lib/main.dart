@@ -1,7 +1,7 @@
-import 'package:Shop_App/screens/orderDetailsScreen.dart';
-import 'package:Shop_App/screens/return_product.dart';
-import 'package:Shop_App/screens/suggestion_Report_Screen.dart';
-import 'package:Shop_App/screens/thanksScreen.dart';
+import './screens/orderDetailsScreen.dart';
+import './screens/return_product_screen.dart';
+import './screens/suggestion_Report_Screen.dart';
+import './screens/thanksScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './screens/products_overview_screen.dart';
@@ -75,7 +75,7 @@ class MyApp extends StatelessWidget {
               ThanksScreen.routeName: (ctx) => ThanksScreen(),
               SuggestionReportScreen.routeName: (ctx) =>
                   SuggestionReportScreen(),
-              ReturnProduct.routeName: (ctx) => ReturnProduct(),
+              ReturnProductScreen.routeName: (ctx) => ReturnProductScreen(),
             },
           ),
         ));
