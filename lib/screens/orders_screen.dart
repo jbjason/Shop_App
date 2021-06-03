@@ -87,7 +87,6 @@ class _OrderScreenState extends State<OrderScreen> {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
             if (widget._selectDays == 0) {
               widget._length = product.orders.length;
-              print('${widget._length}  jb  ');
             }
             return Center(
               child: CircularProgressIndicator(),
