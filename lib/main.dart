@@ -1,4 +1,5 @@
 import 'package:Shop_App/screens/orderDetailsScreen.dart';
+import 'package:Shop_App/screens/suggestion_Report_Screen.dart';
 import 'package:Shop_App/screens/thanksScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -71,6 +72,8 @@ class MyApp extends StatelessWidget {
               EditProductScreen.routeName: (ctx) => EditProductScreen(),
               OrderDetailsScreen.routeName: (ctx) => OrderDetailsScreen(),
               ThanksScreen.routeName: (ctx) => ThanksScreen(),
+              SuggestionReportScreen.routeName: (ctx) =>
+                  SuggestionReportScreen(),
             },
           ),
         ));

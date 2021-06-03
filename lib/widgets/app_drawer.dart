@@ -1,4 +1,5 @@
 import 'package:Shop_App/providers/cart.dart';
+import 'package:Shop_App/screens/suggestion_Report_Screen.dart';
 import 'package:provider/provider.dart';
 import '../screens/user_products_screen.dart';
 import '../screens/orders_screen.dart';
@@ -69,6 +70,16 @@ class AppDrawer extends StatelessWidget {
               title: Text('Manage Products'),
               onTap: () {
                 Navigator.of(context).pushNamed(UserProductsScreen.routeName);
+              },
+            ),
+            Divider(),
+            ListTile(
+              leading: Icon(Icons.edit),
+              title: Text('Suggestion or Report'),
+              onTap: () {
+                Navigator.of(context).pushNamed(
+                    SuggestionReportScreen.routeName,
+                    arguments: [auth.userEmail]);
               },
             ),
             Divider(),
