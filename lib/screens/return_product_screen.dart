@@ -34,8 +34,8 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
       return;
     }
     _form.currentState.save();
-    Provider.of<Orders>(context, listen: false)
-        .addSuggestionReport(email, _productId, _description);
+    Provider.of<Orders>(context, listen: false).addReturnForm(
+        email, _productId, _contact, _subject, _address, _description);
     Navigator.of(context).pop();
   }
 
