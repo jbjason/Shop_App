@@ -55,8 +55,12 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
           child: ListView(
             children: [
               ListTile(
-                title: Text('Conditions of Return'),
-                subtitle: Text('Check you match these conditions'),
+                title: Text(
+                  '     Conditions of Return',
+                  style:
+                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text('( Check you match these conditions )'),
                 trailing: IconButton(
                     icon:
                         Icon(_expanded ? Icons.expand_less : Icons.expand_more),
@@ -67,8 +71,8 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
                     }),
               ),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-                height: _expanded == false ? 5 : 350,
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                height: _expanded == false ? 5 : 370,
                 width: double.infinity,
                 child: Card(
                   color: Colors.blueGrey[900],
