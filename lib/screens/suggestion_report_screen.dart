@@ -60,6 +60,7 @@ class _SuggestionReportScreenState extends State<SuggestionReportScreen> {
                 validator: (value) {
                   return null;
                 },
+                onSaved: (value) => email = value,
               ),
               TextFormField(
                 decoration: InputDecoration(labelText: 'Subject'),
