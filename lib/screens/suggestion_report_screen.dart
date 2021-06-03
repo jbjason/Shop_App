@@ -58,10 +58,6 @@ class _SuggestionReportScreenState extends State<SuggestionReportScreen> {
                   FocusScope.of(context).requestFocus(_subjectFocusNode);
                 },
                 validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Please provide a value';
-                  }
-                  // return null means valid number
                   return null;
                 },
                 onSaved: (value) => email = value,
