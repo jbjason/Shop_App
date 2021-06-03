@@ -34,7 +34,7 @@ class _SuggestionReportScreenState extends State<SuggestionReportScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userEmail = ModalRoute.of(context).settings.arguments as String;
+    final userEmail = ModalRoute.of(context).settings.arguments as List<String>;
     return Padding(
       padding: EdgeInsets.all(16.0),
       child: Form(
