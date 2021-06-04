@@ -186,7 +186,7 @@ class Orders with ChangeNotifier {
   Future<void> addReturnForm(String email, String productId, String contact,
       String subject, String address, String description) async {
     final url =
-        'https://flutter-update-67f54.firebaseio.com/suggestionAndOrders.json?auth=$authToken';
+        'https://flutter-update-67f54.firebaseio.com/returnProductsList.json?auth=$authToken';
     final response = await http.post(
       url,
       body: json.encode({
@@ -199,7 +199,7 @@ class Orders with ChangeNotifier {
       }),
     );
     final rOrder = ReturnClass(
-      id: json.decode(response.body),
+      id: json.decode(response.body)['name'],
       email: email,
       productId: productId,
       contact: contact,
@@ -209,8 +209,5 @@ class Orders with ChangeNotifier {
     );
     _returnProducts.add(rOrder);
     notifyListeners();
-    print(_returnProducts[0].productId);
-    print(_returnProducts[0].contact);
-    print(_returnProducts[0].email);
   }
 }
