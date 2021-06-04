@@ -1,4 +1,5 @@
 import 'package:Shop_App/models/http_exception.dart';
+import 'package:Shop_App/models/returnClass.dart';
 import './cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -25,6 +26,11 @@ class Orders with ChangeNotifier {
   List<OrderItem> _orders = [];
   List<OrderItem> get orders {
     return [..._orders];
+  }
+
+  List<ReturnClass> _returnProducts = [];
+  List<ReturnClass> get returnProducts {
+    return [..._returnProducts];
   }
 
   List<OrderItem> recentTransactions(int _day) {
@@ -179,11 +185,32 @@ class Orders with ChangeNotifier {
 
   Future<void> addReturnForm(String email, String productId, String contact,
       String subject, String address, String description) async {
-    print(email);
-    print(productId);
-    print(contact);
-    print(subject);
-    print(description);
-    print(address);
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/suggestionAndOrders.json?auth=$authToken';
+    final response = await http.post(
+      url,
+      body: json.encode({
+        'email': email,
+        'productId': productId,
+        'cotact': contact,
+        'subject': subject,
+        'address': address,
+        'description': description,
+      }),
+    );
+    final rOrder = ReturnClass(
+      id: json.decode(response.body),
+      email: email,
+      productId: productId,
+      contact: contact,
+      subject: subject,
+      address: address,
+      description: description,
+    );
+    _returnProducts.add(rOrder);
+    notifyListeners();
+    print(_returnProducts[0].productId);
+    print(_returnProducts[0].contact);
+    print(_returnProducts[0].email);
   }
 }
