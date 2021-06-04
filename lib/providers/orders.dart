@@ -171,7 +171,7 @@ class Orders with ChangeNotifier {
 
   void addSuggestionReport(String email, String subject, String description) {
     final url =
-        'https://flutter-update-67f54.firebaseio.com/suggestionAndOrders.json?auth=$authToken';
+        'https://flutter-update-67f54.firebaseio.com/suggestionAndReports.json?auth=$authToken';
     try {
       http.post(
         url,
