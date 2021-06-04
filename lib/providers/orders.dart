@@ -187,27 +187,31 @@ class Orders with ChangeNotifier {
       String subject, String address, String description) async {
     final url =
         'https://flutter-update-67f54.firebaseio.com/returnProductsList.json?auth=$authToken';
-    final response = await http.post(
-      url,
-      body: json.encode({
-        'email': email,
-        'productId': productId,
-        'cotact': contact,
-        'subject': subject,
-        'address': address,
-        'description': description,
-      }),
-    );
-    final rOrder = ReturnClass(
-      id: json.decode(response.body)['name'],
-      email: email,
-      productId: productId,
-      contact: contact,
-      subject: subject,
-      address: address,
-      description: description,
-    );
-    _returnProducts.add(rOrder);
-    notifyListeners();
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode({
+          'email': email,
+          'productId': productId,
+          'cotact': contact,
+          'subject': subject,
+          'address': address,
+          'description': description,
+        }),
+      );
+      final rOrder = ReturnClass(
+        id: json.decode(response.body)['name'],
+        email: email,
+        productId: productId,
+        contact: contact,
+        subject: subject,
+        address: address,
+        description: description,
+      );
+      _returnProducts.add(rOrder);
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
   }
 }
