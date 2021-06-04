@@ -11,6 +11,7 @@ class ReturnProductsListScreen extends StatefulWidget {
 
 class _ReturnProductsListScreenState extends State<ReturnProductsListScreen> {
   var _isInit = false;
+  var _expanded = false;
   @override
   void didChangeDependencies() {
     if (_isInit == false) {
@@ -30,12 +31,56 @@ class _ReturnProductsListScreenState extends State<ReturnProductsListScreen> {
         centerTitle: true,
         title: Text('Return Prod List'),
       ),
-      body: Padding(
-          padding: EdgeInsets.all(5),
-          child: ListView.builder(
-            itemBuilder: (context, index) => Container(),
-            itemCount: product.returnProducts.length,
-          )),
+      body: ListView.builder(
+        itemBuilder: (context, index) => Container(
+          margin: EdgeInsets.only(top: 25),
+          height: _expanded ? 280 : 100,
+          child: Card(
+            elevation: 10,
+            margin: EdgeInsets.all(10),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Text(
+                    '${index + 1}.',
+                    style: TextStyle(fontSize: 25),
+                  ),
+                  title:
+                      Text('OrderId: ${product.returnProducts[index].orderId}'),
+                  subtitle: Text('${product.returnProducts[index].email}'),
+                  trailing: IconButton(
+                    icon:
+                        Icon(_expanded ? Icons.expand_less : Icons.expand_more),
+                    onPressed: () {
+                      setState(() {
+                        _expanded = !_expanded;
+                      });
+                    },
+                  ),
+                ),
+                Container(
+                  padding:
+                      EdgeInsets.only(top: 15, left: 18, right: 5, bottom: 5),
+                  height: _expanded ? 170 : 0,
+                  child: ListView(
+                    children: [
+                      Text(
+                          'productId   :    ${product.returnProducts[index].productId} \n'),
+                      Text(
+                          'contact       :    ${product.returnProducts[index].contact}\n'),
+                      Text(
+                          'Address      :    ${product.returnProducts[index].address}\n'),
+                      Text(
+                          'description :   ${product.returnProducts[index].description}\n'),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        itemCount: product.returnProducts.length,
+      ),
     );
   }
 }
