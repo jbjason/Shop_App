@@ -11,17 +11,17 @@ class ReturnProductScreen extends StatefulWidget {
 class _ReturnProductScreenState extends State<ReturnProductScreen> {
   final _productIdFocusNode = FocusNode();
   final _contactFocusNode = FocusNode();
-  final _subjectFocusNode = FocusNode();
+  final _orderIdFocusNode = FocusNode();
   final _addressFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _form = GlobalKey<FormState>();
   var _expanded = false;
-  String _productId, _description, _contact, _address, _subject;
+  String _productId, _description, _contact, _address, _orderId;
 
   @override
   void dispose() {
     _productIdFocusNode.dispose();
-    _subjectFocusNode.dispose();
+    _orderIdFocusNode.dispose();
     _contactFocusNode.dispose();
     _addressFocusNode.dispose();
     _descriptionFocusNode.dispose();
@@ -35,7 +35,7 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
     }
     _form.currentState.save();
     Provider.of<Orders>(context, listen: false).addReturnForm(
-        email, _productId, _contact, _subject, _address, _description);
+        email, _orderId, _productId, _contact, _address, _description);
     Navigator.of(context).pop();
   }
 
@@ -86,11 +86,27 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
                 decoration: InputDecoration(labelText: 'Email'),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_productIdFocusNode);
+                  FocusScope.of(context).requestFocus(_orderIdFocusNode);
                 },
                 validator: (value) {
                   return null;
                 },
+              ),
+              // Order-Id
+              TextFormField(
+                decoration: InputDecoration(labelText: 'Order Id'),
+                textInputAction: TextInputAction.next,
+                focusNode: _orderIdFocusNode,
+                onFieldSubmitted: (_) {
+                  FocusScope.of(context).requestFocus(_productIdFocusNode);
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please provide the subject';
+                  }
+                  return null;
+                },
+                onSaved: (value) => _orderId = value,
               ),
               // product-id
               TextFormField(
@@ -115,7 +131,7 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
                 focusNode: _contactFocusNode,
                 keyboardType: TextInputType.number,
                 onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_subjectFocusNode);
+                  FocusScope.of(context).requestFocus(_addressFocusNode);
                 },
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -124,22 +140,6 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
                   return null;
                 },
                 onSaved: (value) => _contact = value,
-              ),
-              // subject
-              TextFormField(
-                decoration: InputDecoration(labelText: 'subject'),
-                textInputAction: TextInputAction.next,
-                focusNode: _subjectFocusNode,
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_addressFocusNode);
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please provide the subject';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _subject = value,
               ),
               // address
               TextFormField(
