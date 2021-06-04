@@ -186,12 +186,12 @@ class Orders with ChangeNotifier {
     }
   }
 
-  Future<void> addReturnForm(String email, String orderId, String productId,
-      String contact, String address, String description) async {
+  void addReturnForm(String email, String orderId, String productId,
+      String contact, String address, String description) {
     final url =
         'https://flutter-update-67f54.firebaseio.com/returnProductsList.json?auth=$authToken';
     try {
-      final response = await http.post(
+      http.post(
         url,
         body: json.encode({
           'email': email,
@@ -212,7 +212,36 @@ class Orders with ChangeNotifier {
       //   description: description,
       // );
       // _returnProducts.add(rOrder);
+      // notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> fetchAndSetReturnList() async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/returnProductsList.json?auth=$authToken';
+    try {
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final List<ReturnClass> loadedData = [];
+      extractedData.forEach((key, value) {
+        loadedData.add(ReturnClass(
+            id: key,
+            email: value['email'],
+            productId: value['productId'],
+            contact: value['contact'],
+            orderId: value['orderId'],
+            address: value['address'],
+            description: value['description']));
+      });
+      _returnProducts = loadedData;
       notifyListeners();
+      print(_returnProducts[0].id);
+      print(_returnProducts[0].email);
+      print(_returnProducts[0].productId);
+      print(_returnProducts[0].orderId);
+      print(_returnProducts[0].address);
     } catch (error) {
       throw error;
     }
