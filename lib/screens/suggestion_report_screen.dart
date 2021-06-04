@@ -12,7 +12,6 @@ class _SuggestionReportScreenState extends State<SuggestionReportScreen> {
   final _subjectFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _form = GlobalKey<FormState>();
-  bool _isInit = false;
   String email, subject, description;
 
   @override
