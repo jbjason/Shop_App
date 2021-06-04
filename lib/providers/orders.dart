@@ -202,17 +202,6 @@ class Orders with ChangeNotifier {
           'description': description,
         }),
       );
-      // final rOrder = ReturnClass(
-      //   id: json.decode(response.body)['name'],
-      //   email: email,
-      //   productId: productId,
-      //   contact: contact,
-      //   orderId: orderId,
-      //   address: address,
-      //   description: description,
-      // );
-      // _returnProducts.add(rOrder);
-      // notifyListeners();
     } catch (error) {
       throw error;
     }
@@ -237,11 +226,6 @@ class Orders with ChangeNotifier {
       });
       _returnProducts = loadedData;
       notifyListeners();
-      print(_returnProducts[0].id);
-      print(_returnProducts[0].email);
-      print(_returnProducts[0].productId);
-      print(_returnProducts[0].orderId);
-      print(_returnProducts[0].address);
     } catch (error) {
       throw error;
     }
