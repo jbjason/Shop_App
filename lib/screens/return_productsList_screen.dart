@@ -23,12 +23,19 @@ class _ReturnProductsListScreenState extends State<ReturnProductsListScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final product = Provider.of<Orders>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
         centerTitle: true,
         title: Text('Return Prod List'),
       ),
+      body: Padding(
+          padding: EdgeInsets.all(5),
+          child: ListView.builder(
+            itemBuilder: (context, index) => Container(),
+            itemCount: product.returnProducts.length,
+          )),
     );
   }
 }
