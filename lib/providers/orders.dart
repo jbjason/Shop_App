@@ -169,18 +169,21 @@ class Orders with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addSuggestionReport(
-      String email, String subject, String description) async {
+  void addSuggestionReport(String email, String subject, String description) {
     final url =
         'https://flutter-update-67f54.firebaseio.com/suggestionAndOrders.json?auth=$authToken';
-    await http.post(
-      url,
-      body: json.encode({
-        'email': email,
-        'subject': subject,
-        'description': description,
-      }),
-    );
+    try {
+      http.post(
+        url,
+        body: json.encode({
+          'email': email,
+          'subject': subject,
+          'description': description,
+        }),
+      );
+    } catch (error) {
+      throw error;
+    }
   }
 
   Future<void> addReturnForm(String email, String productId, String contact,
