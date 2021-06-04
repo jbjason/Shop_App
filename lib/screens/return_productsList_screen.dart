@@ -25,14 +25,10 @@ class _ReturnProductsListScreenState extends State<ReturnProductsListScreen> {
             Provider.of<Orders>(context, listen: false).fetchAndSetReturnList(),
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
+            return Center(child: CircularProgressIndicator());
           } else {
             if (dataSnapshot.error != null) {
-              return Center(
-                child: Text('An error occured !'),
-              );
+              return Center(child: Text('An error occured !'));
             } else {
               return Consumer<Orders>(
                 builder: (ctx, product, _) => ListView.builder(
