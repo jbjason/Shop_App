@@ -230,24 +230,26 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   label: Text('Comit to purchase'),
                 ),
                 _isInit == false ? Icon(null) : TermsAndCondition(),
-                Container(
-                  padding: EdgeInsets.all(6),
-                  width: double.infinity,
-                  color: Colors.lightGreen[50],
-                  child: RaisedButton(
-                      onPressed: () => submit(fp),
-                      child: _isLoading
-                          ? CircularProgressIndicator(
-                              backgroundColor: Colors.pink,
-                            )
-                          : Text(
-                              'Confirm Order',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20,
-                                  color: Colors.red),
-                            )),
-                ),
+                _isInit == false
+                    ? Icon(null)
+                    : Container(
+                        padding: EdgeInsets.all(6),
+                        width: double.infinity,
+                        color: Colors.lightGreen[50],
+                        child: RaisedButton(
+                            onPressed: () => submit(fp),
+                            child: _isLoading
+                                ? CircularProgressIndicator(
+                                    backgroundColor: Colors.pink,
+                                  )
+                                : Text(
+                                    'Confirm Order',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                        color: Colors.red),
+                                  )),
+                      ),
                 // FlatButton(
                 //   onPressed: () => submit(fp),
                 //   child: _isLoading
@@ -272,7 +274,7 @@ class TermsAndCondition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 470,
+      height: 450,
       width: double.infinity,
       child: Card(
         color: Colors.blueGrey[900],
