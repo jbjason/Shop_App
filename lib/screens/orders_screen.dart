@@ -84,10 +84,10 @@ class _OrderScreenState extends State<OrderScreen> {
       body: FutureBuilder(
         future: product.fetchAndSetOrders(),
         builder: (ctx, dataSnapshot) {
+          if (widget._selectDays == 0) {
+            widget._length = product.orders.length;
+          }
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
-            if (widget._selectDays == 0) {
-              widget._length = product.orders.length;
-            }
             return Center(
               child: CircularProgressIndicator(),
             );
