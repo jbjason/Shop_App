@@ -1,3 +1,4 @@
+import '../screens/return_productsList_screen.dart';
 import '../providers/cart.dart';
 import '../screens/return_productForm_screen.dart';
 import '../screens/suggestion_Report_Screen.dart';
@@ -86,10 +87,19 @@ class AppDrawer extends StatelessWidget {
               Divider(),
               ListTile(
                 leading: Icon(Icons.sanitizer),
-                title: Text('Return Product'),
+                title: Text('Return Product Form'),
                 onTap: () {
                   Navigator.of(context).pushNamed(ReturnProductScreen.routeName,
                       arguments: [auth.userEmail]);
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.sanitizer),
+                title: Text('Return Prod List'),
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(ReturnProductsListScreen.routeName);
                 },
               ),
               Divider(),

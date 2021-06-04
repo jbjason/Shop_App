@@ -23,6 +23,12 @@ class _ReturnProductsListScreenState extends State<ReturnProductsListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFFC8E6C9),
+        centerTitle: true,
+        title: Text('Return Prod List'),
+      ),
+    );
   }
 }
