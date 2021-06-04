@@ -1,3 +1,4 @@
+import './screens/return_productsList_screen.dart';
 import './screens/orderDetailsScreen.dart';
 import 'screens/return_productForm_screen.dart';
 import './screens/suggestion_Report_Screen.dart';
@@ -75,7 +76,10 @@ class MyApp extends StatelessWidget {
               ThanksScreen.routeName: (ctx) => ThanksScreen(),
               SuggestionReportScreen.routeName: (ctx) =>
                   SuggestionReportScreen(),
+              // this is the Return_productForm_scree
               ReturnProductScreen.routeName: (ctx) => ReturnProductScreen(),
+              ReturnProductsListScreen.routeName: (ctx) =>
+                  ReturnProductsListScreen(),
             },
           ),
         ));
