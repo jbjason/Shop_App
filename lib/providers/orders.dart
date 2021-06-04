@@ -197,7 +197,7 @@ class Orders with ChangeNotifier {
           'email': email,
           'orderId': orderId,
           'productId': productId,
-          'cotact': contact,
+          'contact': contact,
           'address': address,
           'description': description,
         }),
