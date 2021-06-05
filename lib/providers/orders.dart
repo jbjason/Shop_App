@@ -105,8 +105,14 @@ class Orders with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> customerOrdersOnServer(String name, String email, String contact,
-      String address, List<CartItem> cartProducts, double total) async {
+  Future<void> customerOrdersOnServer(
+      String name,
+      String email,
+      String contact,
+      String address,
+      List<CartItem> cartProducts,
+      double total,
+      String userLocalId) async {
     final url =
         'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken';
     final timeStop = DateTime.now();
@@ -120,6 +126,7 @@ class Orders with ChangeNotifier {
           'contact': contact,
           'address': address,
           'amount': total,
+          'userId': userLocalId,
           'products': cartProducts
               .map((cp) => {
                     'id': cp.id,

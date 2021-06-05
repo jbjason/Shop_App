@@ -1,3 +1,4 @@
+import 'package:Shop_App/providers/auth.dart';
 import 'package:Shop_App/providers/cart.dart';
 import 'package:Shop_App/providers/orders.dart';
 import 'package:Shop_App/screens/thanksScreen.dart';
@@ -45,7 +46,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     setState(() {
       _isLoading = true;
     });
-
+    final userLocalId = Provider.of<Auth>(context, listen: false).userId;
     final cart = Provider.of<Cart>(context, listen: false);
     double amount = cart.totalAmount;
     double cutAmount;
@@ -64,6 +65,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       _info['details'],
       cart.items.values.toList(),
       _isVoucherYes ? cutAmount : amount,
+      userLocalId,
     );
     await Provider.of<Orders>(context, listen: false)
         .addOrder(cart.items.values.toList(), amount);
