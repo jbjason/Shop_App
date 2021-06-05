@@ -52,6 +52,7 @@ class _ReturnProductsListItemState extends State<ReturnProductsListItem> {
   var _expanded = false;
   @override
   Widget build(BuildContext context) {
+    final order = Provider.of<Orders>(context, listen: false);
     return Container(
       margin: EdgeInsets.only(top: 25),
       height: _expanded ? 280 : 100,
@@ -74,7 +75,18 @@ class _ReturnProductsListItemState extends State<ReturnProductsListItem> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () {},
+                      onPressed: () async {
+                        try {
+                          await order.deleteReturnListItem(
+                              widget.returnItem[widget.index].id);
+                        } catch (error) {
+                          Scaffold.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Deleteing Failed'),
+                            ),
+                          );
+                        }
+                      },
                     ),
                     IconButton(
                       icon: Icon(

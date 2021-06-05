@@ -230,4 +230,22 @@ class Orders with ChangeNotifier {
       throw error;
     }
   }
+
+  Future<void> deleteReturnListItem(String id) async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/returnProductsList/$id.json?auth=$authToken';
+    final exIndex = _returnProducts.indexWhere((element) => element.id == id);
+    var exProduct = _returnProducts[exIndex];
+    _returnProducts.removeAt(exIndex);
+    notifyListeners();
+    final response = await http.delete(url);
+    // 400 er upore means Error occurs
+    if (response.statusCode >= 400) {
+      _returnProducts.insert(exIndex, exProduct);
+      notifyListeners();
+      // its additional
+      throw HttpException('Could not delete product');
+    }
+    exProduct = null;
+  }
 }
