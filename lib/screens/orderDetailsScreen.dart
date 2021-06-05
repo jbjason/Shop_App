@@ -222,6 +222,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 ),
                 SizedBox(height: 20),
                 RaisedButton.icon(
+                  highlightColor: Colors.green,
                   color: Colors.amber[200],
                   onPressed: () {
                     setState(() {
