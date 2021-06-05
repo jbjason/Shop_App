@@ -49,15 +49,26 @@ class _ReturnProductsListScreenState extends State<ReturnProductsListScreen> {
                                 'OrderId: ${product.returnProducts[index].orderId}'),
                             subtitle:
                                 Text('${product.returnProducts[index].email}'),
-                            trailing: IconButton(
-                              icon: Icon(_expanded
-                                  ? Icons.expand_less
-                                  : Icons.expand_more),
-                              onPressed: () {
-                                setState(() {
-                                  _expanded = !_expanded;
-                                });
-                              },
+                            trailing: Container(
+                              width: 100,
+                              child: Row(
+                                children: [
+                                  IconButton(
+                                    icon: Icon(Icons.delete),
+                                    onPressed: () {},
+                                  ),
+                                  IconButton(
+                                    icon: Icon(_expanded
+                                        ? Icons.expand_less
+                                        : Icons.expand_more),
+                                    onPressed: () {
+                                      setState(() {
+                                        _expanded = !_expanded;
+                                      });
+                                    },
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           Container(
