@@ -1,16 +1,10 @@
+import 'package:Shop_App/models/returnClass.dart';
 import 'package:Shop_App/providers/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ReturnProductsListScreen extends StatefulWidget {
+class ReturnProductsListScreen extends StatelessWidget {
   static const routeName = '/return-products-list';
-  @override
-  _ReturnProductsListScreenState createState() =>
-      _ReturnProductsListScreenState();
-}
-
-class _ReturnProductsListScreenState extends State<ReturnProductsListScreen> {
-  var _expanded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -32,72 +26,87 @@ class _ReturnProductsListScreenState extends State<ReturnProductsListScreen> {
             } else {
               return Consumer<Orders>(
                 builder: (ctx, product, _) => ListView.builder(
-                  itemBuilder: (context, index) => Container(
-                    margin: EdgeInsets.only(top: 25),
-                    height: _expanded ? 280 : 100,
-                    child: Card(
-                      elevation: 10,
-                      margin: EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            leading: Text(
-                              '${index + 1}.',
-                              style: TextStyle(fontSize: 25),
-                            ),
-                            title: Text(
-                                'OrderId: ${product.returnProducts[index].orderId}'),
-                            subtitle:
-                                Text('${product.returnProducts[index].email}'),
-                            trailing: Container(
-                              width: 100,
-                              child: Row(
-                                children: [
-                                  IconButton(
-                                    icon: Icon(Icons.delete),
-                                    onPressed: () {},
-                                  ),
-                                  IconButton(
-                                    icon: Icon(_expanded
-                                        ? Icons.expand_less
-                                        : Icons.expand_more),
-                                    onPressed: () {
-                                      setState(() {
-                                        _expanded = !_expanded;
-                                      });
-                                    },
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.only(
-                                top: 15, left: 18, right: 5, bottom: 5),
-                            height: _expanded ? 170 : 0,
-                            child: ListView(
-                              children: [
-                                Text(
-                                    'productId   :    ${product.returnProducts[index].productId} \n'),
-                                Text(
-                                    'contact       :    ${product.returnProducts[index].contact}\n'),
-                                Text(
-                                    'Address      :    ${product.returnProducts[index].address}\n'),
-                                Text(
-                                    'description :   ${product.returnProducts[index].description}\n'),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  itemBuilder: (context, index) =>
+                      ReturnProductsListItem(product.returnProducts, index),
                   itemCount: product.returnProducts.length,
                 ),
               );
             }
           }
         },
+      ),
+    );
+  }
+}
+
+class ReturnProductsListItem extends StatefulWidget {
+  final List<ReturnClass> returnItem;
+  final int index;
+  ReturnProductsListItem(this.returnItem, this.index);
+
+  @override
+  _ReturnProductsListItemState createState() => _ReturnProductsListItemState();
+}
+
+class _ReturnProductsListItemState extends State<ReturnProductsListItem> {
+  var _expanded = false;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 25),
+      height: _expanded ? 280 : 100,
+      child: Card(
+        elevation: 10,
+        margin: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            ListTile(
+              leading: Text(
+                '${widget.index + 1}.',
+                style: TextStyle(fontSize: 25),
+              ),
+              title:
+                  Text('OrderId: ${widget.returnItem[widget.index].orderId}'),
+              subtitle: Text('${widget.returnItem[widget.index].email}'),
+              trailing: Container(
+                width: 100,
+                child: Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: () {},
+                    ),
+                    IconButton(
+                      icon: Icon(
+                          _expanded ? Icons.expand_less : Icons.expand_more),
+                      onPressed: () {
+                        setState(() {
+                          _expanded = !_expanded;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 15, left: 18, right: 5, bottom: 5),
+              height: _expanded ? 170 : 0,
+              child: ListView(
+                children: [
+                  Text(
+                      'productId   :    ${widget.returnItem[widget.index].productId} \n'),
+                  Text(
+                      'contact       :    ${widget.returnItem[widget.index].contact}\n'),
+                  Text(
+                      'Address      :    ${widget.returnItem[widget.index].address}\n'),
+                  Text(
+                      'description :   ${widget.returnItem[widget.index].description}\n'),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
