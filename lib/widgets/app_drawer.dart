@@ -76,16 +76,6 @@ class AppDrawer extends StatelessWidget {
               ),
               Divider(),
               ListTile(
-                leading: Icon(Icons.help),
-                title: Text('Suggestion or Report'),
-                onTap: () {
-                  Navigator.of(context).pushNamed(
-                      SuggestionReportScreen.routeName,
-                      arguments: [auth.userEmail]);
-                },
-              ),
-              Divider(),
-              ListTile(
                 leading: Icon(Icons.sanitizer),
                 title: Text('Return Product Form'),
                 onTap: () {
@@ -100,6 +90,16 @@ class AppDrawer extends StatelessWidget {
                 onTap: () {
                   Navigator.of(context)
                       .pushNamed(ReturnProductsListScreen.routeName);
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.help),
+                title: Text('Suggestion or Report'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                      SuggestionReportScreen.routeName,
+                      arguments: [auth.userEmail]);
                 },
               ),
               Divider(),
