@@ -41,10 +41,7 @@ class Orders with ChangeNotifier {
   }
 
   int get pointt {
-    if (_pointt != null) {
-      return _pointt.toInt();
-    }
-    return 0;
+    return _pointt.toInt();
   }
 
   Future<void> fetchAndSetOrders() async {
