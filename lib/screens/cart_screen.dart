@@ -1,3 +1,4 @@
+import 'package:Shop_App/providers/orders.dart';
 import 'package:Shop_App/screens/orderDetailsScreen.dart';
 import '../providers/cart.dart' show Cart;
 import 'package:flutter/material.dart';
@@ -16,6 +17,12 @@ class _CartScreenState extends State<CartScreen> {
     setState(() {
       Provider.of<Cart>(context, listen: false).update(idd, countt);
     });
+  }
+
+  @override
+  void initState() {
+    Provider.of<Orders>(context, listen: false).fetchPoint();
+    super.initState();
   }
 
   @override
