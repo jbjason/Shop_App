@@ -165,9 +165,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     }
                     return null;
                   },
-                  onSaved: (value) {
-                    contact = value;
-                  },
                 ),
                 //details
                 TextFormField(
@@ -183,9 +180,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                       return 'Should be at least 10 characters';
                     }
                     return null;
-                  },
-                  onSaved: (value) {
-                    details = value;
                   },
                 ),
                 SizedBox(height: 40),
