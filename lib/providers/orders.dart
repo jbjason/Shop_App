@@ -164,7 +164,6 @@ class Orders with ChangeNotifier {
     try {
       final response = await http.get(url);
       final extract = json.decode(response.body);
-      print(json.decode(response.body));
       if (extract == null) {
         _pointt = 2;
       } else {
