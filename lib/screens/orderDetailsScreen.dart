@@ -62,7 +62,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     name = _nameController.text;
     contact = _contactController.text;
     details = _detailsController.text;
-    Provider.of<Orders>(context, listen: false).customerOrdersOnServer(
+    Provider.of<Orders>(context, listen: false).addCustomerOrdersOnServer(
       name,
       email,
       contact,
