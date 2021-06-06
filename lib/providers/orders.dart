@@ -105,7 +105,7 @@ class Orders with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> customerOrdersOnServer(
+  Future<void> addCustomerOrdersOnServer(
       String name,
       String email,
       String contact,
