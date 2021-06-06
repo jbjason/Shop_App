@@ -55,7 +55,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       point = cutAmount.toInt();
     } else {
       cutAmount = amount - point;
-      point = 1;
+      point = 2;
     }
     String totalCartItems = cart.itemCount.toString();
     await Provider.of<Orders>(context, listen: false).customerOrdersOnServer(
@@ -80,7 +80,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   }
 
   Widget pointBar(int p) {
-    if (p == 0 || p == null) p = 2;
     RangeValues values = RangeValues(0, p.toDouble());
     return RangeSlider(
       values: values,
