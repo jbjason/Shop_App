@@ -25,11 +25,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     'contact': '',
     'details': '',
   };
-  @override
-  void initState() {
-    Provider.of<Orders>(context, listen: false).fetchPoint();
-    super.initState();
-  }
 
   @override
   void dispose() {
@@ -96,7 +91,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final fp = Provider.of<Orders>(context).pointt;
+    final fp = Provider.of<Orders>(context, listen: false).pointt;
     return Scaffold(
       appBar: AppBar(
         title: Text('Confirm ur details'),
