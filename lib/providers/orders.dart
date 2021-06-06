@@ -21,7 +21,7 @@ class OrderItem {
 
 class Orders with ChangeNotifier {
   final String authToken, userId;
-  double _pointt;
+  int _pointt;
   Orders(this.authToken, this.userId, this._orders);
   List<OrderItem> _orders = [];
   List<OrderItem> get orders {
@@ -164,13 +164,13 @@ class Orders with ChangeNotifier {
     try {
       final response = await http.get(url);
       final extract = json.decode(response.body);
+      print(json.decode(response.body));
       if (extract == null) {
-        _pointt = 0;
+        _pointt = 2;
       } else {
         _pointt = extract['M1234567'];
       }
     } catch (error) {
-      _pointt = 0;
       throw HttpException('Error occurs');
     }
     notifyListeners();
