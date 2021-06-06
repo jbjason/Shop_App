@@ -41,7 +41,10 @@ class Orders with ChangeNotifier {
   }
 
   int get pointt {
-    return _pointt.toInt();
+    if (_pointt == null) {
+      return _pointt = 2;
+    }
+    return _pointt;
   }
 
   Future<void> fetchAndSetOrders() async {
@@ -167,6 +170,7 @@ class Orders with ChangeNotifier {
         _pointt = extract['M1234567'];
       }
     } catch (error) {
+      _pointt = 2;
       throw HttpException('Error occurs');
     }
     notifyListeners();

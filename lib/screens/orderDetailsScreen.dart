@@ -17,14 +17,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   final _emailFocusNode = FocusNode();
   final _detailsFocusNode = FocusNode();
   final _voucherFocusNode = FocusNode();
+  final _emailController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _contactController = TextEditingController();
+  final _detailsController = TextEditingController();
   bool _isInit = false;
   var _isLoading = false, _isVoucherYes = false;
-  Map<String, String> _info = {
-    'name': '',
-    'email': '',
-    'contact': '',
-    'details': '',
-  };
+
+  String name, email, details, contact;
 
   @override
   void dispose() {
@@ -32,6 +32,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     _emailFocusNode.dispose();
     _detailsFocusNode.dispose();
     _voucherFocusNode.dispose();
+    _nameController.dispose();
+    _emailController.dispose();
+    _contactController.dispose();
+    _detailsController.dispose();
     super.dispose();
   }
 
@@ -43,6 +47,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     });
     final userLocalId = Provider.of<Auth>(context, listen: false).userId;
     final cart = Provider.of<Cart>(context, listen: false);
+    String totalCartItems = cart.itemCount.toString();
+    // amount,Bonus smaller & bigger conflict solve
     double amount = cart.totalAmount;
     double cutAmount;
     if (point >= amount) {
@@ -52,12 +58,17 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       cutAmount = amount - point;
       point = 2;
     }
-    String totalCartItems = cart.itemCount.toString();
-    await Provider.of<Orders>(context, listen: false).customerOrdersOnServer(
-      _info['name'],
-      _info['email'],
-      _info['contact'],
-      _info['details'],
+    email = _emailController.text;
+    name = _nameController.text;
+    contact = _contactController.text;
+    details = _detailsController.text;
+    print(name + email + contact + details);
+
+    Provider.of<Orders>(context, listen: false).customerOrdersOnServer(
+      name,
+      email,
+      contact,
+      details,
       cart.items.values.toList(),
       _isVoucherYes ? cutAmount : amount,
       userLocalId,
@@ -71,7 +82,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       _isLoading = false;
     });
     Navigator.of(context).pushNamed(ThanksScreen.routeName,
-        arguments: [totalCartItems, _info['details']]);
+        arguments: [totalCartItems, details]);
   }
 
   Widget pointBar(int p) {
@@ -106,6 +117,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Name'),
                   textInputAction: TextInputAction.next,
+                  controller: _nameController,
                   onFieldSubmitted: (value) {
                     FocusScope.of(context).requestFocus(_emailFocusNode);
                   },
@@ -115,15 +127,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     }
                     return null;
                   },
-                  onSaved: (value) {
-                    _info['name'] = value;
-                  },
                 ),
                 // email
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Email-address'),
                   focusNode: _emailFocusNode,
-                  textInputAction: TextInputAction.done,
+                  textInputAction: TextInputAction.next,
+                  controller: _emailController,
                   onFieldSubmitted: (value) {
                     FocusScope.of(context).requestFocus(_numberFocusNode);
                   },
@@ -136,15 +146,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     }
                     return null;
                   },
-                  onSaved: (value) {
-                    _info['email'] = value;
-                  },
                 ),
                 //contact no
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Contact number'),
                   focusNode: _numberFocusNode,
                   textInputAction: TextInputAction.next,
+                  controller: _contactController,
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {
                     FocusScope.of(context).requestFocus(_detailsFocusNode);
@@ -160,7 +168,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     return null;
                   },
                   onSaved: (value) {
-                    _info['contact'] = value;
+                    contact = value;
                   },
                 ),
                 //details
@@ -168,6 +176,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   decoration: InputDecoration(labelText: 'Details address'),
                   focusNode: _detailsFocusNode,
                   maxLines: 3,
+                  controller: _detailsController,
                   keyboardType: TextInputType.multiline,
                   validator: (value) {
                     if (value.isEmpty) {
@@ -178,7 +187,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     return null;
                   },
                   onSaved: (value) {
-                    _info['details'] = value;
+                    details = value;
                   },
                 ),
                 SizedBox(height: 40),
