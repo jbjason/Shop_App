@@ -1,3 +1,5 @@
+import 'package:Shop_App/screens/confirm_orders_screen.dart';
+
 import '../screens/return_productsList_screen.dart';
 import '../providers/cart.dart';
 import '../screens/return_productForm_screen.dart';
@@ -72,6 +74,15 @@ class AppDrawer extends StatelessWidget {
                 title: Text('Manage Products'),
                 onTap: () {
                   Navigator.of(context).pushNamed(UserProductsScreen.routeName);
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.corporate_fare),
+                title: Text('Customer Orders'),
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(ConfirmOrdersScreen.routeName);
                 },
               ),
               Divider(),

@@ -1,6 +1,6 @@
-import 'package:Shop_App/models/confirmOrdersClass.dart';
-import 'package:Shop_App/models/http_exception.dart';
-import 'package:Shop_App/models/returnClass.dart';
+import '../models/confirmOrdersClass.dart';
+import '../models/http_exception.dart';
+import '../models/returnClass.dart';
 import './cart.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -115,8 +115,42 @@ class Orders with ChangeNotifier {
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData == null) return;
       extractedData.forEach((orderId, orderData) {
-        loadedOrders.add(null);
+        loadedOrders.add(ConfirmOrdersClass(
+          orderId: orderId,
+          name: orderData['name'],
+          email: orderData['email'],
+          contact: orderData['contact'],
+          address: orderData['address'],
+          userLocalId: orderData['userId'],
+          amount: orderData['amount'],
+          dateTime: DateTime.parse(orderData['dateTime']),
+          cartProducts: (orderData['products'] as List<dynamic>)
+              .map((item) => CartItem(
+                    id: item['id'],
+                    title: item['title'],
+                    imageUrl: item['imageUrl'],
+                    quantity: item['quantity'],
+                    price: item['price'],
+                  ))
+              .toList(),
+        ));
       });
+
+      print(loadedOrders[0].orderId);
+      print(loadedOrders[0].name);
+      print(loadedOrders[0].email);
+      print(loadedOrders[0].contact);
+      print(loadedOrders[0].address);
+      print(loadedOrders[0].dateTime);
+      print(loadedOrders[0].userLocalId);
+      print('\n');
+      print(loadedOrders[1].orderId);
+      print(loadedOrders[1].name);
+      print(loadedOrders[1].email);
+      print(loadedOrders[1].contact);
+      print(loadedOrders[1].address);
+      print(loadedOrders[1].dateTime);
+      print(loadedOrders[1].userLocalId);
     } catch (error) {
       throw error;
     }
