@@ -63,7 +63,23 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                 'Toal:   \$ ${widget._order.amount}',
                 softWrap: false,
               ),
-              subtitle: Text('${widget._order.email}'),
+              subtitle: Container(
+                width: 150,
+                child: Row(
+                  children: [
+                    RaisedButton.icon(
+                      onPressed: () {},
+                      icon: Icon(Icons.check),
+                      label: Text('Delivered'),
+                    ),
+                    // RaisedButton.icon(
+                    //   onPressed: () {},
+                    //   icon: Icon(Icons.cancel),
+                    //   label: Text('Canceled'),
+                    // ),
+                  ],
+                ),
+              ),
               trailing: Container(
                 width: 100,
                 child: Row(
@@ -103,6 +119,7 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                   // physics: NeverScrollableScrollPhysics(),
                   children: [
                     Text('OrderId   :    ${widget._order.orderId}\n'),
+                    Text('Email     :     ${widget._order.email}'),
                     Text('Name   :    ${widget._order.name} \n'),
                     Text('contact  :    ${widget._order.contact}\n'),
                     Text('Address      :    ${widget._order.address}\n'),
