@@ -135,22 +135,6 @@ class Orders with ChangeNotifier {
               .toList(),
         ));
       });
-
-      print(loadedOrders[0].orderId);
-      print(loadedOrders[0].name);
-      print(loadedOrders[0].email);
-      print(loadedOrders[0].contact);
-      print(loadedOrders[0].address);
-      print(loadedOrders[0].dateTime);
-      print(loadedOrders[0].userLocalId);
-      print('\n');
-      print(loadedOrders[1].orderId);
-      print(loadedOrders[1].name);
-      print(loadedOrders[1].email);
-      print(loadedOrders[1].contact);
-      print(loadedOrders[1].address);
-      print(loadedOrders[1].dateTime);
-      print(loadedOrders[1].userLocalId);
     } catch (error) {
       throw error;
     }
