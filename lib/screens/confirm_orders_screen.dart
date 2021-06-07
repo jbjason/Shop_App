@@ -47,10 +47,10 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 25),
-      height: _expanded ? 280 : 100,
+      margin: EdgeInsets.only(top: 5, bottom: 10),
+      height: _expanded ? 300 : 100,
       child: Card(
-        elevation: 10,
+        elevation: 12,
         margin: EdgeInsets.all(10),
         child: Column(
           children: [
@@ -59,7 +59,10 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                 '${widget.index + 1}.',
                 style: TextStyle(fontSize: 25),
               ),
-              title: Text('OrderId: ${widget._order.orderId}'),
+              title: Text(
+                'Toal:   \$ ${widget._order.amount}',
+                softWrap: false,
+              ),
               subtitle: Text('${widget._order.email}'),
               trailing: Container(
                 width: 100,
@@ -95,14 +98,14 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
             ),
             Container(
               padding: EdgeInsets.only(top: 15, left: 18, right: 5, bottom: 5),
-              height: _expanded ? 200 : 0,
+              height: _expanded ? 150 : 0,
               child: ListView(
                 children: [
                   Text('OrderId   :    ${widget._order.orderId}\n'),
                   Text('Name   :    ${widget._order.name} \n'),
                   Text('contact  :    ${widget._order.contact}\n'),
                   Text('Address      :    ${widget._order.address}\n'),
-                  Text('total Amount :   ${widget._order.amount}\n'),
+                  // Text('total Amount :   ${widget._order.amount}\n'),
                   Text('Products  :'),
                   // Container(
                   //   height: widget._order.cartProducts.length*20.0 + 10,
@@ -113,6 +116,7 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                 ],
               ),
             ),
+            //SizedBox(height: 200),
           ],
         ),
       ),
