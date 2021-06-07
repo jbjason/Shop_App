@@ -68,7 +68,11 @@ class _ReturnProductsListItemState extends State<ReturnProductsListItem> {
                 '${widget.index + 1}.',
                 style: TextStyle(fontSize: 25),
               ),
-              title: Text('OrderId: ${widget.returnItem.orderId}'),
+              title: Text(
+                'OrderId: ${widget.returnItem.orderId}',
+                softWrap: true,
+                overflow: TextOverflow.fade,
+              ),
               subtitle: Text('${widget.returnItem.email}'),
               trailing: Container(
                 width: 100,
@@ -76,10 +80,30 @@ class _ReturnProductsListItemState extends State<ReturnProductsListItem> {
                   children: [
                     IconButton(
                       icon: Icon(Icons.delete),
-                      onPressed: () async {
+                      onPressed: () {
                         try {
-                          await order
-                              .deleteReturnListItem(widget.returnItem.id);
+                          return showDialog(
+                            context: context,
+                            builder: (ctx) => AlertDialog(
+                              title: Text('Alert !'),
+                              content: Text('Do you want to remove the item?'),
+                              actions: [
+                                FlatButton(
+                                  onPressed: () async {
+                                    await order.deleteReturnListItem(
+                                        widget.returnItem.id);
+                                  },
+                                  child: Text('Yes'),
+                                ),
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop(false);
+                                  },
+                                  child: Text('No'),
+                                ),
+                              ],
+                            ),
+                          );
                         } catch (error) {
                           Scaffold.of(context).showSnackBar(
                             SnackBar(

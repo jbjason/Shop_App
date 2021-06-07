@@ -64,113 +64,72 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                 softWrap: false,
               ),
               subtitle: Container(
-                width: 150,
+                width: 170,
                 child: Row(
                   children: [
                     RaisedButton.icon(
+                      color: Colors.green[50],
                       onPressed: () {},
                       icon: Icon(Icons.check),
-                      label: Text('Delivered'),
+                      label: Text(
+                        'Delivered',
+                      ),
                     ),
-                    // RaisedButton.icon(
-                    //   onPressed: () {},
-                    //   icon: Icon(Icons.cancel),
-                    //   label: Text('Canceled'),
-                    // ),
+                    RaisedButton.icon(
+                      color: Colors.red[50],
+                      onPressed: () {},
+                      icon: Icon(Icons.cancel),
+                      label: Text('Canceled'),
+                    ),
                   ],
                 ),
               ),
-              trailing: Container(
-                width: 100,
-                child: Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.delete),
-                      onPressed: () async {
-                        try {
-                          // await order.deleteReturnListItem(
-                          //     widget.returnItem[widget.index].id);
-                        } catch (error) {
-                          Scaffold.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Deleteing Failed'),
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                          _expanded ? Icons.expand_less : Icons.expand_more),
-                      onPressed: () {
-                        setState(() {
-                          _expanded = !_expanded;
-                        });
-                      },
-                    ),
-                  ],
-                ),
+              trailing: IconButton(
+                icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
+                onPressed: () {
+                  setState(() {
+                    _expanded = !_expanded;
+                  });
+                },
               ),
             ),
             Container(
               padding: EdgeInsets.only(top: 15, left: 18, right: 5, bottom: 5),
               height: _expanded ? 150 : 0,
-              child: ListView(
-                  // physics: NeverScrollableScrollPhysics(),
-                  children: [
-                    Text('OrderId   :    ${widget._order.orderId}\n'),
-                    Text('Email     :     ${widget._order.email}'),
-                    Text('Name   :    ${widget._order.name} \n'),
-                    Text('contact  :    ${widget._order.contact}\n'),
-                    Text('Address      :    ${widget._order.address}\n'),
-                    Text('Products  :\n'),
-                    Container(
-                      height: widget._order.cartProducts.length * 22.0 + 10,
-                      child: ListView(
-                        physics: NeverScrollableScrollPhysics(),
-                        children: widget._order.cartProducts
-                            .map((prod) => Row(
-                                  children: [
-                                    Text(
-                                      '   ${prod.title}',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Spacer(),
-                                    Text(
-                                      '${prod.quantity}x  \$${prod.price}   ',
-                                      style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                  ],
-                                ))
-                            .toList(),
-                      ),
-                    ),
-                  ]
-                  // widget._order.cartProducts
-                  //     .map((prod) => Row(
-                  //           children: [
-                  //             Text(
-                  //               '   ${prod.title}',
-                  //               style: TextStyle(
-                  //                   fontSize: 18, fontWeight: FontWeight.bold),
-                  //             ),
-                  //             Spacer(),
-                  //             Text(
-                  //               '${prod.quantity}x  \$${prod.price}   ',
-                  //               style: TextStyle(
-                  //                 fontSize: 15,
-                  //                 fontWeight: FontWeight.bold,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ))
-                  //     .toList(),
+              child: ListView(children: [
+                Text('OrderId   :    ${widget._order.orderId}\n'),
+                Text('Email     :     ${widget._order.email}'),
+                Text('Name   :    ${widget._order.name} \n'),
+                Text('contact  :    ${widget._order.contact}\n'),
+                Text('Address      :    ${widget._order.address}\n'),
+                Text('Products  :\n'),
+                Container(
+                  height: widget._order.cartProducts.length * 22.0 + 10,
+                  child: ListView(
+                    physics: NeverScrollableScrollPhysics(),
+                    children: widget._order.cartProducts
+                        .map((prod) => Row(
+                              children: [
+                                Text(
+                                  '   ${prod.title}',
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Spacer(),
+                                Text(
+                                  '${prod.quantity}x  \$${prod.price}   ',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ))
+                        .toList(),
                   ),
+                ),
+              ]),
             ),
           ],
         ),
@@ -178,8 +137,3 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
     );
   }
 }
-// Text('OrderId   :    ${widget._order.orderId}\n'),
-//                   Text('Name   :    ${widget._order.name} \n'),
-//                   Text('contact  :    ${widget._order.contact}\n'),
-//                   Text('Address      :    ${widget._order.address}\n'),
-//                   Text('Products  :'),
