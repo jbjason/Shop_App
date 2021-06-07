@@ -29,6 +29,11 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
+  List<ConfirmOrdersClass> _customerOrders = [];
+  List<ConfirmOrdersClass> get customerOrders {
+    return [..._customerOrders];
+  }
+
   List<ReturnClass> _returnProducts = [];
   List<ReturnClass> get returnProducts {
     return [..._returnProducts];
@@ -135,6 +140,8 @@ class Orders with ChangeNotifier {
               .toList(),
         ));
       });
+      _customerOrders = loadedOrders;
+      notifyListeners();
     } catch (error) {
       throw error;
     }
