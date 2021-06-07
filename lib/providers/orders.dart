@@ -105,19 +105,35 @@ class Orders with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addCustomerOrdersOnServer(
+  Future<void> fetchAndSetConfiremOrders() async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken';
+    try {
+      final response = await http.get(url);
+      final List<OrderItem> loadedOrders = [];
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData == null) return;
+      extractedData.forEach((orderId, orderData) {
+        loadedOrders.add(null);
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  void addCustomerOrdersOnServer(
       String name,
       String email,
       String contact,
       String address,
       List<CartItem> cartProducts,
       double total,
-      String userLocalId) async {
+      String userLocalId) {
     final url =
         'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken';
     final timeStop = DateTime.now();
     try {
-      await http.post(
+      http.post(
         url,
         body: json.encode({
           'dateTime': timeStop.toIso8601String(),
