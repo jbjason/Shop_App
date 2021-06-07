@@ -100,20 +100,25 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
               padding: EdgeInsets.only(top: 15, left: 18, right: 5, bottom: 5),
               height: _expanded ? 150 : 0,
               child: ListView(
-                children: [
-                  Text('OrderId   :    ${widget._order.orderId}\n'),
-                  Text('Name   :    ${widget._order.name} \n'),
-                  Text('contact  :    ${widget._order.contact}\n'),
-                  Text('Address      :    ${widget._order.address}\n'),
-                  // Text('total Amount :   ${widget._order.amount}\n'),
-                  Text('Products  :'),
-                  // Container(
-                  //   height: widget._order.cartProducts.length*20.0 + 10,
-                  //   child: ListView(
-                  //     children: widget._order.cartProducts.map((e) => ,),
-                  //     ),
-                  // ),
-                ],
+                children: widget._order.cartProducts
+                    .map((prod) => Row(
+                          children: [
+                            Text(
+                              '   ${prod.title}',
+                              style: TextStyle(
+                                  fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                            Spacer(),
+                            Text(
+                              '${prod.quantity}x  \$${prod.price}   ',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ))
+                    .toList(),
               ),
             ),
             //SizedBox(height: 200),
@@ -123,3 +128,8 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
     );
   }
 }
+// Text('OrderId   :    ${widget._order.orderId}\n'),
+//                   Text('Name   :    ${widget._order.name} \n'),
+//                   Text('contact  :    ${widget._order.contact}\n'),
+//                   Text('Address      :    ${widget._order.address}\n'),
+//                   Text('Products  :'),
