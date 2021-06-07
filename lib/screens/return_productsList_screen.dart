@@ -28,7 +28,8 @@ class ReturnProductsListScreen extends StatelessWidget {
                 builder: (ctx, product, _) => ListView.builder(
                   itemBuilder: (context, index) =>
                       // this class exist in below
-                      ReturnProductsListItem(product.returnProducts, index),
+                      ReturnProductsListItem(
+                          product.returnProducts[index], index),
                   itemCount: product.returnProducts.length,
                 ),
               );
@@ -41,7 +42,7 @@ class ReturnProductsListScreen extends StatelessWidget {
 }
 
 class ReturnProductsListItem extends StatefulWidget {
-  final List<ReturnClass> returnItem;
+  final ReturnClass returnItem;
   final int index;
   ReturnProductsListItem(this.returnItem, this.index);
 
@@ -67,9 +68,8 @@ class _ReturnProductsListItemState extends State<ReturnProductsListItem> {
                 '${widget.index + 1}.',
                 style: TextStyle(fontSize: 25),
               ),
-              title:
-                  Text('OrderId: ${widget.returnItem[widget.index].orderId}'),
-              subtitle: Text('${widget.returnItem[widget.index].email}'),
+              title: Text('OrderId: ${widget.returnItem.orderId}'),
+              subtitle: Text('${widget.returnItem.email}'),
               trailing: Container(
                 width: 100,
                 child: Row(
@@ -78,8 +78,8 @@ class _ReturnProductsListItemState extends State<ReturnProductsListItem> {
                       icon: Icon(Icons.delete),
                       onPressed: () async {
                         try {
-                          await order.deleteReturnListItem(
-                              widget.returnItem[widget.index].id);
+                          await order
+                              .deleteReturnListItem(widget.returnItem.id);
                         } catch (error) {
                           Scaffold.of(context).showSnackBar(
                             SnackBar(
@@ -107,14 +107,10 @@ class _ReturnProductsListItemState extends State<ReturnProductsListItem> {
               height: _expanded ? 170 : 0,
               child: ListView(
                 children: [
-                  Text(
-                      'productId   :    ${widget.returnItem[widget.index].productId} \n'),
-                  Text(
-                      'contact       :    ${widget.returnItem[widget.index].contact}\n'),
-                  Text(
-                      'Address      :    ${widget.returnItem[widget.index].address}\n'),
-                  Text(
-                      'description :   ${widget.returnItem[widget.index].description}\n'),
+                  Text('productId   :    ${widget.returnItem.productId} \n'),
+                  Text('contact       :    ${widget.returnItem.contact}\n'),
+                  Text('Address      :    ${widget.returnItem.address}\n'),
+                  Text('description :   ${widget.returnItem.description}\n'),
                 ],
               ),
             ),
