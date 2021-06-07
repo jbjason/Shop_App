@@ -120,7 +120,13 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                         ))
                     .toList(),
               ),
+              // Text('OrderId   :    ${widget._order.orderId}\n'),
+              // Text('Name   :    ${widget._order.name} \n'),
+              // Text('contact  :    ${widget._order.contact}\n'),
+              // Text('Address      :    ${widget._order.address}\n'),
+              // Text('Products  :'),
             ),
+
             //SizedBox(height: 200),
           ],
         ),
