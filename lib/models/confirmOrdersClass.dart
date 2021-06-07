@@ -1,12 +1,12 @@
 import 'package:Shop_App/providers/cart.dart';
 import 'package:flutter/cupertino.dart';
 
-class ConfitemOrdersClass {
+class ConfirmOrdersClass {
   final String orderId, name, email, contact, address, userLocalId;
   final double total;
   final List<CartItem> cartProducts;
 
-  ConfitemOrdersClass({
+  ConfirmOrdersClass({
     @required this.orderId,
     @required this.name,
     @required this.email,
