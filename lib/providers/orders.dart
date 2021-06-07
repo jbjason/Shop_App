@@ -1,3 +1,4 @@
+import 'package:Shop_App/models/confirmOrdersClass.dart';
 import 'package:Shop_App/models/http_exception.dart';
 import 'package:Shop_App/models/returnClass.dart';
 import './cart.dart';
@@ -110,7 +111,7 @@ class Orders with ChangeNotifier {
         'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken';
     try {
       final response = await http.get(url);
-      final List<OrderItem> loadedOrders = [];
+      final List<ConfirmOrdersClass> loadedOrders = [];
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData == null) return;
       extractedData.forEach((orderId, orderData) {
