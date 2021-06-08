@@ -45,6 +45,7 @@ class CustomerOrdersItem extends StatefulWidget {
 
 class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
   var _expanded = false;
+  bool _isInit1 = false, _isInit2 = false;
   @override
   Widget build(BuildContext context) {
     final _product = Provider.of<Orders>(context, listen: false);
@@ -69,28 +70,44 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                 width: 170,
                 child: Row(
                   children: [
-                    RaisedButton.icon(
-                      color: Colors.green[50],
-                      onPressed: () async {
-                        await _product.updateStatus(widget._order.userLocalId,
-                            widget._order.orderId, 'Delivered');
-                        //setState(() {});
-                      },
-                      icon: Icon(Icons.check),
-                      label: Text(
-                        'Delivered',
-                      ),
-                    ),
-                    RaisedButton.icon(
-                      color: Colors.red[50],
-                      onPressed: () async {
-                        await _product.updateStatus(widget._order.userLocalId,
-                            widget._order.orderId, 'Canceled');
-                        //setState(() {});
-                      },
-                      icon: Icon(Icons.cancel),
-                      label: Text('Canceled'),
-                    ),
+                    _isInit1
+                        ? CircularProgressIndicator()
+                        : RaisedButton.icon(
+                            color: Colors.green[50],
+                            onPressed: () async {
+                              setState(() {
+                                _isInit1 = true;
+                              });
+                              await _product.updateStatus(
+                                  widget._order.userLocalId,
+                                  widget._order.orderId,
+                                  'Delivered');
+                              setState(() {
+                                _isInit1 = false;
+                              });
+                            },
+                            icon: Icon(Icons.check),
+                            label: Text('Delivered'),
+                          ),
+                    _isInit2
+                        ? CircularProgressIndicator()
+                        : RaisedButton.icon(
+                            color: Colors.red[50],
+                            onPressed: () async {
+                              setState(() {
+                                _isInit2 = true;
+                              });
+                              await _product.updateStatus(
+                                  widget._order.userLocalId,
+                                  widget._order.orderId,
+                                  'Canceled');
+                              setState(() {
+                                _isInit2 = false;
+                              });
+                            },
+                            icon: Icon(Icons.cancel),
+                            label: Text('Canceled'),
+                          ),
                   ],
                 ),
               ),
