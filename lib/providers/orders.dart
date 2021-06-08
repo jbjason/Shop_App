@@ -189,9 +189,9 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> updateStatus(
-      String localId, String orderId, String currentStatus) async {
+      String id, String localId, String orderId, String currentStatus) async {
     final url =
-        'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken';
+        'https://flutter-update-67f54.firebaseio.com/confirmedOrders/$id.json?auth=$authToken';
     try {
       await http.patch(url,
           body: json.encode({
