@@ -47,6 +47,7 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
   var _expanded = false;
   @override
   Widget build(BuildContext context) {
+    final _product = Provider.of<Orders>(context, listen: false);
     return Container(
       margin: EdgeInsets.only(top: 5, bottom: 10),
       height: _expanded ? 300 : 100,
@@ -70,7 +71,11 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                   children: [
                     RaisedButton.icon(
                       color: Colors.green[50],
-                      onPressed: () {},
+                      onPressed: () async {
+                        await _product.updateStatus(widget._order.userLocalId,
+                            widget._order.orderId, 'Delivered');
+                        //setState(() {});
+                      },
                       icon: Icon(Icons.check),
                       label: Text(
                         'Delivered',
@@ -78,7 +83,11 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                     ),
                     RaisedButton.icon(
                       color: Colors.red[50],
-                      onPressed: () {},
+                      onPressed: () async {
+                        await _product.updateStatus(widget._order.userLocalId,
+                            widget._order.orderId, 'Canceled');
+                        //setState(() {});
+                      },
                       icon: Icon(Icons.cancel),
                       label: Text('Canceled'),
                     ),
