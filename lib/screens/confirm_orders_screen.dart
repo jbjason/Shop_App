@@ -98,8 +98,8 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
               height: _expanded ? 150 : 0,
               child: ListView(children: [
                 Text('OrderId   :    ${widget._order.orderId}\n'),
-                Text('Email     :     ${widget._order.email}'),
-                Text('Name   :    ${widget._order.name} \n'),
+                Text('Email     :     ${widget._order.email}\n'),
+                Text('Name    :    ${widget._order.name} \n'),
                 Text('contact  :    ${widget._order.contact}\n'),
                 Text('Address      :    ${widget._order.address}\n'),
                 Text('Products  :\n'),
