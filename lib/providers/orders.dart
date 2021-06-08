@@ -189,10 +189,18 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> updateStatus(
-      String localId, String orderId, String currentStatus) {
-    print(localId);
-    print(orderId);
-    print(currentStatus);
+      String localId, String orderId, String currentStatus) async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken';
+    try {
+      await http.patch(url,
+          body: json.encode({
+            'status': currentStatus,
+          }));
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
   }
 
   Future<void> addBonusPoint(double amount, int previousPoint) async {
