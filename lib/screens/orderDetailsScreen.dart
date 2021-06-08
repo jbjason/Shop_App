@@ -15,27 +15,26 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   final _form = GlobalKey<FormState>();
   final _numberFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
-  final _detailsFocusNode = FocusNode();
+  final _addressFocusNode = FocusNode();
   final _voucherFocusNode = FocusNode();
   final _emailController = TextEditingController();
   final _nameController = TextEditingController();
   final _contactController = TextEditingController();
-  final _detailsController = TextEditingController();
+  final _addressController = TextEditingController();
   bool _isInit = false;
   var _isLoading = false, _isVoucherYes = false;
-
-  String name, email, details, contact;
+  String name, email, address, contact;
 
   @override
   void dispose() {
     _numberFocusNode.dispose();
     _emailFocusNode.dispose();
-    _detailsFocusNode.dispose();
+    _addressFocusNode.dispose();
     _voucherFocusNode.dispose();
     _nameController.dispose();
     _emailController.dispose();
     _contactController.dispose();
-    _detailsController.dispose();
+    _addressController.dispose();
     super.dispose();
   }
 
@@ -48,6 +47,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     final userLocalId = Provider.of<Auth>(context, listen: false).userId;
     final cart = Provider.of<Cart>(context, listen: false);
     String totalCartItems = cart.itemCount.toString();
+
     // amount,Bonus smaller & bigger conflict solve
     double amount = cart.totalAmount;
     double cutAmount;
@@ -61,18 +61,20 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     email = _emailController.text;
     name = _nameController.text;
     contact = _contactController.text;
-    details = _detailsController.text;
-    Provider.of<Orders>(context, listen: false).addCustomerOrdersOnServer(
-      name,
-      email,
-      contact,
-      details,
-      cart.items.values.toList(),
-      _isVoucherYes ? cutAmount : amount,
-      userLocalId,
-    );
+    address = _addressController.text;
     await Provider.of<Orders>(context, listen: false)
-        .addOrder(cart.items.values.toList(), amount);
+        .addOrder(cart.items.values.toList(), amount)
+        .then((_) {
+      Provider.of<Orders>(context, listen: false).addCustomerOrdersOnServer(
+        name,
+        email,
+        contact,
+        address,
+        cart.items.values.toList(),
+        _isVoucherYes ? cutAmount : amount,
+        userLocalId,
+      );
+    });
     await Provider.of<Orders>(context, listen: false)
         .addBonusPoint(amount, point)
         .then((value) => cart.clear());
@@ -80,7 +82,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       _isLoading = false;
     });
     Navigator.of(context).pushNamed(ThanksScreen.routeName,
-        arguments: [totalCartItems, details]);
+        arguments: [totalCartItems, address]);
   }
 
   Widget pointBar(int p) {
@@ -103,7 +105,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     final fp = Provider.of<Orders>(context, listen: false).pointt;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Confirm ur details'),
+        title: Text('Order details'),
       ),
       body: Padding(
         padding: EdgeInsets.all(16),
@@ -153,7 +155,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   controller: _contactController,
                   keyboardType: TextInputType.number,
                   onFieldSubmitted: (value) {
-                    FocusScope.of(context).requestFocus(_detailsFocusNode);
+                    FocusScope.of(context).requestFocus(_addressFocusNode);
                   },
                   validator: (value) {
                     if (value.isEmpty) {
@@ -169,9 +171,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 //details
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Details address'),
-                  focusNode: _detailsFocusNode,
+                  focusNode: _addressFocusNode,
                   maxLines: 3,
-                  controller: _detailsController,
+                  controller: _addressController,
                   keyboardType: TextInputType.multiline,
                   validator: (value) {
                     if (value.isEmpty) {

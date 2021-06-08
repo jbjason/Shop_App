@@ -23,6 +23,7 @@ class OrderItem {
 class Orders with ChangeNotifier {
   final String authToken, userId;
   int _pointt;
+  var timeStop, _customerOrderId;
   Orders(this.authToken, this.userId, this._orders);
   List<OrderItem> _orders = [];
   List<OrderItem> get orders {
@@ -85,11 +86,10 @@ class Orders with ChangeNotifier {
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
     final url =
         'https://flutter-update-67f54.firebaseio.com/orders/$userId.json?auth=$authToken';
-    final timeStop = DateTime.now();
+    timeStop = DateTime.now();
     final response = await http.post(url,
         body: json.encode({
           'amount': total,
-          // eta deya better for storing dateTime
           'dateTime': timeStop.toIso8601String(),
           'products': cartProducts
               .map((cp) => {
@@ -100,10 +100,11 @@ class Orders with ChangeNotifier {
                   })
               .toList(),
         }));
+    _customerOrderId = json.decode(response.body)['name'];
     _orders.insert(
         0,
         OrderItem(
-          id: json.decode(response.body)['name'],
+          id: _customerOrderId,
           amount: total,
           products: cartProducts,
           dateTime: timeStop,
@@ -121,7 +122,8 @@ class Orders with ChangeNotifier {
       if (extractedData == null) return;
       extractedData.forEach((orderId, orderData) {
         loadedOrders.add(ConfirmOrdersClass(
-          orderId: orderId,
+          id: orderId,
+          orderId: orderData['orderId'],
           name: orderData['name'],
           email: orderData['email'],
           contact: orderData['contact'],
@@ -158,12 +160,12 @@ class Orders with ChangeNotifier {
       String userLocalId) {
     final url =
         'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken';
-    final timeStop = DateTime.now();
     try {
       http.post(
         url,
         body: json.encode({
           'status': "Pending",
+          'orderId': _customerOrderId,
           'dateTime': timeStop.toIso8601String(),
           'name': name,
           'email': email,
