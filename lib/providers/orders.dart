@@ -202,9 +202,14 @@ class Orders with ChangeNotifier {
           'status': currentStatus,
         }),
       );
-      //url =
-      //    'https://flutter-update-67f54.firebaseio.com/orders/$localId/$orderId.json?auth=$authToken';
-
+      url =
+          'https://flutter-update-67f54.firebaseio.com/orders/$localId/$orderId.json?auth=$authToken';
+      await http.patch(
+        url,
+        body: json.encode({
+          'status': currentStatus,
+        }),
+      );
       notifyListeners();
     } catch (error) {
       throw error;
