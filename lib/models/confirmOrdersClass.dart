@@ -2,7 +2,7 @@ import 'package:Shop_App/providers/cart.dart';
 import 'package:flutter/cupertino.dart';
 
 class ConfirmOrdersClass {
-  final String orderId, name, email, contact, address, userLocalId;
+  final String orderId, name, email, contact, address, userLocalId, status;
   final double amount;
   final List<CartItem> cartProducts;
   final DateTime dateTime;
@@ -17,5 +17,6 @@ class ConfirmOrdersClass {
     @required this.cartProducts,
     @required this.amount,
     @required this.dateTime,
+    @required this.status,
   });
 }

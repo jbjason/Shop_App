@@ -97,6 +97,7 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
               padding: EdgeInsets.only(top: 15, left: 18, right: 5, bottom: 5),
               height: _expanded ? 150 : 0,
               child: ListView(children: [
+                Text('Status      :    ${widget._order.status}\n'),
                 Text('OrderId   :    ${widget._order.orderId}\n'),
                 Text('Email     :     ${widget._order.email}\n'),
                 Text('Name    :    ${widget._order.name} \n'),

@@ -128,6 +128,7 @@ class Orders with ChangeNotifier {
           address: orderData['address'],
           userLocalId: orderData['userId'],
           amount: orderData['amount'],
+          status: orderData['status'],
           dateTime: DateTime.parse(orderData['dateTime']),
           cartProducts: (orderData['products'] as List<dynamic>)
               .map((item) => CartItem(
@@ -162,6 +163,7 @@ class Orders with ChangeNotifier {
       http.post(
         url,
         body: json.encode({
+          'status': "Pending",
           'dateTime': timeStop.toIso8601String(),
           'name': name,
           'email': email,
