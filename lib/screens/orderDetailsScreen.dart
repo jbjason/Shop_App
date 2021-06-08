@@ -170,7 +170,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                 ),
                 //details
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Details address'),
+                  decoration: InputDecoration(labelText: 'Detail address'),
                   focusNode: _addressFocusNode,
                   maxLines: 3,
                   controller: _addressController,
