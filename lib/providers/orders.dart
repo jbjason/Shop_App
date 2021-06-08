@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class OrderItem {
-  final String id;
+  final String id, status;
   final double amount;
   final List<CartItem> products;
   final DateTime dateTime;
@@ -17,6 +17,7 @@ class OrderItem {
     @required this.amount,
     @required this.products,
     @required this.dateTime,
+    this.status = "Pending",
   });
 }
 
@@ -68,6 +69,7 @@ class Orders with ChangeNotifier {
         id: orderId,
         amount: orderData['amount'],
         dateTime: DateTime.parse(orderData['dateTime']),
+        status: orderData['status'],
         // products come from Cart(which stored in CartItem)
         products: (orderData['products'] as List<dynamic>)
             .map((item) => CartItem(
@@ -91,6 +93,7 @@ class Orders with ChangeNotifier {
         body: json.encode({
           'amount': total,
           'dateTime': timeStop.toIso8601String(),
+          'status': "Pending",
           'products': cartProducts
               .map((cp) => {
                     'id': cp.id,
