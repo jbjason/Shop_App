@@ -16,7 +16,7 @@ class ConfirmOrdersScreen extends StatelessWidget {
       ),
       body: FutureBuilder(
           future: Provider.of<Orders>(context, listen: false)
-              .fetchAndSetConfiremOrders(),
+              .fetchAndSetCustomerOrders(),
           builder: (ctx, dataSnapShot) {
             if (ConnectionState.waiting == dataSnapShot.connectionState) {
               return Center(child: CircularProgressIndicator());

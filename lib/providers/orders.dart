@@ -111,7 +111,7 @@ class Orders with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchAndSetConfiremOrders() async {
+  Future<void> fetchAndSetCustomerOrders() async {
     final url =
         'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken';
     try {
