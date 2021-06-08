@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import '../models/confirmOrdersClass.dart';
 import '../providers/orders.dart';
 import 'package:flutter/material.dart';
@@ -97,10 +98,15 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
               padding: EdgeInsets.only(top: 15, left: 18, right: 5, bottom: 5),
               height: _expanded ? 150 : 0,
               child: ListView(children: [
+                Text('Date      :    ' +
+                    DateFormat('dd/MM/yyyy    hh:mm')
+                        .format(widget._order.dateTime) +
+                    '\n'),
                 Text('Status      :    ${widget._order.status}\n'),
                 Text('OrderId   :    ${widget._order.orderId}\n'),
+                Text('UserId   :    ${widget._order.userLocalId}\n'),
+                Text('Name     :    ${widget._order.name} \n'),
                 Text('Email     :     ${widget._order.email}\n'),
-                Text('Name    :    ${widget._order.name} \n'),
                 Text('contact  :    ${widget._order.contact}\n'),
                 Text('Address      :    ${widget._order.address}\n'),
                 Text('Products  :\n'),
