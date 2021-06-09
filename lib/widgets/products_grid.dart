@@ -26,19 +26,6 @@ class _ProductsGridState extends State<ProductsGrid> {
     super.dispose();
   }
 
-  // final List<String> _cities = [];
-  // void setCitiesData() {
-  //   final productsDat = Provider.of<Products>(context, listen: false).items;
-  //   if (_isInit != 0) return;
-  //   int n = productsDat.length;
-  //   for (int i = 0; i < n; i++) {
-  //     _cities.insert(i, productsDat[i].title);
-  //   }
-  //   setState(() {
-  //     _isInit++;
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     final heightOfScreen = MediaQuery.of(context).size.height;
@@ -147,7 +134,6 @@ class _ProductsGridState extends State<ProductsGrid> {
 class DataSearch extends SearchDelegate<String> {
   final List<String> cities;
   DataSearch(this.cities);
-  //final cities = [];
   final recentCities = [
     "London",
     "Munich",
@@ -207,7 +193,6 @@ class DataSearch extends SearchDelegate<String> {
           onTap: () {
             query = suggestionList[index];
             close(context, query);
-            //showResults(context);
           },
           leading: Icon(Icons.location_city),
           title: RichText(
