@@ -22,6 +22,7 @@ class _ProductsGridState extends State<ProductsGrid> {
     'Groceries',
     'Cloths'
   ];
+
   @override
   void dispose() {
     super.dispose();
@@ -58,9 +59,13 @@ class _ProductsGridState extends State<ProductsGrid> {
                       hintText: 'Search a product',
                       hintStyle: TextStyle(color: Color(0xFF00838F)),
                     ),
+                    onTap: () async {
+                      final result = await showSearch(
+                          context: context, delegate: DataSearch());
+                      print(result);
+                    },
                   ),
                 ),
-                Icon(Icons.settings),
               ],
             ),
           ),
@@ -107,7 +112,6 @@ class _ProductsGridState extends State<ProductsGrid> {
               padding: const EdgeInsets.all(10.0),
               itemCount: products.length,
               itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
-                //create: (c) => products[i],
                 value: products[i],
                 child: ProductItem(
                     //products[i].id, products[i].title, products[i].imageUrl
@@ -124,5 +128,117 @@ class _ProductsGridState extends State<ProductsGrid> {
         ],
       ),
     );
+  }
+}
+
+class DataSearch extends SearchDelegate<String> {
+  final cities = [
+    "Berlin",
+    "Paris",
+    "Bermhinton",
+    "Hamberg",
+    "London",
+    "Munich",
+    "Beijing",
+    "Dhaka",
+    "Shylet",
+    "Khulna",
+    "Chittagong",
+    "Borishal",
+    "Mumbai",
+    "Delhi",
+    "London",
+    "Chennai",
+    "Kolkata",
+    "Hyderbad",
+    "Pune",
+    "Kanpur",
+    "Bangalore",
+    "Agra",
+    "Beijing"
+  ];
+  final recentCities = [
+    "London",
+    "Munich",
+    "Beijing",
+    "Dhaka",
+    "Paris",
+  ];
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    try {
+      return [
+        IconButton(
+            icon: Icon(Icons.clear),
+            onPressed: () {
+              query = "";
+            })
+      ];
+    } catch (error) {
+      throw UnimplementedError();
+    }
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    try {
+      return IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            close(context, null);
+          });
+    } catch (error) {
+      throw UnimplementedError();
+    }
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    //return
+    return Center(
+      child: Text(
+        query,
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+      ),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    try {
+      final suggestionList = query.isEmpty
+          ? recentCities
+          : cities.where((p) {
+              final cityLower = p.toLowerCase();
+              final queryLower = query.toLowerCase();
+              return cityLower.startsWith(queryLower);
+            }).toList();
+      return ListView.builder(
+        itemBuilder: (context, index) => ListTile(
+          onTap: () {
+            query = suggestionList[index];
+            print('jb');
+            close(context, query);
+            //showResults(context);
+          },
+          leading: Icon(Icons.location_city),
+          title: RichText(
+            text: TextSpan(
+                text: suggestionList[index].substring(0, query.length),
+                style:
+                    TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                children: [
+                  TextSpan(
+                    text: suggestionList[index].substring(query.length),
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ]),
+          ),
+        ),
+        itemCount: suggestionList.length,
+      );
+    } catch (error) {
+      throw UnimplementedError();
+    }
   }
 }
