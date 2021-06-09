@@ -27,7 +27,7 @@ class _ProductsGridState extends State<ProductsGrid> {
   }
 
   final List<String> _cities = [];
-  void fold() {
+  void setCitiesData() {
     final productsDat = Provider.of<Products>(context, listen: false).items;
     if (_isInit != 0) return;
     int n = productsDat.length;
@@ -72,6 +72,7 @@ class _ProductsGridState extends State<ProductsGrid> {
                       hintStyle: TextStyle(color: Color(0xFF00838F)),
                     ),
                     onTap: () async {
+                      setCitiesData();
                       final result = await showSearch(
                           context: context, delegate: DataSearch(_cities));
                       print(result);
@@ -144,7 +145,7 @@ class _ProductsGridState extends State<ProductsGrid> {
 }
 
 class DataSearch extends SearchDelegate<String> {
-  final cities;
+  final List<String> cities;
   DataSearch(this.cities);
   final recentCities = [
     "London",
