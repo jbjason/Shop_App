@@ -51,6 +51,7 @@ class _ProductsGridState extends State<ProductsGrid> {
                   child: TextField(
                     style: TextStyle(color: Color(0xFF0277BD)),
                     textInputAction: TextInputAction.done,
+                    readOnly: true,
                     decoration: InputDecoration(
                       focusColor: Colors.white,
                       enabledBorder: InputBorder.none,
@@ -160,8 +161,6 @@ class DataSearch extends SearchDelegate<String> {
   final recentCities = [
     "London",
     "Munich",
-    "Beijing",
-    "Dhaka",
     "Paris",
   ];
   @override
