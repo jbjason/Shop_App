@@ -6,14 +6,12 @@ import '../widgets/product_item.dart';
 class ProductsGrid extends StatefulWidget {
   final bool showFabs;
   ProductsGrid(this.showFabs);
-
   @override
   _ProductsGridState createState() => _ProductsGridState();
 }
 
 class _ProductsGridState extends State<ProductsGrid> {
-  int selectedIndex = 0;
-
+  int selectedIndex = 0, _isInit = 0;
   final List<String> _category = [
     'All Products',
     'Favorites',
@@ -26,6 +24,19 @@ class _ProductsGridState extends State<ProductsGrid> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  final List<String> _cities = [];
+  void fold() {
+    final productsDat = Provider.of<Products>(context, listen: false).items;
+    if (_isInit != 0) return;
+    int n = productsDat.length;
+    for (int i = 0; i < n; i++) {
+      _cities.insert(i, productsDat[i].title);
+    }
+    setState(() {
+      _isInit++;
+    });
   }
 
   @override
@@ -62,7 +73,7 @@ class _ProductsGridState extends State<ProductsGrid> {
                     ),
                     onTap: () async {
                       final result = await showSearch(
-                          context: context, delegate: DataSearch());
+                          context: context, delegate: DataSearch(_cities));
                       print(result);
                     },
                   ),
@@ -133,7 +144,8 @@ class _ProductsGridState extends State<ProductsGrid> {
 }
 
 class DataSearch extends SearchDelegate<String> {
-  final cities = ["Bd", "India", "Mepal"];
+  final cities;
+  DataSearch(this.cities);
   final recentCities = [
     "London",
     "Munich",
