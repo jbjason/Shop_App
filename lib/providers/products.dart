@@ -11,6 +11,7 @@ class Products with ChangeNotifier {
     this.userId,
     this._items,
   );
+
   List<String> _commentsList = [];
   List<Product> _items = [
     // Product(
@@ -55,6 +56,11 @@ class Products with ChangeNotifier {
     return [..._commentsList];
   }
 
+  List<String> _cities = [];
+  List<String> get cities {
+    return [..._cities];
+  }
+
   List<Product> get favoriteItems {
     return _items.where((element) => element.isFavorite).toList();
   }
@@ -94,6 +100,7 @@ class Products with ChangeNotifier {
           isReview: prodData['isReview'],
           category: prodData['category'],
         ));
+        _cities.add(prodData['title']);
       });
       _items = loadedProducts;
       notifyListeners();
