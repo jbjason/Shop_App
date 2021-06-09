@@ -62,7 +62,8 @@ class _ProductsGridState extends State<ProductsGrid> {
                     ),
                     onTap: () async {
                       final result = await showSearch(
-                          context: context, delegate: DataSearch());
+                          context: context,
+                          delegate: DataSearch(productsData.items));
                       print(result);
                     },
                   ),
@@ -133,31 +134,8 @@ class _ProductsGridState extends State<ProductsGrid> {
 }
 
 class DataSearch extends SearchDelegate<String> {
-  final cities = [
-    "Berlin",
-    "Paris",
-    "Bermhinton",
-    "Hamberg",
-    "London",
-    "Munich",
-    "Beijing",
-    "Dhaka",
-    "Shylet",
-    "Khulna",
-    "Chittagong",
-    "Borishal",
-    "Mumbai",
-    "Delhi",
-    "London",
-    "Chennai",
-    "Kolkata",
-    "Hyderbad",
-    "Pune",
-    "Kanpur",
-    "Bangalore",
-    "Agra",
-    "Beijing"
-  ];
+  final cities;
+  DataSearch(this.cities);
   final recentCities = [
     "London",
     "Munich",
@@ -207,7 +185,7 @@ class DataSearch extends SearchDelegate<String> {
     try {
       final suggestionList = query.isEmpty
           ? recentCities
-          : cities.where((p) {
+          : cities.title.where((p) {
               final cityLower = p.toLowerCase();
               final queryLower = query.toLowerCase();
               return cityLower.startsWith(queryLower);
