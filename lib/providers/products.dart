@@ -56,9 +56,9 @@ class Products with ChangeNotifier {
     return [..._commentsList];
   }
 
-  List<String> _cities = [];
-  List<String> get cities {
-    return [..._cities];
+  List<String> _searcHints = [];
+  List<String> get searcHints {
+    return [..._searcHints];
   }
 
   List<Product> get favoriteItems {
@@ -100,7 +100,7 @@ class Products with ChangeNotifier {
           isReview: prodData['isReview'],
           category: prodData['category'],
         ));
-        _cities.add(prodData['title']);
+        _searcHints.add(prodData['title']);
       });
       _items = loadedProducts;
       notifyListeners();

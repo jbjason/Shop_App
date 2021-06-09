@@ -61,7 +61,7 @@ class _ProductsGridState extends State<ProductsGrid> {
                     onTap: () async {
                       final result = await showSearch(
                           context: context,
-                          delegate: DataSearch(productsData.cities));
+                          delegate: DataSearch(productsData.searcHints));
                       print(result);
                     },
                   ),
@@ -132,8 +132,8 @@ class _ProductsGridState extends State<ProductsGrid> {
 }
 
 class DataSearch extends SearchDelegate<String> {
-  final List<String> cities;
-  DataSearch(this.cities);
+  final List<String> _hints;
+  DataSearch(this._hints);
   final recentCities = [
     "London",
     "Munich",
@@ -183,7 +183,7 @@ class DataSearch extends SearchDelegate<String> {
     try {
       final suggestionList = query.isEmpty
           ? recentCities
-          : cities.where((p) {
+          : _hints.where((p) {
               final cityLower = p.toLowerCase();
               final queryLower = query.toLowerCase();
               return cityLower.startsWith(queryLower);
