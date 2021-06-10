@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../providers/orders.dart' as pi;
-import 'dart:math';
 
 class OrderItem extends StatefulWidget {
   final pi.OrderItem order;
@@ -13,6 +12,24 @@ class OrderItem extends StatefulWidget {
 
 class _OrderItemState extends State<OrderItem> {
   var _expanded = false;
+  var _currentStatus;
+  var _currentIcon;
+
+  @override
+  void initState() {
+    if (widget.order.status == "Pending") {
+      _currentStatus = "Pending";
+      _currentIcon = Icon(Icons.arrow_circle_down);
+    } else if (widget.order.status == "Delivered") {
+      _currentStatus = "Delivered";
+      _currentIcon = Icon(Icons.check);
+    } else {
+      _currentStatus = "Canceled";
+      _currentIcon = Icon(Icons.cancel);
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,8 +54,8 @@ class _OrderItemState extends State<OrderItem> {
                     child: FlatButton.icon(
                         onPressed: () {},
                         color: Colors.amber[100],
-                        icon: Icon(Icons.arrow_circle_down),
-                        label: Text('Pending')),
+                        icon: _currentIcon,
+                        label: Text(_currentStatus)),
                   ),
                 ]),
               ),
