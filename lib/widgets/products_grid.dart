@@ -62,7 +62,9 @@ class _ProductsGridState extends State<ProductsGrid> {
                       final result = await showSearch(
                           context: context,
                           delegate: DataSearch(productsData.searcHints));
-                      print(result);
+                      if (result != null) {
+                        productsData.serachForProduct(result);
+                      }
                     },
                   ),
                 ),
