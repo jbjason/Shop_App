@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import '../providers/orders.dart' as pi;
 import 'dart:math';
 
@@ -15,9 +16,8 @@ class _OrderItemState extends State<OrderItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //duration: Duration(milliseconds: 300),
-      height:
-          _expanded ? min(widget.order.products.length * 20.0 + 110, 200) : 95,
+      margin: EdgeInsets.only(top: 5, bottom: 10),
+      height: _expanded ? 250 : 100,
       child: Card(
         margin: EdgeInsets.all(10),
         elevation: 15,
@@ -42,10 +42,6 @@ class _OrderItemState extends State<OrderItem> {
                   ),
                 ]),
               ),
-
-              //   Text(
-              // DateFormat('dd/MM/yyyy hh:mm').format(widget.order.dateTime),
-              //),
               trailing: IconButton(
                   icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
                   onPressed: () {
@@ -56,29 +52,41 @@ class _OrderItemState extends State<OrderItem> {
             ),
             Container(
               padding: EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-              height: _expanded
-                  ? min(widget.order.products.length * 20.0 + 10, 100)
-                  : 0,
+              height: _expanded ? 120 : 0,
               child: ListView(
-                children: widget.order.products
-                    .map((prod) => Row(
-                          children: [
-                            Text(
-                              '${prod.title}',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold),
-                            ),
-                            Spacer(),
-                            Text(
-                              '${prod.quantity}x  \$${prod.price}',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ))
-                    .toList(),
+                children: [
+                  Text(
+                    'Date   :    ' +
+                        DateFormat('dd/MM/yyyy   hh:mm\n')
+                            .format(widget.order.dateTime),
+                  ),
+                  Container(
+                    height: widget.order.products.length * 22.0 + 10,
+                    child: ListView(
+                      physics: NeverScrollableScrollPhysics(),
+                      children: widget.order.products
+                          .map((prod) => Row(
+                                children: [
+                                  Text(
+                                    '${prod.title}',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Spacer(),
+                                  Text(
+                                    '${prod.quantity}x  \$${prod.price}',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ))
+                          .toList(),
+                    ),
+                  ),
+                ],
               ),
             )
           ],
