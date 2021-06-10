@@ -12,20 +12,22 @@ class OrderItem extends StatefulWidget {
 
 class _OrderItemState extends State<OrderItem> {
   var _expanded = false;
-  var _currentStatus;
-  var _currentIcon;
+  var _currentStatus, _currentIcon, _currentColor;
 
   @override
   void initState() {
     if (widget.order.status == "Pending") {
       _currentStatus = "Pending";
       _currentIcon = Icon(Icons.arrow_circle_down);
+      _currentColor = Colors.amber[100];
     } else if (widget.order.status == "Delivered") {
       _currentStatus = "Delivered";
       _currentIcon = Icon(Icons.check);
+      _currentColor = Colors.green[100];
     } else {
       _currentStatus = "Canceled";
       _currentIcon = Icon(Icons.cancel);
+      _currentColor = Colors.red[200];
     }
     super.initState();
   }
@@ -53,7 +55,7 @@ class _OrderItemState extends State<OrderItem> {
                   WidgetSpan(
                     child: FlatButton.icon(
                         onPressed: () {},
-                        color: Colors.amber[100],
+                        color: _currentColor,
                         icon: _currentIcon,
                         label: Text(_currentStatus)),
                   ),
