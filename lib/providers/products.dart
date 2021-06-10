@@ -246,9 +246,7 @@ class Products with ChangeNotifier {
   }
 
   void serachForProduct(String s) {
-    List<Product> _current = _items;
     _items = _items.where((element) => element.title.contains(s)).toList();
     notifyListeners();
-    _items = _current;
   }
 }
