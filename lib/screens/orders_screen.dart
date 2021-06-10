@@ -103,9 +103,11 @@ class _OrderScreenState extends State<OrderScreen> {
             } else {
               return Consumer<Orders>(
                 builder: (ctx, orderData, child) => ListView.builder(
-                    itemBuilder: (ctx, i) => OrderItem(widget._selectDays == 0
-                        ? orderData.orders[i]
-                        : widget._userTransaction[i]),
+                    itemBuilder: (ctx, i) => OrderItem(
+                        widget._selectDays == 0
+                            ? orderData.orders[i]
+                            : widget._userTransaction[i],
+                        i),
                     itemCount: widget._showAll == false
                         ? widget._selectCount
                         : widget._length),

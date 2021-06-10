@@ -126,7 +126,7 @@ class UserProfile extends StatelessWidget {
           Container(
             height: 300,
             child: ListView.builder(
-              itemBuilder: (ctx, i) => OrderItem(_userTransactions[i]),
+              itemBuilder: (ctx, i) => OrderItem(_userTransactions[i], i),
               itemCount: _userTransactions.length,
             ),
           ),

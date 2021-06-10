@@ -11,7 +11,7 @@ class ProductsGrid extends StatefulWidget {
 }
 
 class _ProductsGridState extends State<ProductsGrid> {
-  int selectedIndex = 0, _isInit = 0;
+  int selectedIndex = 0;
   final List<String> _category = [
     'All Products',
     'Favorites',
