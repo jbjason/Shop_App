@@ -1,4 +1,6 @@
+import 'package:Shop_App/providers/products.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SetOffersScreen extends StatefulWidget {
   static const routeName = '/set-offers-screen';
@@ -23,9 +25,8 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
     String _imageUrl = _imageController.text;
     String _amount = _amountController.text;
     String _voucherCode = _voucherController.text;
-    print(_imageUrl);
-    print(_amount);
-    print(_voucherCode);
+    Provider.of<Products>(context, listen: false)
+        .setOffers(_imageUrl, _amount, _voucherCode);
   }
 
   void _updateImageUrl() {
