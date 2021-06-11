@@ -18,7 +18,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _titleFocusNode = FocusNode();
   final _categoryFocusNode = FocusNode();
 
-  final _imageUrlController = TextEditingController();
+  final _imageUrlController1 = TextEditingController();
   final _imageUrlController2 = TextEditingController();
   final _imageUrlController3 = TextEditingController();
   // Gloabally key declare for Form widget's children can be accessible
@@ -67,7 +67,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           'imageUrl2': '',
           'imageUrl3': '',
         };
-        _imageUrlController.text = _editedProduct.imageUrl1;
+        _imageUrlController1.text = _editedProduct.imageUrl1;
         _imageUrlController2.text = _editedProduct.imageUrl2;
         _imageUrlController3.text = _editedProduct.imageUrl3;
       }
@@ -81,25 +81,24 @@ class _EditProductScreenState extends State<EditProductScreen> {
     // if we use FocusNode method then we have to dispose them for memory's sake
     _priceFocusNode.dispose();
     _descriptionFocusNode.dispose();
-    _imageUrlController.dispose();
-    _imageUrlFocusNode.dispose();
-    _imageUrlFocusNode2.dispose();
-    _imageUrlFocusNode3.dispose();
+    _imageUrlController1.dispose();
     _titleFocusNode.dispose();
     _categoryFocusNode.dispose();
-
     _imageUrlFocusNode.removeListener(_updateImageUrl);
     _imageUrlFocusNode2.removeListener(_updateImageUrl);
     _imageUrlFocusNode3.removeListener(_updateImageUrl);
+    _imageUrlFocusNode.dispose();
+    _imageUrlFocusNode2.dispose();
+    _imageUrlFocusNode3.dispose();
     super.dispose();
   }
 
   void _updateImageUrl() {
     if (!_imageUrlFocusNode.hasFocus) {
-      if ((!_imageUrlController.text.startsWith('http') &&
-              !_imageUrlController.text.startsWith('https')) ||
-          (!_imageUrlController.text.endsWith('.jpg') &&
-              !_imageUrlController.text.endsWith('.png'))) {
+      if ((!_imageUrlController1.text.startsWith('http') &&
+              !_imageUrlController1.text.startsWith('https')) ||
+          (!_imageUrlController1.text.endsWith('.jpg') &&
+              !_imageUrlController1.text.endsWith('.png'))) {
         return;
       }
       setState(() {});
@@ -306,11 +305,11 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           decoration: BoxDecoration(
                             border: Border.all(width: 2, color: Colors.green),
                           ),
-                          child: _imageUrlController.text.isEmpty
+                          child: _imageUrlController1.text.isEmpty
                               ? Text('Enter a URL')
                               : FittedBox(
                                   child: Image.network(
-                                    _imageUrlController.text,
+                                    _imageUrlController1.text,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -321,7 +320,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             // initialValue: _initValues['imageUrl'],
                             decoration: InputDecoration(labelText: 'Image Url'),
                             keyboardType: TextInputType.url,
-                            controller: _imageUrlController,
+                            controller: _imageUrlController1,
                             textInputAction: TextInputAction.next,
                             focusNode: _imageUrlFocusNode,
                             onFieldSubmitted: (_) {
