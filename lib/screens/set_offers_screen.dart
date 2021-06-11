@@ -42,10 +42,14 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
 
   @override
   void dispose() {
-    _imageFocusNode.dispose();
     _amountFocusNode.dispose();
     _voucherFocusNode.dispose();
+    _imageController.dispose();
+    _amountController.dispose();
+    _voucherController.dispose();
     _imageFocusNode.removeListener(_updateImageUrl);
+
+    _imageFocusNode.dispose();
     super.dispose();
   }
 
