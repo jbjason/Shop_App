@@ -1,4 +1,5 @@
 import 'package:Shop_App/models/http_exception.dart';
+import 'package:Shop_App/models/offer.dart';
 import 'package:flutter/material.dart';
 import './product.dart';
 import 'package:http/http.dart' as http;
@@ -59,6 +60,11 @@ class Products with ChangeNotifier {
   List<String> _searcHints = [];
   List<String> get searcHints {
     return [..._searcHints];
+  }
+
+  List<Offer> _offersList = [];
+  List<Offer> get offerList {
+    return [..._offersList];
   }
 
   List<Product> get favoriteItems {
@@ -261,5 +267,24 @@ class Products with ChangeNotifier {
           'voucherCode': voucherCode,
         }));
     print(json.decode(response.body));
+  }
+
+  Future<void> fetchOffers() async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/offers.json?auth=$authToken';
+    final response = await http.get(url);
+    final extractedOffers = json.decode(response.body) as Map<String, dynamic>;
+    if (extractedOffers == null) return;
+    final List<Offer> loadedList = [];
+    extractedOffers.forEach((id, value) {
+      final String s = value['amount'];
+      loadedList.add(Offer(
+          id: id,
+          imageUrl: value['imageUrl'],
+          voucherCode: value['voucherCode'],
+          amount: double.parse(s)));
+    });
+    _offersList = loadedList;
+    notifyListeners();
   }
 }
