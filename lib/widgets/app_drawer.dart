@@ -54,10 +54,12 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
-              ListTile(
-                leading: Icon(Icons.card_giftcard),
-                title: Text('Manage Offer\'s'),
-                onTap: () => OffersList(),
+              Container(
+                child: ListTile(
+                  leading: Icon(Icons.card_giftcard),
+                  title: Text('Manage Offer\'s'),
+                  onTap: () => OffersList(),
+                ),
               ),
               Divider(),
               ListTile(
