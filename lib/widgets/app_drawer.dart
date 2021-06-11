@@ -54,13 +54,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
-              Container(
-                child: ListTile(
-                  leading: Icon(Icons.card_giftcard),
-                  title: Text('Manage Offer\'s'),
-                  onTap: () => OffersList(),
-                ),
-              ),
+              OffersList(),
               Divider(),
               ListTile(
                 leading: Icon(Icons.people_alt_outlined),
@@ -205,39 +199,83 @@ class OffersList extends StatefulWidget {
 }
 
 class _OffersListState extends State<OffersList> {
+  bool _isExpand = false;
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Divider(),
-        ListTile(
-          leading: Icon(Icons.minimize_rounded),
-          title: Text('     Special Offer'),
-          onTap: () {},
-        ),
-        Divider(),
-        ListTile(
-          leading: Icon(Icons.minimize_rounded),
-          title: Text('     Up to \'n\' Tk Offer'),
-          onTap: () {},
-        ),
-        Divider(),
-        ListTile(
-          leading: Icon(Icons.minimize_rounded),
-          title: Text('     Next Day Delivery'),
-          onTap: () {},
-        ),
-        Divider(),
-        ListTile(
-          leading: Icon(Icons.minimize_rounded),
-          title: Text('     Combo Offer'),
-          onTap: () {},
-        ),
-      ],
+    return Container(
+      height: _isExpand ? (60 * 5.0) : 60,
+      child: Column(
+        //itemExtent: 46,
+        children: [
+          ListTile(
+            leading: Icon(Icons.edit),
+            title: Text('Manage Offer\'s'),
+            onTap: () {
+              setState(() {
+                _isExpand = true;
+              });
+            },
+          ),
+          Container(
+            height: _isExpand ? 58 * 4.0 : 0,
+            margin: EdgeInsets.only(left: 40),
+            child: Column(
+              children: [
+                ListTile(
+                  leading: Icon(Icons.minimize_rounded),
+                  title: Text('Special Offer'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(Icons.minimize_rounded),
+                  title: Text('Up to \'n\' Tk Offer'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(Icons.minimize_rounded),
+                  title: Text('Next Day Delivery'),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(Icons.minimize_rounded),
+                  title: Text('Combo Offer'),
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
 
+// Container(
+//                   height: 100,
+//                   child: ListView(
+//                     children: [
+//                       ListTile(
+//                         //leading: Icon(Icons.minimize_rounded),
+//                         title: Text('Special Offer'),
+//                         onTap: () {},
+//                       ),
+//                       ListTile(
+//                         // leading: Icon(Icons.minimize_rounded),
+//                         title: Text('Up to \'n\' Tk Offer'),
+//                         onTap: () {},
+//                       ),
+//                       ListTile(
+//                         // leading: Icon(Icons.minimize_rounded),
+//                         title: Text('Next Day Delivery'),
+//                         onTap: () {},
+//                       ),
+//                       ListTile(
+//                         //leading: Icon(Icons.minimize_rounded),
+//                         title: Text('Combo Offer'),
+//                         onTap: () {},
+//                       ),
+//                     ],
+//                   ),)
 class HelpLineContacts extends StatelessWidget {
   const HelpLineContacts({
     Key key,
