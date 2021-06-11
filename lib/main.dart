@@ -1,3 +1,4 @@
+import './screens/set_offers_screen.dart';
 import './screens/offers_scrren.dart';
 import './screens/confirm_orders_screen.dart';
 import './screens/return_productsList_screen.dart';
@@ -84,6 +85,7 @@ class MyApp extends StatelessWidget {
                   ReturnProductsListScreen(),
               ConfirmOrdersScreen.routeName: (ctx) => ConfirmOrdersScreen(),
               OffersScreen.routeName: (ctx) => OffersScreen(),
+              SetOffersScreen.routeName: (ctx) => SetOffersScreen(),
             },
           ),
         ));
