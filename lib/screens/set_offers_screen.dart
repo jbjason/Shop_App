@@ -27,6 +27,7 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
     String _voucherCode = _voucherController.text;
     Provider.of<Products>(context, listen: false)
         .setOffers(_imageUrl, _amount, _voucherCode);
+    Navigator.of(context).pop();
   }
 
   void _updateImageUrl() {
