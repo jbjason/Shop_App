@@ -249,4 +249,7 @@ class Products with ChangeNotifier {
     _items = _items.where((element) => element.title.contains(s)).toList();
     notifyListeners();
   }
+
+  Future<void> setOffers(
+      String imageUrl, double amount, String voucherCode) async {}
 }
