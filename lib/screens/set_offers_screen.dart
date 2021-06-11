@@ -44,11 +44,10 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
   void dispose() {
     _amountFocusNode.dispose();
     _voucherFocusNode.dispose();
-    _imageController.dispose();
     _amountController.dispose();
     _voucherController.dispose();
     _imageFocusNode.removeListener(_updateImageUrl);
-
+    _imageController.dispose();
     _imageFocusNode.dispose();
     super.dispose();
   }
