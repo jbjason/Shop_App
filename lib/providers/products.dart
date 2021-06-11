@@ -251,5 +251,15 @@ class Products with ChangeNotifier {
   }
 
   Future<void> setOffers(
-      String imageUrl, String amount, String voucherCode) async {}
+      String imageUrl, String amount, String voucherCode) async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/offers.json?auth=$authToken';
+    final response = await http.post(url,
+        body: json.encode({
+          'imageUrl': imageUrl,
+          'amount': amount,
+          'voucherCode': voucherCode,
+        }));
+    print(json.decode(response.body));
+  }
 }
