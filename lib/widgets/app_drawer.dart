@@ -1,3 +1,5 @@
+import 'package:Shop_App/screens/set_offers_screen.dart';
+
 import '../screens/offers_scrren.dart';
 import '../screens/confirm_orders_screen.dart';
 import '../screens/return_productsList_screen.dart';
@@ -54,6 +56,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
+              // Offers List
               OffersList(),
               Divider(),
               ListTile(
@@ -229,7 +232,9 @@ class _OffersListState extends State<OffersList> {
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
                   title: Text('Up to \'n\' Tk Offer'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(SetOffersScreen.routeName);
+                  },
                 ),
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
