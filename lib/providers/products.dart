@@ -251,5 +251,5 @@ class Products with ChangeNotifier {
   }
 
   Future<void> setOffers(
-      String imageUrl, double amount, String voucherCode) async {}
+      String imageUrl, String amount, String voucherCode) async {}
 }
