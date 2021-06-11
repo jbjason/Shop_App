@@ -12,7 +12,7 @@ class EditProductScreen extends StatefulWidget {
 class _EditProductScreenState extends State<EditProductScreen> {
   final _priceFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
-  final _imageUrlFocusNode = FocusNode();
+  final _imageUrlFocusNode1 = FocusNode();
   final _imageUrlFocusNode2 = FocusNode();
   final _imageUrlFocusNode3 = FocusNode();
   final _titleFocusNode = FocusNode();
@@ -46,7 +46,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   @override
   void initState() {
-    _imageUrlFocusNode.addListener(_updateImageUrl);
+    _imageUrlFocusNode1.addListener(_updateImageUrl);
     _imageUrlFocusNode2.addListener(_updateImageUrl);
     _imageUrlFocusNode3.addListener(_updateImageUrl);
     super.initState();
@@ -81,20 +81,22 @@ class _EditProductScreenState extends State<EditProductScreen> {
     // if we use FocusNode method then we have to dispose them for memory's sake
     _priceFocusNode.dispose();
     _descriptionFocusNode.dispose();
-    _imageUrlController1.dispose();
     _titleFocusNode.dispose();
     _categoryFocusNode.dispose();
-    _imageUrlFocusNode.removeListener(_updateImageUrl);
+    _imageUrlFocusNode1.removeListener(_updateImageUrl);
     _imageUrlFocusNode2.removeListener(_updateImageUrl);
     _imageUrlFocusNode3.removeListener(_updateImageUrl);
-    _imageUrlFocusNode.dispose();
+    _imageUrlController1.dispose();
+    _imageUrlController2.dispose();
+    _imageUrlController3.dispose();
+    _imageUrlFocusNode1.dispose();
     _imageUrlFocusNode2.dispose();
     _imageUrlFocusNode3.dispose();
     super.dispose();
   }
 
   void _updateImageUrl() {
-    if (!_imageUrlFocusNode.hasFocus) {
+    if (!_imageUrlFocusNode1.hasFocus) {
       if ((!_imageUrlController1.text.startsWith('http') &&
               !_imageUrlController1.text.startsWith('https')) ||
           (!_imageUrlController1.text.endsWith('.jpg') &&
@@ -322,7 +324,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             keyboardType: TextInputType.url,
                             controller: _imageUrlController1,
                             textInputAction: TextInputAction.next,
-                            focusNode: _imageUrlFocusNode,
+                            focusNode: _imageUrlFocusNode1,
                             onFieldSubmitted: (_) {
                               _saveForm();
                             },
