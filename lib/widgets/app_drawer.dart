@@ -55,6 +55,12 @@ class AppDrawer extends StatelessWidget {
               ),
               Divider(),
               ListTile(
+                leading: Icon(Icons.card_giftcard),
+                title: Text('Manage Offer\'s'),
+                onTap: () => OffersList(),
+              ),
+              Divider(),
+              ListTile(
                 leading: Icon(Icons.people_alt_outlined),
                 title: Text('Profile'),
                 onTap: () {
@@ -187,6 +193,45 @@ class AppDrawer extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class OffersList extends StatefulWidget {
+  @override
+  _OffersListState createState() => _OffersListState();
+}
+
+class _OffersListState extends State<OffersList> {
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      children: [
+        Divider(),
+        ListTile(
+          leading: Icon(Icons.minimize_rounded),
+          title: Text('     Special Offer'),
+          onTap: () {},
+        ),
+        Divider(),
+        ListTile(
+          leading: Icon(Icons.minimize_rounded),
+          title: Text('     Up to \'n\' Tk Offer'),
+          onTap: () {},
+        ),
+        Divider(),
+        ListTile(
+          leading: Icon(Icons.minimize_rounded),
+          title: Text('     Next Day Delivery'),
+          onTap: () {},
+        ),
+        Divider(),
+        ListTile(
+          leading: Icon(Icons.minimize_rounded),
+          title: Text('     Combo Offer'),
+          onTap: () {},
+        ),
+      ],
     );
   }
 }
