@@ -1,3 +1,4 @@
+import '../screens/offers_scrren.dart';
 import '../screens/confirm_orders_screen.dart';
 import '../screens/return_productsList_screen.dart';
 import '../providers/cart.dart';
@@ -42,6 +43,14 @@ class AppDrawer extends StatelessWidget {
                 title: Text('Shop'),
                 onTap: () {
                   Navigator.of(context).pushNamed('/');
+                },
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.card_giftcard),
+                title: Text('Offer\'s Zone'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(OffersScreen.routeName);
                 },
               ),
               Divider(),
