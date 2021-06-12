@@ -267,7 +267,6 @@ class Products with ChangeNotifier {
             'amount': amount,
             'voucherCode': voucherCode,
           }));
-      print(json.decode(response.body));
     } catch (error) {
       throw error;
     }
@@ -289,10 +288,6 @@ class Products with ChangeNotifier {
           amount: double.parse(s)));
     });
     _offersList = loadedList;
-    print(_offersList[0].id);
-    print(_offersList[0].imageUrl);
-    print(_offersList[0].voucherCode);
-    print(_offersList[0].amount);
-    // notifyListeners();
+    notifyListeners();
   }
 }
