@@ -16,13 +16,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   final _numberFocusNode = FocusNode();
   final _emailFocusNode = FocusNode();
   final _addressFocusNode = FocusNode();
-  final _voucherFocusNode = FocusNode();
+  //final _voucherFocusNode = FocusNode();
+  final _voucherController = TextEditingController();
   final _emailController = TextEditingController();
   final _nameController = TextEditingController();
   final _contactController = TextEditingController();
   final _addressController = TextEditingController();
   bool _isInit = false;
-  var _isLoading = false, _isVoucherYes = false;
+  var _isLoading = false, _isUsePointsYes = false;
   String name, email, address, contact;
 
   @override
@@ -30,7 +31,8 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     _numberFocusNode.dispose();
     _emailFocusNode.dispose();
     _addressFocusNode.dispose();
-    _voucherFocusNode.dispose();
+    _voucherController.dispose();
+    //_voucherFocusNode.dispose();
     _nameController.dispose();
     _emailController.dispose();
     _contactController.dispose();
@@ -44,45 +46,45 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     setState(() {
       _isLoading = true;
     });
-    final userLocalId = Provider.of<Auth>(context, listen: false).userId;
-    final cart = Provider.of<Cart>(context, listen: false);
-    String totalCartItems = cart.itemCount.toString();
+    // final userLocalId = Provider.of<Auth>(context, listen: false).userId;
+    // final cart = Provider.of<Cart>(context, listen: false);
+    // String totalCartItems = cart.itemCount.toString();
 
-    // amount,Bonus smaller & bigger conflict solve
-    double amount = cart.totalAmount;
-    double cutAmount;
-    if (point >= amount) {
-      cutAmount = point - amount;
-      point = cutAmount.toInt();
-    } else {
-      cutAmount = amount - point;
-      point = 2;
-    }
-    email = _emailController.text;
-    name = _nameController.text;
-    contact = _contactController.text;
-    address = _addressController.text;
-    await Provider.of<Orders>(context, listen: false)
-        .addOrder(cart.items.values.toList(), amount)
-        .then((_) {
-      Provider.of<Orders>(context, listen: false).addCustomerOrdersOnServer(
-        name,
-        email,
-        contact,
-        address,
-        cart.items.values.toList(),
-        _isVoucherYes ? cutAmount : amount,
-        userLocalId,
-      );
-    });
-    await Provider.of<Orders>(context, listen: false)
-        .addBonusPoint(amount, point)
-        .then((value) => cart.clear());
-    setState(() {
-      _isLoading = false;
-    });
-    Navigator.of(context).pushNamed(ThanksScreen.routeName,
-        arguments: [totalCartItems, address]);
+    // // amount,Bonus smaller & bigger conflict solve
+    // double amount = cart.totalAmount;
+    // double cutAmount;
+    // if (point >= amount) {
+    //   cutAmount = point - amount;
+    //   point = cutAmount.toInt();
+    // } else {
+    //   cutAmount = amount - point;
+    //   point = 2;
+    // }
+    // email = _emailController.text;
+    // name = _nameController.text;
+    // contact = _contactController.text;
+    // address = _addressController.text;
+    // await Provider.of<Orders>(context, listen: false)
+    //     .addOrder(cart.items.values.toList(), amount)
+    //     .then((_) {
+    //   Provider.of<Orders>(context, listen: false).addCustomerOrdersOnServer(
+    //     name,
+    //     email,
+    //     contact,
+    //     address,
+    //     cart.items.values.toList(),
+    //     _isUsePointsYes ? cutAmount : amount,
+    //     userLocalId,
+    //   );
+    // });
+    // await Provider.of<Orders>(context, listen: false)
+    //     .addBonusPoint(amount, point)
+    //     .then((value) => cart.clear());
+    // setState(() {
+    //   _isLoading = false;
+    // });
+    // Navigator.of(context).pushNamed(ThanksScreen.routeName,
+    //     arguments: [totalCartItems, address]);
   }
 
   Widget pointBar(int p) {
@@ -185,6 +187,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   },
                 ),
                 SizedBox(height: 40),
+                // Just a text before the pointsBar
                 Text('Your Bonus Points',
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.red)),
@@ -200,18 +203,40 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                   //padding: EdgeInsets.all(20),
                   child:
                       Row(mainAxisAlignment: MainAxisAlignment.end, children: [
-                    Text('Voucher code:   '),
+                    Text('Use Points:'),
+                    SizedBox(width: 13),
                     Expanded(
                       child: TextFormField(
                         decoration: InputDecoration(
-                          labelText: '     Y / N',
+                          labelText: 'press  Y or N',
                         ),
                         onSaved: (value) {
                           if (value == "y" || value == "Y") {
                             setState(() {
-                              _isVoucherYes = true;
+                              _isUsePointsYes = true;
                             });
                           }
+                        },
+                      ),
+                    )
+                  ]),
+                ),
+                Container(
+                  height: 40,
+                  width: 80,
+                  //padding: EdgeInsets.all(20),
+                  child:
+                      Row(mainAxisAlignment: MainAxisAlignment.end, children: [
+                    Text('Use Voucher:'),
+                    SizedBox(width: 13),
+                    Expanded(
+                      child: TextFormField(
+                        decoration: InputDecoration(labelText: 'Voucher code'),
+                        //focusNode: _voucherFocusNode,
+                        textInputAction: TextInputAction.done,
+                        controller: _voucherController,
+                        validator: (value) {
+                          return null;
                         },
                       ),
                     )
@@ -250,15 +275,6 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                                         color: Colors.red),
                                   )),
                       ),
-                // FlatButton(
-                //   onPressed: () => submit(fp),
-                //   child: _isLoading
-                //       ? CircularProgressIndicator(
-                //           backgroundColor: Colors.pink,
-                //         )
-                //       : Text('Commit to purchase'),
-                //   textColor: Colors.green,
-                // ),
               ],
             )),
       ),
@@ -277,7 +293,7 @@ class TermsAndCondition extends StatelessWidget {
       height: 430,
       width: double.infinity,
       child: Card(
-        color: Colors.blueGrey[900],
+        color: Colors.blueGrey[600],
         child: RichText(
             text: TextSpan(children: [
           TextSpan(
