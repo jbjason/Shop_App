@@ -67,6 +67,11 @@ class Products with ChangeNotifier {
     return [..._uptoOffersList];
   }
 
+  List<String> _offersImages = [];
+  List<String> get offersImages {
+    return [..._offersImages];
+  }
+
   List<Product> get favoriteItems {
     return _items.where((element) => element.isFavorite).toList();
   }
@@ -270,7 +275,7 @@ class Products with ChangeNotifier {
       final String id = json.decode(response.body)['name'];
       url =
           'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken';
-      final response2 = await http.put(
+      await http.put(
         url,
         body: json.encode(
           imageUrl,
@@ -294,9 +299,17 @@ class Products with ChangeNotifier {
         final String s = value['amount'];
         loadedList.add(Offer(
             id: id,
-            imageUrl: value['imageUrl'],
+            rewardPoint: value['rewardPoint'],
             voucherCode: value['voucherCode'],
             amount: double.parse(s)));
+      });
+      url =
+          'https://flutter-update-67f54.firebaseio.com/offers/images.json?auth=$authToken';
+      final response1 = await http.get(url);
+      final extractedImages = json.decode(response1.body);
+      if (extractedImages == null) return;
+      extractedImages.forEach((id, value) {
+        _offersImages.add(value[id]);
       });
       _uptoOffersList = loadedList;
       notifyListeners();
