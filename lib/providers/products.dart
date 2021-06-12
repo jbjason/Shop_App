@@ -297,11 +297,14 @@ class Products with ChangeNotifier {
       final List<Offer> loadedList = [];
       extractedOffers.forEach((id, value) {
         final String s = value['amount'];
-        loadedList.add(Offer(
-            id: id,
-            rewardPoint: value['rewardPoint'],
-            voucherCode: value['voucherCode'],
-            amount: double.parse(s)));
+        final String ss = value['rewardPoint'];
+        loadedList.add(
+          Offer(
+              id: id,
+              rewardPoint: double.parse(ss),
+              voucherCode: value['voucherCode'],
+              amount: double.parse(s)),
+        );
       });
       // url =
       //     'https://flutter-update-67f54.firebaseio.com/offers/images.json?auth=$authToken';

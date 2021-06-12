@@ -79,37 +79,37 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       cutAmount = amount - point;
       point = 2;
     }
-    // if (_isVoucherCodeOk) {
-    //   final s = Provider.of<Products>(context, listen: false)
-    //       .uptoOffersList[_voucherIndex]
-    //       .amount;
-    //   cutAmount -= s;
-    // }
+    if (_isVoucherCodeOk) {
+      final s = Provider.of<Products>(context, listen: false)
+          .uptoOffersList[_voucherIndex]
+          .rewardPoint;
+      cutAmount -= s;
+    }
     email = _emailController.text;
     name = _nameController.text;
     contact = _contactController.text;
     address = _addressController.text;
-    // await Provider.of<Orders>(context, listen: false)
-    //     .addOrder(cart.items.values.toList(), amount)
-    //     .then((_) {
-    //   Provider.of<Orders>(context, listen: false).addCustomerOrdersOnServer(
-    //     name,
-    //     email,
-    //     contact,
-    //     address,
-    //     cart.items.values.toList(),
-    //     _isUsePointsYes ? cutAmount : amount,
-    //     userLocalId,
-    //   );
-    // });
-    // await Provider.of<Orders>(context, listen: false)
-    //     .addBonusPoint(amount, point)
-    //     .then((value) => cart.clear());
-    // setState(() {
-    //   _isLoading = false;
-    // });
-    // Navigator.of(context).pushNamed(ThanksScreen.routeName,
-    //     arguments: [totalCartItems, address]);
+    await Provider.of<Orders>(context, listen: false)
+        .addOrder(cart.items.values.toList(), amount)
+        .then((_) {
+      Provider.of<Orders>(context, listen: false).addCustomerOrdersOnServer(
+        name,
+        email,
+        contact,
+        address,
+        cart.items.values.toList(),
+        _isUsePointsYes ? cutAmount : amount,
+        userLocalId,
+      );
+    });
+    await Provider.of<Orders>(context, listen: false)
+        .addBonusPoint(amount, point)
+        .then((value) => cart.clear());
+    setState(() {
+      _isLoading = false;
+    });
+    Navigator.of(context).pushNamed(ThanksScreen.routeName,
+        arguments: [totalCartItems, address]);
   }
 
   void checkingVoucher(String _voucherText) {
