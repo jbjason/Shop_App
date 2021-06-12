@@ -62,9 +62,9 @@ class Products with ChangeNotifier {
     return [..._searcHints];
   }
 
-  List<Offer> _offersList = [];
-  List<Offer> get offerList {
-    return [..._offersList];
+  List<Offer> _uptoOffersList = [];
+  List<Offer> get uptoOffersList {
+    return [..._uptoOffersList];
   }
 
   List<Product> get favoriteItems {
@@ -287,7 +287,7 @@ class Products with ChangeNotifier {
           voucherCode: value['voucherCode'],
           amount: double.parse(s)));
     });
-    _offersList = loadedList;
+    _uptoOffersList = loadedList;
     notifyListeners();
   }
 }
