@@ -68,16 +68,16 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     final userLocalId = Provider.of<Auth>(context, listen: false).userId;
     final cart = Provider.of<Cart>(context, listen: false);
     String totalCartItems = cart.itemCount.toString();
-
     // amount,Bonus smaller & bigger conflict solve
-    double amount = cart.totalAmount;
-    double cutAmount;
-    if (point >= amount) {
-      cutAmount = point - amount;
-      point = cutAmount.toInt();
-    } else {
-      cutAmount = amount - point;
-      point = 2;
+    double cutAmount = cart.totalAmount;
+    if (_isUsePointsYes) {
+      if (point >= cutAmount) {
+        cutAmount = point - cutAmount;
+        point = cutAmount.toInt();
+      } else {
+        cutAmount = cutAmount - point;
+        point = 2;
+      }
     }
     if (_isVoucherCodeOk) {
       final s = Provider.of<Products>(context, listen: false)
@@ -90,7 +90,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     contact = _contactController.text;
     address = _addressController.text;
     await Provider.of<Orders>(context, listen: false)
-        .addOrder(cart.items.values.toList(), amount)
+        .addOrder(cart.items.values.toList(), cutAmount)
         .then((_) {
       Provider.of<Orders>(context, listen: false).addCustomerOrdersOnServer(
         name,
@@ -98,12 +98,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
         contact,
         address,
         cart.items.values.toList(),
-        _isUsePointsYes ? cutAmount : amount,
+        cutAmount,
         userLocalId,
       );
     });
     await Provider.of<Orders>(context, listen: false)
-        .addBonusPoint(amount, point)
+        .addBonusPoint(cart.totalAmount, point)
         .then((value) => cart.clear());
     setState(() {
       _isLoading = false;
