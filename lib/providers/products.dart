@@ -273,7 +273,7 @@ class Products with ChangeNotifier {
     }
   }
 
-  Future<void> fetchOffersUpto() async {
+  Future<void> fetchOffersUptoAmount() async {
     final url =
         'https://flutter-update-67f54.firebaseio.com/offers/uptoAmount.json?auth=$authToken';
     final response = await http.get(url);
