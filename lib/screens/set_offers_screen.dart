@@ -13,6 +13,8 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
   final _imageFocusNode = FocusNode();
   final _amountFocusNode = FocusNode();
   final _voucherFocusNode = FocusNode();
+  final _rewardPointFocusNode = FocusNode();
+  final _rewardPointController = TextEditingController();
   final _imageController = TextEditingController();
   final _amountController = TextEditingController();
   final _voucherController = TextEditingController();
@@ -22,11 +24,12 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
       return;
     }
     _form.currentState.save();
-    String _imageUrl = _imageController.text;
-    String _amount = _amountController.text;
-    String _voucherCode = _voucherController.text;
+    final String _imageUrl = _imageController.text;
+    final String _amount = _amountController.text;
+    final String _voucherCode = _voucherController.text;
+    final String _rewardPoint = _rewardPointController.text;
     Provider.of<Products>(context, listen: false)
-        .setOffersUptoAmount(_imageUrl, _amount, _voucherCode);
+        .setOffersUptoAmount(_imageUrl, _amount, _voucherCode, _rewardPoint);
     Navigator.of(context).pop();
   }
 
@@ -48,6 +51,8 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
     _voucherFocusNode.dispose();
     _amountController.dispose();
     _voucherController.dispose();
+    _rewardPointFocusNode.dispose();
+    _rewardPointController.dispose();
     _imageFocusNode.removeListener(_updateImageUrl);
     _imageController.dispose();
     _imageFocusNode.dispose();
@@ -91,7 +96,7 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
                           ),
                         ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 14),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Image Url'),
                   keyboardType: TextInputType.url,
@@ -111,7 +116,7 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 14),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Target Amount'),
                   textInputAction: TextInputAction.next,
@@ -119,11 +124,27 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
                   keyboardType: TextInputType.number,
                   controller: _amountController,
                   onFieldSubmitted: (_) {
-                    FocusScope.of(context).requestFocus(_voucherFocusNode);
+                    FocusScope.of(context).requestFocus(_rewardPointFocusNode);
                   },
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please provide the amount';
+                    }
+                    return null;
+                  },
+                ),
+                SizedBox(height: 14),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Bonus Point'),
+                  focusNode: _rewardPointFocusNode,
+                  textInputAction: TextInputAction.next,
+                  controller: _rewardPointController,
+                  onFieldSubmitted: (_) {
+                    FocusScope.of(context).requestFocus(_voucherFocusNode);
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please provide reward point';
                     }
                     return null;
                   },
