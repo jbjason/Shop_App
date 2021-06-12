@@ -282,21 +282,26 @@ class Products with ChangeNotifier {
   }
 
   Future<void> fetchOffersUptoAmount() async {
-    // final url =
-    //     'https://flutter-update-67f54.firebaseio.com/offers/uptoAmount.json?auth=$authToken';
-    // final response = await http.get(url);
-    // final extractedOffers = json.decode(response.body) as Map<String, dynamic>;
-    // if (extractedOffers == null) return;
-    // final List<Offer> loadedList = [];
-    // extractedOffers.forEach((id, value) {
-    //   final String s = value['amount'];
-    //   loadedList.add(Offer(
-    //       id: id,
-    //       imageUrl: value['imageUrl'],
-    //       voucherCode: value['voucherCode'],
-    //       amount: double.parse(s)));
-    // });
-    // _uptoOffersList = loadedList;
-    // notifyListeners();
+    var url =
+        'https://flutter-update-67f54.firebaseio.com/offers/uptoAmount.json?auth=$authToken';
+    try {
+      final response = await http.get(url);
+      final extractedOffers =
+          json.decode(response.body) as Map<String, dynamic>;
+      if (extractedOffers == null) return;
+      final List<Offer> loadedList = [];
+      extractedOffers.forEach((id, value) {
+        final String s = value['amount'];
+        loadedList.add(Offer(
+            id: id,
+            imageUrl: value['imageUrl'],
+            voucherCode: value['voucherCode'],
+            amount: double.parse(s)));
+      });
+      _uptoOffersList = loadedList;
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
   }
 }
