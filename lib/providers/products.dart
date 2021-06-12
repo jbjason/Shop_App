@@ -289,6 +289,10 @@ class Products with ChangeNotifier {
           amount: double.parse(s)));
     });
     _offersList = loadedList;
-    notifyListeners();
+    print(_offersList[0].id);
+    print(_offersList[0].imageUrl);
+    print(_offersList[0].voucherCode);
+    print(_offersList[0].amount);
+    // notifyListeners();
   }
 }
