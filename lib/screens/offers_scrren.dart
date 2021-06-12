@@ -22,20 +22,10 @@ class _OffersScreenState extends State<OffersScreen> {
     final uptoOffersList = _list.uptoOffersList;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFFC8E6C9),
-        title: Text('Available Offers'),
-      ),
-      body: Center(
-          child: ListView(
-        children: [
-          Text(imagesList[0]),
-          Text(uptoOffersList[0].id),
-          Text(uptoOffersList[0].amount.toString()),
-          Text(uptoOffersList[0].rewardPoint),
-          Text(uptoOffersList[0].voucherCode),
-        ],
-      )),
-    );
+        appBar: AppBar(
+          backgroundColor: Color(0xFFC8E6C9),
+          title: Text('Available Offers'),
+        ),
+        body: Center());
   }
 }
