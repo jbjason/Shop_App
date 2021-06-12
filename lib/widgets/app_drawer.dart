@@ -222,6 +222,7 @@ class _OffersListState extends State<OffersList> {
           Container(
             height: _isExpand ? 58 * 4.0 : 0,
             margin: EdgeInsets.only(left: 40),
+            padding: EdgeInsets.all(10),
             child: Column(
               children: [
                 ListTile(
@@ -231,7 +232,7 @@ class _OffersListState extends State<OffersList> {
                 ),
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
-                  title: Text('Up to \'n\' Tk Offer'),
+                  title: Text('Up to \'N\' Tk Offer'),
                   onTap: () {
                     Navigator.of(context).pushNamed(SetOffersScreen.routeName);
                   },

@@ -256,22 +256,26 @@ class Products with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> setOffers(
+  Future<void> setOffersUptoAmount(
       String imageUrl, String amount, String voucherCode) async {
     final url =
-        'https://flutter-update-67f54.firebaseio.com/offers.json?auth=$authToken';
-    final response = await http.post(url,
-        body: json.encode({
-          'imageUrl': imageUrl,
-          'amount': amount,
-          'voucherCode': voucherCode,
-        }));
-    print(json.decode(response.body));
+        'https://flutter-update-67f54.firebaseio.com/offers/uptoAmount.json?auth=$authToken';
+    try {
+      final response = await http.post(url,
+          body: json.encode({
+            'imageUrl': imageUrl,
+            'amount': amount,
+            'voucherCode': voucherCode,
+          }));
+      print(json.decode(response.body));
+    } catch (error) {
+      throw error;
+    }
   }
 
-  Future<void> fetchOffers() async {
+  Future<void> fetchOffersUpto() async {
     final url =
-        'https://flutter-update-67f54.firebaseio.com/offers.json?auth=$authToken';
+        'https://flutter-update-67f54.firebaseio.com/offers/uptoAmount.json?auth=$authToken';
     final response = await http.get(url);
     final extractedOffers = json.decode(response.body) as Map<String, dynamic>;
     if (extractedOffers == null) return;
