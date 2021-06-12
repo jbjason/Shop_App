@@ -65,24 +65,30 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     setState(() {
       _isLoading = true;
     });
-    // final userLocalId = Provider.of<Auth>(context, listen: false).userId;
-    // final cart = Provider.of<Cart>(context, listen: false);
-    // String totalCartItems = cart.itemCount.toString();
+    final userLocalId = Provider.of<Auth>(context, listen: false).userId;
+    final cart = Provider.of<Cart>(context, listen: false);
+    String totalCartItems = cart.itemCount.toString();
 
-    // // amount,Bonus smaller & bigger conflict solve
-    // double amount = cart.totalAmount;
-    // double cutAmount;
-    // if (point >= amount) {
-    //   cutAmount = point - amount;
-    //   point = cutAmount.toInt();
-    // } else {
-    //   cutAmount = amount - point;
-    //   point = 2;
+    // amount,Bonus smaller & bigger conflict solve
+    double amount = cart.totalAmount;
+    double cutAmount;
+    if (point >= amount) {
+      cutAmount = point - amount;
+      point = cutAmount.toInt();
+    } else {
+      cutAmount = amount - point;
+      point = 2;
+    }
+    // if (_isVoucherCodeOk) {
+    //   final s = Provider.of<Products>(context, listen: false)
+    //       .uptoOffersList[_voucherIndex]
+    //       .amount;
+    //   cutAmount -= s;
     // }
-    // email = _emailController.text;
-    // name = _nameController.text;
-    // contact = _contactController.text;
-    // address = _addressController.text;
+    email = _emailController.text;
+    name = _nameController.text;
+    contact = _contactController.text;
+    address = _addressController.text;
     // await Provider.of<Orders>(context, listen: false)
     //     .addOrder(cart.items.values.toList(), amount)
     //     .then((_) {
@@ -232,9 +238,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                     ),
                     SizedBox(height: 40),
                     // Just a text before the pointsBar
-                    Text('Your Bonus Points',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.red)),
+                    Text(
+                      'Your Bonus Points',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red,
+                          decoration: TextDecoration.underline),
+                    ),
                     // pointBar
                     Container(
                       margin: EdgeInsets.only(bottom: 8),
