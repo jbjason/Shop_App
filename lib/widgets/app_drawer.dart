@@ -215,14 +215,14 @@ class _OffersListState extends State<OffersList> {
             title: Text('Manage Offer\'s'),
             onTap: () {
               setState(() {
-                _isExpand = true;
+                _isExpand = !_isExpand;
               });
             },
           ),
           Container(
-            height: _isExpand ? 58 * 4.0 : 0,
+            height: _isExpand ? 60 * 4.0 : 0,
             margin: EdgeInsets.only(left: 40),
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(8),
             child: Column(
               children: [
                 ListTile(
@@ -232,7 +232,7 @@ class _OffersListState extends State<OffersList> {
                 ),
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
-                  title: Text('Up to \'N\' Tk Offer'),
+                  title: Text('Upto \'N\' Tk Offer'),
                   onTap: () {
                     Navigator.of(context).pushNamed(SetOffersScreen.routeName);
                   },
