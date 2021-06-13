@@ -13,22 +13,9 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
 
   @override
   void dispose() {
-    _imageController.removeListener(_updateImageUrl);
     _imageController.dispose();
     _imageFocusNode.dispose();
     super.dispose();
-  }
-
-  void _updateImageUrl() {
-    if (!_imageFocusNode.hasFocus) {
-      if ((!_imageController.text.startsWith('http') &&
-              !_imageController.text.startsWith('https')) ||
-          (!_imageController.text.endsWith('.jpg') &&
-              !_imageController.text.endsWith('.png'))) {
-        return;
-      }
-      setState(() {});
-    }
   }
 
   @override
@@ -40,7 +27,9 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
       ),
       body: Padding(
         padding: EdgeInsets.all(15),
-        child: Column(
+        child: ListView(
+          reverse: true,
+          shrinkWrap: true,
           children: [
             Container(
               margin: EdgeInsets.all(10),
@@ -63,7 +52,9 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
               focusNode: _imageFocusNode,
               controller: _imageController,
               keyboardType: TextInputType.url,
-              onFieldSubmitted: (_) {},
+              onFieldSubmitted: (_) {
+                setState(() {});
+              },
               validator: (value) {
                 if (value.isEmpty) {
                   return 'Please enter a Url';
@@ -75,7 +66,7 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
                 return null;
               },
             ),
-          ],
+          ].reversed.toList(),
         ),
       ),
     );
