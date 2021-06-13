@@ -288,6 +288,10 @@ class Products with ChangeNotifier {
     }
   }
 
+  Future<void> setOffersNextDayDelivery(String imageUrl) {
+    print(imageUrl);
+  }
+
   Future<void> fetchOffersUptoAmount() async {
     var url =
         'https://flutter-update-67f54.firebaseio.com/offers/uptoAmount.json?auth=$authToken';

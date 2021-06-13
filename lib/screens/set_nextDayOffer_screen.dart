@@ -1,4 +1,6 @@
+import 'package:Shop_App/providers/products.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SetNextDayOfferScreen extends StatefulWidget {
   static const routeName = '/next-day-offer';
@@ -10,6 +12,12 @@ class SetNextDayOfferScreen extends StatefulWidget {
 class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
   final _imageFocusNode = FocusNode();
   final _imageController = TextEditingController();
+
+  void _saveForm() {
+    Provider.of<Products>(context, listen: false)
+        .setOffersNextDayDelivery(_imageController.text.trim());
+    Navigator.of(context).pop();
+  }
 
   @override
   void dispose() {
@@ -24,6 +32,9 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
         title: Text('Manage Offers'),
+        actions: [
+          IconButton(icon: Icon(Icons.save), onPressed: _saveForm),
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(15),
