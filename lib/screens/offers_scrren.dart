@@ -11,15 +11,15 @@ class OffersScreen extends StatefulWidget {
 class _OffersScreenState extends State<OffersScreen> {
   @override
   void initState() {
-    Provider.of<Products>(context, listen: false).fetchOffersUptoAmount();
+    Provider.of<Products>(context, listen: false).testing();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final _list = Provider.of<Products>(context, listen: false);
-    final imagesList = _list.offersImages;
-    final uptoOffersList = _list.uptoOffersList;
+    // final _list = Provider.of<Products>(context, listen: false);
+    // final imagesList = _list.offersImages;
+    // final uptoOffersList = _list.uptoOffersList;
 
     return Scaffold(
         appBar: AppBar(

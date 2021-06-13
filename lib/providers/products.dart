@@ -306,18 +306,23 @@ class Products with ChangeNotifier {
               amount: double.parse(s)),
         );
       });
-      // url =
-      //     'https://flutter-update-67f54.firebaseio.com/offers/images.json?auth=$authToken';
-      // final response1 = await http.get(url);
-      // final extractedImages = json.decode(response1.body) as dynamic;
-      // if (extractedImages == null) return;
-      // extractedImages.forEach((id, value) {
-      //   _offersImages.add(value[id]);
-      // });
+
       _uptoOffersList = loadedList;
       notifyListeners();
     } catch (error) {
       throw error;
     }
+  }
+
+  Future<void> testing()async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/offers/images.json?auth=$authToken';
+    final response1 = await http.get(url);
+    print(json.decode(response1.body));
+    // final extractedImages = json.decode(response1.body) as dynamic;
+    // if (extractedImages == null) return;
+    // extractedImages.forEach((id, value) {
+    //   _offersImages.add(value[id]);
+    // });
   }
 }
