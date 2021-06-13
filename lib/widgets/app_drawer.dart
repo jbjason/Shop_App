@@ -40,6 +40,7 @@ class AppDrawer extends StatelessWidget {
               //   automaticallyImplyLeading: false,
               // ),
               // simply Horizontal Line
+              // Myshop
               ListTile(
                 leading: Icon(Icons.shop),
                 title: Text('Shop'),
@@ -48,6 +49,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
+              // Offers_screen
               ListTile(
                 leading: Icon(Icons.card_giftcard),
                 title: Text('Offer\'s Zone'),
@@ -73,15 +75,17 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
+              // My Orders
               ListTile(
                 leading: Icon(Icons.payment),
-                title: Text('Orders'),
+                title: Text('My Orders'),
                 onTap: () {
                   Navigator.of(context).pushNamed(OrderScreen.routeName,
                       arguments: ["order", "Your Orders"]);
                 },
               ),
               Divider(),
+              // manage products
               ListTile(
                 leading: Icon(Icons.edit),
                 title: Text('Manage Products'),
@@ -90,6 +94,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
+              // cutomer orders
               ListTile(
                 leading: Icon(Icons.corporate_fare),
                 title: Text('Customer Orders'),
@@ -99,6 +104,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
+              // Return Product Form
               ListTile(
                 leading: Icon(Icons.sanitizer),
                 title: Text('Return Product Form'),
@@ -108,6 +114,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
+              // Return Prod List
               ListTile(
                 leading: Icon(Icons.sanitizer),
                 title: Text('Return Prod List'),
@@ -117,6 +124,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
+              // Suggestion or Report form
               ListTile(
                 leading: Icon(Icons.help),
                 title: Text('Suggestion or Report'),
@@ -127,6 +135,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
+              //About Us
               ListTile(
                 leading: Icon(Icons.album_outlined),
                 title: Text('About Us'),
@@ -151,6 +160,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
+              // HelpLine
               ListTile(
                 leading: Icon(Icons.mediation),
                 title: Text('HelpLine..'),
@@ -176,6 +186,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
+              // LogOut
               ListTile(
                 leading: Icon(Icons.exit_to_app),
                 title: Text('LogOut',
@@ -256,32 +267,6 @@ class _OffersListState extends State<OffersList> {
   }
 }
 
-// Container(
-//                   height: 100,
-//                   child: ListView(
-//                     children: [
-//                       ListTile(
-//                         //leading: Icon(Icons.minimize_rounded),
-//                         title: Text('Special Offer'),
-//                         onTap: () {},
-//                       ),
-//                       ListTile(
-//                         // leading: Icon(Icons.minimize_rounded),
-//                         title: Text('Up to \'n\' Tk Offer'),
-//                         onTap: () {},
-//                       ),
-//                       ListTile(
-//                         // leading: Icon(Icons.minimize_rounded),
-//                         title: Text('Next Day Delivery'),
-//                         onTap: () {},
-//                       ),
-//                       ListTile(
-//                         //leading: Icon(Icons.minimize_rounded),
-//                         title: Text('Combo Offer'),
-//                         onTap: () {},
-//                       ),
-//                     ],
-//                   ),)
 class HelpLineContacts extends StatelessWidget {
   const HelpLineContacts({
     Key key,
