@@ -314,7 +314,7 @@ class Products with ChangeNotifier {
     }
   }
 
-  Future<void> testing() async {
+  Future<void> fetchOffersImagesList() async {
     final url =
         'https://flutter-update-67f54.firebaseio.com/offers/images.json?auth=$authToken';
     final response1 = await http.get(url);

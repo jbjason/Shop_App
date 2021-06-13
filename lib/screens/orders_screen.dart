@@ -94,9 +94,7 @@ class _OrderScreenState extends State<OrderScreen> {
           } else {
             // if an error occurs
             if (dataSnapshot.error != null) {
-              return Center(
-                child: Text('An error occured'),
-              );
+              return Center(child: Text('An error occured'));
             } else if (connection[0] == "profile") {
               return Container(
                   child: UserProfile(connection[2], connection[3]));
