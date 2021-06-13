@@ -325,9 +325,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             controller: _imageUrlController1,
                             textInputAction: TextInputAction.next,
                             focusNode: _imageUrlFocusNode1,
-                            onFieldSubmitted: (_) {
-                              _saveForm();
-                            },
+                            // onFieldSubmitted: (_) {
+                            //   _saveForm();
+                            // },
                             validator: (value) {
                               if (value.isEmpty) {
                                 return 'Please enter a Url';
@@ -385,9 +385,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             controller: _imageUrlController2,
                             textInputAction: TextInputAction.next,
                             focusNode: _imageUrlFocusNode2,
-                            onFieldSubmitted: (_) {
-                              _saveForm();
-                            },
+                            // onFieldSubmitted: (_) {
+                            //   _saveForm();
+                            // },
                             validator: (value) {
                               return null;
                             },
@@ -436,10 +436,10 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             keyboardType: TextInputType.url,
                             controller: _imageUrlController3,
                             textInputAction: TextInputAction.done,
-                            focusNode: _imageUrlFocusNode3,
-                            onFieldSubmitted: (_) {
-                              _saveForm();
-                            },
+                            // focusNode: _imageUrlFocusNode3,
+                            // onFieldSubmitted: (_) {
+                            //   _saveForm();
+                            // },
                             validator: (value) {
                               return null;
                             },
