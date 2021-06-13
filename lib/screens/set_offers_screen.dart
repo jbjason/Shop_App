@@ -70,7 +70,7 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
-        title: Text('Customer Orders',
+        title: Text('Manage Offers',
             style: TextStyle(fontSize: 20, color: Colors.black)),
         actions: [
           IconButton(
