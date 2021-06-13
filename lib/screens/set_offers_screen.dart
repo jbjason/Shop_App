@@ -19,7 +19,7 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
   final _amountController = TextEditingController();
   final _voucherController = TextEditingController();
 
-  void _saveForm() {
+  void _saveForm() async {
     if (!_form.currentState.validate()) {
       return;
     }
@@ -28,9 +28,12 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
     final String _amount = _amountController.text;
     final String _voucherCode = _voucherController.text;
     final String _rewardPoint = _rewardPointController.text;
-    Provider.of<Products>(context, listen: false)
-        .setOffersUptoAmount(_imageUrl, _amount, _voucherCode, _rewardPoint);
-    Navigator.of(context).pop();
+    await Provider.of<Products>(context, listen: false)
+        .setOffersUptoAmount(_imageUrl, _amount, _voucherCode, _rewardPoint)
+        .then((_) {
+      _scaffoldKey.currentState
+          .showSnackBar(SnackBar(content: Text('Offer has been Saved')));
+    });
   }
 
   @override
@@ -52,9 +55,11 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
     super.initState();
   }
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
         title: Text('Manage Offers',

@@ -13,10 +13,11 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
   final _imageFocusNode = FocusNode();
   final _imageController = TextEditingController();
 
-  void _saveForm() {
-    Provider.of<Products>(context, listen: false)
+  void _saveForm() async {
+    await Provider.of<Products>(context, listen: false)
         .setOffersNextDayDelivery(_imageController.text.trim());
-    Navigator.of(context).pop();
+    _scaffoldKey.currentState
+        .showSnackBar(SnackBar(content: Text('Offer has been Saved')));
   }
 
   @override
@@ -26,6 +27,7 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
     super.dispose();
   }
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,24 +60,33 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
                       ),
                     ),
             ),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Image Url'),
-              focusNode: _imageFocusNode,
-              controller: _imageController,
-              keyboardType: TextInputType.url,
-              onFieldSubmitted: (_) {
-                setState(() {});
-              },
-              validator: (value) {
-                if (value.isEmpty) {
-                  return 'Please enter a Url';
-                } else if ((!value.startsWith('http') &&
-                        !value.startsWith('https')) ||
-                    (!value.endsWith('.jpg') && !value.endsWith('.png'))) {
-                  return 'Please enter a valid Url';
-                }
-                return null;
-              },
+            Row(
+              children: [
+                SizedBox(width: 15),
+                Expanded(
+                  child: TextFormField(
+                    decoration: InputDecoration(labelText: 'Image Url'),
+                    focusNode: _imageFocusNode,
+                    controller: _imageController,
+                    keyboardType: TextInputType.url,
+                    onFieldSubmitted: (_) {
+                      setState(() {});
+                    },
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter a Url';
+                      } else if ((!value.startsWith('http') &&
+                              !value.startsWith('https')) ||
+                          (!value.endsWith('.jpg') &&
+                              !value.endsWith('.png'))) {
+                        return 'Please enter a valid Url';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(width: 15),
+              ],
             ),
           ].reversed.toList(),
         ),

@@ -288,8 +288,28 @@ class Products with ChangeNotifier {
     }
   }
 
-  Future<void> setOffersNextDayDelivery(String imageUrl) {
-    print(imageUrl);
+  Future<void> setOffersNextDayDelivery(String imageUrl) async {
+    var url =
+        'https://flutter-update-67f54.firebaseio.com/offers/nextDayDelivery.json?auth=$authToken';
+    try {
+      final response = await http.post(
+        url,
+        body: json.encode({
+          'imageUrl': imageUrl,
+        }),
+      );
+      final String id = json.decode(response.body)['name'];
+      url =
+          'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken';
+      await http.put(
+        url,
+        body: json.encode(
+          imageUrl,
+        ),
+      );
+    } catch (error) {
+      throw error;
+    }
   }
 
   Future<void> fetchOffersUptoAmount() async {
