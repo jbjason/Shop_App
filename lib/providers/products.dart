@@ -67,8 +67,8 @@ class Products with ChangeNotifier {
     return [..._uptoOffersList];
   }
 
-  List<String> _offersImages = [];
-  List<String> get offersImages {
+  List<OffersImagesList> _offersImages = [];
+  List<OffersImagesList> get offersImages {
     return [..._offersImages];
   }
 
@@ -314,15 +314,19 @@ class Products with ChangeNotifier {
     }
   }
 
-  Future<void> testing()async {
+  Future<void> testing() async {
     final url =
         'https://flutter-update-67f54.firebaseio.com/offers/images.json?auth=$authToken';
     final response1 = await http.get(url);
-    print(json.decode(response1.body));
-    // final extractedImages = json.decode(response1.body) as dynamic;
-    // if (extractedImages == null) return;
-    // extractedImages.forEach((id, value) {
-    //   _offersImages.add(value[id]);
-    // });
+    final extractedImages = json.decode(response1.body) as Map<String, dynamic>;
+    if (extractedImages == null) return;
+    extractedImages.forEach((id, value) {
+      _offersImages.add(OffersImagesList(id: id, imageUrl: value));
+    });
+    print(_offersImages[0].id);
+    print(_offersImages[0].imageUrl);
+    print(_offersImages[1].id);
+    print(_offersImages[1].imageUrl);
+    notifyListeners();
   }
 }

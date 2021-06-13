@@ -9,3 +9,11 @@ class Offer {
       @required this.voucherCode,
       @required this.amount});
 }
+
+class OffersImagesList {
+  final String id, imageUrl;
+  OffersImagesList({
+    @required this.id,
+    @required this.imageUrl,
+  });
+}
