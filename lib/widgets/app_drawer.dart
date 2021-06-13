@@ -1,3 +1,4 @@
+import '../screens/set_nextDayOffer_screen.dart';
 import '../screens/set_offers_screen.dart';
 import '../screens/offers_scrren.dart';
 import '../screens/confirm_orders_screen.dart';
@@ -250,7 +251,10 @@ class _OffersListState extends State<OffersList> {
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
                   title: Text('Next Day Delivery'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed(SetNextDayOfferScreen.routeName);
+                  },
                 ),
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
