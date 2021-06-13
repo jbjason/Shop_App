@@ -1,4 +1,4 @@
-import 'package:Shop_App/widgets/userProfile.dart';
+import '../widgets/userProfile.dart';
 import '../widgets/app_drawer.dart';
 import '../providers/orders.dart' show Orders;
 import 'package:flutter/material.dart';
