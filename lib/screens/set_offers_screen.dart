@@ -33,18 +33,6 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
     Navigator.of(context).pop();
   }
 
-  void _updateImageUrl() {
-    if (!_imageFocusNode.hasFocus) {
-      if ((!_imageController.text.startsWith('http') &&
-              !_imageController.text.startsWith('https')) ||
-          (!_imageController.text.endsWith('.jpg') &&
-              !_imageController.text.endsWith('.png'))) {
-        return;
-      }
-      setState(() {});
-    }
-  }
-
   @override
   void dispose() {
     _amountFocusNode.dispose();
@@ -53,7 +41,6 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
     _voucherController.dispose();
     _rewardPointFocusNode.dispose();
     _rewardPointController.dispose();
-    _imageFocusNode.removeListener(_updateImageUrl);
     _imageController.dispose();
     _imageFocusNode.dispose();
     super.dispose();
@@ -109,6 +96,7 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
                   controller: _imageController,
                   textInputAction: TextInputAction.next,
                   onFieldSubmitted: (_) {
+                    setState(() {});
                     FocusScope.of(context).requestFocus(_amountFocusNode);
                   },
                   validator: (value) {
