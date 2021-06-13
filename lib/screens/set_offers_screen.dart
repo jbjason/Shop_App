@@ -60,6 +60,12 @@ class _SetOffersScreenState extends State<SetOffersScreen> {
   }
 
   @override
+  void initState() {
+    Provider.of<Products>(context, listen: false).fetchOffersUptoAmount();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

@@ -272,15 +272,17 @@ class Products with ChangeNotifier {
             'amount': amount,
             'voucherCode': voucherCode,
           }));
-      final String id = json.decode(response.body)['name'];
-      url =
-          'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken';
-      await http.put(
-        url,
-        body: json.encode(
-          imageUrl,
-        ),
-      );
+      if (_uptoOffersList.length < 1) {
+        final String id = json.decode(response.body)['name'];
+        url =
+            'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken';
+        await http.put(
+          url,
+          body: json.encode(
+            imageUrl,
+          ),
+        );
+      }
     } catch (error) {
       throw error;
     }
