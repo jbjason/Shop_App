@@ -323,10 +323,6 @@ class Products with ChangeNotifier {
     extractedImages.forEach((id, value) {
       _offersImages.add(OffersImagesList(id: id, imageUrl: value));
     });
-    print(_offersImages[0].id);
-    print(_offersImages[0].imageUrl);
-    print(_offersImages[1].id);
-    print(_offersImages[1].imageUrl);
     notifyListeners();
   }
 }
