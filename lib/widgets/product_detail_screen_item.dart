@@ -7,7 +7,7 @@ import 'package:Shop_App/widgets/comments.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
 
 class ProductDetailScreenItem extends StatefulWidget {
-  final String image2, image1, image3, id;
+  final String image2, image1, image3, id, extra;
   final String _title, _description;
   final double price;
   double rating;
@@ -15,8 +15,17 @@ class ProductDetailScreenItem extends StatefulWidget {
   String currentImageUrl;
   int _isInit = 1;
 
-  ProductDetailScreenItem(this.id, this._title, this._description, this.price,
-      this.image1, this.image2, this.image3, this.rating, this.review);
+  ProductDetailScreenItem(
+      this.id,
+      this._title,
+      this._description,
+      this.price,
+      this.image1,
+      this.image2,
+      this.image3,
+      this.rating,
+      this.review,
+      this.extra);
   @override
   _ProductDetailScreenItemState createState() =>
       _ProductDetailScreenItemState();
@@ -256,7 +265,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                       ),
                     ),
                     Text(
-                      '\$ 679.7',
+                      widget.extra,
                       style: TextStyle(
                           decoration: TextDecoration.lineThrough,
                           color: Colors.black,
