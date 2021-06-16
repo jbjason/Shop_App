@@ -260,7 +260,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                       style: TextStyle(
                           decoration: TextDecoration.lineThrough,
                           color: Colors.black,
-                          decorationColor: Colors.red),
+                          decorationColor: Colors.red,
+                          decorationThickness: 5.0),
                     )
                   ],
                 ),
