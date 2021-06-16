@@ -246,6 +246,24 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                     ],
                   ),
                 ),
+                Column(
+                  children: [
+                    Text(
+                      '-4%',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '\$ 679.7',
+                      style: TextStyle(
+                          decoration: TextDecoration.lineThrough,
+                          color: Colors.black,
+                          decorationColor: Colors.red),
+                    )
+                  ],
+                ),
                 Padding(
                   padding: EdgeInsets.all(15),
                   child: ClipPath(
