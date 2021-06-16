@@ -110,6 +110,7 @@ class Products with ChangeNotifier {
           isRating: prodData['isRating'],
           isReview: prodData['isReview'],
           category: prodData['category'],
+          extra: prodData['extra'],
         ));
         _searcHints.add(prodData['title']);
       });
@@ -137,6 +138,7 @@ class Products with ChangeNotifier {
           'isRating': product.isRating,
           'isReview': product.isReview,
           'category': product.category,
+          'extra': product.extra,
         }),
       );
       final newProduct = Product(
@@ -146,12 +148,11 @@ class Products with ChangeNotifier {
         imageUrl1: product.imageUrl1,
         imageUrl2: product.imageUrl2,
         imageUrl3: product.imageUrl3,
-        // this give access code of (.post's) body as Map like
-        // {name: -MMU-mCP6SqbQBL5yZFB} so to use this as Unique id we can....
         id: json.decode(response.body)['name'],
         isRating: product.isRating,
         isReview: product.isReview,
         category: product.category,
+        extra: product.extra,
       );
       // adding
       _items.add(newProduct);

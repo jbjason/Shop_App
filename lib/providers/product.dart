@@ -6,6 +6,7 @@ class Product with ChangeNotifier {
   final String id, title, description, category;
   final String imageUrl1, imageUrl2, imageUrl3;
   final double price;
+  String extra;
   double isRating;
   int isReview;
   bool isFavorite;
@@ -21,6 +22,7 @@ class Product with ChangeNotifier {
     this.isRating = 5.0,
     this.isReview = 10,
     @required this.category,
+    this.extra = "no",
   });
 
   Future<void> toggleFavoriteStatus(String token, String userId) async {
