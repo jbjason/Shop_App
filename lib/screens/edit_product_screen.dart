@@ -320,16 +320,18 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
-                            // Image field e Control & initialValue options je kono 1ta thakte pare eksathe
                             // initialValue: _initValues['imageUrl'],
                             decoration: InputDecoration(labelText: 'Image Url'),
                             keyboardType: TextInputType.url,
                             controller: _imageUrlController1,
                             textInputAction: TextInputAction.next,
                             focusNode: _imageUrlFocusNode1,
-                            // onFieldSubmitted: (_) {
-                            //   _saveForm();
-                            // },
+                            onFieldSubmitted: (_) {
+                              // newly added
+                              if (_imageUrlController1.text.trim() != '') {
+                                setState(() {});
+                              }
+                            },
                             validator: (value) {
                               if (value.isEmpty) {
                                 return 'Please enter a Url';
@@ -380,16 +382,17 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
-                            // Image field e Control & initialValue options je kono 1ta thakte pare eksathe
-                            // initialValue: _initValues['imageUrl'],
                             decoration: InputDecoration(labelText: 'Image Url'),
                             keyboardType: TextInputType.url,
                             controller: _imageUrlController2,
                             textInputAction: TextInputAction.next,
                             focusNode: _imageUrlFocusNode2,
-                            // onFieldSubmitted: (_) {
-                            //   _saveForm();
-                            // },
+                            onFieldSubmitted: (_) {
+                              // newly added
+                              if (_imageUrlController2.text.trim() != '') {
+                                setState(() {});
+                              }
+                            },
                             validator: (value) {
                               return null;
                             },
@@ -439,9 +442,12 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             controller: _imageUrlController3,
                             textInputAction: TextInputAction.done,
                             // focusNode: _imageUrlFocusNode3,
-                            // onFieldSubmitted: (_) {
-                            //   _saveForm();
-                            // },
+                            onFieldSubmitted: (_) {
+                              // newly added
+                              if (_imageUrlController3.text.trim() != '') {
+                                setState(() {});
+                              }
+                            },
                             validator: (value) {
                               return null;
                             },
