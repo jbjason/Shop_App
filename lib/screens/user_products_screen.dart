@@ -14,18 +14,23 @@ class UserProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productData = Provider.of<Products>(context);
+    final name = ModalRoute.of(context).settings.arguments as String;
+    bool _offerPage = name == "specialOffer" ? true : false;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
         title: Text('Your Products',
             style: TextStyle(fontSize: 20, color: Colors.black87)),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              Navigator.of(context).pushNamed(EditProductScreen.routeName);
-            },
-          ),
+          _offerPage
+              ? Icon(null)
+              : IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamed(EditProductScreen.routeName);
+                  },
+                ),
         ],
       ),
       drawer: AppDrawer(),
@@ -39,6 +44,7 @@ class UserProductsScreen extends StatelessWidget {
                 productData.items[i].id,
                 productData.items[i].title,
                 productData.items[i].imageUrl1,
+                _offerPage,
               ),
             ]),
             itemCount: productData.items.length,
