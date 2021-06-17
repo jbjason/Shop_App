@@ -2,7 +2,7 @@ import '../providers/auth.dart';
 import '../providers/cart.dart';
 import '../providers/orders.dart';
 import '../providers/products.dart';
-import '../screens/thanksScreen.dart';
+import 'thanksScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
