@@ -9,28 +9,40 @@ class SetSpecialOfferScreen extends StatefulWidget {
 }
 
 class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
-  final _currentPriceFocusNode = FocusNode();
-  final _offerPriceFocusNode = FocusNode();
-  var _expanded = false;
-  String oldPrice, offerPrice;
+  final _currentPriceController = TextEditingController();
+  final _offerPriceController = TextEditingController();
+  var _expanded = false, _isInit = false, productId;
 
-  void _save() {
-    print(oldPrice);
-    print(offerPrice);
+  void _save() async {
+    final String oldPrice = _currentPriceController.text.trim();
+    final String offerPrice = _offerPriceController.text.trim();
+    Provider.of<Products>(context, listen: false)
+        .updateOfferProduct(productId, oldPrice, offerPrice);
+    Future.delayed(Duration(milliseconds: 200));
+    Navigator.of(context).pop();
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (_isInit) return;
+    productId = ModalRoute.of(context).settings.arguments as String;
+    final product =
+        Provider.of<Products>(context, listen: false).findById(productId);
+    _currentPriceController.text = product.price.toString();
+    _offerPriceController.text = product.extra;
+    _isInit = true;
+    super.didChangeDependencies();
   }
 
   @override
   void dispose() {
-    _currentPriceFocusNode.dispose();
-    _offerPriceFocusNode.dispose();
+    _currentPriceController.dispose();
+    _offerPriceController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final productId = ModalRoute.of(context).settings.arguments as String;
-    final product =
-        Provider.of<Products>(context, listen: false).findById(productId);
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -73,13 +85,13 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                 height: _expanded == false ? 0 : 90,
                 width: double.infinity,
                 child: Card(
-                  //color: Colors.blueGrey[200],
                   child: CondtionsForReturns(),
                 ),
               ),
               SizedBox(height: 20),
               Row(
                 children: [
+                  SizedBox(width: 15),
                   Expanded(
                       child: Text(
                     "Current Price    :",
@@ -90,15 +102,9 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                   )),
                   Expanded(
                     child: TextFormField(
-                      initialValue: product.price.toString(),
-                      focusNode: _currentPriceFocusNode,
+                      controller: _currentPriceController,
                       textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.numberWithOptions(),
-                      onFieldSubmitted: (value) {
-                        oldPrice = value;
-                        FocusScope.of(context)
-                            .requestFocus(_offerPriceFocusNode);
-                      },
+                      keyboardType: TextInputType.number,
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please provide a value';
@@ -113,6 +119,7 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
+                  SizedBox(width: 15),
                   Expanded(
                       child: Text(
                     "Offer Price    :",
@@ -123,11 +130,9 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                   )),
                   Expanded(
                       child: TextFormField(
-                    initialValue: product.extra,
-                    focusNode: _offerPriceFocusNode,
+                    controller: _offerPriceController,
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.done,
-                    onFieldSubmitted: (value) => offerPrice = value,
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please provide a value';
@@ -167,7 +172,7 @@ class CondtionsForReturns extends StatelessWidget {
         WidgetSpan(
             child: Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
         TextSpan(
-            text: '   2.  Leave the offer text either blank or type \'No\'\n',
+            text: '   2.  Leave the offer text with typing \'No\'\n',
             style: TextStyle(
               color: Colors.black,
             )),

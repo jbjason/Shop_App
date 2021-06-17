@@ -352,4 +352,20 @@ class Products with ChangeNotifier {
     });
     notifyListeners();
   }
+
+  Future<void> updateOfferProduct(
+      String id, String oldPrice, String offerPrice) async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken';
+    try {
+      await http.patch(url,
+          body: json.encode({
+            'price': oldPrice,
+            'extra': offerPrice,
+          }));
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
 }
