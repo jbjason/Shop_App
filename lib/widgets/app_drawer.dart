@@ -91,7 +91,7 @@ class AppDrawer extends StatelessWidget {
                 title: Text('Manage Products'),
                 onTap: () {
                   Navigator.of(context).pushNamed(UserProductsScreen.routeName,
-                      arguments: ['product']);
+                      arguments: 'product');
                 },
               ),
               Divider(),

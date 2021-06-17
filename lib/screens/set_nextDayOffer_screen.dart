@@ -1,4 +1,5 @@
 import 'package:Shop_App/providers/products.dart';
+import 'package:Shop_App/screens/user_products_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +31,7 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
   @override
   Widget build(BuildContext context) {
     final name = ModalRoute.of(context).settings.arguments as String;
+    bool _specialOffer = name == "specialOffer" ? true : false;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
@@ -90,6 +92,24 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
                 ),
                 SizedBox(width: 15),
               ],
+            ),
+            Container(
+              height: _specialOffer ? 30 : 0,
+              child: Card(
+                elevation: 10,
+                child: Text(
+                    'To Edit the product price based on this Special offer\n Press this below button'),
+              ),
+            ),
+            Container(
+              color: Colors.black54,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pushNamed(UserProductsScreen.routeName,
+                      arguments: 'specialOffer');
+                },
+                child: Text("Manage price"),
+              ),
             ),
           ].reversed.toList(),
         ),
