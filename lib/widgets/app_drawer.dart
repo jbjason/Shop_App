@@ -90,7 +90,8 @@ class AppDrawer extends StatelessWidget {
                 leading: Icon(Icons.edit),
                 title: Text('Manage Products'),
                 onTap: () {
-                  Navigator.of(context).pushNamed(UserProductsScreen.routeName);
+                  Navigator.of(context).pushNamed(UserProductsScreen.routeName,
+                      arguments: ['product']);
                 },
               ),
               Divider(),
@@ -236,10 +237,15 @@ class _OffersListState extends State<OffersList> {
             padding: EdgeInsets.all(8),
             child: Column(
               children: [
+                // special offer & next day delivery is connected on pic uploading
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
                   title: Text('Special Offer'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                        SetNextDayOfferScreen.routeName,
+                        arguments: 'specialOffer');
+                  },
                 ),
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
@@ -252,8 +258,9 @@ class _OffersListState extends State<OffersList> {
                   leading: Icon(Icons.minimize_rounded),
                   title: Text('Next Day Delivery'),
                   onTap: () {
-                    Navigator.of(context)
-                        .pushNamed(SetNextDayOfferScreen.routeName);
+                    Navigator.of(context).pushNamed(
+                        SetNextDayOfferScreen.routeName,
+                        arguments: 'nextDayDelivery');
                   },
                 ),
                 ListTile(

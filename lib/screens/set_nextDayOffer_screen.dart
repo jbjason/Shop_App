@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 class SetNextDayOfferScreen extends StatefulWidget {
   static const routeName = '/next-day-offer';
-
   @override
   _SetNextDayOfferScreenState createState() => _SetNextDayOfferScreenState();
 }
@@ -13,11 +12,12 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
   final _imageFocusNode = FocusNode();
   final _imageController = TextEditingController();
 
-  void _saveForm() async {
-    await Provider.of<Products>(context, listen: false)
-        .setOffersNextDayDelivery(_imageController.text.trim());
-    _scaffoldKey.currentState
-        .showSnackBar(SnackBar(content: Text('Offer has been Saved')));
+  void _saveForm(String name) async {
+    print(name);
+    // await Provider.of<Products>(context, listen: false)
+    //     .setOffersNextDayDelivery(_imageController.text.trim(), name);
+    // _scaffoldKey.currentState
+    //     .showSnackBar(SnackBar(content: Text('Offer has been Saved')));
   }
 
   @override
@@ -30,12 +30,16 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
+    final name = ModalRoute.of(context).settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
-        title: Text('Manage Offers'),
+        title: Text('Manage Offer'),
         actions: [
-          IconButton(icon: Icon(Icons.save), onPressed: _saveForm),
+          IconButton(
+            icon: Icon(Icons.save),
+            onPressed: () => _saveForm(name),
+          )
         ],
       ),
       body: Padding(

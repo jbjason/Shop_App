@@ -288,7 +288,7 @@ class Products with ChangeNotifier {
     }
   }
 
-  Future<void> setOffersNextDayDelivery(String imageUrl) async {
+  Future<void> setOffersNextDayDelivery(String imageUrl, String name) async {
     var url =
         'https://flutter-update-67f54.firebaseio.com/offers/nextDayDelivery.json?auth=$authToken';
     try {
