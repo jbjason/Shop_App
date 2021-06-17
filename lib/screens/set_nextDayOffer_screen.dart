@@ -94,21 +94,27 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
               ],
             ),
             Container(
-              height: _specialOffer ? 30 : 0,
+              height: _specialOffer ? 50 : 0,
               child: Card(
                 elevation: 10,
-                child: Text(
-                    'To Edit the product price based on this Special offer\n Press this below button'),
-              ),
-            ),
-            Container(
-              color: Colors.black54,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pushNamed(UserProductsScreen.routeName,
-                      arguments: 'specialOffer');
-                },
-                child: Text("Manage price"),
+                child: Column(
+                  children: [
+                    Text(
+                      'To Edit the product price based on this Special offer\n Press this below button',
+                    ),
+                    Container(
+                      color: Colors.black54,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(
+                              UserProductsScreen.routeName,
+                              arguments: 'specialOffer');
+                        },
+                        child: Text("Manage price"),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ].reversed.toList(),
