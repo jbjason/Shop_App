@@ -11,19 +11,16 @@ class SetSpecialOfferScreen extends StatefulWidget {
 class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
   final _currentPriceFocusNode = FocusNode();
   final _offerPriceFocusNode = FocusNode();
-  final _currentPriceController = TextEditingController();
-  final _offerPriceController = TextEditingController();
   var _expanded = false;
+  String oldPrice, offerPrice;
 
   void _save() {
-    final String old = _currentPriceController.text.trim();
-    final String offer = _offerPriceController.text.trim();
+    print(oldPrice);
+    print(offerPrice);
   }
 
   @override
   void dispose() {
-    _currentPriceController.dispose();
-    _offerPriceController.dispose();
     _currentPriceFocusNode.dispose();
     _offerPriceFocusNode.dispose();
     super.dispose();
@@ -42,6 +39,7 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
             'Manage Discount Price',
             style: TextStyle(fontSize: 20, color: Colors.black87),
           ),
+          actions: [IconButton(icon: Icon(Icons.save), onPressed: _save)],
         ),
         body: Padding(
           padding: EdgeInsets.all(15),
@@ -94,10 +92,10 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                     child: TextFormField(
                       initialValue: product.price.toString(),
                       focusNode: _currentPriceFocusNode,
-                      controller: _currentPriceController,
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.numberWithOptions(),
-                      onFieldSubmitted: (_) {
+                      onFieldSubmitted: (value) {
+                        oldPrice = value;
                         FocusScope.of(context)
                             .requestFocus(_offerPriceFocusNode);
                       },
@@ -127,9 +125,9 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                       child: TextFormField(
                     initialValue: product.extra,
                     focusNode: _offerPriceFocusNode,
-                    controller: _offerPriceController,
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.done,
+                    onFieldSubmitted: (value) => offerPrice = value,
                     validator: (value) {
                       if (value.isEmpty) {
                         return 'Please provide a value';
