@@ -40,6 +40,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     'imageUrl1': '',
     'imageUrl2': '',
     'imageUrl3': '',
+    'category': '',
   };
   var _isInit = true;
   var isLoading = false;
@@ -63,6 +64,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           'title': _editedProduct.title,
           'description': _editedProduct.description,
           'price': _editedProduct.price.toString(),
+          'category': _editedProduct.category,
           'imageUrl1': '',
           'imageUrl2': '',
           'imageUrl3': '',
@@ -170,7 +172,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 child: ListView(
                   children: [
                     TextFormField(
-                      // initialValue: _initValues['title'],
+                      initialValue: _initValues['category'],
                       decoration: InputDecoration(labelText: 'Category'),
                       textInputAction: TextInputAction.next,
                       focusNode: _categoryFocusNode,
@@ -199,7 +201,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                     ),
                     TextFormField(
-                      // initialValue: _initValues['title'],
+                      initialValue: _initValues['title'],
                       decoration: InputDecoration(labelText: 'Title'),
                       textInputAction: TextInputAction.next,
                       focusNode: _titleFocusNode,
@@ -228,7 +230,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                     ),
                     TextFormField(
-                      //initialValue: _initValues['price'],
+                      initialValue: _initValues['price'],
                       decoration: InputDecoration(labelText: 'Price'),
                       keyboardType: TextInputType.number,
                       focusNode: _priceFocusNode,
@@ -266,7 +268,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                     ),
                     TextFormField(
-                      //initialValue: _initValues['description'],
+                      initialValue: _initValues['description'],
                       decoration: InputDecoration(labelText: 'Description'),
                       maxLines: 3,
                       keyboardType: TextInputType.multiline,

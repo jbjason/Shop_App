@@ -270,7 +270,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                           decoration: TextDecoration.lineThrough,
                           color: Colors.black,
                           decorationColor: Colors.red,
-                          decorationThickness: 5.0),
+                          fontSize: 22,
+                          decorationThickness: 2.8),
                     )
                   ],
                 ),
@@ -291,7 +292,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                         color: Colors.amber[300],
                       ),
                       child: Text(
-                        '\$${widget.price}',
+                        '\$${widget.price.toStringAsFixed(0)}',
                         style: Theme.of(context).textTheme.title.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.bold,
