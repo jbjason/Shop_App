@@ -51,6 +51,10 @@ class Products with ChangeNotifier {
     return [..._items];
   }
 
+  List<Product> get favoriteItems {
+    return _items.where((element) => element.isFavorite).toList();
+  }
+
   List<String> _commentsList = [];
   List<String> get commentsList {
     return [..._commentsList];
@@ -69,10 +73,6 @@ class Products with ChangeNotifier {
   List<OffersImagesList> _offersImages = [];
   List<OffersImagesList> get offersImages {
     return [..._offersImages];
-  }
-
-  List<Product> get favoriteItems {
-    return _items.where((element) => element.isFavorite).toList();
   }
 
   Product findById(String id) {
