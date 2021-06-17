@@ -19,18 +19,18 @@ class ProductsOverviewScreen extends StatefulWidget {
 
 class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   var _showOnlyFavorites = false;
-  var _isInit = true;
+  var _isInit = false;
   var isLoading = true;
   @override
   void didChangeDependencies() {
-    if (_isInit) {
-      Provider.of<Products>(context).fetchAndSetProducts().then((_) {
-        setState(() {
-          isLoading = false;
-        });
+    if (_isInit) return;
+    _isInit = true;
+    Provider.of<Products>(context).fetchAndSetProducts().then((_) {
+      setState(() {
+        isLoading = false;
       });
-    }
-    _isInit = false;
+    });
+
     super.didChangeDependencies();
   }
 
