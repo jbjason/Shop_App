@@ -13,11 +13,10 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
   final _imageController = TextEditingController();
 
   void _saveForm(String name) async {
-    print(name);
-    // await Provider.of<Products>(context, listen: false)
-    //     .setOffersNextDayDelivery(_imageController.text.trim(), name);
-    // _scaffoldKey.currentState
-    //     .showSnackBar(SnackBar(content: Text('Offer has been Saved')));
+    await Provider.of<Products>(context, listen: false)
+        .setOffersNextDayDelivery(_imageController.text.trim(), name);
+    _scaffoldKey.currentState
+        .showSnackBar(SnackBar(content: Text('Offer has been Saved')));
   }
 
   @override
