@@ -1,5 +1,5 @@
-import 'package:Shop_App/models/http_exception.dart';
-import 'package:Shop_App/models/offer.dart';
+import '../models/http_exception.dart';
+import '../models/offer.dart';
 import 'package:flutter/material.dart';
 import './product.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +13,6 @@ class Products with ChangeNotifier {
     this._items,
   );
 
-  List<String> _commentsList = [];
   List<Product> _items = [
     // Product(
     //   id: 'p1',
@@ -48,11 +47,11 @@ class Products with ChangeNotifier {
     //       'https://static01.nyt.com/images/2011/01/26/business/pan2/pan2-blog480.jpg',
     // ),
   ];
-
   List<Product> get items {
     return [..._items];
   }
 
+  List<String> _commentsList = [];
   List<String> get commentsList {
     return [..._commentsList];
   }
