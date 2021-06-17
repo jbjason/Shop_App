@@ -1,8 +1,6 @@
-import 'package:Shop_App/screens/set_specialOffer_screen.dart';
-
+import '../screens/set_specialOffer_screen.dart';
 import '../providers/products.dart';
 import 'package:provider/provider.dart';
-
 import '../screens/edit_product_screen.dart';
 import 'package:flutter/material.dart';
 
