@@ -55,6 +55,16 @@ class Products with ChangeNotifier {
     return _items.where((element) => element.isFavorite).toList();
   }
 
+  List<Product> get specialOfferItems {
+    return _items
+        .where((element) => element.extra != "no" && element.extra != "combo")
+        .toList();
+  }
+
+  List<Product> get comboOfferItems {
+    return _items.where((element) => element.extra == "combo").toList();
+  }
+
   List<String> _commentsList = [];
   List<String> get commentsList {
     return [..._commentsList];
