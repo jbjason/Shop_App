@@ -16,9 +16,10 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
   void _save() async {
     final String oldPrice = _currentPriceController.text.trim();
     final String offerPrice = _offerPriceController.text.trim();
-    Provider.of<Products>(context, listen: false)
+    await Provider.of<Products>(context, listen: false)
         .updateOfferProduct(productId, oldPrice, offerPrice);
-    Future.delayed(Duration(milliseconds: 200));
+    _scaffoldKey.currentState
+        .showSnackBar(SnackBar(content: Text('Updated Successfully')));
     Navigator.of(context).pop();
   }
 
@@ -41,9 +42,11 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
     super.dispose();
   }
 
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
+      key: _scaffoldKey,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFFC8E6C9),
