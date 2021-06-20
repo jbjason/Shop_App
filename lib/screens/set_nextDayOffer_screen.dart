@@ -12,12 +12,16 @@ class SetNextDayOfferScreen extends StatefulWidget {
 class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
   final _imageFocusNode = FocusNode();
   final _imageController = TextEditingController();
+  bool _hints = false;
 
   void _saveForm(String name) async {
     await Provider.of<Products>(context, listen: false)
         .setOffersNextDayDelivery(_imageController.text.trim(), name);
     _scaffoldKey.currentState
         .showSnackBar(SnackBar(content: Text('Offer has been Saved')));
+    setState(() {
+      _hints = true;
+    });
   }
 
   @override
@@ -96,14 +100,14 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
             Container(
               padding: EdgeInsets.all(5),
               margin: EdgeInsets.only(top: 15),
-              height: _specialOffer ? 140 : 0,
+              height: _specialOffer && _hints ? 150 : 0,
               child: Card(
                 elevation: 10,
                 child: Column(
                   children: [
                     Text(
-                      ' To Edit the product price based on this Special offer.\n  Press this below button...',
-                      style: TextStyle(fontSize: 20),
+                      ' To Edit Products prices Go to manage Special/Combo offer.\n Or Press this button below...',
+                      style: TextStyle(fontSize: 16),
                     ),
                     Container(
                       child: ElevatedButton(
