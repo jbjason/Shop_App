@@ -95,7 +95,7 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
             ),
             Container(
               padding: EdgeInsets.all(5),
-              margin: EdgeInsets.only(top: 10),
+              margin: EdgeInsets.only(top: 15),
               height: _specialOffer ? 140 : 0,
               child: Card(
                 elevation: 10,

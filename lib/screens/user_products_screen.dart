@@ -39,6 +39,7 @@ class _UserProductsScreenState extends State<UserProductsScreen> {
   @override
   Widget build(BuildContext context) {
     //final productData = Provider.of<Products>(context);
+    // selecting the list based on chosen PopUpMenuItem
     final List<Product> productData = _selectedList;
     final name = ModalRoute.of(context).settings.arguments as String;
     bool _offerPage = (name == "specialOffer") ? true : false;
