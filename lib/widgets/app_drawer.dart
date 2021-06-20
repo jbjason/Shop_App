@@ -39,7 +39,7 @@ class AppDrawer extends StatelessWidget {
               //   // back button disable
               //   automaticallyImplyLeading: false,
               // ),
-              // simply Horizontal Line
+
               // Myshop
               ListTile(
                 leading: Icon(Icons.shop),
