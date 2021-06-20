@@ -18,8 +18,6 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
     final String offerPrice = _offerPriceController.text.trim();
     await Provider.of<Products>(context, listen: false)
         .updateOfferProduct(productId, oldPrice, offerPrice);
-    _scaffoldKey.currentState
-        .showSnackBar(SnackBar(content: Text('Updated Successfully')));
     Navigator.of(context).pop();
   }
 
@@ -46,7 +44,6 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      key: _scaffoldKey,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Color(0xFFC8E6C9),
