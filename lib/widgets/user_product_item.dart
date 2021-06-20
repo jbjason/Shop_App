@@ -9,6 +9,33 @@ class UserProductItem extends StatelessWidget {
   final bool _offerPage;
   UserProductItem(this.id, this.title, this.imageUrl, this._offerPage);
 
+  void forShowDialoag(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('Alert !'),
+        content: Text('Do you want to remove the item ?'),
+        actions: [
+          FlatButton(
+            onPressed: () async {
+              await Provider.of<Products>(context, listen: false)
+                  .deleteProduct(id);
+            },
+            color: Colors.green,
+            child: Text('Yes'),
+          ),
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            color: Colors.redAccent,
+            child: Text('No'),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final scaffold = Scaffold.of(context);
@@ -38,8 +65,7 @@ class UserProductItem extends StatelessWidget {
                     color: Theme.of(context).errorColor,
                     onPressed: () async {
                       try {
-                        await Provider.of<Products>(context, listen: false)
-                            .deleteProduct(id);
+                        forShowDialoag(context);
                       } catch (error) {
                         scaffold.showSnackBar(SnackBar(
                           content: Text('Deleteing Failed'),
