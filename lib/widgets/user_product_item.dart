@@ -59,7 +59,7 @@ class UserProductItem extends StatelessWidget {
               },
             ),
             _offerPage
-                ? Icon(null)
+                ? Container(width: 0)
                 : IconButton(
                     icon: Icon(Icons.delete),
                     color: Theme.of(context).errorColor,
