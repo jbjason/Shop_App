@@ -66,7 +66,7 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                     style: TextStyle(
                         color: Colors.red, fontWeight: FontWeight.bold),
                   ),
-                  subtitle: Text('  dfdjdf '),
+                  subtitle: Text('  This might help you '),
                   trailing: IconButton(
                       icon: Icon(
                         _expanded ? Icons.expand_less : Icons.expand_more,
