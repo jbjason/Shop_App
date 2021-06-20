@@ -35,7 +35,8 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
   @override
   Widget build(BuildContext context) {
     final name = ModalRoute.of(context).settings.arguments as String;
-    bool _specialOffer = name == "specialOffer" ? true : false;
+    bool _specialOffer =
+        name == "specialOffer" || name == "combo" ? true : false;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
@@ -114,7 +115,7 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
                         onPressed: () {
                           Navigator.of(context).pushNamed(
                               UserProductsScreen.routeName,
-                              arguments: 'specialOffer');
+                              arguments: 'offer');
                         },
                         child: Text("Manage price"),
                       ),

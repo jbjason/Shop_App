@@ -42,7 +42,7 @@ class _UserProductsScreenState extends State<UserProductsScreen> {
     // selecting the list based on chosen PopUpMenuItem
     final List<Product> productData = _selectedList;
     final name = ModalRoute.of(context).settings.arguments as String;
-    bool _offerPage = (name == "specialOffer") ? true : false;
+    bool _offerPage = (name == "offer") ? true : false;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),

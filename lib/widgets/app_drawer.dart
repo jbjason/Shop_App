@@ -58,9 +58,29 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
+              // manage products
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text('Manage Products'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(UserProductsScreen.routeName,
+                      arguments: 'product');
+                },
+              ),
+              Divider(),
               // Offers List
               OffersList(),
               Divider(),
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text('Manage Special/Combo Price'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(UserProductsScreen.routeName,
+                      arguments: 'offer');
+                },
+              ),
+              Divider(),
+              // my Profile
               ListTile(
                 leading: Icon(Icons.people_alt_outlined),
                 title: Text('Profile'),
@@ -85,16 +105,7 @@ class AppDrawer extends StatelessWidget {
                 },
               ),
               Divider(),
-              // manage products
-              ListTile(
-                leading: Icon(Icons.edit),
-                title: Text('Manage Products'),
-                onTap: () {
-                  Navigator.of(context).pushNamed(UserProductsScreen.routeName,
-                      arguments: 'product');
-                },
-              ),
-              Divider(),
+
               // cutomer orders
               ListTile(
                 leading: Icon(Icons.corporate_fare),
@@ -266,7 +277,11 @@ class _OffersListState extends State<OffersList> {
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
                   title: Text('Combo Offer'),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                        SetNextDayOfferScreen.routeName,
+                        arguments: 'comboOffer');
+                  },
                 ),
               ],
             ),
