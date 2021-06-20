@@ -56,6 +56,8 @@ class Products with ChangeNotifier {
   }
 
   List<Product> get specialOfferItems {
+    // extra="no" means kono offer nai , extra=combo means combo offer
+    // extra= ei 2ta naa hoye value thakle special offer Item oita
     return _items
         .where((element) => element.extra != "no" && element.extra != "combo")
         .toList();
