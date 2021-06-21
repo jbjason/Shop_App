@@ -107,7 +107,6 @@ class Products with ChangeNotifier {
       final favoriteData = json.decode(favoriteResponse.body);
 
       extractedData.forEach((proId, prodData) {
-        final s = prodData['extra'];
         loadedProducts.add(Product(
           id: proId,
           title: prodData['title'],
@@ -122,7 +121,7 @@ class Products with ChangeNotifier {
           isRating: prodData['isRating'],
           isReview: prodData['isReview'],
           category: prodData['category'],
-          extra: s.toString(),
+          extra: prodData['extra'],
         ));
         _searcHints.add(prodData['title']);
       });
