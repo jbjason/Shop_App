@@ -4,7 +4,7 @@ import '../providers/orders.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ConfirmOrdersScreen extends StatelessWidget {
+class CustomerOrdersScreen extends StatelessWidget {
   static const routeName = '/confirm-orders-screen';
 
   @override

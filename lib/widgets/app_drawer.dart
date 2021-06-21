@@ -112,7 +112,7 @@ class AppDrawer extends StatelessWidget {
                 title: Text('Customer Orders'),
                 onTap: () {
                   Navigator.of(context)
-                      .pushNamed(ConfirmOrdersScreen.routeName);
+                      .pushNamed(CustomerOrdersScreen.routeName);
                 },
               ),
               Divider(),

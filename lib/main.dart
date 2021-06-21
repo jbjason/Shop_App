@@ -85,7 +85,7 @@ class MyApp extends StatelessWidget {
               ReturnProductScreen.routeName: (ctx) => ReturnProductScreen(),
               ReturnProductsListScreen.routeName: (ctx) =>
                   ReturnProductsListScreen(),
-              ConfirmOrdersScreen.routeName: (ctx) => ConfirmOrdersScreen(),
+              CustomerOrdersScreen.routeName: (ctx) => CustomerOrdersScreen(),
               OffersScreen.routeName: (ctx) => OffersScreen(),
               SetOffersScreen.routeName: (ctx) => SetOffersScreen(),
               SetNextDayOfferScreen.routeName: (ctx) => SetNextDayOfferScreen(),
