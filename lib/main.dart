@@ -2,7 +2,7 @@ import './screens/set_specialOffer_screen.dart';
 import './screens/set_nextDayOffer_screen.dart';
 import './screens/set_offers_screen.dart';
 import './screens/offers_scrren.dart';
-import './screens/confirm_orders_screen.dart';
+import 'screens/customer_orders_screen.dart';
 import './screens/return_productsList_screen.dart';
 import 'screens/order_details_screen.dart';
 import 'screens/return_productForm_screen.dart';
