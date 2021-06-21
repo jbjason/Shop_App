@@ -38,6 +38,12 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
   String _selectedLocation;
   int _isComment = 1;
   List<String> _comments = [];
+
+  double percentageCount() {
+    double d = (widget.price * 100.0) / double.parse(widget.extra);
+    return d -= 100.0;
+  }
+
   @override
   void initState() {
     Provider.of<Products>(context, listen: false)
@@ -89,6 +95,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
     final cart = Provider.of<Cart>(context, listen: false);
     final size = MediaQuery.of(context).size;
     final product = Provider.of<Products>(context);
+    final bool _offerAvailable =
+        widget.extra == "no" || widget.extra == "combo" ? false : true;
     _comments = product.commentsList;
     return SingleChildScrollView(
       child: Column(
@@ -240,6 +248,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // title & review
                 Expanded(
                   child: Column(
                     children: [
@@ -255,17 +264,20 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                     ],
                   ),
                 ),
+                // offer percentage & PreviousPrice
                 Column(
                   children: [
                     Text(
-                      '-4%',
+                      _offerAvailable
+                          ? percentageCount().toStringAsFixed(2)
+                          : '',
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      widget.extra,
+                      _offerAvailable ? widget.extra : '',
                       style: TextStyle(
                           decoration: TextDecoration.lineThrough,
                           color: Colors.black,
@@ -305,14 +317,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
             ),
           ),
           // description
-          Container(
-            color: Color(0xFFE8F5E9).withOpacity(0.5),
-            padding: EdgeInsets.all(10),
-            child: Text(
-              widget._description,
-              style: TextStyle(height: 1.8),
-            ),
-          ),
+          DescriptionWidget(widget: widget),
           // add_to_cart button
           GestureDetector(
             onTap: () => {
@@ -354,21 +359,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
             ),
           ),
           // colors demo (circle)
-          Container(
-            margin: EdgeInsets.only(top: 20, left: 35),
-            height: 30,
-            width: double.infinity,
-            child: Row(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                ColorPin(c: Colors.cyan),
-                ColorPin(c: Colors.purple),
-                ColorPin(c: Colors.brown),
-                ColorPin(c: Colors.red),
-              ],
-            ),
-          ),
+          ColorDemo(),
           // choose color & size
           Container(
             width: double.infinity,
@@ -458,6 +449,52 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
             ),
           ),
           _isComment != 1 ? Comments(widget.id, _comments) : Text(''),
+        ],
+      ),
+    );
+  }
+}
+
+class DescriptionWidget extends StatelessWidget {
+  const DescriptionWidget({
+    Key key,
+    @required this.widget,
+  }) : super(key: key);
+
+  final ProductDetailScreenItem widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Color(0xFFE8F5E9).withOpacity(0.5),
+      padding: EdgeInsets.all(10),
+      child: Text(
+        widget._description,
+        style: TextStyle(height: 1.8),
+      ),
+    );
+  }
+}
+
+class ColorDemo extends StatelessWidget {
+  const ColorDemo({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: 20, left: 35),
+      height: 30,
+      width: double.infinity,
+      child: Row(
+        // crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          ColorPin(c: Colors.cyan),
+          ColorPin(c: Colors.purple),
+          ColorPin(c: Colors.brown),
+          ColorPin(c: Colors.red),
         ],
       ),
     );
