@@ -372,7 +372,7 @@ class Products with ChangeNotifier {
     try {
       await http.patch(url,
           body: json.encode({
-            'price': offerPrice,
+            'price': double.parse(offerPrice),
             'extra': oldPrice,
           }));
       notifyListeners();
