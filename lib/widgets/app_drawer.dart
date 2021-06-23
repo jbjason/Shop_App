@@ -16,205 +16,197 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
-    return Stack(
-      children: [
-        Drawer(
-          child: SingleChildScrollView(
-            child: Container(
-              //color: Color(0xFF4A4A58),
-              child: Column(
-                children: [
-                  UserAccountsDrawerHeader(
-                    accountName: Text('Jb Jason'),
-                    accountEmail: Text(auth.userEmail),
-                    currentAccountPicture: CircleAvatar(
-                      child: FlutterLogo(
-                        size: 50,
-                      ),
-                    ),
+    return Drawer(
+      child: SingleChildScrollView(
+        child: Container(
+          //color: Color(0xFF4A4A58),
+          child: Column(
+            children: [
+              UserAccountsDrawerHeader(
+                accountName: Text('Jb Jason'),
+                accountEmail: Text(auth.userEmail),
+                currentAccountPicture: CircleAvatar(
+                  child: FlutterLogo(
+                    size: 50,
                   ),
-                  // Myshop
-                  ListTile(
-                    leading: Icon(Icons.shop),
-                    title: Text('Shop'),
-                    onTap: () {
-                      Navigator.of(context).pushNamed('/');
-                    },
-                  ),
-                  Divider(),
-                  // Offers_screen
-                  ListTile(
-                    leading: Icon(Icons.card_giftcard),
-                    title: Text('Offer\'s Zone'),
-                    onTap: () {
-                      Navigator.of(context).pushNamed(OffersScreen.routeName);
-                    },
-                  ),
-                  Divider(),
-                  // manage products
-                  ListTile(
-                    leading: Icon(Icons.edit),
-                    title: Text('Manage Products'),
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                          UserProductsScreen.routeName,
-                          arguments: 'product');
-                    },
-                  ),
-                  Divider(),
-                  // Offers List
-                  OffersList(),
-                  Divider(),
-                  // Manage Special/Combo Price
-                  ListTile(
-                    leading: Icon(Icons.edit),
-                    title: Text('Manage Special/Combo Price'),
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                          UserProductsScreen.routeName,
-                          arguments: 'offer');
-                    },
-                  ),
-                  Divider(),
-                  // my Profile
-                  ListTile(
-                    leading: Icon(Icons.people_alt_outlined),
-                    title: Text('Profile'),
-                    onTap: () {
-                      Navigator.of(context).pushNamed(OrderScreen.routeName,
-                          arguments: [
-                            "profile",
-                            "Your Profile",
-                            auth.userEmail,
-                            auth.userId
-                          ]);
-                    },
-                  ),
-                  Divider(),
-                  // My Orders
-                  ListTile(
-                    leading: Icon(Icons.payment),
-                    title: Text('My Orders'),
-                    onTap: () {
-                      Navigator.of(context).pushNamed(OrderScreen.routeName,
-                          arguments: ["order", "Your Orders"]);
-                    },
-                  ),
-                  Divider(),
+                ),
+              ),
+              // Myshop
+              ListTile(
+                leading: Icon(Icons.shop),
+                title: Text('Shop'),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/');
+                },
+              ),
+              Divider(),
+              // Offers_screen
+              ListTile(
+                leading: Icon(Icons.card_giftcard),
+                title: Text('Offer\'s Zone'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(OffersScreen.routeName);
+                },
+              ),
+              Divider(),
+              // manage products
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text('Manage Products'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(UserProductsScreen.routeName,
+                      arguments: 'product');
+                },
+              ),
+              Divider(),
+              // Offers List
+              OffersList(),
+              Divider(),
+              // Manage Special/Combo Pric
+              ListTile(
+                leading: Icon(Icons.edit),
+                title: Text('Manage Special/Combo Price'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(UserProductsScreen.routeName,
+                      arguments: 'offer');
+                },
+              ),
+              Divider(),
+              // my Profile
+              ListTile(
+                leading: Icon(Icons.people_alt_outlined),
+                title: Text('Profile'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(OrderScreen.routeName,
+                      arguments: [
+                        "profile",
+                        "Your Profile",
+                        auth.userEmail,
+                        auth.userId
+                      ]);
+                },
+              ),
+              Divider(),
+              // My Orders
+              ListTile(
+                leading: Icon(Icons.payment),
+                title: Text('My Orders'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(OrderScreen.routeName,
+                      arguments: ["order", "Your Orders"]);
+                },
+              ),
+              Divider(),
 
-                  // cutomer orders
-                  ListTile(
-                    leading: Icon(Icons.corporate_fare),
-                    title: Text('Customer Orders'),
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(CustomerOrdersScreen.routeName);
-                    },
-                  ),
-                  Divider(),
-                  // Return Product Form
-                  ListTile(
-                    leading: Icon(Icons.sanitizer),
-                    title: Text('Return Product Form'),
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                          ReturnProductScreen.routeName,
-                          arguments: [auth.userEmail]);
-                    },
-                  ),
-                  Divider(),
-                  // Return Prod List
-                  ListTile(
-                    leading: Icon(Icons.sanitizer),
-                    title: Text('Return Prod List'),
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(ReturnProductsListScreen.routeName);
-                    },
-                  ),
-                  Divider(),
-                  // Suggestion or Report form
-                  ListTile(
-                    leading: Icon(Icons.help),
-                    title: Text('Suggestion or Report'),
-                    onTap: () {
-                      Navigator.of(context).pushNamed(
-                          SuggestionReportScreen.routeName,
-                          arguments: [auth.userEmail]);
-                    },
-                  ),
-                  Divider(),
-                  //About Us
-                  ListTile(
-                    leading: Icon(Icons.album_outlined),
-                    title: Text('About Us'),
-                    onTap: () {
-                      return showDialog(
-                          context: context,
-                          builder: (ctx) => AlertDialog(
-                                title: Container(
-                                  width: double.infinity,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    ' About Us ',
-                                    style: TextStyle(
-                                      decoration: TextDecoration.underline,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 25,
-                                    ),
-                                  ),
+              // cutomer orders
+              ListTile(
+                leading: Icon(Icons.corporate_fare),
+                title: Text('Customer Orders'),
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(CustomerOrdersScreen.routeName);
+                },
+              ),
+              Divider(),
+              // Return Product Form
+              ListTile(
+                leading: Icon(Icons.sanitizer),
+                title: Text('Return Product Form'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(ReturnProductScreen.routeName,
+                      arguments: [auth.userEmail]);
+                },
+              ),
+              Divider(),
+              // Return Prod List
+              ListTile(
+                leading: Icon(Icons.sanitizer),
+                title: Text('Return Prod List'),
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(ReturnProductsListScreen.routeName);
+                },
+              ),
+              Divider(),
+              // Suggestion or Report form
+              ListTile(
+                leading: Icon(Icons.help),
+                title: Text('Suggestion or Report'),
+                onTap: () {
+                  Navigator.of(context).pushNamed(
+                      SuggestionReportScreen.routeName,
+                      arguments: [auth.userEmail]);
+                },
+              ),
+              Divider(),
+              //About Us
+              ListTile(
+                leading: Icon(Icons.album_outlined),
+                title: Text('About Us'),
+                onTap: () {
+                  return showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                            title: Container(
+                              width: double.infinity,
+                              alignment: Alignment.center,
+                              child: Text(
+                                ' About Us ',
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
                                 ),
-                                content: AboutUsMessages(),
-                              ));
-                    },
-                  ),
-                  Divider(),
-                  // HelpLine
-                  ListTile(
-                    leading: Icon(Icons.mediation),
-                    title: Text('HelpLine..'),
-                    onTap: () {
-                      return showDialog(
-                        context: context,
-                        builder: (ctx) => AlertDialog(
-                          title: Container(
-                            width: double.infinity,
-                            alignment: Alignment.center,
-                            child: Text(
-                              'HELPLINE',
-                              style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 25,
                               ),
                             ),
-                          ),
-                          content: HelpLineContacts(),
-                        ),
-                      );
-                    },
-                  ),
-                  Divider(),
-                  // LogOut
-                  ListTile(
-                    leading: Icon(Icons.exit_to_app),
-                    title: Text('LogOut',
-                        style: TextStyle(
-                            color: Colors.black87,
-                            fontWeight: FontWeight.w700)),
-                    onTap: () {
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pushReplacementNamed('/');
-                      Provider.of<Auth>(context, listen: false).logout();
-                      Provider.of<Cart>(context, listen: false).clear();
-                    },
-                  ),
-                ],
+                            content: AboutUsMessages(),
+                          ));
+                },
               ),
-            ),
+              Divider(),
+              // HelpLine
+              ListTile(
+                leading: Icon(Icons.mediation),
+                title: Text('HelpLine..'),
+                onTap: () {
+                  return showDialog(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: Container(
+                        width: double.infinity,
+                        alignment: Alignment.center,
+                        child: Text(
+                          'HELPLINE',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 25,
+                          ),
+                        ),
+                      ),
+                      content: HelpLineContacts(),
+                    ),
+                  );
+                },
+              ),
+              Divider(),
+              // LogOut
+              ListTile(
+                leading: Icon(Icons.exit_to_app),
+                title: Text('LogOut',
+                    style: TextStyle(
+                        color: Colors.black87, fontWeight: FontWeight.w700)),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).pushReplacementNamed('/');
+                  Provider.of<Auth>(context, listen: false).logout();
+                  Provider.of<Cart>(context, listen: false).clear();
+                },
+              ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }
