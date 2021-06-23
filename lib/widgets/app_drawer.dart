@@ -65,6 +65,7 @@ class AppDrawer extends StatelessWidget {
                   // Offers List
                   OffersList(),
                   Divider(),
+                  // Manage Special/Combo Price
                   ListTile(
                     leading: Icon(Icons.edit),
                     title: Text('Manage Special/Combo Price'),
