@@ -41,7 +41,7 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userEmail = ModalRoute.of(context).settings.arguments as List<String>;
+    final userEmail = ModalRoute.of(context).settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
@@ -82,7 +82,7 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
               ),
               // email
               TextFormField(
-                initialValue: userEmail[0],
+                initialValue: userEmail,
                 readOnly: true,
                 decoration: InputDecoration(labelText: 'Email'),
                 textInputAction: TextInputAction.next,

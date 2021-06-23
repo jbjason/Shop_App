@@ -22,191 +22,352 @@ class AppDrawer extends StatelessWidget {
           //color: Color(0xFF4A4A58),
           child: Column(
             children: [
-              UserAccountsDrawerHeader(
-                accountName: Text('Jb Jason'),
-                accountEmail: Text(auth.userEmail),
-                currentAccountPicture: CircleAvatar(
-                  child: FlutterLogo(
-                    size: 50,
-                  ),
-                ),
-              ),
+              Header(auth: auth),
               // Myshop
-              ListTile(
-                leading: Icon(Icons.shop),
-                title: Text('Shop'),
-                onTap: () {
-                  Navigator.of(context).pushNamed('/');
-                },
-              ),
+              MyShop(),
               Divider(),
               // Offers_screen
-              ListTile(
-                leading: Icon(Icons.card_giftcard),
-                title: Text('Offer\'s Zone'),
-                onTap: () {
-                  Navigator.of(context).pushNamed(OffersScreen.routeName);
-                },
-              ),
+              OffersZone(),
               Divider(),
               // manage products
-              ListTile(
-                leading: Icon(Icons.edit),
-                title: Text('Manage Products'),
-                onTap: () {
-                  Navigator.of(context).pushNamed(UserProductsScreen.routeName,
-                      arguments: 'product');
-                },
-              ),
+              ManageProducts(),
               Divider(),
               // Offers List
               OffersList(),
               Divider(),
               // Manage Special/Combo Pric
-              ListTile(
-                leading: Icon(Icons.edit),
-                title: Text('Manage Special/Combo Price'),
-                onTap: () {
-                  Navigator.of(context).pushNamed(UserProductsScreen.routeName,
-                      arguments: 'offer');
-                },
-              ),
+              ManageSpecialComboPrice(),
               Divider(),
               // my Profile
-              ListTile(
-                leading: Icon(Icons.people_alt_outlined),
-                title: Text('Profile'),
-                onTap: () {
-                  Navigator.of(context).pushNamed(OrderScreen.routeName,
-                      arguments: [
-                        "profile",
-                        "Your Profile",
-                        auth.userEmail,
-                        auth.userId
-                      ]);
-                },
-              ),
+              MyProfile(auth: auth),
               Divider(),
               // My Orders
-              ListTile(
-                leading: Icon(Icons.payment),
-                title: Text('My Orders'),
-                onTap: () {
-                  Navigator.of(context).pushNamed(OrderScreen.routeName,
-                      arguments: ["order", "Your Orders"]);
-                },
-              ),
+              MyOrders(),
               Divider(),
 
               // cutomer orders
-              ListTile(
-                leading: Icon(Icons.corporate_fare),
-                title: Text('Customer Orders'),
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(CustomerOrdersScreen.routeName);
-                },
-              ),
+              CustomerOrders(),
               Divider(),
               // Return Product Form
-              ListTile(
-                leading: Icon(Icons.sanitizer),
-                title: Text('Return Product Form'),
-                onTap: () {
-                  Navigator.of(context).pushNamed(ReturnProductScreen.routeName,
-                      arguments: [auth.userEmail]);
-                },
-              ),
+              ReturnProductForm(auth: auth),
               Divider(),
               // Return Prod List
-              ListTile(
-                leading: Icon(Icons.sanitizer),
-                title: Text('Return Prod List'),
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(ReturnProductsListScreen.routeName);
-                },
-              ),
+              ReturnProductList(),
               Divider(),
               // Suggestion or Report form
-              ListTile(
-                leading: Icon(Icons.help),
-                title: Text('Suggestion or Report'),
-                onTap: () {
-                  Navigator.of(context).pushNamed(
-                      SuggestionReportScreen.routeName,
-                      arguments: [auth.userEmail]);
-                },
-              ),
+              SuggestionOrReport(auth: auth),
               Divider(),
               //About Us
-              ListTile(
-                leading: Icon(Icons.album_outlined),
-                title: Text('About Us'),
-                onTap: () {
-                  return showDialog(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                            title: Container(
-                              width: double.infinity,
-                              alignment: Alignment.center,
-                              child: Text(
-                                ' About Us ',
-                                style: TextStyle(
-                                  decoration: TextDecoration.underline,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 25,
-                                ),
-                              ),
-                            ),
-                            content: AboutUsMessages(),
-                          ));
-                },
-              ),
+              AboutUs(),
               Divider(),
               // HelpLine
-              ListTile(
-                leading: Icon(Icons.mediation),
-                title: Text('HelpLine..'),
-                onTap: () {
-                  return showDialog(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                      title: Container(
-                        width: double.infinity,
-                        alignment: Alignment.center,
-                        child: Text(
-                          'HELPLINE',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 25,
-                          ),
-                        ),
-                      ),
-                      content: HelpLineContacts(),
-                    ),
-                  );
-                },
-              ),
+              HelpLine(),
               Divider(),
               // LogOut
-              ListTile(
-                leading: Icon(Icons.exit_to_app),
-                title: Text('LogOut',
-                    style: TextStyle(
-                        color: Colors.black87, fontWeight: FontWeight.w700)),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  Navigator.of(context).pushReplacementNamed('/');
-                  Provider.of<Auth>(context, listen: false).logout();
-                  Provider.of<Cart>(context, listen: false).clear();
-                },
-              ),
+              LogOut(),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class ReturnProductForm extends StatelessWidget {
+  const ReturnProductForm({
+    Key key,
+    @required this.auth,
+  }) : super(key: key);
+
+  final Auth auth;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.sanitizer),
+      title: Text('Return Product Form'),
+      onTap: () {
+        Navigator.of(context).pushNamed(ReturnProductScreen.routeName,
+            arguments: auth.userEmail);
+      },
+    );
+  }
+}
+
+class SuggestionOrReport extends StatelessWidget {
+  const SuggestionOrReport({
+    Key key,
+    @required this.auth,
+  }) : super(key: key);
+
+  final Auth auth;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.help),
+      title: Text('Suggestion or Report'),
+      onTap: () {
+        Navigator.of(context).pushNamed(SuggestionReportScreen.routeName,
+            arguments: auth.userEmail);
+      },
+    );
+  }
+}
+
+class MyProfile extends StatelessWidget {
+  const MyProfile({
+    Key key,
+    @required this.auth,
+  }) : super(key: key);
+
+  final Auth auth;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.people_alt_outlined),
+      title: Text('Profile'),
+      onTap: () {
+        Navigator.of(context).pushNamed(OrderScreen.routeName, arguments: [
+          "profile",
+          "Your Profile",
+          auth.userEmail,
+          auth.userId
+        ]);
+      },
+    );
+  }
+}
+
+class Header extends StatelessWidget {
+  const Header({
+    Key key,
+    @required this.auth,
+  }) : super(key: key);
+
+  final Auth auth;
+
+  @override
+  Widget build(BuildContext context) {
+    return UserAccountsDrawerHeader(
+      accountName: Text('Jb Jason'),
+      accountEmail: Text(auth.userEmail),
+      currentAccountPicture: CircleAvatar(
+        child: FlutterLogo(
+          size: 50,
+        ),
+      ),
+    );
+  }
+}
+
+class ReturnProductList extends StatelessWidget {
+  const ReturnProductList({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.sanitizer),
+      title: Text('Return Prod List'),
+      onTap: () {
+        Navigator.of(context).pushNamed(ReturnProductsListScreen.routeName);
+      },
+    );
+  }
+}
+
+class MyShop extends StatelessWidget {
+  const MyShop({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.shop),
+      title: Text('Shop'),
+      onTap: () {
+        Navigator.of(context).pushNamed('/');
+      },
+    );
+  }
+}
+
+class CustomerOrders extends StatelessWidget {
+  const CustomerOrders({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.corporate_fare),
+      title: Text('Customer Orders'),
+      onTap: () {
+        Navigator.of(context).pushNamed(CustomerOrdersScreen.routeName);
+      },
+    );
+  }
+}
+
+class MyOrders extends StatelessWidget {
+  const MyOrders({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.payment),
+      title: Text('My Orders'),
+      onTap: () {
+        Navigator.of(context).pushNamed(OrderScreen.routeName,
+            arguments: ["order", "Your Orders"]);
+      },
+    );
+  }
+}
+
+class ManageSpecialComboPrice extends StatelessWidget {
+  const ManageSpecialComboPrice({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.edit),
+      title: Text('Manage Special/Combo Price'),
+      onTap: () {
+        Navigator.of(context)
+            .pushNamed(UserProductsScreen.routeName, arguments: 'offer');
+      },
+    );
+  }
+}
+
+class ManageProducts extends StatelessWidget {
+  const ManageProducts({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.edit),
+      title: Text('Manage Products'),
+      onTap: () {
+        Navigator.of(context)
+            .pushNamed(UserProductsScreen.routeName, arguments: 'product');
+      },
+    );
+  }
+}
+
+class OffersZone extends StatelessWidget {
+  const OffersZone({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.card_giftcard),
+      title: Text('Offer\'s Zone'),
+      onTap: () {
+        Navigator.of(context).pushNamed(OffersScreen.routeName);
+      },
+    );
+  }
+}
+
+class LogOut extends StatelessWidget {
+  const LogOut({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.exit_to_app),
+      title: Text('LogOut',
+          style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w700)),
+      onTap: () {
+        Navigator.of(context).pop();
+        Navigator.of(context).pushReplacementNamed('/');
+        Provider.of<Auth>(context, listen: false).logout();
+        Provider.of<Cart>(context, listen: false).clear();
+      },
+    );
+  }
+}
+
+class HelpLine extends StatelessWidget {
+  const HelpLine({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.mediation),
+      title: Text('HelpLine..'),
+      onTap: () {
+        return showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Container(
+              width: double.infinity,
+              alignment: Alignment.center,
+              child: Text(
+                'HELPLINE',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                ),
+              ),
+            ),
+            content: HelpLineContacts(),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class AboutUs extends StatelessWidget {
+  const AboutUs({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.album_outlined),
+      title: Text('About Us'),
+      onTap: () {
+        return showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+                  title: Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    child: Text(
+                      ' About Us ',
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                      ),
+                    ),
+                  ),
+                  content: AboutUsMessages(),
+                ));
+      },
     );
   }
 }

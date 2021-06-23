@@ -34,7 +34,7 @@ class _SuggestionReportScreenState extends State<SuggestionReportScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userEmail = ModalRoute.of(context).settings.arguments as List<String>;
+    final userEmail = ModalRoute.of(context).settings.arguments as String;
 
     return Scaffold(
       appBar: AppBar(
@@ -49,7 +49,7 @@ class _SuggestionReportScreenState extends State<SuggestionReportScreen> {
           child: ListView(
             children: [
               TextFormField(
-                initialValue: userEmail[0],
+                initialValue: userEmail,
                 readOnly: true,
                 decoration: InputDecoration(labelText: 'Email'),
                 textInputAction: TextInputAction.next,
