@@ -12,7 +12,13 @@ import '../screens/orders_screen.dart';
 import 'package:flutter/material.dart';
 import '../providers/auth.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
+  @override
+  _AppDrawerState createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+  bool _isInit = true;
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
@@ -29,6 +35,12 @@ class AppDrawer extends StatelessWidget {
               // Offers_screen
               OffersZone(),
               Divider(),
+              ListTile(
+                leading: Icon(Icons.sort_sharp),
+                title: Text('Sort By...'),
+                onTap: () {},
+              ),
+              Divider(),
               // manage products
               ManageProducts(),
               Divider(),
@@ -44,7 +56,6 @@ class AppDrawer extends StatelessWidget {
               // My Orders
               MyOrders(),
               Divider(),
-
               // cutomer orders
               CustomerOrders(),
               Divider(),
