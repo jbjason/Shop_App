@@ -12,19 +12,14 @@ import '../screens/orders_screen.dart';
 import 'package:flutter/material.dart';
 import '../providers/auth.dart';
 
-class AppDrawer extends StatefulWidget {
-  @override
-  _AppDrawerState createState() => _AppDrawerState();
-}
-
-class _AppDrawerState extends State<AppDrawer> {
-  bool _isInit = true;
+class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
     return Drawer(
       child: SingleChildScrollView(
         child: Container(
+          padding: EdgeInsets.all(8),
           //color: Color(0xFF4A4A58),
           child: Column(
             children: [
@@ -35,11 +30,8 @@ class _AppDrawerState extends State<AppDrawer> {
               // Offers_screen
               OffersZone(),
               Divider(),
-              ListTile(
-                leading: Icon(Icons.sort_sharp),
-                title: Text('Sort By...'),
-                onTap: () {},
-              ),
+              //sortBy
+              SortByClass(),
               Divider(),
               // manage products
               ManageProducts(),
@@ -79,6 +71,169 @@ class _AppDrawerState extends State<AppDrawer> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SortByClass extends StatefulWidget {
+  @override
+  _SortByClassState createState() => _SortByClassState();
+}
+
+class _SortByClassState extends State<SortByClass> {
+  bool _isExpand = false;
+  double lowValue = 0, highValue = 1000;
+  Widget pointBar() {
+    RangeValues values = RangeValues(lowValue, highValue);
+    return Container(
+      child: SliderTheme(
+        data: SliderThemeData(
+          trackHeight: 10,
+          thumbColor: Colors.red,
+          activeTrackColor: Colors.red.shade200,
+          inactiveTrackColor: Colors.red.shade50,
+          rangeThumbShape: RoundRangeSliderThumbShape(enabledThumbRadius: 15),
+          overlayShape: RoundSliderOverlayShape(overlayRadius: 40),
+        ),
+        child: RangeSlider(
+          values: values,
+          min: 0,
+          max: 2800,
+          divisions: 200,
+          labels: RangeLabels(
+            values.start.round().toString(),
+            values.end.round().toString(),
+          ),
+          onChanged: (val) {
+            setState(() {
+              highValue = val.end;
+            });
+          },
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          ListTile(
+            leading: Icon(Icons.sort_sharp),
+            title: Text('Sort By...'),
+            onTap: () {
+              setState(() {
+                _isExpand = !_isExpand;
+              });
+            },
+          ),
+          Container(
+            height: _isExpand ? 300 : 0,
+            child: Column(
+              children: [
+                Container(
+                  margin: EdgeInsets.only(top: 30, left: 8, bottom: 20),
+                  color: Colors.black12,
+                  alignment: Alignment.center,
+                  height: 40,
+                  child: Text(
+                    'Sort By *(Price)',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text('0',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
+                    Text('1000', style: TextStyle(fontSize: 15)),
+                    Text('2000', style: TextStyle(fontSize: 15)),
+                    Text('+',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 18)),
+                  ],
+                ),
+                pointBar(),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(''),
+                    Text('500'),
+                    Text('1500', style: TextStyle(fontSize: 15)),
+                    Text('2500', style: TextStyle(fontSize: 15)),
+                  ],
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 35, left: 8, bottom: 20),
+                  color: Colors.black12,
+                  alignment: Alignment.center,
+                  height: 40,
+                  child: Text(
+                    'Sort By *(Category)',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(bottom: 20),
+                  padding: EdgeInsets.only(left: 25),
+                  height: 150,
+                  child: ListView(
+                    shrinkWrap: true,
+                    children: [
+                      ListTile(
+                          tileColor: Colors.orange[50],
+                          leading: Text('1. '),
+                          title: Text('jb jason'),
+                          onTap: () {}),
+                      ListTile(
+                          tileColor: Colors.orange[50],
+                          leading: Text('2. '),
+                          title: Text('Dipta Roy'),
+                          onTap: () {}),
+                      ListTile(
+                          leading: Text('3. '),
+                          title: Text('Tanmoy Sarker'),
+                          onTap: () {}),
+                      ListTile(
+                          leading: Text('4. '),
+                          title: Text('Sorovi'),
+                          onTap: () {}),
+                      ListTile(
+                          leading: Text('5. '),
+                          title: Text('Shovon'),
+                          onTap: () {}),
+                      ListTile(
+                          tileColor: Colors.orange[50],
+                          leading: Text('6. '),
+                          title: Text('Mrittunjay'),
+                          onTap: () {}),
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    Spacer(),
+                    ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: Icon(Icons.swap_vert),
+                        label: Text('   Apply')),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
