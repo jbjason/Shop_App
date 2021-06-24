@@ -87,31 +87,29 @@ class _SortByClassState extends State<SortByClass> {
 
   Widget pointBar() {
     RangeValues values = RangeValues(lowValue, highValue);
-    return Container(
-      child: SliderTheme(
-        data: SliderThemeData(
-          trackHeight: 10,
-          thumbColor: Colors.red,
-          activeTrackColor: Colors.red.shade200,
-          inactiveTrackColor: Colors.red.shade50,
-          rangeThumbShape: RoundRangeSliderThumbShape(enabledThumbRadius: 15),
-          overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
+    return SliderTheme(
+      data: SliderThemeData(
+        trackHeight: 10,
+        thumbColor: Colors.red,
+        activeTrackColor: Colors.red.shade200,
+        inactiveTrackColor: Colors.red.shade50,
+        rangeThumbShape: RoundRangeSliderThumbShape(enabledThumbRadius: 15),
+        overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
+      ),
+      child: RangeSlider(
+        values: values,
+        min: 0,
+        max: 2800,
+        divisions: 200,
+        labels: RangeLabels(
+          values.start.round().toString(),
+          values.end.round().toString(),
         ),
-        child: RangeSlider(
-          values: values,
-          min: 0,
-          max: 2800,
-          divisions: 200,
-          labels: RangeLabels(
-            values.start.round().toString(),
-            values.end.round().toString(),
-          ),
-          onChanged: (val) {
-            setState(() {
-              highValue = val.end;
-            });
-          },
-        ),
+        onChanged: (val) {
+          setState(() {
+            highValue = val.end;
+          });
+        },
       ),
     );
   }
