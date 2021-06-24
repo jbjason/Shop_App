@@ -273,6 +273,14 @@ class Products with ChangeNotifier {
     notifyListeners();
   }
 
+  void sortByClass(String cat, double pr) {
+    _items = _items
+        .where(
+            (element) => element.category.contains(cat) && element.price <= pr)
+        .toList();
+    notifyListeners();
+  }
+
   Future<void> setOffersUptoAmount(String imageUrl, String amount,
       String voucherCode, String rewardPoint) async {
     var url =

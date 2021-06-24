@@ -1,3 +1,5 @@
+import 'package:Shop_App/providers/products.dart';
+
 import '../screens/set_nextDayOffer_screen.dart';
 import '../screens/set_offers_screen.dart';
 import '../screens/offers_scrren.dart';
@@ -84,6 +86,12 @@ class SortByClass extends StatefulWidget {
 class _SortByClassState extends State<SortByClass> {
   bool _isExpand = false;
   double lowValue = 0, highValue = 1000;
+
+  void _save(String category) {
+    // category unselected or price sortOut korte hobe
+    Provider.of<Products>(context, listen: false)
+        .sortByClass(category, highValue);
+  }
 
   Widget pointBar() {
     RangeValues values = RangeValues(lowValue, highValue);
@@ -225,9 +233,10 @@ class _SortByClassState extends State<SortByClass> {
                   children: [
                     Spacer(),
                     ElevatedButton.icon(
-                        onPressed: () {},
-                        icon: Icon(Icons.swap_vert),
-                        label: Text('   Apply')),
+                      icon: Icon(Icons.swap_vert),
+                      label: Text('   Apply'),
+                      onPressed: () => _save('cloth'),
+                    ),
                   ],
                 ),
               ],
