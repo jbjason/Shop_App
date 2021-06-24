@@ -121,6 +121,7 @@ class _SortByClassState extends State<SortByClass> {
       child: Column(
         children: [
           ListTile(
+            tileColor: _isExpand ? Colors.green[200] : Colors.transparent,
             leading: Icon(Icons.sort_sharp),
             title: Text('Sort By...'),
             onTap: () {
@@ -130,11 +131,11 @@ class _SortByClassState extends State<SortByClass> {
             },
           ),
           Container(
-            height: _isExpand ? 300 : 0,
+            height: _isExpand ? 550 : 0,
             child: Column(
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 30, left: 8, bottom: 20),
+                  margin: EdgeInsets.only(top: 20, left: 18, bottom: 20),
                   color: Colors.black12,
                   alignment: Alignment.center,
                   height: 40,
@@ -157,7 +158,7 @@ class _SortByClassState extends State<SortByClass> {
                     Text('2000', style: TextStyle(fontSize: 15)),
                     Text('+',
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18)),
+                            fontWeight: FontWeight.bold, fontSize: 20)),
                   ],
                 ),
                 pointBar(),
@@ -172,7 +173,7 @@ class _SortByClassState extends State<SortByClass> {
                   ],
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 35, left: 8, bottom: 20),
+                  margin: EdgeInsets.only(top: 35, left: 18, bottom: 20),
                   color: Colors.black12,
                   alignment: Alignment.center,
                   height: 40,
