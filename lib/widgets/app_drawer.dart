@@ -84,6 +84,7 @@ class SortByClass extends StatefulWidget {
 class _SortByClassState extends State<SortByClass> {
   bool _isExpand = false;
   double lowValue = 0, highValue = 1000;
+
   Widget pointBar() {
     RangeValues values = RangeValues(lowValue, highValue);
     return Container(
@@ -94,7 +95,7 @@ class _SortByClassState extends State<SortByClass> {
           activeTrackColor: Colors.red.shade200,
           inactiveTrackColor: Colors.red.shade50,
           rangeThumbShape: RoundRangeSliderThumbShape(enabledThumbRadius: 15),
-          overlayShape: RoundSliderOverlayShape(overlayRadius: 40),
+          overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
         ),
         child: RangeSlider(
           values: values,
