@@ -12,14 +12,6 @@ class ProductsGrid extends StatefulWidget {
 
 class _ProductsGridState extends State<ProductsGrid> {
   int selectedIndex = 0;
-  final List<String> _category = [
-    'All Products',
-    'Favorites',
-    'Electronics',
-    'Sports',
-    'Groceries',
-    'Cloths'
-  ];
 
   @override
   void dispose() {
@@ -30,6 +22,7 @@ class _ProductsGridState extends State<ProductsGrid> {
   Widget build(BuildContext context) {
     final heightOfScreen = MediaQuery.of(context).size.height;
     final productsData = Provider.of<Products>(context);
+    final List<String> _category = productsData.categories;
     final products =
         widget.showFabs ? productsData.favoriteItems : productsData.items;
 
@@ -137,7 +130,7 @@ class DataSearch extends SearchDelegate<String> {
   final List<String> _hints;
   DataSearch(this._hints);
   final recentCities = [
-    "London",
+    "Red T-shirt",
     "Munich",
     "Paris",
   ];

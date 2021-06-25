@@ -106,9 +106,6 @@ class Products with ChangeNotifier {
       test.add(value);
     });
     _categories = test;
-    print(_categories[0]);
-    print(_categories[1]);
-    print(_categories[2]);
     notifyListeners();
   }
 
