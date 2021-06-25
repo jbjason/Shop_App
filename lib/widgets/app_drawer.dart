@@ -129,7 +129,7 @@ class _SortByClassState extends State<SortByClass> {
           ListTile(
             tileColor: _isExpand ? Colors.green[200] : Colors.transparent,
             leading: Icon(Icons.sort_sharp),
-            title: Text('Sort By...'),
+            title: Text('Search By...'),
             onTap: () {
               setState(() {
                 _isExpand = !_isExpand;
