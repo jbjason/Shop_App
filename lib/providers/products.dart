@@ -91,6 +91,27 @@ class Products with ChangeNotifier {
     return _items.firstWhere((element) => element.id == id);
   }
 
+  List<String> _categories = [];
+  List<String> get categories {
+    return [..._categories];
+  }
+
+  Future<void> fetchAndSetCategories() async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/category.json?auth=$authToken';
+    final response = await http.get(url);
+    final extract = json.decode(response.body) as Map<String, dynamic>;
+    final List<String> test = [];
+    extract.forEach((_, value) {
+      test.add(value);
+    });
+    _categories = test;
+    print(_categories[0]);
+    print(_categories[1]);
+    print(_categories[2]);
+    notifyListeners();
+  }
+
   // imageUrl2 & imageUrl3 empty return korbe jodi url insert kora na thake
   Future<void> fetchAndSetProducts() async {
     //String filterString =filterByUser ? '&orderBy="creatorId"&equalTo="$userId"' : '';

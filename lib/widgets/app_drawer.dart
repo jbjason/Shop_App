@@ -88,8 +88,8 @@ class _SortByClassState extends State<SortByClass> {
 
   void _save(String category) {
     // category unselected or price sortOut korte hobe
-    Provider.of<Products>(context, listen: false)
-        .sortByClass(category, highValue);
+    // Provider.of<Products>(context, listen: false)
+    //     .sortByClass(category, highValue);
   }
 
   Widget pointBar() {
