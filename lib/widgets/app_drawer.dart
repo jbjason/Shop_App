@@ -85,11 +85,12 @@ class SortByClass extends StatefulWidget {
 class _SortByClassState extends State<SortByClass> {
   bool _isExpand = false;
   double lowValue = 0, highValue = 1000;
+  int _selectedIndex = 0;
 
   void _save(String category) {
     // category unselected or price sortOut korte hobe
-    // Provider.of<Products>(context, listen: false)
-    //     .sortByClass(category, highValue);
+    Provider.of<Products>(context, listen: false)
+        .sortByClass(category, highValue);
   }
 
   Widget pointBar() {
@@ -123,9 +124,12 @@ class _SortByClassState extends State<SortByClass> {
 
   @override
   Widget build(BuildContext context) {
+    final List<String> _category =
+        Provider.of<Products>(context, listen: false).categories;
     return Container(
       child: Column(
         children: [
+          // SearchBy title
           ListTile(
             tileColor: _isExpand ? Colors.green[200] : Colors.transparent,
             leading: Icon(Icons.sort_sharp),
@@ -195,37 +199,21 @@ class _SortByClassState extends State<SortByClass> {
                   margin: EdgeInsets.only(bottom: 20),
                   padding: EdgeInsets.only(left: 25),
                   height: 150,
-                  child: ListView(
+                  child: ListView.builder(
                     shrinkWrap: true,
-                    children: [
-                      ListTile(
-                          tileColor: Colors.orange[50],
-                          leading: Text('1. '),
-                          title: Text('jb jason'),
-                          onTap: () {}),
-                      ListTile(
-                          tileColor: Colors.orange[50],
-                          leading: Text('2. '),
-                          title: Text('Dipta Roy'),
-                          onTap: () {}),
-                      ListTile(
-                          leading: Text('3. '),
-                          title: Text('Tanmoy Sarker'),
-                          onTap: () {}),
-                      ListTile(
-                          leading: Text('4. '),
-                          title: Text('Sorovi'),
-                          onTap: () {}),
-                      ListTile(
-                          leading: Text('5. '),
-                          title: Text('Shovon'),
-                          onTap: () {}),
-                      ListTile(
-                          tileColor: Colors.orange[50],
-                          leading: Text('6. '),
-                          title: Text('Mrittunjay'),
-                          onTap: () {}),
-                    ],
+                    itemBuilder: (context, index) => ListTile(
+                      tileColor: index == _selectedIndex
+                          ? Colors.orange[200]
+                          : Colors.orange[50].withOpacity(0.8),
+                      leading: Text('$index. '),
+                      title: Text(_category[index]),
+                      onTap: () {
+                        setState(() {
+                          _selectedIndex = index;
+                        });
+                      },
+                    ),
+                    itemCount: _category.length,
                   ),
                 ),
                 Row(
@@ -234,7 +222,7 @@ class _SortByClassState extends State<SortByClass> {
                     ElevatedButton.icon(
                       icon: Icon(Icons.swap_vert),
                       label: Text('   Apply'),
-                      onPressed: () => _save('cloth'),
+                      onPressed: () {},
                     ),
                   ],
                 ),
