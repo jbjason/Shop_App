@@ -85,10 +85,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
           .rewardPoint;
       cutAmount -= s;
     }
-    email = _emailController.text;
-    name = _nameController.text;
-    contact = _contactController.text;
-    address = _addressController.text;
+    email = _emailController.text.trim();
+    name = _nameController.text.trim();
+    contact = _contactController.text.trim();
+    address = _addressController.text.trim();
     await Provider.of<Orders>(context, listen: false)
         .addOrder(cart.items.values.toList(), cutAmount)
         .then((_) {
