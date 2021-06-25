@@ -205,7 +205,7 @@ class _SortByClassState extends State<SortByClass> {
                       tileColor: index == _selectedIndex
                           ? Colors.orange[200]
                           : Colors.orange[50].withOpacity(0.8),
-                      leading: Text('$index. '),
+                      leading: Text('${index + 1}. '),
                       title: Text(_category[index]),
                       onTap: () {
                         setState(() {
