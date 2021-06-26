@@ -23,44 +23,36 @@ class ThanksScreen extends StatelessWidget {
           child: ListView(
             shrinkWrap: true,
             children: [
-              Container(
-                color: Colors.pink,
-                height: 22,
-                child: Text(
-                  'Your order has been placed successfully !',
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-              ),
+              SuccessFullText(),
               InvoiceTitleAndOrderId(orderId: orderId),
               UserInfoDetails(
                   size: size, name: name, address: address, contact: contact),
-              // Container(
-              //   height: length * 22.0 + 10,
-              //   child: ListView(
-              //     physics: NeverScrollableScrollPhysics(),
-              //     children: widget.order.products
-              //         .map((prod) => Row(
-              //               children: [
-              //                 Text(
-              //                   '${prod.title}',
-              //                   overflow: TextOverflow.fade,
-              //                   style: TextStyle(
-              //                       fontSize: 18, fontWeight: FontWeight.bold),
-              //                 ),
-              //                 Spacer(),
-              //                 Text(
-              //                   '${prod.quantity}x  \$${prod.price}',
-              //                   style: TextStyle(
-              //                     fontSize: 15,
-              //                     fontWeight: FontWeight.bold,
-              //                   ),
-              //                 ),
-              //               ],
-              //             ))
-              //         .toList(),
-              //   ),
-              // ),
+              Container(
+                height: finalProduct.length * 22.0 + 10,
+                child: ListView(
+                  physics: NeverScrollableScrollPhysics(),
+                  children: finalProduct
+                      .map((prod) => Row(
+                            children: [
+                              Text(
+                                '${prod.title}',
+                                overflow: TextOverflow.fade,
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.bold),
+                              ),
+                              Spacer(),
+                              Text(
+                                '${prod.quantity}x  \$${prod.price}',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ))
+                      .toList(),
+                ),
+              ),
               SubTotalOfferAmount(
                   finalAmount: finalAmount,
                   finalPoint: finalPoint,
@@ -70,6 +62,24 @@ class ThanksScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SuccessFullText extends StatelessWidget {
+  const SuccessFullText({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.pink,
+      height: 22,
+      child: Text(
+        'Your order has been placed successfully !',
+        style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
       ),
     );
   }
