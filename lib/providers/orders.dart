@@ -31,6 +31,10 @@ class Orders with ChangeNotifier {
     return [..._orders];
   }
 
+  String get customerOrderId {
+    return _customerOrderId.toString();
+  }
+
   List<ConfirmOrdersClass> _customerOrders = [];
   List<ConfirmOrdersClass> get customerOrders {
     return [..._customerOrders];

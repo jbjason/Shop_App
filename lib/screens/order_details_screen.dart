@@ -67,23 +67,30 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     });
     final userLocalId = Provider.of<Auth>(context, listen: false).userId;
     final cart = Provider.of<Cart>(context, listen: false);
-    String totalCartItems = cart.itemCount.toString();
+    // this three for sending to ThanksScreen
+    double finalAmount, finalVoucher = 0;
+    int finalPoint = 0;
+    final List<CartItem> finalProducts = cart.items.values.toList();
     // amount,Bonus smaller & bigger conflict solve
     double cutAmount = cart.totalAmount;
+    finalAmount = cutAmount;
     if (_isUsePointsYes) {
       if (point >= cutAmount) {
+        finalPoint = cutAmount.toInt();
         cutAmount = point - cutAmount;
         point = cutAmount.toInt();
       } else {
         cutAmount = cutAmount - point;
+        finalPoint = point;
         point = 2;
       }
     }
     if (_isVoucherCodeOk) {
-      final s = Provider.of<Products>(context, listen: false)
+      final double s = Provider.of<Products>(context, listen: false)
           .uptoOffersList[_voucherIndex]
           .rewardPoint;
       cutAmount -= s;
+      finalVoucher = s;
     }
     email = _emailController.text.trim();
     name = _nameController.text.trim();
@@ -108,8 +115,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     setState(() {
       _isLoading = false;
     });
-    Navigator.of(context).pushNamed(ThanksScreen.routeName,
-        arguments: [totalCartItems, address]);
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ThanksScreen(finalProducts, finalPoint,
+          finalVoucher, finalAmount, name, address, contact),
+    ));
   }
 
   void checkingVoucher(String _voucherText) {
