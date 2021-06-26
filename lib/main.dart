@@ -7,7 +7,6 @@ import './screens/return_productsList_screen.dart';
 import 'screens/order_details_screen.dart';
 import 'screens/return_productForm_screen.dart';
 import './screens/suggestion_Report_Screen.dart';
-import './screens/thanksScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './screens/products_overview_screen.dart';
@@ -78,7 +77,6 @@ class MyApp extends StatelessWidget {
               UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
               EditProductScreen.routeName: (ctx) => EditProductScreen(),
               OrderDetailsScreen.routeName: (ctx) => OrderDetailsScreen(),
-              ThanksScreen.routeName: (ctx) => ThanksScreen(),
               SuggestionReportScreen.routeName: (ctx) =>
                   SuggestionReportScreen(),
               // this is the Return_productForm_scree

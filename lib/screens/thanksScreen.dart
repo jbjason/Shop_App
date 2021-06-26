@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class ThanksScreen extends StatelessWidget {
-  static const routeName = '/thanks-screen';
   final String name, address, contact;
   final double finalAmount, finalVoucher;
   final int finalPoint;
