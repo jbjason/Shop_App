@@ -16,68 +16,83 @@ class ThanksScreen extends StatelessWidget {
     final String orderId =
         Provider.of<Orders>(context, listen: false).customerOrderId;
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(10.0),
-          child: ListView(
-            shrinkWrap: true,
-            children: [
-              SuccessFullText(),
-              InvoiceTitleAndOrderId(orderId: orderId),
-              UserInfoDetails(
-                  size: size, name: name, address: address, contact: contact),
-              Row(
-                children: [
-                  SizedBox(width: 5),
-                  Text('Title', style: TextStyle(fontWeight: FontWeight.bold)),
-                  Spacer(),
-                  Text('Quantity',
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  SizedBox(width: 5),
-                  Text('Price', style: TextStyle(fontWeight: FontWeight.bold)),
-                ],
-              ),
-              Card(
-                child: Container(
-                  padding: EdgeInsets.all(5),
-                  height: finalProduct.length * 24.0 + 10,
-                  child: ListView(
-                    physics: NeverScrollableScrollPhysics(),
-                    children: finalProduct
-                        .map((prod) => Row(
-                              children: [
-                                Text(
-                                  '${prod.title}',
-                                  overflow: TextOverflow.fade,
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Spacer(),
-                                Text(
-                                  '${prod.quantity}x  \$${prod.price}',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ],
-                            ))
-                        .toList(),
-                  ),
-                ),
-              ),
-              SubTotalOfferAmount(
-                  finalAmount: finalAmount,
-                  finalPoint: finalPoint,
-                  finalVoucher: finalVoucher),
-              SizedBox(height: 15),
-              GoBackButton(),
-            ],
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.all(10.0),
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                SuccessFullText(),
+                InvoiceTitleAndOrderId(orderId: orderId),
+                UserInfoDetails(
+                    size: size, name: name, address: address, contact: contact),
+                TitlePriceAsTitleText(),
+                ProductsDetails(finalProduct: finalProduct),
+                SubTotalOfferAmount(
+                    finalAmount: finalAmount,
+                    finalPoint: finalPoint,
+                    finalVoucher: finalVoucher),
+                SizedBox(height: 15),
+                GoBackButton(),
+              ],
+            ),
           ),
         ),
       ),
+    );
+  }
+}
+
+class ProductsDetails extends StatelessWidget {
+  const ProductsDetails({
+    Key key,
+    @required this.finalProduct,
+  }) : super(key: key);
+
+  final List<CartItem> finalProduct;
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 8,
+      child: Container(
+        padding: EdgeInsets.all(5),
+        height: finalProduct.length * 24.0 + 10,
+        child: ListView(
+          physics: NeverScrollableScrollPhysics(),
+          children: finalProduct
+              .map((prod) => Row(
+                    children: [
+                      Text('${prod.title}', overflow: TextOverflow.fade),
+                      Spacer(),
+                      Text('${prod.quantity}x  \$${prod.price}'),
+                    ],
+                  ))
+              .toList(),
+        ),
+      ),
+    );
+  }
+}
+
+class TitlePriceAsTitleText extends StatelessWidget {
+  const TitlePriceAsTitleText({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        SizedBox(width: 20),
+        Text('Title', style: TextStyle(fontWeight: FontWeight.bold)),
+        Spacer(),
+        Text('Quantity', style: TextStyle(fontWeight: FontWeight.bold)),
+        SizedBox(width: 12),
+        Text('Price', style: TextStyle(fontWeight: FontWeight.bold)),
+      ],
     );
   }
 }
@@ -91,7 +106,7 @@ class SuccessFullText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.pink,
-      height: 22,
+      height: 28,
       child: Text(
         'Your order has been placed successfully !',
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -229,7 +244,7 @@ class InvoiceTitleAndOrderId extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(16.0),
-      margin: EdgeInsets.only(bottom: 30),
+      margin: EdgeInsets.only(bottom: 15),
       color: Colors.black26,
       child: Row(
         children: [
