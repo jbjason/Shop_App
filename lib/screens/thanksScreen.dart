@@ -27,30 +27,45 @@ class ThanksScreen extends StatelessWidget {
               InvoiceTitleAndOrderId(orderId: orderId),
               UserInfoDetails(
                   size: size, name: name, address: address, contact: contact),
-              Container(
-                height: finalProduct.length * 22.0 + 10,
-                child: ListView(
-                  physics: NeverScrollableScrollPhysics(),
-                  children: finalProduct
-                      .map((prod) => Row(
-                            children: [
-                              Text(
-                                '${prod.title}',
-                                overflow: TextOverflow.fade,
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
-                              Spacer(),
-                              Text(
-                                '${prod.quantity}x  \$${prod.price}',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
+              Row(
+                children: [
+                  SizedBox(width: 5),
+                  Text('Title', style: TextStyle(fontWeight: FontWeight.bold)),
+                  Spacer(),
+                  Text('Quantity',
+                      style: TextStyle(fontWeight: FontWeight.bold)),
+                  SizedBox(width: 5),
+                  Text('Price', style: TextStyle(fontWeight: FontWeight.bold)),
+                ],
+              ),
+              Card(
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  height: finalProduct.length * 24.0 + 10,
+                  child: ListView(
+                    physics: NeverScrollableScrollPhysics(),
+                    children: finalProduct
+                        .map((prod) => Row(
+                              children: [
+                                Text(
+                                  '${prod.title}',
+                                  overflow: TextOverflow.fade,
+                                  style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
                                 ),
-                              ),
-                            ],
-                          ))
-                      .toList(),
+                                Spacer(),
+                                Text(
+                                  '${prod.quantity}x  \$${prod.price}',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ))
+                        .toList(),
+                  ),
                 ),
               ),
               SubTotalOfferAmount(
