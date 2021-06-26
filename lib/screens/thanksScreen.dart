@@ -25,98 +25,16 @@ class ThanksScreen extends StatelessWidget {
             children: [
               Container(
                 color: Colors.pink,
+                height: 22,
                 child: Text(
-                  'Your order has been placed successfully',
+                  'Your order has been placed successfully !',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.bold),
                 ),
               ),
-              Text(finalProduct[0].price.toString()),
-              Text(finalProduct[0].title),
-              Text(finalProduct[0].quantity.toString()),
-              Container(
-                padding: EdgeInsets.all(16.0),
-                margin: EdgeInsets.only(bottom: 30),
-                color: Colors.black26,
-                child: Row(
-                  children: [
-                    Spacer(),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text('INVOICE',
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 26)),
-                        SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Text('OrderId :'),
-                            Text('$orderId'),
-                          ],
-                        ),
-                        Row(children: [
-                          Text('Date : '),
-                          Text(
-                              DateFormat('dd-mm -yyyy').format(DateTime.now())),
-                        ]),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(12),
-                child: Card(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 10),
-                      Container(
-                        width: size.width * 8,
-                        child: Text(
-                          'Bill TO : ',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Row(
-                        children: [
-                          Container(width: 70, child: Text('Name :')),
-                          Text('$name',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 14)),
-                        ],
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Container(width: 70, child: Text('Address :')),
-                          Container(
-                            width: 280,
-                            child: Text(address,
-                                //overflow: TextOverflow.ellipsis,
-                                maxLines: 6,
-                                style: TextStyle(fontSize: 14)),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 8),
-                      Row(
-                        children: [
-                          Container(width: 70, child: Text('Contact :')),
-                          Text(contact, style: TextStyle(fontSize: 14)),
-                        ],
-                      ),
-                      SizedBox(height: 16),
-                      Text(
-                        '* Estimated Delivary in 7days *',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
+              InvoiceTitleAndOrderId(orderId: orderId),
+              UserInfoDetails(
+                  size: size, name: name, address: address, contact: contact),
               // Container(
               //   height: length * 22.0 + 10,
               //   child: ListView(
@@ -143,41 +61,173 @@ class ThanksScreen extends StatelessWidget {
               //         .toList(),
               //   ),
               // ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  RichText(
-                    text: TextSpan(children: [
-                      TextSpan(
-                          text: '    Sub Total : \$ $finalAmount\n\n',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.black,
-                              fontSize: 20)),
-                      TextSpan(
-                          text:
-                              '    Discount : \$ ${finalPoint + finalVoucher}\n\n',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.black,
-                              fontSize: 20)),
-                      TextSpan(
-                          text:
-                              '    Grand Total : \$ ${finalAmount - (finalPoint + finalVoucher)}\n\n',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold)),
-                    ]),
-                  ),
-                ],
-              ),
+              SubTotalOfferAmount(
+                  finalAmount: finalAmount,
+                  finalPoint: finalPoint,
+                  finalVoucher: finalVoucher),
               SizedBox(height: 15),
               GoBackButton(),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class SubTotalOfferAmount extends StatelessWidget {
+  const SubTotalOfferAmount({
+    Key key,
+    @required this.finalAmount,
+    @required this.finalPoint,
+    @required this.finalVoucher,
+  }) : super(key: key);
+
+  final double finalAmount;
+  final int finalPoint;
+  final double finalVoucher;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        RichText(
+          text: TextSpan(children: [
+            TextSpan(
+                text: '    Sub Total : \$ $finalAmount\n\n',
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.black,
+                    fontSize: 20)),
+            TextSpan(
+                text: '    Discount : \$ ${finalPoint + finalVoucher}\n\n',
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.black,
+                    fontSize: 20)),
+            TextSpan(
+                text:
+                    '    Grand Total : \$ ${finalAmount - (finalPoint + finalVoucher)}\n\n',
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold)),
+          ]),
+        ),
+      ],
+    );
+  }
+}
+
+class UserInfoDetails extends StatelessWidget {
+  const UserInfoDetails({
+    Key key,
+    @required this.size,
+    @required this.name,
+    @required this.address,
+    @required this.contact,
+  }) : super(key: key);
+
+  final Size size;
+  final String name;
+  final String address;
+  final String contact;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(12),
+      child: Card(
+        child: Column(
+          children: [
+            SizedBox(height: 10),
+            Container(
+              width: size.width * 8,
+              child: Text(
+                'Bill TO : ',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+            ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Container(width: 70, child: Text('Name :')),
+                Text('$name',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Container(width: 70, child: Text('Address :')),
+                Container(
+                  width: 280,
+                  child: Text(address,
+                      //overflow: TextOverflow.ellipsis,
+                      maxLines: 6,
+                      style: TextStyle(fontSize: 14)),
+                ),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              children: [
+                Container(width: 70, child: Text('Contact :')),
+                Text(contact, style: TextStyle(fontSize: 14)),
+              ],
+            ),
+            SizedBox(height: 16),
+            Text(
+              '* Estimated Delivary in 7days *',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class InvoiceTitleAndOrderId extends StatelessWidget {
+  const InvoiceTitleAndOrderId({
+    Key key,
+    @required this.orderId,
+  }) : super(key: key);
+
+  final String orderId;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(16.0),
+      margin: EdgeInsets.only(bottom: 30),
+      color: Colors.black26,
+      child: Row(
+        children: [
+          Spacer(),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text('INVOICE',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 26)),
+              SizedBox(height: 8),
+              Row(
+                children: [
+                  Text('OrderId :'),
+                  Text('$orderId'),
+                ],
+              ),
+              Row(children: [
+                Text('Date : '),
+                Text(DateFormat('dd-mm -yyyy').format(DateTime.now())),
+              ]),
+            ],
+          )
+        ],
       ),
     );
   }
