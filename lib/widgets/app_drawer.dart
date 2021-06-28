@@ -1,3 +1,5 @@
+import 'package:Shop_App/screens/statistic_screen.dart';
+
 import '../providers/products.dart';
 import '../screens/set_nextDayOffer_screen.dart';
 import '../screens/set_offers_screen.dart';
@@ -58,6 +60,9 @@ class AppDrawer extends StatelessWidget {
               // Return Prod List
               ReturnProductList(),
               Divider(),
+              // Business Statistic
+              StatisTic(),
+              Divider(),
               // Suggestion or Report form
               SuggestionOrReport(auth: auth),
               Divider(),
@@ -73,6 +78,23 @@ class AppDrawer extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+}
+
+class StatisTic extends StatelessWidget {
+  const StatisTic({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(Icons.bar_chart),
+      title: Text('Business Statistic'),
+      onTap: () {
+        Navigator.of(context).pushNamed(StatisticScreen.routeName);
+      },
     );
   }
 }

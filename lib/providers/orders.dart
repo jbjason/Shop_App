@@ -45,6 +45,25 @@ class Orders with ChangeNotifier {
     return [..._returnProducts];
   }
 
+  double _totalRevenue = 0;
+  int _totalSell = 0;
+  double get totalRevenue {
+    return _totalRevenue;
+  }
+
+  int get totalSell {
+    return _totalSell;
+  }
+
+  int get totalPending {
+    return _customerOrders
+        .where(
+          (element) => element.status == 'Pending',
+        )
+        .toList()
+        .length;
+  }
+
   List<OrderItem> recentTransactions(int _day) {
     return _orders.where((element) {
       return element.dateTime
@@ -332,5 +351,31 @@ class Orders with ChangeNotifier {
       throw HttpException('Could not delete product');
     }
     exProduct = null;
+  }
+
+  Future<void> fetchAndSetStatistic() async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/statistic.json?auth=$authToken';
+    try {
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      _totalRevenue = extractedData['total'];
+      _totalSell = extractedData['count'];
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> updateStatistic(double amount) async {
+    final url =
+        'https://flutter-update-67f54.firebaseio.com/statistic.json?auth=$authToken';
+    try {
+      await http.put(url,
+          body: json.encode(
+              {'total': _totalRevenue + amount, 'count': _totalSell + 1}));
+    } catch (error) {
+      throw error;
+    }
   }
 }

@@ -1,3 +1,4 @@
+import './screens/statistic_screen.dart';
 import './screens/set_specialOffer_screen.dart';
 import './screens/set_nextDayOffer_screen.dart';
 import './screens/set_offers_screen.dart';
@@ -88,6 +89,7 @@ class MyApp extends StatelessWidget {
               SetOffersScreen.routeName: (ctx) => SetOffersScreen(),
               SetNextDayOfferScreen.routeName: (ctx) => SetNextDayOfferScreen(),
               SetSpecialOfferScreen.routeName: (ctx) => SetSpecialOfferScreen(),
+              StatisticScreen.routeName: (ctx) => StatisticScreen(),
             },
           ),
         ));
