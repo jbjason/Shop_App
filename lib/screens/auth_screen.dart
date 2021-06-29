@@ -262,8 +262,9 @@ class _AuthCardState extends State<AuthCard>
                     opacity: _opacityAnimation,
                     child: TextFormField(
                       enabled: _authMode == AuthMode.Signup,
-                      decoration:
-                          InputDecoration(labelText: 'Confirm Password'),
+                      decoration: InputDecoration(
+                          labelText: 'Confirm Password',
+                          prefixIcon: Icon(Icons.lock)),
                       obscureText: true,
                       validator: _authMode == AuthMode.Signup
                           ? (value) {
