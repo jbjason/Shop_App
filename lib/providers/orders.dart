@@ -25,6 +25,8 @@ class Orders with ChangeNotifier {
   final String authToken, userId;
   int _pointt;
   var timeStop, _customerOrderId;
+  double _totalRevenue = 0;
+  int _totalSell = 0;
   Orders(this.authToken, this.userId, this._orders);
   List<OrderItem> _orders = [];
   List<OrderItem> get orders {
@@ -45,8 +47,6 @@ class Orders with ChangeNotifier {
     return [..._returnProducts];
   }
 
-  double _totalRevenue = 0;
-  int _totalSell = 0;
   double get totalRevenue {
     return _totalRevenue;
   }
@@ -354,19 +354,19 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchAndSetStatistic() async {
-    final url = Uri.parse(
-        'https://flutter-update-67f54.firebaseio.com/statistic.json?auth=$authToken');
-    try {
-      final response = await http.get(url);
-      final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      _totalRevenue = extractedData['total'];
-      _totalSell = extractedData['count'];
-      await fetchAndSetCustomerOrders();
-      await fetchAndSetReturnList();
-      notifyListeners();
-    } catch (error) {
-      throw error;
-    }
+    // final url = Uri.parse(
+    //     'https://flutter-update-67f54.firebaseio.com/statistic.json?auth=$authToken');
+    // try {
+    //   final response = await http.get(url);
+    //   final extractedData = json.decode(response.body) as Map<String, dynamic>;
+    //   _totalRevenue = extractedData['total'];
+    //   _totalSell = extractedData['count'];
+    //   await fetchAndSetCustomerOrders();
+    //   await fetchAndSetReturnList();
+    //   notifyListeners();
+    // } catch (error) {
+    //   throw error;
+    // }
   }
 
   Future<void> updateStatistic(double amount) async {
