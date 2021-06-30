@@ -354,19 +354,19 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchAndSetStatistic() async {
-    // final url = Uri.parse(
-    //     'https://flutter-update-67f54.firebaseio.com/statistic.json?auth=$authToken');
-    // try {
-    //   final response = await http.get(url);
-    //   final extractedData = json.decode(response.body) as Map<String, dynamic>;
-    //   _totalRevenue = extractedData['total'];
-    //   _totalSell = extractedData['count'];
-    //   await fetchAndSetCustomerOrders();
-    //   await fetchAndSetReturnList();
-    //   notifyListeners();
-    // } catch (error) {
-    //   throw error;
-    // }
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/statistic.json?auth=$authToken');
+    try {
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      _totalRevenue = extractedData['total'];
+      _totalSell = extractedData['count'];
+      //await fetchAndSetCustomerOrders();
+      // await fetchAndSetReturnList();
+      notifyListeners();
+    } catch (error) {
+      throw error;
+    }
   }
 
   Future<void> updateStatistic(double amount) async {
