@@ -58,7 +58,7 @@ class Orders with ChangeNotifier {
   int get totalPending {
     final List<ConfirmOrdersClass> ss = _customerOrders
         .where(
-          (element) => element.status == 'Pending',
+          (element) => element.status == "Pending",
         )
         .toList();
     return ss.length;
@@ -359,11 +359,10 @@ class Orders with ChangeNotifier {
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      _totalRevenue = extractedData['total'];
       _totalSell = extractedData['count'];
-      //await fetchAndSetCustomerOrders();
-      // await fetchAndSetReturnList();
-      notifyListeners();
+      _totalRevenue = extractedData['total'];
+      fetchAndSetCustomerOrders();
+      fetchAndSetReturnList();
     } catch (error) {
       throw error;
     }

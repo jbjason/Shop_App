@@ -113,8 +113,8 @@ class StatisticScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  'jb',
-                                  //'${statData.totalPending} /-',
+                                  //'jb',
+                                  '${statData.totalPending} /-',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 20,
@@ -144,8 +144,8 @@ class StatisticScreen extends StatelessWidget {
                                 ),
                                 Expanded(
                                     child: Text(
-                                  'jjj',
-                                  //'${statData.returnProducts.length} /-',
+                                  //'jjj',
+                                  '${statData.returnProducts.length} /-',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     fontSize: 20,
