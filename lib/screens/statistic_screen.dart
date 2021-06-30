@@ -9,7 +9,7 @@ class StatisticScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final statData = Provider.of<Orders>(context, listen: false);
+    //final statData = Provider.of<Orders>(context, listen: false);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -30,135 +30,137 @@ class StatisticScreen extends StatelessWidget {
             } else if (dataSnapShot.error != null) {
               return Center(child: Text('An error occured'));
             } else {
-              return Center(
-                child: Padding(
-                  padding: EdgeInsets.all(15),
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: [
-                      Container(
-                          margin: EdgeInsets.all(15),
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              Container(
-                                width: size.width * .3,
-                                child: Text(
-                                  'Total Revenue:  ',
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
+              return Consumer<Orders>(
+                builder: (ctx, statData, _) => Center(
+                  child: Padding(
+                    padding: EdgeInsets.all(15),
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.all(15),
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: size.width * .3,
+                                  child: Text(
+                                    'Total Revenue:  ',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                  child: Text(
-                                '${statData.totalRevenue} /=',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              )),
-                            ],
-                          )),
-                      Divider(
-                        color: Colors.pink,
-                        height: 5,
-                        thickness: 3,
-                      ),
-                      Container(
-                          margin: EdgeInsets.all(15),
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              Container(
-                                width: size.width * .3,
-                                child: Text(
-                                  'Total Sell:  ',
+                                Expanded(
+                                    child: Text(
+                                  '${statData.totalRevenue} /=',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                )),
+                              ],
+                            )),
+                        Divider(
+                          color: Colors.pink,
+                          height: 5,
+                          thickness: 3,
+                        ),
+                        Container(
+                            margin: EdgeInsets.all(15),
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: size.width * .3,
+                                  child: Text(
+                                    'Total Sell:  ',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                  child: Text(
-                                '${statData.totalSell} /-',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              )),
-                            ],
-                          )),
-                      Divider(
-                        color: Colors.pink,
-                        height: 5,
-                        thickness: 3,
-                      ),
-                      Container(
-                          margin: EdgeInsets.all(15),
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              Container(
-                                width: size.width * .3,
-                                child: Text(
-                                  'Total Pending:  ',
+                                Expanded(
+                                    child: Text(
+                                  '${statData.totalSell} /-',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                )),
+                              ],
+                            )),
+                        Divider(
+                          color: Colors.pink,
+                          height: 5,
+                          thickness: 3,
+                        ),
+                        Container(
+                            margin: EdgeInsets.all(15),
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: size.width * .3,
+                                  child: Text(
+                                    'Total Pending:  ',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                  child: Text(
-                                'jb',
-                                //'${statData.totalPending} /-',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              )),
-                            ],
-                          )),
-                      Divider(
-                        color: Colors.pink,
-                        height: 5,
-                        thickness: 3,
-                      ),
-                      Container(
-                          margin: EdgeInsets.all(15),
-                          width: double.infinity,
-                          child: Row(
-                            children: [
-                              Container(
-                                width: size.width * .3,
-                                child: Text(
-                                  'Returns Pending:  ',
+                                Expanded(
+                                    child: Text(
+                                  'jb',
+                                  //'${statData.totalPending} /-',
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20,
+                                  ),
+                                )),
+                              ],
+                            )),
+                        Divider(
+                          color: Colors.pink,
+                          height: 5,
+                          thickness: 3,
+                        ),
+                        Container(
+                            margin: EdgeInsets.all(15),
+                            width: double.infinity,
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: size.width * .3,
+                                  child: Text(
+                                    'Returns Pending:  ',
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                  child: Text(
-                                'jjj',
-                                //'${statData.returnProducts.length} /-',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 20,
-                                ),
-                              )),
-                            ],
-                          )),
-                      Divider(
-                        color: Colors.pink,
-                        height: 5,
-                        thickness: 3,
-                      ),
-                    ],
+                                Expanded(
+                                    child: Text(
+                                  'jjj',
+                                  //'${statData.returnProducts.length} /-',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                  ),
+                                )),
+                              ],
+                            )),
+                        Divider(
+                          color: Colors.pink,
+                          height: 5,
+                          thickness: 3,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
