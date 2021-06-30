@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'dart:async';
-
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/http_exception.dart';
 import 'package:flutter/material.dart';
@@ -39,8 +38,8 @@ class Auth with ChangeNotifier {
 
   Future<void> _authenticate(
       String email, String password, String urlSegment) async {
-    final url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyAuZi5SdwleTshce5N9HG6mX4OqKpVJt8I';
+    final url = Uri.parse(
+        'https://identitytoolkit.googleapis.com/v1/accounts:$urlSegment?key=AIzaSyAuZi5SdwleTshce5N9HG6mX4OqKpVJt8I');
     try {
       final response = await http.post(url,
           body: json.encode({

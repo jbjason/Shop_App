@@ -29,8 +29,8 @@ class Product with ChangeNotifier {
     bool oldF = isFavorite;
     isFavorite = !isFavorite;
     notifyListeners();
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/userFavorites/$userId/$id.json?auth=$token';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/userFavorites/$userId/$id.json?auth=$token');
     try {
       await http.put(url,
           body: json.encode(

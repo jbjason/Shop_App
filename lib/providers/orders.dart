@@ -79,8 +79,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchAndSetOrders() async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/orders/$userId.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/orders/$userId.json?auth=$authToken');
     final response = await http.get(url);
     // empty list initialized
     final List<OrderItem> loadedOrders = [];
@@ -109,8 +109,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> addOrder(List<CartItem> cartProducts, double total) async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/orders/$userId.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/orders/$userId.json?auth=$authToken');
     timeStop = DateTime.now();
     final response = await http.post(url,
         body: json.encode({
@@ -139,8 +139,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchAndSetCustomerOrders() async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken');
     try {
       final response = await http.get(url);
       final List<ConfirmOrdersClass> loadedOrders = [];
@@ -184,8 +184,8 @@ class Orders with ChangeNotifier {
       List<CartItem> cartProducts,
       double total,
       String userLocalId) {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/confirmedOrders.json?auth=$authToken');
     try {
       http.post(
         url,
@@ -216,8 +216,8 @@ class Orders with ChangeNotifier {
 
   Future<void> updateStatus(
       String id, String localId, String orderId, String currentStatus) async {
-    var url =
-        'https://flutter-update-67f54.firebaseio.com/confirmedOrders/$id.json?auth=$authToken';
+    var url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/confirmedOrders/$id.json?auth=$authToken');
     try {
       await http.patch(
         url,
@@ -225,8 +225,8 @@ class Orders with ChangeNotifier {
           'status': currentStatus,
         }),
       );
-      url =
-          'https://flutter-update-67f54.firebaseio.com/orders/$localId/$orderId.json?auth=$authToken';
+      url = Uri.parse(
+          'https://flutter-update-67f54.firebaseio.com/orders/$localId/$orderId.json?auth=$authToken');
       await http.patch(
         url,
         body: json.encode({
@@ -240,8 +240,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> addBonusPoint(double amount, int previousPoint) async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/bonusPoint/$userId/M1234567.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/bonusPoint/$userId/M1234567.json?auth=$authToken');
     double point = amount / 100;
 
     try {
@@ -256,8 +256,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchPoint() async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/bonusPoint/$userId.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/bonusPoint/$userId.json?auth=$authToken');
     try {
       final response = await http.get(url);
       final extract = json.decode(response.body);
@@ -274,8 +274,8 @@ class Orders with ChangeNotifier {
   }
 
   void addSuggestionReport(String email, String subject, String description) {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/suggestionAndReports.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/suggestionAndReports.json?auth=$authToken');
     try {
       http.post(
         url,
@@ -292,8 +292,8 @@ class Orders with ChangeNotifier {
 
   void addReturnForm(String email, String orderId, String productId,
       String contact, String address, String description) {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/returnProductsList.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/returnProductsList.json?auth=$authToken');
     try {
       http.post(
         url,
@@ -312,8 +312,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchAndSetReturnList() async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/returnProductsList.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/returnProductsList.json?auth=$authToken');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -336,8 +336,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> deleteReturnListItem(String id) async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/returnProductsList/$id.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/returnProductsList/$id.json?auth=$authToken');
     final exIndex = _returnProducts.indexWhere((element) => element.id == id);
     var exProduct = _returnProducts[exIndex];
     _returnProducts.removeAt(exIndex);
@@ -354,8 +354,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> fetchAndSetStatistic() async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/statistic.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/statistic.json?auth=$authToken');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -368,8 +368,8 @@ class Orders with ChangeNotifier {
   }
 
   Future<void> updateStatistic(double amount) async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/statistic.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/statistic.json?auth=$authToken');
     try {
       await http.put(url,
           body: json.encode(

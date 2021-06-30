@@ -97,8 +97,8 @@ class Products with ChangeNotifier {
   }
 
   Future<void> fetchAndSetCategories() async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/category.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/category.json?auth=$authToken');
     final response = await http.get(url);
     final extract = json.decode(response.body) as Map<String, dynamic>;
     final List<String> test = [];
@@ -112,15 +112,15 @@ class Products with ChangeNotifier {
   // imageUrl2 & imageUrl3 empty return korbe jodi url insert kora na thake
   Future<void> fetchAndSetProducts() async {
     //String filterString =filterByUser ? '&orderBy="creatorId"&equalTo="$userId"' : '';
-    var url =
-        'https://flutter-update-67f54.firebaseio.com/products.json?auth=$authToken';
+    var url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/products.json?auth=$authToken');
     try {
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Product> loadedProducts = [];
       if (extractedData == null) return;
-      url =
-          'https://flutter-update-67f54.firebaseio.com/userFavorites/$userId.json?auth=$authToken';
+      url = Uri.parse(
+          'https://flutter-update-67f54.firebaseio.com/userFavorites/$userId.json?auth=$authToken');
       final favoriteResponse = await http.get(url);
       final favoriteData = json.decode(favoriteResponse.body);
 
@@ -151,8 +151,8 @@ class Products with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/products.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/products.json?auth=$authToken');
     try {
       final response = await http.post(
         url,
@@ -193,8 +193,8 @@ class Products with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken');
     final exIndex = _items.indexWhere((element) => element.id == id);
     var exProduct = _items[exIndex];
     _items.removeAt(exIndex);
@@ -211,8 +211,8 @@ class Products with ChangeNotifier {
   }
 
   Future<void> updateProduct(String id, Product newProduct) async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken');
     await http.patch(url,
         body: json.encode({
           'title': newProduct.title,
@@ -230,8 +230,8 @@ class Products with ChangeNotifier {
     final double oldRating = _items[index].isRating;
     newRating = (oldRating + newRating) / 2.0;
     final int newReview = _items[index].isReview + 1.toInt();
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken');
     try {
       final response = await http.patch(
         url,
@@ -301,8 +301,8 @@ class Products with ChangeNotifier {
 
   Future<void> setOffersUptoAmount(String imageUrl, String amount,
       String voucherCode, String rewardPoint) async {
-    var url =
-        'https://flutter-update-67f54.firebaseio.com/offers/uptoAmount.json?auth=$authToken';
+    var url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/offers/uptoAmount.json?auth=$authToken');
     try {
       final response = await http.post(url,
           body: json.encode({
@@ -312,8 +312,8 @@ class Products with ChangeNotifier {
           }));
       if (_uptoOffersList.length < 1) {
         final String id = json.decode(response.body)['name'];
-        url =
-            'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken';
+        url = Uri.parse(
+            'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken');
         await http.put(
           url,
           body: json.encode(
@@ -328,8 +328,8 @@ class Products with ChangeNotifier {
 
   // nextDay & special offer image insert both in this method
   Future<void> setOffersNextDayDelivery(String imageUrl, String name) async {
-    var url =
-        'https://flutter-update-67f54.firebaseio.com/offers/$name.json?auth=$authToken';
+    var url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/offers/$name.json?auth=$authToken');
     try {
       final response = await http.post(
         url,
@@ -338,8 +338,8 @@ class Products with ChangeNotifier {
         }),
       );
       final String id = json.decode(response.body)['name'];
-      url =
-          'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken';
+      url = Uri.parse(
+          'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken');
       await http.put(
         url,
         body: json.encode(
@@ -352,8 +352,8 @@ class Products with ChangeNotifier {
   }
 
   Future<void> fetchOffersUptoAmount() async {
-    var url =
-        'https://flutter-update-67f54.firebaseio.com/offers/uptoAmount.json?auth=$authToken';
+    var url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/offers/uptoAmount.json?auth=$authToken');
     try {
       final response = await http.get(url);
       final extractedOffers =
@@ -380,8 +380,8 @@ class Products with ChangeNotifier {
   }
 
   Future<void> fetchOffersImagesList() async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/offers/images.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/offers/images.json?auth=$authToken');
     final response1 = await http.get(url);
     final extractedImages = json.decode(response1.body) as Map<String, dynamic>;
     if (extractedImages == null) return;
@@ -393,8 +393,8 @@ class Products with ChangeNotifier {
 
   Future<void> updateOfferProduct(
       String id, String oldPrice, String offerPrice) async {
-    final url =
-        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken';
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken');
     try {
       if (oldPrice == null || oldPrice.isEmpty) {
         oldPrice = "no";
