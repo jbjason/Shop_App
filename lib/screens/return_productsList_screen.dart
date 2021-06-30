@@ -22,7 +22,8 @@ class ReturnProductsListScreen extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
           } else {
             if (dataSnapshot.error != null) {
-              return Center(child: Text('An error occured !'));
+              return Center(
+                  child: Text('An error occured !\n No available Items'));
             } else {
               return Consumer<Orders>(
                 builder: (ctx, product, _) => ListView.builder(

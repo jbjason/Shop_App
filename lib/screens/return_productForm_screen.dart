@@ -182,7 +182,7 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32.0)),
                   ),
-                  onPressed: () => _saveForm(userEmail[0]),
+                  onPressed: () => _saveForm(userEmail),
                   child: Text(
                     'Submit',
                     style: TextStyle(fontSize: 25),
