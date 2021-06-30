@@ -361,6 +361,8 @@ class Orders with ChangeNotifier {
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       _totalRevenue = extractedData['total'];
       _totalSell = extractedData['count'];
+      await fetchAndSetCustomerOrders();
+      await fetchAndSetReturnList();
       notifyListeners();
     } catch (error) {
       throw error;
