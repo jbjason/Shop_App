@@ -56,12 +56,12 @@ class Orders with ChangeNotifier {
   }
 
   int get totalPending {
-    return _customerOrders
+    final List<ConfirmOrdersClass> ss = _customerOrders
         .where(
           (element) => element.status == 'Pending',
         )
-        .toList()
-        .length;
+        .toList();
+    return ss.length;
   }
 
   List<OrderItem> recentTransactions(int _day) {
