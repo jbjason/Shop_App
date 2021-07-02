@@ -214,8 +214,8 @@ class Orders with ChangeNotifier {
     }
   }
 
-  Future<void> updateStatus(
-      String id, String localId, String orderId, String currentStatus) async {
+  Future<void> updateStatus(String id, String localId, String orderId,
+      String currentStatus, double amount) async {
     var url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/confirmedOrders/$id.json?auth=$authToken');
     try {
@@ -223,6 +223,7 @@ class Orders with ChangeNotifier {
         url,
         body: json.encode({
           'status': currentStatus,
+          'dateTime': DateTime.now().toIso8601String(),
         }),
       );
       url = Uri.parse(
@@ -233,6 +234,7 @@ class Orders with ChangeNotifier {
           'status': currentStatus,
         }),
       );
+      updateStatistic(amount);
       notifyListeners();
     } catch (error) {
       throw error;

@@ -79,10 +79,12 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                                 _isInit1 = true;
                               });
                               await _product.updateStatus(
-                                  widget._order.id,
-                                  widget._order.userLocalId,
-                                  widget._order.orderId,
-                                  'Delivered');
+                                widget._order.id,
+                                widget._order.userLocalId,
+                                widget._order.orderId,
+                                'Delivered',
+                                widget._order.amount,
+                              );
                               setState(() {
                                 _isInit1 = false;
                               });
@@ -102,7 +104,8 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                                   widget._order.id,
                                   widget._order.userLocalId,
                                   widget._order.orderId,
-                                  'Canceled');
+                                  'Canceled',
+                                  0.0);
                               setState(() {
                                 _isInit2 = false;
                               });
