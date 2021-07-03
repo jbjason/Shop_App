@@ -9,6 +9,7 @@ class CustomerOrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<Orders>(context, listen: false).fetchAndSetStatistic();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
@@ -48,6 +49,10 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
   bool _isInit1 = false, _isInit2 = false;
   @override
   Widget build(BuildContext context) {
+    bool _isConfirmed = widget._order.status == "Delivered" ||
+            widget._order.status == "Canceled"
+        ? true
+        : false;
     final _product = Provider.of<Orders>(context, listen: false);
     return Container(
       margin: EdgeInsets.only(top: 5, bottom: 10),
@@ -66,56 +71,58 @@ class _CustomerOrdersItemState extends State<CustomerOrdersItem> {
                 'Toal:   \$ ${widget._order.amount}',
                 softWrap: false,
               ),
-              subtitle: Container(
-                width: 170,
-                child: Row(
-                  children: [
-                    _isInit1
-                        ? CircularProgressIndicator()
-                        : RaisedButton.icon(
-                            color: Colors.green[50],
-                            onPressed: () async {
-                              setState(() {
-                                _isInit1 = true;
-                              });
-                              await _product.updateStatus(
-                                widget._order.id,
-                                widget._order.userLocalId,
-                                widget._order.orderId,
-                                'Delivered',
-                                widget._order.amount,
-                              );
-                              setState(() {
-                                _isInit1 = false;
-                              });
-                            },
-                            icon: Icon(Icons.check),
-                            label: Text('Delivered'),
-                          ),
-                    _isInit2
-                        ? CircularProgressIndicator()
-                        : RaisedButton.icon(
-                            color: Colors.red[50],
-                            onPressed: () async {
-                              setState(() {
-                                _isInit2 = true;
-                              });
-                              await _product.updateStatus(
-                                  widget._order.id,
-                                  widget._order.userLocalId,
-                                  widget._order.orderId,
-                                  'Canceled',
-                                  0.0);
-                              setState(() {
-                                _isInit2 = false;
-                              });
-                            },
-                            icon: Icon(Icons.cancel),
-                            label: Text('Canceled'),
-                          ),
-                  ],
-                ),
-              ),
+              subtitle: _isConfirmed
+                  ? Container()
+                  : Container(
+                      width: 170,
+                      child: Row(
+                        children: [
+                          _isInit1
+                              ? CircularProgressIndicator()
+                              : RaisedButton.icon(
+                                  color: Colors.green[50],
+                                  onPressed: () async {
+                                    setState(() {
+                                      _isInit1 = true;
+                                    });
+                                    await _product.updateStatus(
+                                      widget._order.id,
+                                      widget._order.userLocalId,
+                                      widget._order.orderId,
+                                      'Delivered',
+                                      widget._order.amount,
+                                    );
+                                    setState(() {
+                                      _isInit1 = false;
+                                    });
+                                  },
+                                  icon: Icon(Icons.check),
+                                  label: Text('Delivered'),
+                                ),
+                          _isInit2
+                              ? CircularProgressIndicator()
+                              : RaisedButton.icon(
+                                  color: Colors.red[50],
+                                  onPressed: () async {
+                                    setState(() {
+                                      _isInit2 = true;
+                                    });
+                                    await _product.updateStatus(
+                                        widget._order.id,
+                                        widget._order.userLocalId,
+                                        widget._order.orderId,
+                                        'Canceled',
+                                        0.0);
+                                    setState(() {
+                                      _isInit2 = false;
+                                    });
+                                  },
+                                  icon: Icon(Icons.cancel),
+                                  label: Text('Canceled'),
+                                ),
+                        ],
+                      ),
+                    ),
               trailing: IconButton(
                 icon: Icon(_expanded ? Icons.expand_less : Icons.expand_more),
                 onPressed: () {
