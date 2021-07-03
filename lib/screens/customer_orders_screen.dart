@@ -9,7 +9,6 @@ class CustomerOrdersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<Orders>(context, listen: false).fetchAndSetStatistic();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
