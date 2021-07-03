@@ -24,16 +24,14 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   @override
   void didChangeDependencies() {
     if (_isInit) return;
-    Provider.of<Products>(context).fetchAndSetCategories().then((_) {
-      Provider.of<Products>(context).fetchAndSetProducts();
-    }).then(
-      (_) => {
+    Future.delayed(Duration(milliseconds: 300)).then((_) async {
+      Provider.of<Products>(context).fetchAndSetCategories();
+      Provider.of<Products>(context).fetchAndSetProducts().then((_) {
         setState(() {
           isLoading = false;
-        })
-      },
-    );
-
+        });
+      });
+    });
     _isInit = true;
     super.didChangeDependencies();
   }
