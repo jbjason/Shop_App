@@ -284,45 +284,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           //offer coundown timer
           _offerAvailable ? CountDownClock(product: product) : Container(),
           // add_to_cart button
-          GestureDetector(
-            onTap: () => {
-              cart.addItem(
-                widget.id,
-                widget.price,
-                widget.image1,
-                widget._title,
-                1,
-              ),
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text('Added item to Cart!'),
-                duration: Duration(seconds: 1),
-              )),
-            },
-            child: Container(
-              margin: EdgeInsets.only(top: size.height * 0.1),
-              padding: EdgeInsets.all(20),
-              width: size.width * 0.7,
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.shopping_bag),
-                  SizedBox(width: 10),
-                  Text(
-                    'Add  to  Cart',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          AddToCartButton(cart: cart, widget: widget, size: size),
           // colors demo (circle)
           ColorDemo(),
           // choose color & size
@@ -415,6 +377,62 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           ),
           _isComment != 1 ? Comments(widget.id, _comments) : Text(''),
         ],
+      ),
+    );
+  }
+}
+
+class AddToCartButton extends StatelessWidget {
+  const AddToCartButton({
+    Key key,
+    @required this.cart,
+    @required this.widget,
+    @required this.size,
+  }) : super(key: key);
+
+  final Cart cart;
+  final ProductDetailScreenItem widget;
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () => {
+        cart.addItem(
+          widget.id,
+          widget.price,
+          widget.image1,
+          widget._title,
+          1,
+        ),
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text('Added item to Cart!'),
+          duration: Duration(seconds: 1),
+        )),
+      },
+      child: Container(
+        margin: EdgeInsets.only(top: size.height * 0.1),
+        padding: EdgeInsets.all(20),
+        width: size.width * 0.7,
+        decoration: BoxDecoration(
+          color: Colors.amber,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.shopping_bag),
+            SizedBox(width: 10),
+            Text(
+              'Add  to  Cart',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
