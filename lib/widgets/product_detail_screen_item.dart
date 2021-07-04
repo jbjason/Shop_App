@@ -524,7 +524,7 @@ class CountDownClock extends StatelessWidget {
         fontWeight: FontWeight.bold,
       ),
       decoration: BoxDecoration(
-        color: Colors.red,
+        color: Color(0xFFC41A3B),
         shape: BoxShape.circle,
       ),
       shouldShowDays: true,
