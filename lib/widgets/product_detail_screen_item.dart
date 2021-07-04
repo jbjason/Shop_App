@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 import 'package:Shop_App/widgets/comments.dart';
 import 'package:pinch_zoom/pinch_zoom.dart';
+import 'package:slide_countdown_clock/slide_countdown_clock.dart';
 
 class ProductDetailScreenItem extends StatefulWidget {
   final String image2, image1, image3, id, extra;
@@ -319,7 +320,20 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           // description
           DescriptionWidget(widget: widget),
           //offer coundown timer
-
+          SlideCountdownClock(
+            duration: Duration(minutes: product.deadLineDuration),
+            padding: EdgeInsets.all(15),
+            slideDirection: SlideDirection.Up,
+            separator: ':',
+            textStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.red,
+              shape: BoxShape.circle,
+            ),
+            shouldShowDays: true,
+          ),
           // add_to_cart button
           GestureDetector(
             onTap: () => {
