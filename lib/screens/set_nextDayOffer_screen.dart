@@ -57,6 +57,7 @@ class _SetNextDayOfferScreenState extends State<SetNextDayOfferScreen> {
     bool _specialOffer =
         name == "specialOffer" || name == "combo" ? true : false;
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Color(0xFFC8E6C9),
         title: Text('Manage Offer'),
