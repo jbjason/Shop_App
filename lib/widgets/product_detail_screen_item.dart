@@ -250,21 +250,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 // title & review
-                Expanded(
-                  child: Column(
-                    children: [
-                      Text(
-                        widget._title,
-                        style: Theme.of(context).textTheme.headline4.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 35,
-                            ),
-                      ),
-                      Text(' ${widget.review} reviews'),
-                    ],
-                  ),
-                ),
+                TitleAndReveiw(widget: widget),
                 // offer percentage & PreviousPrice
                 Column(
                   children: [
@@ -288,52 +274,15 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                     )
                   ],
                 ),
-                Padding(
-                  padding: EdgeInsets.all(15),
-                  child: ClipPath(
-                    clipper: PriceCliper(),
-                    child: Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      height: 65,
-                      width: 70,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(40),
-                          bottomRight: Radius.circular(40),
-                        ),
-                        color: Colors.amber[300],
-                      ),
-                      child: Text(
-                        '\$${widget.price.toStringAsFixed(0)}',
-                        style: Theme.of(context).textTheme.title.copyWith(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                    ),
-                  ),
-                ),
+                //price
+                PriceContainer(widget: widget),
               ],
             ),
           ),
           // description
           DescriptionWidget(widget: widget),
           //offer coundown timer
-          SlideCountdownClock(
-            duration: Duration(minutes: product.deadLineDuration),
-            padding: EdgeInsets.all(15),
-            slideDirection: SlideDirection.Up,
-            separator: ':',
-            textStyle: TextStyle(
-              fontWeight: FontWeight.bold,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.red,
-              shape: BoxShape.circle,
-            ),
-            shouldShowDays: true,
-          ),
+          _offerAvailable ? CountDownClock(product: product) : Container(),
           // add_to_cart button
           GestureDetector(
             onTap: () => {
@@ -467,6 +416,100 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           _isComment != 1 ? Comments(widget.id, _comments) : Text(''),
         ],
       ),
+    );
+  }
+}
+
+class PriceContainer extends StatelessWidget {
+  const PriceContainer({
+    Key key,
+    @required this.widget,
+  }) : super(key: key);
+
+  final ProductDetailScreenItem widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(15),
+      child: ClipPath(
+        clipper: PriceCliper(),
+        child: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(vertical: 15),
+          height: 65,
+          width: 70,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(40),
+              bottomRight: Radius.circular(40),
+            ),
+            color: Colors.amber[300],
+          ),
+          child: Text(
+            '\$${widget.price.toStringAsFixed(0)}',
+            style: Theme.of(context).textTheme.title.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class TitleAndReveiw extends StatelessWidget {
+  const TitleAndReveiw({
+    Key key,
+    @required this.widget,
+  }) : super(key: key);
+
+  final ProductDetailScreenItem widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Column(
+        children: [
+          Text(
+            widget._title,
+            style: Theme.of(context).textTheme.headline4.copyWith(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 35,
+                ),
+          ),
+          Text(' ${widget.review} reviews'),
+        ],
+      ),
+    );
+  }
+}
+
+class CountDownClock extends StatelessWidget {
+  const CountDownClock({
+    Key key,
+    @required this.product,
+  }) : super(key: key);
+
+  final Products product;
+
+  @override
+  Widget build(BuildContext context) {
+    return SlideCountdownClock(
+      duration: Duration(minutes: product.deadLineDuration),
+      padding: EdgeInsets.all(15),
+      slideDirection: SlideDirection.Up,
+      separator: ':',
+      textStyle: TextStyle(
+        fontWeight: FontWeight.bold,
+      ),
+      decoration: BoxDecoration(
+        color: Colors.red,
+        shape: BoxShape.circle,
+      ),
+      shouldShowDays: true,
     );
   }
 }
