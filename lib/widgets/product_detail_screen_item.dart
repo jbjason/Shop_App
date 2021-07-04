@@ -318,6 +318,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           ),
           // description
           DescriptionWidget(widget: widget),
+          //offer coundown timer
+
           // add_to_cart button
           GestureDetector(
             onTap: () => {
