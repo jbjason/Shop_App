@@ -96,6 +96,11 @@ class Products with ChangeNotifier {
     return [..._categories];
   }
 
+  int _deadLineDuration = 0;
+  int get deadLineDuration {
+    return _deadLineDuration;
+  }
+
   Future<void> fetchAndSetCategories() async {
     final url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/category.json?auth=$authToken');
@@ -409,6 +414,24 @@ class Products with ChangeNotifier {
       notifyListeners();
     } catch (error) {
       throw error;
+    }
+  }
+
+  Future<void> fetchAndSetDeadLines() async {
+    final url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/offers/specialOffer.json?auth=$authToken');
+    try {
+      final response = await http.get(url);
+      final extract = json.decode(response.body) as Map<String, dynamic>;
+      extract.forEach((id, value) {
+        DateTime date = DateTime.parse(value['deadline']);
+        DateTime _current = DateTime.now();
+        final difference = _current.difference(date).inMinutes;
+        _deadLineDuration = difference;
+      });
+      notifyListeners();
+    } catch (e) {
+      print(e.toString());
     }
   }
 }
