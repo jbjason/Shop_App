@@ -429,7 +429,6 @@ class Products with ChangeNotifier {
         final difference = _current.difference(date).inMinutes;
         _deadLineDuration = difference;
       });
-      notifyListeners();
     } catch (e) {
       print(e.toString());
     }
