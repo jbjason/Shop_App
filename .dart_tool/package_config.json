@@ -224,6 +224,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "slide_countdown_clock",
+      "rootUri": "file:///E:/Programs/flutter/.pub-cache/hosted/pub.dartlang.org/slide_countdown_clock-1.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "smooth_star_rating",
       "rootUri": "file:///E:/Programs/flutter/.pub-cache/hosted/pub.dartlang.org/smooth_star_rating-1.1.1",
       "packageUri": "lib/",
@@ -296,7 +302,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-06-03T10:05:34.771505Z",
+  "generated": "2021-07-04T17:55:52.897173Z",
   "generator": "pub",
   "generatorVersion": "2.12.2"
 }
