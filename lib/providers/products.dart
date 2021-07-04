@@ -327,7 +327,8 @@ class Products with ChangeNotifier {
   }
 
   // nextDay & special offer image insert both in this method
-  Future<void> setOffersNextDayDelivery(String imageUrl, String name) async {
+  Future<void> setOffersNextDayDelivery(
+      String imageUrl, String name, DateTime dateTime) async {
     var url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/offers/$name.json?auth=$authToken');
     try {
@@ -335,6 +336,7 @@ class Products with ChangeNotifier {
         url,
         body: json.encode({
           'imageUrl': imageUrl,
+          'deadline': dateTime.toIso8601String(),
         }),
       );
       final String id = json.decode(response.body)['name'];
