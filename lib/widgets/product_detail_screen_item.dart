@@ -36,9 +36,9 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
   final primaryColor = const Color(0xFF0C9869);
   final backgroundColor = const Color(0xFFF9F8FD);
   List<String> _locations = ['M', 'L', 'XL', 'XXL'];
+  List<String> _comments = [];
   String _selectedLocation;
   int _isComment = 1;
-  List<String> _comments = [];
 
   double percentageCount() {
     double d = (widget.price * 100.0) / double.parse(widget.extra);
@@ -113,7 +113,6 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                   Container(
                     height: size.height * .7,
                     width: size.width * .22,
-                    //margin: EdgeInsets.only(bottom: 120),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
@@ -157,83 +156,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                             zoomedBackgroundColor: Colors.grey.shade300,
                           ),
                         ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: Container(
-                            height: size.height * .1,
-                            width: size.width * .55,
-                            // color: Colors.amber,
-                            decoration: BoxDecoration(
-                              color: Colors.lightGreen[300],
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(63),
-                                bottomLeft: Radius.circular(63),
-                              ),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(height: 3),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.red,
-                                    ),
-                                    RichText(
-                                      text: TextSpan(
-                                        children: [
-                                          TextSpan(
-                                              text: '${widget.rating} /',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold)),
-                                          TextSpan(
-                                              text: '5\n',
-                                              style: TextStyle(
-                                                //fontSize: 16,
-                                                color: Colors.black,
-                                                //fontWeight: FontWeight.bold
-                                              )),
-                                          TextSpan(
-                                              text: 'Ratings',
-                                              style: TextStyle(
-                                                  //fontSize: 16,
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.bold)),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(height: 3),
-                                    SmoothStarRating(
-                                      size: 26,
-                                      borderColor: Colors.white,
-                                      color: Colors.amber,
-                                      spacing: 2.0,
-                                      onRated: (value) {
-                                        Provider.of<Products>(context,
-                                                listen: false)
-                                            .updateRatingAndReview(
-                                                widget.id, value);
-                                      },
-                                    ),
-                                    Text('Rate Us',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold)),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
+                        // positioned of ratings & all
+                        PositionedWidget(size: size, widget: widget)
                       ],
                     ),
                   ),
@@ -350,7 +274,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
             ),
           ),
           // comments
-          GestureDetector(
+          InkWell(
             onTap: () {
               setState(() {
                 _isComment = 0;
@@ -378,6 +302,123 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           _isComment != 1 ? Comments(widget.id, _comments) : Text(''),
         ],
       ),
+    );
+  }
+}
+
+class PositionedWidget extends StatelessWidget {
+  const PositionedWidget({
+    Key key,
+    @required this.size,
+    @required this.widget,
+  }) : super(key: key);
+
+  final Size size;
+  final ProductDetailScreenItem widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Positioned(
+      bottom: 0,
+      right: 0,
+      child: Container(
+        height: size.height * .1,
+        width: size.width * .55,
+        decoration: BoxDecoration(
+          color: Colors.lightGreen[300],
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(63),
+            bottomLeft: Radius.circular(63),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            // current Ratings
+            CurrentRating(widget: widget),
+            // Ratings Bar
+            RatingBar(widget: widget),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class CurrentRating extends StatelessWidget {
+  const CurrentRating({
+    Key key,
+    @required this.widget,
+  }) : super(key: key);
+
+  final ProductDetailScreenItem widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(height: 3),
+        Icon(
+          Icons.star,
+          color: Colors.red,
+        ),
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                  text: '${widget.rating} /',
+                  style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold)),
+              TextSpan(
+                  text: '5\n',
+                  style: TextStyle(
+                    //fontSize: 16,
+                    color: Colors.black,
+                    //fontWeight: FontWeight.bold
+                  )),
+              TextSpan(
+                  text: 'Ratings',
+                  style: TextStyle(
+                      //fontSize: 16,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold)),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class RatingBar extends StatelessWidget {
+  const RatingBar({
+    Key key,
+    @required this.widget,
+  }) : super(key: key);
+
+  final ProductDetailScreenItem widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(height: 3),
+        SmoothStarRating(
+          size: 26,
+          borderColor: Colors.white,
+          color: Colors.amber,
+          spacing: 2.0,
+          onRated: (value) {
+            Provider.of<Products>(context, listen: false)
+                .updateRatingAndReview(widget.id, value);
+          },
+        ),
+        Text('Rate Us', style: TextStyle(fontWeight: FontWeight.bold)),
+      ],
     );
   }
 }
