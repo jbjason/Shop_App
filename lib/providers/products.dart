@@ -400,6 +400,12 @@ class Products with ChangeNotifier {
 
   Future<void> updateOfferProduct(
       String id, String oldPrice, String offerPrice) async {
+    // checking & set String as lowerCase
+    try {
+      double.parse(offerPrice);
+    } catch (_) {
+      offerPrice = offerPrice.toLowerCase();
+    }
     final url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken');
     try {

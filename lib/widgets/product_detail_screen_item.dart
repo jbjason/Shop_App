@@ -41,7 +41,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
   int _isComment = 1;
 
   double percentageCount() {
-    double d = (widget.price * 100.0) / double.parse(widget.extra);
+    double d = (double.parse(widget.extra) * 100.0) / widget.price;
     return d -= 100.0;
   }
 
@@ -96,8 +96,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
     final cart = Provider.of<Cart>(context, listen: false);
     final size = MediaQuery.of(context).size;
     final product = Provider.of<Products>(context);
-    final bool _offerAvailable =
-        widget.extra == "no" || widget.extra == "combo" ? false : true;
+    final bool _offerAvailable = widget.extra == "no" ? false : true;
     _comments = product.commentsList;
     return SingleChildScrollView(
       child: Column(
@@ -206,9 +205,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           // description
           DescriptionWidget(widget: widget),
           //offer coundown timer
-          _offerAvailable || widget.extra == 'combo'
-              ? CountDownClock(product: product)
-              : Container(),
+          _offerAvailable ? CountDownClock(product: product) : Container(),
           // add_to_cart button
           AddToCartButton(cart: cart, widget: widget, size: size),
           // colors demo (circle)
@@ -499,7 +496,7 @@ class PriceContainer extends StatelessWidget {
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(vertical: 15),
           height: 65,
-          width: 70,
+          width: 74,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(40),
