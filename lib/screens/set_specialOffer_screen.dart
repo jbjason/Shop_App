@@ -11,6 +11,7 @@ class SetSpecialOfferScreen extends StatefulWidget {
 class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
   final _currentPriceController = TextEditingController();
   final _offerPriceController = TextEditingController();
+  final _descriptionController = TextEditingController();
   var _expanded = false, _isInit = false, productId;
 
   void _save() async {
@@ -20,8 +21,9 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
     }
     final String oldPrice = _currentPriceController.text.trim();
     final String offerPrice = _offerPriceController.text.trim();
+    final String description = _descriptionController.text.trim();
     await Provider.of<Products>(context, listen: false)
-        .updateOfferProduct(productId, oldPrice, offerPrice);
+        .updateOfferProduct(productId, oldPrice, offerPrice, description);
     Navigator.of(context).pop();
   }
 
@@ -33,6 +35,7 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
         Provider.of<Products>(context, listen: false).findById(productId);
     _currentPriceController.text = product.price.toString();
     _offerPriceController.text = product.extra;
+    _descriptionController.text = product.description;
     _isInit = true;
     super.didChangeDependencies();
   }
@@ -41,6 +44,7 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
   void dispose() {
     _currentPriceController.dispose();
     _offerPriceController.dispose();
+    _descriptionController.dispose();
     super.dispose();
   }
 
@@ -121,7 +125,7 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                     )
                   ],
                 ),
-                SizedBox(height: 40),
+                SizedBox(height: 30),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -138,15 +142,28 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                         child: TextFormField(
                       controller: _offerPriceController,
                       keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.done,
+                      textInputAction: TextInputAction.next,
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please provide a value';
                         }
                         return null;
                       },
-                    ))
+                    )),
                   ],
+                ),
+                SizedBox(height: 20),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Description'),
+                  controller: _descriptionController,
+                  textInputAction: TextInputAction.done,
+                  maxLines: 3,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please provide a value';
+                    }
+                    return null;
+                  },
                 ),
               ],
             ),

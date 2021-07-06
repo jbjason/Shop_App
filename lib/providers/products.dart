@@ -399,7 +399,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> updateOfferProduct(
-      String id, String oldPrice, String offerPrice) async {
+      String id, String oldPrice, String offerPrice, String description) async {
     // checking & set String as lowerCase
     try {
       double.parse(offerPrice);
@@ -413,6 +413,7 @@ class Products with ChangeNotifier {
           body: json.encode({
             'price': oldPrice,
             'extra': offerPrice,
+            'description': description,
           }));
       notifyListeners();
     } catch (error) {
