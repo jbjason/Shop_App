@@ -44,7 +44,6 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
     super.dispose();
   }
 
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _form = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
