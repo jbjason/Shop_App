@@ -278,7 +278,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     // available
                     TextFormField(
                       initialValue: _initValues['available'],
-                      decoration: InputDecoration(labelText: 'available'),
+                      decoration:
+                          InputDecoration(labelText: 'Available Product'),
                       keyboardType: TextInputType.number,
                       focusNode: _availableFocusNode,
                       textInputAction: TextInputAction.next,
