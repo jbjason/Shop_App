@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 class UserProductItem extends StatelessWidget {
   final String title, imageUrl, id;
   final bool _offerPage;
-  UserProductItem(this.id, this.title, this.imageUrl, this._offerPage);
+  final int _available;
+  UserProductItem(
+      this.id, this.title, this.imageUrl, this._offerPage, this._available);
 
   void forShowDialoag(BuildContext context) {
     showDialog(
@@ -44,6 +46,7 @@ class UserProductItem extends StatelessWidget {
       leading: CircleAvatar(
         backgroundImage: NetworkImage(imageUrl),
       ),
+      subtitle: Text('Available = $_available /-'),
       trailing: Container(
         width: 100,
         child: Row(

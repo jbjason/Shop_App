@@ -99,6 +99,7 @@ class _UserProductsScreenState extends State<UserProductsScreen> {
                 productData[i].title,
                 productData[i].imageUrl1,
                 _offerPage,
+                productData[i].available,
               ),
             ]),
             itemCount: productData.length,
