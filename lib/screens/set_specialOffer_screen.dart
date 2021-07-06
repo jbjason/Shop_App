@@ -72,7 +72,7 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                   //margin: EdgeInsets.all(12),
                   child: ListTile(
                     title: Text(
-                      'Instructions of removing offer',
+                      'Instructions of Set/Removing offer',
                       style: TextStyle(
                           color: Colors.red, fontWeight: FontWeight.bold),
                     ),
@@ -189,14 +189,15 @@ class CondtionsForReturns extends StatelessWidget {
         WidgetSpan(
             child: Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
         TextSpan(
-            text: '   1.  Remove the offer price.\n\n',
+            text:
+                '   1.  Set new Specialoffer price or leave it as \'No\'.\n\n',
             style: TextStyle(
               color: Colors.black,
             )),
         WidgetSpan(
             child: Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
         TextSpan(
-            text: '   2.  Leave the offer text with typing \'No\'\n',
+            text: '   2.  For setting Combo offer type \'combo\' \n',
             style: TextStyle(
               color: Colors.black,
             )),
