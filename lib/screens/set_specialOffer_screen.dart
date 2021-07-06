@@ -14,9 +14,12 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
   var _expanded = false, _isInit = false, productId;
 
   void _save() async {
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return;
+    }
     final String oldPrice = _currentPriceController.text.trim();
-    String offerPrice = _offerPriceController.text.trim();
-
+    final String offerPrice = _offerPriceController.text.trim();
     await Provider.of<Products>(context, listen: false)
         .updateOfferProduct(productId, oldPrice, offerPrice);
     Navigator.of(context).pop();
@@ -42,6 +45,7 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
   }
 
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _form = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,94 +60,97 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
         ),
         body: Padding(
           padding: EdgeInsets.all(15),
-          child: Column(
-            children: [
-              Card(
-                elevation: 7,
-                //margin: EdgeInsets.all(12),
-                child: ListTile(
-                  title: Text(
-                    'Instructions of removing offer',
-                    style: TextStyle(
-                        color: Colors.red, fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: Text(' ( This might help you ) '),
-                  trailing: IconButton(
-                      icon: Icon(
-                        _expanded ? Icons.expand_less : Icons.expand_more,
-                        color: Colors.cyan,
-                        size: 35,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _expanded = !_expanded;
-                        });
-                      }),
-                ),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                height: _expanded == false ? 0 : 90,
-                width: double.infinity,
-                child: Card(
-                  child: CondtionsForReturns(),
-                ),
-              ),
-              SizedBox(height: 20),
-              Row(
-                children: [
-                  SizedBox(width: 15),
-                  Expanded(
-                      child: Text(
-                    "Current Price    :",
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
+          child: Form(
+            key: _form,
+            child: Column(
+              children: [
+                Card(
+                  elevation: 7,
+                  //margin: EdgeInsets.all(12),
+                  child: ListTile(
+                    title: Text(
+                      'Instructions of removing offer',
+                      style: TextStyle(
+                          color: Colors.red, fontWeight: FontWeight.bold),
                     ),
-                  )),
-                  Expanded(
-                    child: TextFormField(
-                      controller: _currentPriceController,
-                      textInputAction: TextInputAction.next,
+                    subtitle: Text(' ( This might help you ) '),
+                    trailing: IconButton(
+                        icon: Icon(
+                          _expanded ? Icons.expand_less : Icons.expand_more,
+                          color: Colors.cyan,
+                          size: 35,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _expanded = !_expanded;
+                          });
+                        }),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  height: _expanded == false ? 0 : 90,
+                  width: double.infinity,
+                  child: Card(
+                    child: CondtionsForReturns(),
+                  ),
+                ),
+                SizedBox(height: 20),
+                Row(
+                  children: [
+                    SizedBox(width: 15),
+                    Expanded(
+                        child: Text(
+                      "Current Price    :",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+                    Expanded(
+                      child: TextFormField(
+                        controller: _currentPriceController,
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Please provide a value';
+                          }
+                          return null;
+                        },
+                      ),
+                    )
+                  ],
+                ),
+                SizedBox(height: 40),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    SizedBox(width: 15),
+                    Expanded(
+                        child: Text(
+                      "Offer Price    :",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )),
+                    Expanded(
+                        child: TextFormField(
+                      controller: _offerPriceController,
                       keyboardType: TextInputType.number,
+                      textInputAction: TextInputAction.done,
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please provide a value';
                         }
                         return null;
                       },
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(height: 40),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  SizedBox(width: 15),
-                  Expanded(
-                      child: Text(
-                    "Offer Price    :",
-                    style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )),
-                  Expanded(
-                      child: TextFormField(
-                    controller: _offerPriceController,
-                    keyboardType: TextInputType.number,
-                    textInputAction: TextInputAction.done,
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please provide a value';
-                      }
-                      return null;
-                    },
-                  ))
-                ],
-              ),
-            ],
+                    ))
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

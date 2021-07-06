@@ -405,8 +405,8 @@ class Products with ChangeNotifier {
     try {
       await http.patch(url,
           body: json.encode({
-            'price': double.parse(offerPrice),
-            'extra': oldPrice,
+            'price': oldPrice,
+            'extra': offerPrice,
           }));
       notifyListeners();
     } catch (error) {
