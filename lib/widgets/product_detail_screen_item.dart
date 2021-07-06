@@ -563,6 +563,7 @@ class CountDownClock extends StatelessWidget {
       separator: ':',
       textStyle: TextStyle(
         fontWeight: FontWeight.bold,
+        color: Colors.white,
       ),
       decoration: BoxDecoration(
         color: Color(0xFFC41A3B),
