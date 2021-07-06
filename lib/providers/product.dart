@@ -8,7 +8,7 @@ class Product with ChangeNotifier {
   final double price;
   String extra;
   double isRating;
-  int isReview;
+  int isReview, available;
   bool isFavorite;
   Product({
     @required this.id,
@@ -22,6 +22,7 @@ class Product with ChangeNotifier {
     this.isRating = 5.0,
     this.isReview = 10,
     @required this.category,
+    @required this.available,
     this.extra = "no",
   });
 

@@ -11,6 +11,7 @@ class EditProductScreen extends StatefulWidget {
 
 class _EditProductScreenState extends State<EditProductScreen> {
   final _priceFocusNode = FocusNode();
+  final _availableFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _imageUrlFocusNode1 = FocusNode();
   final _imageUrlFocusNode2 = FocusNode();
@@ -26,6 +27,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   var _editedProduct = Product(
     id: null,
     title: '',
+    available: 0,
     description: '',
     price: 0,
     imageUrl1: '',
@@ -37,6 +39,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     'title': '',
     'description': '',
     'price': '',
+    'available': '',
     'imageUrl1': '',
     'imageUrl2': '',
     'imageUrl3': '',
@@ -64,6 +67,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
           'title': _editedProduct.title,
           'description': _editedProduct.description,
           'price': _editedProduct.price.toString(),
+          'available': _editedProduct.available.toString(),
           'category': _editedProduct.category,
           'imageUrl1': '',
           'imageUrl2': '',
@@ -84,6 +88,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _priceFocusNode.dispose();
     _descriptionFocusNode.dispose();
     _titleFocusNode.dispose();
+    _availableFocusNode.dispose();
     _categoryFocusNode.dispose();
     _imageUrlFocusNode1.removeListener(_updateImageUrl);
     _imageUrlFocusNode2.removeListener(_updateImageUrl);
@@ -114,9 +119,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
     if (!isValid) {
       return;
     }
-    // nicher Form widget er sathe ei void_method theke interact korar jonno
-    // Form widget er currentState save korar buildIn method
-    // _form is a key of Form widgt
     _form.currentState.save();
     setState(() {
       isLoading = true;
@@ -171,6 +173,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                 key: _form,
                 child: ListView(
                   children: [
+                    //category
                     TextFormField(
                       initialValue: _initValues['category'],
                       decoration: InputDecoration(labelText: 'Category'),
@@ -190,6 +193,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         _editedProduct = Product(
                           id: _editedProduct.id,
                           title: value,
+                          available: _editedProduct.available,
                           description: _editedProduct.description,
                           price: _editedProduct.price,
                           imageUrl1: _editedProduct.imageUrl1,
@@ -200,6 +204,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         );
                       },
                     ),
+                    // title
                     TextFormField(
                       initialValue: _initValues['title'],
                       decoration: InputDecoration(labelText: 'Title'),
@@ -219,6 +224,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         _editedProduct = Product(
                           id: _editedProduct.id,
                           title: value,
+                          available: _editedProduct.available,
                           description: _editedProduct.description,
                           price: _editedProduct.price,
                           imageUrl1: _editedProduct.imageUrl1,
@@ -229,6 +235,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         );
                       },
                     ),
+                    // price
                     TextFormField(
                       initialValue: _initValues['price'],
                       decoration: InputDecoration(labelText: 'Price'),
@@ -237,7 +244,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) {
                         FocusScope.of(context)
-                            .requestFocus(_descriptionFocusNode);
+                            .requestFocus(_availableFocusNode);
                       },
                       validator: (value) {
                         if (value.isEmpty) {
@@ -257,6 +264,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         _editedProduct = Product(
                           title: _editedProduct.title,
                           description: _editedProduct.description,
+                          available: _editedProduct.available,
                           price: double.parse(value),
                           imageUrl1: _editedProduct.imageUrl1,
                           imageUrl2: _editedProduct.imageUrl2,
@@ -267,6 +275,47 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         );
                       },
                     ),
+                    // available
+                    TextFormField(
+                      initialValue: _initValues['available'],
+                      decoration: InputDecoration(labelText: 'available'),
+                      keyboardType: TextInputType.number,
+                      focusNode: _availableFocusNode,
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (_) {
+                        FocusScope.of(context)
+                            .requestFocus(_descriptionFocusNode);
+                      },
+                      validator: (value) {
+                        if (value.isEmpty) {
+                          return 'Please enter a value';
+                        }
+                        // .tryParse(value) == null  mane invalid nuber boshano hoise
+                        else if (int.tryParse(value) == null) {
+                          return 'Please enter a valid number';
+                        }
+                        // .parse(value) price er limit set kora
+                        else if (int.parse(value) <= 0) {
+                          return 'Please enter a number greater than zero';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) {
+                        _editedProduct = Product(
+                          title: _editedProduct.title,
+                          description: _editedProduct.description,
+                          price: _editedProduct.price,
+                          available: int.parse(value),
+                          imageUrl1: _editedProduct.imageUrl1,
+                          imageUrl2: _editedProduct.imageUrl2,
+                          imageUrl3: _editedProduct.imageUrl3,
+                          id: _editedProduct.id,
+                          isFavorite: _editedProduct.isFavorite,
+                          category: _editedProduct.category,
+                        );
+                      },
+                    ),
+                    //description
                     TextFormField(
                       initialValue: _initValues['description'],
                       decoration: InputDecoration(labelText: 'Description'),
@@ -289,6 +338,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           title: _editedProduct.title,
                           description: value,
                           price: _editedProduct.price,
+                          available: _editedProduct.available,
                           imageUrl1: _editedProduct.imageUrl1,
                           imageUrl2: _editedProduct.imageUrl2,
                           imageUrl3: _editedProduct.imageUrl3,
@@ -346,6 +396,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             onSaved: (value) {
                               _editedProduct = Product(
                                 title: _editedProduct.title,
+                                available: _editedProduct.available,
                                 description: _editedProduct.description,
                                 price: _editedProduct.price,
                                 imageUrl1: value,
@@ -401,6 +452,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 title: _editedProduct.title,
                                 description: _editedProduct.description,
                                 price: _editedProduct.price,
+                                available: _editedProduct.available,
                                 imageUrl1: _editedProduct.imageUrl1,
                                 imageUrl2: value,
                                 imageUrl3: _editedProduct.imageUrl3,
@@ -455,6 +507,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               _editedProduct = Product(
                                 title: _editedProduct.title,
                                 description: _editedProduct.description,
+                                available: _editedProduct.available,
                                 price: _editedProduct.price,
                                 imageUrl1: _editedProduct.imageUrl1,
                                 imageUrl2: _editedProduct.imageUrl2,
