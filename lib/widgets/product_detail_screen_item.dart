@@ -206,7 +206,9 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           // description
           DescriptionWidget(widget: widget),
           //offer coundown timer
-          _offerAvailable ? CountDownClock(product: product) : Container(),
+          _offerAvailable || widget.extra == 'combo'
+              ? CountDownClock(product: product)
+              : Container(),
           // add_to_cart button
           AddToCartButton(cart: cart, widget: widget, size: size),
           // colors demo (circle)

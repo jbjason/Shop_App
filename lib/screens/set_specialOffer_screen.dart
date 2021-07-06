@@ -15,7 +15,8 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
 
   void _save() async {
     final String oldPrice = _currentPriceController.text.trim();
-    final String offerPrice = _offerPriceController.text.trim();
+    String offerPrice = _offerPriceController.text.trim();
+
     await Provider.of<Products>(context, listen: false)
         .updateOfferProduct(productId, oldPrice, offerPrice);
     Navigator.of(context).pop();

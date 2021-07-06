@@ -403,9 +403,6 @@ class Products with ChangeNotifier {
     final url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken');
     try {
-      if (oldPrice == null || oldPrice.isEmpty) {
-        oldPrice = "no";
-      }
       await http.patch(url,
           body: json.encode({
             'price': double.parse(offerPrice),
