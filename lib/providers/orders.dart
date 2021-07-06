@@ -382,4 +382,6 @@ class Orders with ChangeNotifier {
       throw error;
     }
   }
+
+  void updateAvailableCount(int count) {}
 }
