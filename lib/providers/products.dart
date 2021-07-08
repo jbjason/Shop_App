@@ -1,3 +1,4 @@
+import 'package:Shop_App/providers/cart.dart';
 import '../models/http_exception.dart';
 import '../models/offer.dart';
 import 'package:flutter/material.dart';
@@ -89,6 +90,11 @@ class Products with ChangeNotifier {
 
   Product findById(String id) {
     return _items.firstWhere((element) => element.id == id);
+  }
+
+  int availableProduct(String id) {
+    Product p = _items.firstWhere((element) => element.id == id);
+    return p.available;
   }
 
   List<String> _categories = [];
@@ -439,5 +445,32 @@ class Products with ChangeNotifier {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  Future<void> updateAvailableProduct(List<CartItem> finalProduct) async {
+    int _availableCount, _updatedCount = 0;
+    String _proId;
+
+    finalProduct.forEach((element) async {
+      _proId = element.id;
+      _availableCount = availableProduct(_proId);
+      // if availabe product is lesser than ordered then store 0
+      if (element.quantity > _availableCount) {
+        _updatedCount = 0;
+      } else {
+        _updatedCount = _availableCount - element.quantity;
+      }
+      final url = Uri.parse(
+          'https://flutter-update-67f54.firebaseio.com/products/$_proId.json?auth=$authToken');
+      try {
+        await http.patch(url,
+            body: json.encode({
+              'available': _updatedCount,
+            }));
+      } catch (e) {
+        print(e);
+      }
+      await Future.delayed(Duration(seconds: 2));
+    });
   }
 }

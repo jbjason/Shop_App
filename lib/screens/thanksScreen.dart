@@ -1,5 +1,6 @@
 import 'package:Shop_App/providers/cart.dart';
 import 'package:Shop_App/providers/orders.dart';
+import 'package:Shop_App/providers/products.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +36,7 @@ class ThanksScreen extends StatelessWidget {
                     finalPoint: finalPoint,
                     finalVoucher: finalVoucher),
                 SizedBox(height: 15),
-                GoBackButton(),
+                GoBackButton(finalProduct: finalProduct),
               ],
             ),
           ),
@@ -273,53 +274,90 @@ class InvoiceTitleAndOrderId extends StatelessWidget {
   }
 }
 
-class GoBackButton extends StatelessWidget {
+class GoBackButton extends StatefulWidget {
   const GoBackButton({
     Key key,
+    @required this.finalProduct,
   }) : super(key: key);
+  final List<CartItem> finalProduct;
+  @override
+  _GoBackButtonState createState() => _GoBackButtonState();
+}
+
+class _GoBackButtonState extends State<GoBackButton> {
+  var _isInit = true;
+
+  @override
+  void initState() {
+    Provider.of<Products>(context, listen: false)
+        .updateAvailableProduct(widget.finalProduct)
+        .then((_) {
+      setState(() {
+        _isInit = false;
+      });
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        // for popping 2page at a time
-        int count = 0;
-        Navigator.popUntil(context, (route) {
-          return count++ == 3;
-        });
-      },
-      child: Container(
-        padding: EdgeInsets.all(20),
-        decoration: BoxDecoration(color: Colors.green[100], boxShadow: [
-          BoxShadow(
-            offset: Offset(5, 3),
-            blurRadius: 10,
-            color: Colors.greenAccent,
-          ),
-        ]),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              child: Image.asset(
-                'assets/images/back_arrow_1.jpg',
-                fit: BoxFit.fill,
-                height: 32,
+    return _isInit
+        ? Container(
+            padding: EdgeInsets.all(20),
+            decoration: BoxDecoration(color: Colors.green[100], boxShadow: [
+              BoxShadow(
+                offset: Offset(5, 3),
+                blurRadius: 10,
+                color: Colors.greenAccent,
+              ),
+            ]),
+            child: Row(
+              children: [
+                Text('Order Processing...'),
+                CircularProgressIndicator(backgroundColor: Colors.purple),
+              ],
+            ),
+          )
+        : InkWell(
+            onTap: () {
+              // for popping 2page at a time
+              int count = 0;
+              Navigator.popUntil(context, (route) {
+                return count++ == 3;
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(color: Colors.green[100], boxShadow: [
+                BoxShadow(
+                  offset: Offset(5, 3),
+                  blurRadius: 10,
+                  color: Colors.greenAccent,
+                ),
+              ]),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    child: Image.asset(
+                      'assets/images/back_arrow_1.jpg',
+                      fit: BoxFit.fill,
+                      height: 32,
+                    ),
+                  ),
+                  SizedBox(width: 14),
+                  SizedBox(child: Text('|')),
+                  SizedBox(width: 20),
+                  Text(
+                    ' Back to the Shop ',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
-            SizedBox(width: 14),
-            SizedBox(child: Text('|')),
-            SizedBox(width: 20),
-            Text(
-              ' Back to the Shop ',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold),
-            ),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }
