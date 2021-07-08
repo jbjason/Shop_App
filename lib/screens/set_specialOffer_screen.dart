@@ -65,14 +65,14 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
           padding: EdgeInsets.all(15),
           child: Form(
             key: _form,
-            child: Column(
+            child: ListView(
               children: [
                 Card(
                   elevation: 7,
                   //margin: EdgeInsets.all(12),
                   child: ListTile(
                     title: Text(
-                      'Instructions of Set/Removing offer',
+                      'Instructions of Set offer',
                       style: TextStyle(
                           color: Colors.red, fontWeight: FontWeight.bold),
                     ),
@@ -92,7 +92,7 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                 ),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 5),
-                  height: _expanded == false ? 0 : 90,
+                  height: _expanded == false ? 0 : 120,
                   width: double.infinity,
                   child: Card(
                     child: CondtionsForReturns(),
@@ -113,7 +113,7 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                     Expanded(
                       child: TextFormField(
                         controller: _currentPriceController,
-                        textInputAction: TextInputAction.next,
+                        textInputAction: TextInputAction.done,
                         keyboardType: TextInputType.number,
                         validator: (value) {
                           if (value.isEmpty) {
@@ -125,7 +125,7 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                     )
                   ],
                 ),
-                SizedBox(height: 30),
+                SizedBox(height: 10),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -141,13 +141,22 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                     Expanded(
                         child: TextFormField(
                       controller: _offerPriceController,
-                      keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.next,
+                      textInputAction: TextInputAction.done,
                       validator: (value) {
                         if (value.isEmpty) {
                           return 'Please provide a value';
                         }
-                        return null;
+                        try {
+                          double.parse(value);
+                          return null;
+                        } catch (_) {
+                          if (value.toLowerCase() == "combo" ||
+                              value.toLowerCase() == "no") {
+                            return null;
+                          } else {
+                            return 'Please Provide Valid status';
+                          }
+                        }
                       },
                     )),
                   ],
@@ -189,15 +198,21 @@ class CondtionsForReturns extends StatelessWidget {
         WidgetSpan(
             child: Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
         TextSpan(
-            text:
-                '   1.  Set new Specialoffer price or leave it as \'No\'.\n\n',
+            text: '   1.  Set new price of Special Offer.\n\n',
             style: TextStyle(
               color: Colors.black,
             )),
         WidgetSpan(
             child: Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
         TextSpan(
-            text: '   2.  For setting Combo offer type \'combo\' \n',
+            text: '   2.  For setting Combo offer type \'combo\'. \n\n',
+            style: TextStyle(
+              color: Colors.black,
+            )),
+        WidgetSpan(
+            child: Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
+        TextSpan(
+            text: '   3.  Type \'No\' for removing all offers.\n',
             style: TextStyle(
               color: Colors.black,
             )),
