@@ -70,7 +70,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     // this three for sending to ThanksScreen
     double finalAmount, finalVoucher = 0;
     int finalPoint = 0;
-    final List<CartItem> finalProducts = cart.items.values.toList();
+    final List<CartItem> allCartProducts = cart.items.values.toList();
     // amount,Bonus smaller & bigger conflict solve
     double cutAmount = cart.totalAmount;
     finalAmount = cutAmount;
@@ -97,14 +97,14 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     contact = _contactController.text.trim();
     address = _addressController.text.trim();
     await Provider.of<Orders>(context, listen: false)
-        .addOrder(cart.items.values.toList(), cutAmount)
+        .addOrder(allCartProducts, cutAmount)
         .then((_) {
       Provider.of<Orders>(context, listen: false).addCustomerOrdersOnServer(
         name,
         email,
         contact,
         address,
-        cart.items.values.toList(),
+        allCartProducts,
         cutAmount,
         userLocalId,
       );
@@ -116,7 +116,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       _isLoading = false;
     });
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => ThanksScreen(finalProducts, finalPoint,
+      builder: (context) => ThanksScreen(allCartProducts, finalPoint,
           finalVoucher, finalAmount, name, address, contact),
     ));
   }
