@@ -152,6 +152,7 @@ class SubTotalOfferAmount extends StatelessWidget {
                     '    Grand Total : \$ ${finalAmount - (finalPoint + finalVoucher)}\n\n',
                 style: TextStyle(
                     decoration: TextDecoration.underline,
+                    decorationThickness: 2.3,
                     color: Colors.black,
                     fontSize: 20,
                     fontWeight: FontWeight.bold)),
