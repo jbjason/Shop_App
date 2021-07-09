@@ -11,6 +11,7 @@ class ProductDetailScreenItem extends StatefulWidget {
   final String image2, image1, image3, id, extra;
   final String _title, _description;
   final double price;
+  final int _available;
   double rating;
   int review;
   String currentImageUrl;
@@ -26,7 +27,8 @@ class ProductDetailScreenItem extends StatefulWidget {
       this.image3,
       this.rating,
       this.review,
-      this.extra);
+      this.extra,
+      this._available);
   @override
   _ProductDetailScreenItemState createState() =>
       _ProductDetailScreenItemState();
@@ -450,30 +452,48 @@ class AddToCartButton extends StatelessWidget {
           duration: Duration(seconds: 1),
         )),
       },
-      child: Container(
-        margin: EdgeInsets.only(top: size.height * 0.1),
-        padding: EdgeInsets.all(20),
-        width: size.width * 0.7,
-        decoration: BoxDecoration(
-          color: Colors.amber,
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.shopping_bag),
-            SizedBox(width: 10),
-            Text(
-              'Add  to  Cart',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
+      child: widget._available < 1
+          ? Container(
+              margin: EdgeInsets.only(top: size.height * 0.1),
+              padding: EdgeInsets.all(20),
+              width: size.width * 0.7,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text(
+                'Out of Stock..!',
+                style: TextStyle(
+                  decoration: TextDecoration.lineThrough,
+                  decorationThickness: 2,
+                  color: Colors.white,
+                ),
+              ),
+            )
+          : Container(
+              margin: EdgeInsets.only(top: size.height * 0.1),
+              padding: EdgeInsets.all(20),
+              width: size.width * 0.7,
+              decoration: BoxDecoration(
+                color: Colors.amber,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.shopping_bag),
+                  SizedBox(width: 10),
+                  Text(
+                    'Add  to  Cart',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
     );
   }
 }
