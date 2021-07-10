@@ -158,7 +158,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    final fp = Provider.of<Orders>(context, listen: false).pointt;
+    final fp = Provider.of<Orders>(context).pointt;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(

@@ -179,9 +179,9 @@ class UserInfoDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(12),
-      child: Card(
+    return Card(
+      child: Padding(
+        padding: EdgeInsets.all(10),
         child: Column(
           children: [
             SizedBox(height: 10),
