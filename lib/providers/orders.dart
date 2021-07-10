@@ -23,7 +23,7 @@ class OrderItem {
 
 class Orders with ChangeNotifier {
   final String authToken, userId;
-  int _pointt;
+  int _pointt = 0;
   var timeStop, _customerOrderId;
   double _totalRevenue = 0;
   int _totalSell = 0;
