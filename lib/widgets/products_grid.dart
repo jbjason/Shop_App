@@ -71,7 +71,7 @@ class _ProductsGridState extends State<ProductsGrid> {
             height: 38,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemBuilder: (ctx, index) => GestureDetector(
+              itemBuilder: (ctx, index) => InkWell(
                 onTap: () {
                   setState(() {
                     selectedIndex = index;
