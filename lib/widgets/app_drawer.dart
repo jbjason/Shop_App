@@ -337,7 +337,7 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) {
     return UserAccountsDrawerHeader(
       accountName: Text('Jb Jason'),
-      accountEmail: Text(auth.userEmail),
+      accountEmail: Text(auth.userEmail == null ? '' : auth.userEmail),
       currentAccountPicture: CircleAvatar(
         child: FlutterLogo(
           size: 50,
