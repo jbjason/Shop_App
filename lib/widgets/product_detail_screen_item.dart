@@ -461,12 +461,14 @@ class AddToCartButton extends StatelessWidget {
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(
-                'Out of Stock..!',
-                style: TextStyle(
-                  decoration: TextDecoration.lineThrough,
-                  decorationThickness: 2,
-                  color: Colors.white,
+              child: Center(
+                child: Text(
+                  'Out of Stock..!',
+                  style: TextStyle(
+                    decoration: TextDecoration.lineThrough,
+                    decorationThickness: 2,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             )
