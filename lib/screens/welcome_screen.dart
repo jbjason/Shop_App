@@ -12,7 +12,6 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   var _isLoading = true;
   var _isInit = false;
-  var isLoading = true;
   @override
   void didChangeDependencies() {
     if (_isInit) return;
@@ -108,18 +107,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(14),
                           color: Colors.purple[50]),
-                      child: Center(
-                        child: Row(children: [
-                          Text(
-                            "Loading...!",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                          CircularProgressIndicator(
-                              backgroundColor: Colors.purple),
-                        ]),
-                      ),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              "Loading...!",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            CircularProgressIndicator(
+                              backgroundColor: Colors.purple,
+                            )
+                          ]),
                     )
                   : NavigateButton(),
             ],

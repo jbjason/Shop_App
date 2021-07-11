@@ -14,11 +14,6 @@ class _ProductsGridState extends State<ProductsGrid> {
   int selectedIndex = 0;
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     final heightOfScreen = MediaQuery.of(context).size.height;
     final productsData = Provider.of<Products>(context);
