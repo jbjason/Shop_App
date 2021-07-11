@@ -441,6 +441,9 @@ class Products with ChangeNotifier {
         DateTime _current = DateTime.now();
         final difference = _current.difference(date).inMinutes;
         _deadLineDuration = -difference;
+        if (_deadLineDuration < 0) {
+          _deadLineDuration = 0;
+        }
       });
     } catch (e) {
       print(e.toString());
