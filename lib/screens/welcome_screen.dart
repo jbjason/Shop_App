@@ -1,3 +1,4 @@
+import 'package:Shop_App/screens/products_overview_screen.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -79,19 +80,25 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              Container(
-                height: 60,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                    gradient: LinearGradient(colors: [
-                      Color.fromRGBO(143, 148, 251, 1),
-                      Color.fromRGBO(143, 148, 251, .6),
-                    ])),
-                child: Center(
-                  child: Text(
-                    "Press here to continue .......",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
+              InkWell(
+                onTap: () {
+                  Navigator.of(context)
+                      .pushNamed(ProductsOverviewScreen.routename);
+                },
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14),
+                      gradient: LinearGradient(colors: [
+                        Color.fromRGBO(143, 148, 251, 1),
+                        Color.fromRGBO(143, 148, 251, .6),
+                      ])),
+                  child: Center(
+                    child: Text(
+                      "Press here to continue .......",
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ),

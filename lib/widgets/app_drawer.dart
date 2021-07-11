@@ -1,3 +1,4 @@
+import 'package:Shop_App/screens/products_overview_screen.dart';
 import 'package:Shop_App/screens/statistic_screen.dart';
 
 import '../providers/products.dart';
@@ -374,7 +375,7 @@ class MyShop extends StatelessWidget {
       leading: Icon(Icons.shop),
       title: Text('Shop'),
       onTap: () {
-        Navigator.of(context).pushNamed('/');
+        Navigator.of(context).pushNamed(ProductsOverviewScreen.routename);
       },
     );
   }

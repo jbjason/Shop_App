@@ -1,3 +1,5 @@
+import 'package:Shop_App/screens/welcome_screen.dart';
+
 import './screens/statistic_screen.dart';
 import './screens/set_specialOffer_screen.dart';
 import './screens/set_nextDayOffer_screen.dart';
@@ -62,7 +64,7 @@ class MyApp extends StatelessWidget {
             ),
             debugShowCheckedModeBanner: false,
             home: authData.isAuth
-                ? ProductsOverviewScreen()
+                ? WelcomeScreen()
                 : FutureBuilder(
                     future: authData.tryAutoLogin(),
                     builder: (ctx, authResultSnapshot) =>
@@ -72,6 +74,8 @@ class MyApp extends StatelessWidget {
                             : AuthScreen(),
                   ),
             routes: {
+              ProductsOverviewScreen.routename: (ctx) =>
+                  ProductsOverviewScreen(),
               ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
               CartScreen.routeName: (ctx) => CartScreen(),
               OrderScreen.routeName: (ctx) => OrderScreen(),
