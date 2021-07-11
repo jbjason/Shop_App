@@ -1,8 +1,30 @@
+import 'package:Shop_App/providers/products.dart';
 import 'package:Shop_App/screens/products_overview_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   static const routeName = '/thanks-screen';
+  @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  var _isLoading = true;
+  var _isInit = false;
+  var isLoading = true;
+  @override
+  void didChangeDependencies() {
+    if (_isInit) return;
+    Provider.of<Products>(context).fetchAndSetCategories();
+    Provider.of<Products>(context).fetchAndSetProducts().then((_) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+    _isInit = true;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,29 +102,57 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ),
               Spacer(),
-              InkWell(
-                onTap: () {
-                  Navigator.of(context)
-                      .pushNamed(ProductsOverviewScreen.routename);
-                },
-                child: Container(
-                  height: 60,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
-                      gradient: LinearGradient(colors: [
-                        Color.fromRGBO(143, 148, 251, 1),
-                        Color.fromRGBO(143, 148, 251, .6),
-                      ])),
-                  child: Center(
-                    child: Text(
-                      "Press here to continue .......",
-                      style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-              ),
+              _isLoading
+                  ? Container(
+                      height: 60,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(14),
+                          color: Colors.purple[50]),
+                      child: Center(
+                        child: Row(children: [
+                          Text(
+                            "Loading...!",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          CircularProgressIndicator(
+                              backgroundColor: Colors.purple),
+                        ]),
+                      ),
+                    )
+                  : NavigateButton(),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class NavigateButton extends StatelessWidget {
+  const NavigateButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).pushNamed(ProductsOverviewScreen.routename);
+      },
+      child: Container(
+        height: 60,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(14),
+            gradient: LinearGradient(colors: [
+              Color.fromRGBO(143, 148, 251, 1),
+              Color.fromRGBO(143, 148, 251, .6),
+            ])),
+        child: Center(
+          child: Text(
+            "Press here to continue....",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
         ),
       ),
