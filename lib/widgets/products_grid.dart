@@ -12,7 +12,7 @@ class ProductsGrid extends StatefulWidget {
 
 class _ProductsGridState extends State<ProductsGrid> {
   int selectedIndex = 0;
-  var _isCategory = false;
+  var _isCategory = false, _isSearch = false;
   @override
   Widget build(BuildContext context) {
     final heightOfScreen = MediaQuery.of(context).size.height;
@@ -22,7 +22,9 @@ class _ProductsGridState extends State<ProductsGrid> {
         ? productsData.favoriteItems
         : _isCategory
             ? productsData.getSelectedCategoryList
-            : productsData.items;
+            : _isSearch
+                ? productsData.getSearchedList
+                : productsData.items;
 
     return SingleChildScrollView(
       child: Column(
@@ -54,7 +56,10 @@ class _ProductsGridState extends State<ProductsGrid> {
                           context: context,
                           delegate: DataSearch(productsData.searcHints));
                       if (result != null) {
-                        productsData.serachForProduct(result);
+                        setState(() {
+                          productsData.setSerachForProduct(result);
+                          _isSearch = true;
+                        });
                       }
                     },
                   ),

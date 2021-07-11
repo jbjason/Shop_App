@@ -117,6 +117,15 @@ class Products with ChangeNotifier {
           .toList();
   }
 
+  String search;
+  void setSerachForProduct(String s) {
+    search = s;
+  }
+
+  List<Product> get getSearchedList {
+    return _items.where((element) => element.title.contains(search)).toList();
+  }
+
   int _deadLineDuration = 0;
   int get deadLineDuration {
     return _deadLineDuration;
@@ -313,11 +322,6 @@ class Products with ChangeNotifier {
     } catch (error) {
       throw error;
     }
-  }
-
-  void serachForProduct(String s) {
-    _items = _items.where((element) => element.title.contains(s)).toList();
-    notifyListeners();
   }
 
   void sortByClass(String cat, double pr) {
