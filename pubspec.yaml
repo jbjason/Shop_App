@@ -61,6 +61,11 @@ flutter:
     - assets/images/jb.jpg
     - assets/images/tanmoy.jpg
     - assets/images/tahmina.jpg
+    - assets/images/welcomeShop.jpg
+    - assets/images/clock.png
+    - assets/images/light1.png
+    - assets/images/light2.png
+    - assets/images/background.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
