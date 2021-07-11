@@ -98,8 +98,23 @@ class Products with ChangeNotifier {
   }
 
   List<String> _categories = [];
+  int _selectedCatIndex;
   List<String> get categories {
     return [..._categories];
+  }
+
+  void setSelectedCategoryIndex(int i) {
+    _selectedCatIndex = i;
+  }
+
+  List<Product> get getSelectedCategoryList {
+    if (_categories[_selectedCatIndex].toLowerCase() == "all") {
+      return [..._items];
+    } else
+      return _items
+          .where(
+              (element) => _categories[_selectedCatIndex] == element.category)
+          .toList();
   }
 
   int _deadLineDuration = 0;

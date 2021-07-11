@@ -12,14 +12,17 @@ class ProductsGrid extends StatefulWidget {
 
 class _ProductsGridState extends State<ProductsGrid> {
   int selectedIndex = 0;
-
+  var _isCategory = false;
   @override
   Widget build(BuildContext context) {
     final heightOfScreen = MediaQuery.of(context).size.height;
     final productsData = Provider.of<Products>(context);
     final List<String> _category = productsData.categories;
-    final products =
-        widget.showFabs ? productsData.favoriteItems : productsData.items;
+    final products = widget.showFabs
+        ? productsData.favoriteItems
+        : _isCategory
+            ? productsData.getSelectedCategoryList
+            : productsData.items;
 
     return SingleChildScrollView(
       child: Column(
@@ -70,6 +73,8 @@ class _ProductsGridState extends State<ProductsGrid> {
                 onTap: () {
                   setState(() {
                     selectedIndex = index;
+                    productsData.setSelectedCategoryIndex(selectedIndex);
+                    _isCategory = true;
                   });
                 },
                 child: Container(
