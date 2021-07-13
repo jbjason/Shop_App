@@ -2,6 +2,8 @@ import 'package:Shop_App/providers/auth.dart';
 import 'package:Shop_App/providers/cart.dart';
 import 'package:Shop_App/providers/product.dart';
 import 'package:Shop_App/providers/products.dart';
+import 'package:Shop_App/screens/cart_screen.dart';
+import 'package:Shop_App/widgets/badge.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,6 +30,18 @@ class _ViewOfferScreenState extends State<ViewOfferScreen> {
           backgroundColor: Color(0xFFC8E6C9),
           title: Text('Offer Products',
               style: TextStyle(fontSize: 20, color: Colors.black)),
+          actions: [
+            Consumer<Cart>(
+              builder: (_, cart, ch) =>
+                  Badge(child: ch, value: cart.itemCount.toString()),
+              child: IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(CartScreen.routeName);
+                },
+              ),
+            ),
+          ],
         ),
         body: Column(
           children: [
