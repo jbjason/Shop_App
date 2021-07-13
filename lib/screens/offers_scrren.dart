@@ -1,3 +1,5 @@
+import 'package:Shop_App/screens/view_offer_screen.dart';
+
 import '../models/offer.dart';
 import '../providers/products.dart';
 import 'package:flutter/material.dart';
@@ -52,11 +54,17 @@ class _OffersImagesItemState extends State<OffersImagesItem> {
     return Container(
       padding: EdgeInsets.all(10),
       margin: EdgeInsets.all(10),
-      child: Image.network(
-        widget.product.imageUrl,
-        fit: BoxFit.fill,
-        height: 300,
-        width: double.infinity,
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context)
+              .pushNamed(ViewOfferScreen.routeName, arguments: 'offer');
+        },
+        child: Image.network(
+          widget.product.imageUrl,
+          fit: BoxFit.fill,
+          height: 300,
+          width: double.infinity,
+        ),
       ),
     );
   }
