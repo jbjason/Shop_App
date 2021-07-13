@@ -1,5 +1,6 @@
 import 'package:Shop_App/screens/products_overview_screen.dart';
 import 'package:Shop_App/screens/statistic_screen.dart';
+import 'package:Shop_App/screens/view_offer_screen.dart';
 
 import '../providers/products.dart';
 import '../screens/set_nextDayOffer_screen.dart';
@@ -113,7 +114,9 @@ class _SortByClassState extends State<SortByClass> {
   void _save(String category) {
     // category unselected or price sortOut korte hobe
     Provider.of<Products>(context, listen: false)
-        .sortByClass(category, highValue);
+        .setSortProducts(category, highValue);
+    Navigator.of(context)
+        .pushNamed(ViewOfferScreen.routeName, arguments: 'sortBy');
   }
 
   Widget pointBar() {
@@ -245,7 +248,7 @@ class _SortByClassState extends State<SortByClass> {
                     ElevatedButton.icon(
                       icon: Icon(Icons.swap_vert),
                       label: Text('   Apply'),
-                      onPressed: () {},
+                      onPressed: () => _save(_category[_selectedIndex]),
                     ),
                   ],
                 ),

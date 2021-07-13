@@ -126,6 +126,19 @@ class Products with ChangeNotifier {
     return _items.where((element) => element.title.contains(search)).toList();
   }
 
+  var cat, pr;
+  void setSortProducts(String cat, double pr) {
+    cat = this.cat;
+    pr = this.pr;
+  }
+
+  List<Product> get getSortProducts {
+    return _items
+        .where(
+            (element) => element.category.contains(cat) && element.price <= pr)
+        .toList();
+  }
+
   int _deadLineDuration = 0;
   int get deadLineDuration {
     return _deadLineDuration;
@@ -322,14 +335,6 @@ class Products with ChangeNotifier {
     } catch (error) {
       throw error;
     }
-  }
-
-  void sortByClass(String cat, double pr) {
-    _items = _items
-        .where(
-            (element) => element.category.contains(cat) && element.price <= pr)
-        .toList();
-    notifyListeners();
   }
 
   Future<void> setOffersUptoAmount(String imageUrl, String amount,
