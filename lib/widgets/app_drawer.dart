@@ -111,10 +111,10 @@ class _SortByClassState extends State<SortByClass> {
   double lowValue = 0, highValue = 1000;
   int _selectedIndex = 0;
 
-  void _save(String category) {
+  void _save(String cat) {
     // category unselected or price sortOut korte hobe
     Provider.of<Products>(context, listen: false)
-        .setSortProducts(category, highValue);
+        .setSortProducts(cat, highValue);
     Navigator.of(context)
         .pushNamed(ViewOfferScreen.routeName, arguments: 'sortBy');
   }
@@ -248,7 +248,9 @@ class _SortByClassState extends State<SortByClass> {
                     ElevatedButton.icon(
                       icon: Icon(Icons.swap_vert),
                       label: Text('   Apply'),
-                      onPressed: () => _save(_category[_selectedIndex]),
+                      onPressed: () {
+                        _save(_category[_selectedIndex]);
+                      },
                     ),
                   ],
                 ),

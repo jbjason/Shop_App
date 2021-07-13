@@ -126,10 +126,11 @@ class Products with ChangeNotifier {
     return _items.where((element) => element.title.contains(search)).toList();
   }
 
-  var cat, pr;
+  String cat = '';
+  double pr = 0;
   void setSortProducts(String cat, double pr) {
-    cat = this.cat;
-    pr = this.pr;
+    this.cat = cat;
+    this.pr = pr;
   }
 
   List<Product> get getSortProducts {
