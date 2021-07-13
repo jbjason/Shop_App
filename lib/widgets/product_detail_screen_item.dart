@@ -438,11 +438,14 @@ class AddToCartButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double _currentPrice = widget.extra != "no" && widget.extra != "combo"
+        ? double.parse(widget.extra)
+        : widget.price;
     return InkWell(
       onTap: () => {
         cart.addItem(
           widget.id,
-          widget.price,
+          _currentPrice,
           widget.image1,
           widget._title,
           1,

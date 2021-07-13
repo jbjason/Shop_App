@@ -11,6 +11,10 @@ class ProductItem extends StatelessWidget {
     final product = Provider.of<Product>(context, listen: false);
     final cart = Provider.of<Cart>(context, listen: false);
     final authData = Provider.of<Auth>(context, listen: false);
+    final double _currentPrice =
+        product.extra != "no" && product.extra != "combo"
+            ? double.parse(product.extra)
+            : product.price;
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -50,7 +54,7 @@ class ProductItem extends StatelessWidget {
           trailing: IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
-              cart.addItem(product.id, product.price, product.imageUrl1,
+              cart.addItem(product.id, _currentPrice, product.imageUrl1,
                   product.title, 1);
               Scaffold.of(context).hideCurrentSnackBar();
               Scaffold.of(context).showSnackBar(SnackBar(

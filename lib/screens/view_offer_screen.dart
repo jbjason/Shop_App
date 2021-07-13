@@ -139,6 +139,9 @@ class ViewOfferItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final authData = Provider.of<Auth>(context, listen: false);
     final cart = Provider.of<Cart>(context, listen: false);
+    final double _currentPrice = item.extra != "no" && item.extra != "combo"
+        ? double.parse(item.extra)
+        : item.price;
     return Padding(
       padding: EdgeInsets.all(10),
       child: Column(children: [
@@ -270,7 +273,7 @@ class ViewOfferItem extends StatelessWidget {
                               IconButton(
                                 icon: Icon(Icons.shopping_cart),
                                 onPressed: () {
-                                  cart.addItem(item.id, item.price,
+                                  cart.addItem(item.id, _currentPrice,
                                       item.imageUrl1, item.title, 1);
                                   Scaffold.of(context).hideCurrentSnackBar();
                                   Scaffold.of(context).showSnackBar(SnackBar(
