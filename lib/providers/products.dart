@@ -133,10 +133,17 @@ class Products with ChangeNotifier {
   }
 
   List<Product> get getSortProducts {
-    return _items
+    if (cat == "All") {
+      return _items.where((element) => element.price <= pr).toList();
+    }
+    final v = _items
         .where(
             (element) => element.category.contains(cat) && element.price <= pr)
         .toList();
+    if (v == null) {
+      return [];
+    } else
+      return v;
   }
 
   int _deadLineDuration = 0;
