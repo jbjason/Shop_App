@@ -358,7 +358,7 @@ class _RelatedProductsState extends State<RelatedProducts> {
             ),
           ),
           Container(
-            height: 300.0,
+            height: 304.0,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
