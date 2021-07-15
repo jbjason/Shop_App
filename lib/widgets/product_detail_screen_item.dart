@@ -278,6 +278,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           _offerAvailable ? CountDownClock(product: product) : Container(),
           // add_to_cart button
           AddToCartButton(cart: cart, widget: widget, size: size),
+          // relatedProducts list
           RelatedProducts(widget._title, widget.category, widget.id),
           // comments
           InkWell(
