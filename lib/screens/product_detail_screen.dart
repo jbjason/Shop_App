@@ -56,6 +56,7 @@ class ProductDetailScreen extends StatelessWidget {
         loadedProduct.isReview,
         loadedProduct.extra,
         loadedProduct.available,
+        loadedProduct.category,
       ),
     );
   }

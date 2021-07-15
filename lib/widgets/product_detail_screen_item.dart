@@ -1,4 +1,5 @@
 import 'package:Shop_App/providers/cart.dart';
+import 'package:Shop_App/providers/product.dart';
 import 'package:Shop_App/providers/products.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +9,7 @@ import 'package:pinch_zoom/pinch_zoom.dart';
 import 'package:slide_countdown_clock/slide_countdown_clock.dart';
 
 class ProductDetailScreenItem extends StatefulWidget {
-  final String image2, image1, image3, id, extra;
+  final String image2, image1, image3, id, extra, category;
   final String _title, _description;
   final double price;
   final int _available;
@@ -18,17 +19,19 @@ class ProductDetailScreenItem extends StatefulWidget {
   int _isInit = 1;
 
   ProductDetailScreenItem(
-      this.id,
-      this._title,
-      this._description,
-      this.price,
-      this.image1,
-      this.image2,
-      this.image3,
-      this.rating,
-      this.review,
-      this.extra,
-      this._available);
+    this.id,
+    this._title,
+    this._description,
+    this.price,
+    this.image1,
+    this.image2,
+    this.image3,
+    this.rating,
+    this.review,
+    this.extra,
+    this._available,
+    this.category,
+  );
   @override
   _ProductDetailScreenItemState createState() =>
       _ProductDetailScreenItemState();
@@ -206,10 +209,6 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           ),
           // description
           DescriptionWidget(widget: widget),
-          //offer coundown timer
-          _offerAvailable ? CountDownClock(product: product) : Container(),
-          // add_to_cart button
-          AddToCartButton(cart: cart, widget: widget, size: size),
           // colors demo (circle)
           ColorDemo(),
           // choose color & size
@@ -274,6 +273,11 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
               ],
             ),
           ),
+          //offer coundown timer
+          _offerAvailable ? CountDownClock(product: product) : Container(),
+          // add_to_cart button
+          AddToCartButton(cart: cart, widget: widget, size: size),
+          RelatedProducts(widget._title, widget.category),
           // comments
           InkWell(
             onTap: () {
@@ -301,6 +305,176 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
             ),
           ),
           _isComment != 1 ? Comments(widget.id, _comments) : Text(''),
+        ],
+      ),
+    );
+  }
+}
+
+class RelatedProducts extends StatefulWidget {
+  final String name, cat;
+  RelatedProducts(this.name, this.cat);
+  @override
+  _RelatedProductsState createState() => _RelatedProductsState();
+}
+
+class _RelatedProductsState extends State<RelatedProducts> {
+  List<Product> _relatedList = [];
+  Text _buildRatingStars(int rating) {
+    String stars = '';
+    for (int i = 0; i < rating; i++) {
+      stars += '⭐';
+    }
+    return Text(stars);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final load = Provider.of<Products>(context, listen: false);
+    _relatedList = load.getRelatedProductsList(widget.name, widget.cat);
+    return Padding(
+      padding: EdgeInsets.all(15),
+      child: ListView(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'Related Products',
+                  style: TextStyle(
+                    fontSize: 22.0,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+                Spacer(),
+              ],
+            ),
+          ),
+          Container(
+            height: 300.0,
+            //color: Colors.blueGrey[100],
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: _relatedList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: EdgeInsets.all(10),
+                  child: Card(
+                    elevation: 15,
+                    child: Container(
+                      color: Colors.indigo[200],
+                      margin: EdgeInsets.all(10.0),
+                      width: 210.0,
+                      child: Stack(
+                        alignment: Alignment.topCenter,
+                        children: <Widget>[
+                          Positioned(
+                            bottom: 5.0,
+                            child: Container(
+                              height: 100.0,
+                              width: 200.0,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              child: Padding(
+                                padding: EdgeInsets.all(10.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      '\$ ${_relatedList[index].price}',
+                                      style: TextStyle(
+                                        fontSize: 18.0,
+                                        fontWeight: FontWeight.w600,
+                                        letterSpacing: 1.2,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: <Widget>[
+                                        Icon(
+                                          Icons.location_on_sharp,
+                                          size: 10.0,
+                                          color: Colors.black,
+                                        ),
+                                        SizedBox(width: 5.0),
+                                        Text(
+                                          '${_relatedList[index].isReview}activities',
+                                          style: TextStyle(
+                                            fontSize: 11,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    _buildRatingStars(
+                                        _relatedList[index].isRating.toInt()),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20.0),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black26,
+                                  offset: Offset(0.0, 2.0),
+                                  blurRadius: 6.0,
+                                ),
+                              ],
+                            ),
+                            child: Stack(
+                              children: <Widget>[
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: Image.network(
+                                    _relatedList[index].imageUrl1,
+                                    height: 180.0,
+                                    width: 180.0,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Positioned(
+                                  left: 5.0,
+                                  bottom: 10.0,
+                                  child: Container(
+                                    color: Colors.black.withOpacity(0.5),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          _relatedList[index].title,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.w600,
+                                            letterSpacing: 1.2,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
         ],
       ),
     );
@@ -456,49 +630,79 @@ class AddToCartButton extends StatelessWidget {
         )),
       },
       child: widget._available < 1
-          ? Container(
-              margin: EdgeInsets.only(top: size.height * 0.1),
-              padding: EdgeInsets.all(20),
-              width: size.width * 0.7,
-              decoration: BoxDecoration(
-                color: Colors.red,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Text(
-                  'Out of Stock..!',
-                  style: TextStyle(
-                    decoration: TextDecoration.lineThrough,
-                    decorationThickness: 2,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            )
-          : Container(
-              margin: EdgeInsets.only(top: size.height * 0.1),
-              padding: EdgeInsets.all(20),
-              width: size.width * 0.7,
-              decoration: BoxDecoration(
-                color: Colors.amber,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.shopping_bag),
-                  SizedBox(width: 10),
-                  Text(
-                    'Add  to  Cart',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ],
-              ),
+          ? ButtonOutOfStock(size: size)
+          : ButtonAddToCart(size: size),
+    );
+  }
+}
+
+class ButtonOutOfStock extends StatelessWidget {
+  const ButtonOutOfStock({
+    Key key,
+    @required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: size.height * 0.1),
+      padding: EdgeInsets.all(20),
+      width: size.width * 0.7,
+      decoration: BoxDecoration(
+        color: Colors.red,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Center(
+        child: Text(
+          'Out of Stock..!',
+          style: TextStyle(
+            decoration: TextDecoration.lineThrough,
+            decorationThickness: 2,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 18,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ButtonAddToCart extends StatelessWidget {
+  const ButtonAddToCart({
+    Key key,
+    @required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.only(top: size.height * 0.1),
+      padding: EdgeInsets.all(20),
+      width: size.width * 0.7,
+      decoration: BoxDecoration(
+        color: Colors.amber,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.shopping_bag),
+          SizedBox(width: 10),
+          Text(
+            'Add  to  Cart',
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 18,
             ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -117,6 +117,15 @@ class Products with ChangeNotifier {
           .toList();
   }
 
+  List<Product> getRelatedProductsList(String name, String catgory) {
+    var s = _items.where((element) => element.title.contains(name)).toList();
+    if (s.length > 3) {
+      return s;
+    } else {
+      return _items.where((element) => element.category == catgory).toList();
+    }
+  }
+
   String search;
   void setSerachForProduct(String s) {
     search = s;
