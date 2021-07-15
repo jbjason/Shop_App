@@ -336,7 +336,7 @@ class _RelatedProductsState extends State<RelatedProducts> {
     _relatedList =
         load.getRelatedProductsList(widget.name, widget.cat, widget.id);
     return Container(
-      height: 340,
+      height: 370,
       padding: EdgeInsets.all(15),
       child: ListView(
         children: <Widget>[
@@ -358,7 +358,7 @@ class _RelatedProductsState extends State<RelatedProducts> {
             ),
           ),
           Container(
-            height: 330.0,
+            height: 300.0,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
