@@ -395,14 +395,32 @@ class _RelatedProductsState extends State<RelatedProducts> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Text(
-                                        '\$ ${_relatedList[index].price}',
-                                        style: TextStyle(
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.w600,
-                                          letterSpacing: 1.2,
-                                        ),
+                                      // price & offer Price Row
+                                      Row(
+                                        children: [
+                                          Text(
+                                            '\$ ${_relatedList[index].price}',
+                                            style: TextStyle(
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w600,
+                                              letterSpacing: 1.2,
+                                            ),
+                                          ),
+                                          _relatedList[index].extra != "no" ||
+                                                  _relatedList[index].extra !=
+                                                      "combo"
+                                              ? Text(
+                                                  '\$ ${_relatedList[index].extra}',
+                                                  style: TextStyle(
+                                                    fontSize: 18.0,
+                                                    fontWeight: FontWeight.w600,
+                                                    letterSpacing: 1.2,
+                                                  ),
+                                                )
+                                              : Text(''),
+                                        ],
                                       ),
+                                      // icon & Reviews
                                       Row(
                                         children: <Widget>[
                                           Icon(
@@ -420,6 +438,7 @@ class _RelatedProductsState extends State<RelatedProducts> {
                                           ),
                                         ],
                                       ),
+                                      // ratings
                                       _buildRatingStars(
                                           _relatedList[index].isRating.toInt()),
                                     ],
