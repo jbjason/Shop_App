@@ -396,14 +396,15 @@ class RelatedProducts extends StatelessWidget {
                                           Text(
                                             '\$ ${_relatedList[index].price}',
                                             style: TextStyle(
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.w600,
-                                              decoration: _relatedList[index]
-                                                          .extra !=
-                                                      "no"
-                                                  ? TextDecoration.lineThrough
-                                                  : TextDecoration.none,
-                                            ),
+                                                fontSize: 15.0,
+                                                fontWeight: FontWeight.w600,
+                                                decoration: _relatedList[index]
+                                                            .extra !=
+                                                        "no"
+                                                    ? TextDecoration.lineThrough
+                                                    : TextDecoration.none,
+                                                decorationThickness: 2,
+                                                decorationColor: Colors.red),
                                           ),
                                           Spacer(),
                                           _relatedList[index].extra != "no"
@@ -427,7 +428,7 @@ class RelatedProducts extends StatelessWidget {
                                           ),
                                           SizedBox(width: 5.0),
                                           Text(
-                                            '${_relatedList[index].isReview}activities',
+                                            '${_relatedList[index].isReview} activities',
                                             style: TextStyle(
                                               fontSize: 11,
                                               color: Colors.black,
