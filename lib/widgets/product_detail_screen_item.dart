@@ -338,7 +338,7 @@ class _RelatedProductsState extends State<RelatedProducts> {
       child: ListView(
         children: <Widget>[
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0),
+            padding: EdgeInsets.symmetric(horizontal: 5.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
