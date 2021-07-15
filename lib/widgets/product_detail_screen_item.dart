@@ -648,7 +648,7 @@ class ButtonOutOfStock extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: size.height * 0.1),
+      margin: EdgeInsets.only(top: 30),
       padding: EdgeInsets.all(20),
       width: size.width * 0.7,
       decoration: BoxDecoration(
@@ -682,7 +682,7 @@ class ButtonAddToCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: size.height * 0.1),
+      margin: EdgeInsets.only(top: 30),
       padding: EdgeInsets.all(20),
       width: size.width * 0.7,
       decoration: BoxDecoration(
