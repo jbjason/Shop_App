@@ -117,12 +117,18 @@ class Products with ChangeNotifier {
           .toList();
   }
 
-  List<Product> getRelatedProductsList(String name, String catgory) {
-    var s = _items.where((element) => element.title.contains(name)).toList();
+  List<Product> getRelatedProductsList(String name, String catgory, String id) {
+    var s = _items
+        .where((element) => element.title.contains(name) && element.id != id)
+        .toList();
     if (s.length > 3) {
       return s;
     } else {
-      return _items.where((element) => element.category == catgory).toList();
+      return _items
+          .where((element) =>
+              element.title.contains(name) && element.id != id ||
+              element.category == catgory)
+          .toList();
     }
   }
 

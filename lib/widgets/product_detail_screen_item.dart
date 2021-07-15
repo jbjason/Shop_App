@@ -1,6 +1,7 @@
 import 'package:Shop_App/providers/cart.dart';
 import 'package:Shop_App/providers/product.dart';
 import 'package:Shop_App/providers/products.dart';
+import 'package:Shop_App/screens/product_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -277,7 +278,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           _offerAvailable ? CountDownClock(product: product) : Container(),
           // add_to_cart button
           AddToCartButton(cart: cart, widget: widget, size: size),
-          RelatedProducts(widget._title, widget.category),
+          RelatedProducts(widget._title, widget.category, widget.id),
           // comments
           InkWell(
             onTap: () {
@@ -312,8 +313,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
 }
 
 class RelatedProducts extends StatefulWidget {
-  final String name, cat;
-  RelatedProducts(this.name, this.cat);
+  final String name, cat, id;
+  RelatedProducts(this.name, this.cat, this.id);
   @override
   _RelatedProductsState createState() => _RelatedProductsState();
 }
@@ -331,7 +332,8 @@ class _RelatedProductsState extends State<RelatedProducts> {
   @override
   Widget build(BuildContext context) {
     final load = Provider.of<Products>(context, listen: false);
-    _relatedList = load.getRelatedProductsList(widget.name, widget.cat);
+    _relatedList =
+        load.getRelatedProductsList(widget.name, widget.cat, widget.id);
     return Container(
       height: 330,
       padding: EdgeInsets.all(15),
@@ -356,124 +358,132 @@ class _RelatedProductsState extends State<RelatedProducts> {
           ),
           Container(
             height: 300.0,
-            //color: Colors.blueGrey[100],
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: _relatedList.length,
               itemBuilder: (BuildContext context, int index) {
-                return Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Card(
-                    elevation: 15,
-                    child: Container(
-                      color: Colors.indigo[200],
-                      margin: EdgeInsets.all(10.0),
-                      width: 210.0,
-                      child: Stack(
-                        alignment: Alignment.topCenter,
-                        children: <Widget>[
-                          Positioned(
-                            bottom: 5.0,
-                            child: Container(
-                              height: 100.0,
-                              width: 200.0,
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(10.0),
-                              ),
-                              child: Padding(
-                                padding: EdgeInsets.all(10.0),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      '\$ ${_relatedList[index].price}',
-                                      style: TextStyle(
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.w600,
-                                        letterSpacing: 1.2,
-                                      ),
-                                    ),
-                                    Row(
-                                      children: <Widget>[
-                                        Icon(
-                                          Icons.location_on_sharp,
-                                          size: 10.0,
-                                          color: Colors.black,
+                return InkWell(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(
+                      ProductDetailScreen.routeName,
+                      arguments: _relatedList[index].id,
+                    );
+                  },
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Card(
+                      elevation: 15,
+                      child: Container(
+                        color: Colors.indigo[200],
+                        margin: EdgeInsets.all(10.0),
+                        width: 210.0,
+                        child: Stack(
+                          alignment: Alignment.topCenter,
+                          children: <Widget>[
+                            Positioned(
+                              bottom: 5.0,
+                              child: Container(
+                                height: 100.0,
+                                width: 200.0,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsets.all(10.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Text(
+                                        '\$ ${_relatedList[index].price}',
+                                        style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600,
+                                          letterSpacing: 1.2,
                                         ),
-                                        SizedBox(width: 5.0),
-                                        Text(
-                                          '${_relatedList[index].isReview}activities',
-                                          style: TextStyle(
-                                            fontSize: 11,
+                                      ),
+                                      Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.location_on_sharp,
+                                            size: 10.0,
                                             color: Colors.black,
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                    _buildRatingStars(
-                                        _relatedList[index].isRating.toInt()),
-                                  ],
+                                          SizedBox(width: 5.0),
+                                          Text(
+                                            '${_relatedList[index].isReview}activities',
+                                            style: TextStyle(
+                                              fontSize: 11,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      _buildRatingStars(
+                                          _relatedList[index].isRating.toInt()),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black26,
-                                  offset: Offset(0.0, 2.0),
-                                  blurRadius: 6.0,
-                                ),
-                              ],
-                            ),
-                            child: Stack(
-                              children: <Widget>[
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  child: Image.network(
-                                    _relatedList[index].imageUrl1,
-                                    height: 180.0,
-                                    width: 180.0,
-                                    fit: BoxFit.cover,
+                            Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(20.0),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black26,
+                                    offset: Offset(0.0, 2.0),
+                                    blurRadius: 6.0,
                                   ),
-                                ),
-                                Positioned(
-                                  left: 5.0,
-                                  bottom: 10.0,
-                                  child: Container(
-                                    color: Colors.black.withOpacity(0.5),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: <Widget>[
-                                        Text(
-                                          _relatedList[index].title,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.w600,
-                                            letterSpacing: 1.2,
-                                          ),
-                                        ),
-                                      ],
+                                ],
+                              ),
+                              child: Stack(
+                                children: <Widget>[
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    child: Image.network(
+                                      _relatedList[index].imageUrl1,
+                                      height: 180.0,
+                                      width: 180.0,
+                                      fit: BoxFit.cover,
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ],
+                                  Positioned(
+                                    left: 5.0,
+                                    bottom: 10.0,
+                                    child: Container(
+                                      color: Colors.black.withOpacity(0.5),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Text(
+                                            _relatedList[index].title,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 24.0,
+                                              fontWeight: FontWeight.w600,
+                                              letterSpacing: 1.2,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 );
               },
+              itemCount: _relatedList.length,
             ),
           ),
         ],
