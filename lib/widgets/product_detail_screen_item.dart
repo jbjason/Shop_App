@@ -336,7 +336,7 @@ class _RelatedProductsState extends State<RelatedProducts> {
     _relatedList =
         load.getRelatedProductsList(widget.name, widget.cat, widget.id);
     return Container(
-      height: 330,
+      height: 340,
       padding: EdgeInsets.all(15),
       child: ListView(
         children: <Widget>[
@@ -348,7 +348,7 @@ class _RelatedProductsState extends State<RelatedProducts> {
                 Text(
                   'Related Products',
                   style: TextStyle(
-                    fontSize: 22.0,
+                    fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 1.5,
                   ),
@@ -358,7 +358,7 @@ class _RelatedProductsState extends State<RelatedProducts> {
             ),
           ),
           Container(
-            height: 300.0,
+            height: 330.0,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
@@ -402,20 +402,21 @@ class _RelatedProductsState extends State<RelatedProducts> {
                                           Text(
                                             '\$ ${_relatedList[index].price}',
                                             style: TextStyle(
-                                              fontSize: 18.0,
+                                              fontSize: 15.0,
                                               fontWeight: FontWeight.w600,
-                                              letterSpacing: 1.2,
+                                              decoration: _relatedList[index]
+                                                          .extra !=
+                                                      "no"
+                                                  ? TextDecoration.lineThrough
+                                                  : TextDecoration.none,
                                             ),
                                           ),
-                                          _relatedList[index].extra != "no" ||
-                                                  _relatedList[index].extra !=
-                                                      "combo"
+                                          _relatedList[index].extra != "no"
                                               ? Text(
                                                   '\$ ${_relatedList[index].extra}',
                                                   style: TextStyle(
-                                                    fontSize: 18.0,
-                                                    fontWeight: FontWeight.w600,
-                                                    letterSpacing: 1.2,
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.w800,
                                                   ),
                                                 )
                                               : Text(''),
