@@ -332,7 +332,8 @@ class _RelatedProductsState extends State<RelatedProducts> {
   Widget build(BuildContext context) {
     final load = Provider.of<Products>(context, listen: false);
     _relatedList = load.getRelatedProductsList(widget.name, widget.cat);
-    return Padding(
+    return Container(
+      height: 330,
       padding: EdgeInsets.all(15),
       child: ListView(
         children: <Widget>[
