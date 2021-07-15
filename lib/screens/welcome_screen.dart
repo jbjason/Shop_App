@@ -19,9 +19,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Provider.of<Products>(context).fetchAndSetProducts().then((_) {
       setState(() {
         _isLoading = false;
+        _isInit = true;
       });
     });
-    _isInit = true;
     super.didChangeDependencies();
   }
 
