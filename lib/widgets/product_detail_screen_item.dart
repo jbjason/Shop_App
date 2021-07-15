@@ -185,7 +185,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                   children: [
                     Text(
                       _offerAvailable
-                          ? percentageCount().toStringAsFixed(2)
+                          ? '- ${percentageCount().toStringAsFixed(2)}%'
                           : '',
                       style: TextStyle(
                         color: Colors.black,
@@ -313,14 +313,9 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
   }
 }
 
-class RelatedProducts extends StatefulWidget {
+class RelatedProducts extends StatelessWidget {
   final String name, cat, id;
   RelatedProducts(this.name, this.cat, this.id);
-  @override
-  _RelatedProductsState createState() => _RelatedProductsState();
-}
-
-class _RelatedProductsState extends State<RelatedProducts> {
   List<Product> _relatedList = [];
   Text _buildRatingStars(int rating) {
     String stars = '';
@@ -333,8 +328,7 @@ class _RelatedProductsState extends State<RelatedProducts> {
   @override
   Widget build(BuildContext context) {
     final load = Provider.of<Products>(context, listen: false);
-    _relatedList =
-        load.getRelatedProductsList(widget.name, widget.cat, widget.id);
+    _relatedList = load.getRelatedProductsList(name, cat, id);
     return Container(
       height: 370,
       padding: EdgeInsets.all(15),
@@ -411,6 +405,7 @@ class _RelatedProductsState extends State<RelatedProducts> {
                                                   : TextDecoration.none,
                                             ),
                                           ),
+                                          Spacer(),
                                           _relatedList[index].extra != "no"
                                               ? Text(
                                                   '\$ ${_relatedList[index].extra}',
