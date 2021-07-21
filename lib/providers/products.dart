@@ -222,7 +222,8 @@ class Products with ChangeNotifier {
     }
   }
 
-  Future<void> addProduct(Product product) async {
+  Future<void> addProduct(
+      Product product, List<String> sizeList, List<String> colorList) async {
     final url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/products.json?auth=$authToken');
     try {

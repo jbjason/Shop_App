@@ -22,8 +22,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _imageUrlController1 = TextEditingController();
   final _imageUrlController2 = TextEditingController();
   final _imageUrlController3 = TextEditingController();
-  List<ColorAnd> colorsList = [];
-  List<SizeAnd> sizeList = [];
+  List<String> colorsList = [];
+  List<String> sizeList = [];
   // Gloabally key declare for Form widget's children can be accessible
   final _form = GlobalKey<FormState>();
   var _editedProduct = Product(
@@ -128,7 +128,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
     if (_editedProduct.id == null) {
       try {
         await Provider.of<Products>(context, listen: false)
-            .addProduct(_editedProduct);
+            .addProduct(_editedProduct, sizeList, colorsList);
       } catch (error) {
         await showDialog<Null>(
             context: context,
@@ -247,7 +247,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       textInputAction: TextInputAction.next,
                       onFieldSubmitted: (_) {
                         FocusScope.of(context)
-                            .requestFocus(_availableFocusNode);
+                            .requestFocus(_descriptionFocusNode);
                       },
                       validator: (value) {
                         if (value.isEmpty) {
@@ -278,53 +278,13 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         );
                       },
                     ),
-                    // available
-                    TextFormField(
-                      initialValue: _initValues['available'],
-                      decoration:
-                          InputDecoration(labelText: 'Available Product'),
-                      keyboardType: TextInputType.number,
-                      focusNode: _availableFocusNode,
-                      textInputAction: TextInputAction.next,
-                      onFieldSubmitted: (_) {
-                        FocusScope.of(context)
-                            .requestFocus(_descriptionFocusNode);
-                      },
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          return 'Please enter a value';
-                        }
-                        // .tryParse(value) == null  mane invalid nuber boshano hoise
-                        else if (int.tryParse(value) == null) {
-                          return 'Please enter a valid number';
-                        }
-                        // .parse(value) price er limit set kora
-                        else if (int.parse(value) <= 0) {
-                          return 'Please enter a number greater than zero';
-                        }
-                        return null;
-                      },
-                      onSaved: (value) {
-                        _editedProduct = Product(
-                          title: _editedProduct.title,
-                          description: _editedProduct.description,
-                          price: _editedProduct.price,
-                          available: int.parse(value),
-                          imageUrl1: _editedProduct.imageUrl1,
-                          imageUrl2: _editedProduct.imageUrl2,
-                          imageUrl3: _editedProduct.imageUrl3,
-                          id: _editedProduct.id,
-                          isFavorite: _editedProduct.isFavorite,
-                          category: _editedProduct.category,
-                        );
-                      },
-                    ),
                     //description
                     TextFormField(
                       initialValue: _initValues['description'],
                       decoration: InputDecoration(labelText: 'Description'),
                       maxLines: 3,
                       keyboardType: TextInputType.multiline,
+                      textInputAction: TextInputAction.done,
                       focusNode: _descriptionFocusNode,
                       onFieldSubmitted: (_) {
                         FocusScope.of(context).requestFocus();
@@ -352,6 +312,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         );
                       },
                     ),
+                    // size List
                     Container(
                       width: size.width,
                       child: Row(
@@ -371,7 +332,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               )),
                               child: TextFormField(
                                 onSaved: (value) {
-                                  sizeList.add(SizeAnd(value));
+                                  sizeList.add(value);
                                 },
                                 validator: (value) {
                                   if (value.isEmpty) {
@@ -391,7 +352,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               )),
                               child: TextFormField(
                                 onSaved: (value) {
-                                  sizeList.add(SizeAnd(value));
+                                  sizeList.add(value);
                                 },
                                 validator: (value) {
                                   return null;
@@ -408,7 +369,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             )),
                             child: TextFormField(
                               onSaved: (value) {
-                                sizeList.add(SizeAnd(value));
+                                sizeList.add(value);
                               },
                               validator: (value) {
                                 return null;
@@ -419,6 +380,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       ),
                     ),
                     SizedBox(height: 10),
+                    // colors List
                     Container(
                       width: size.width,
                       child: Row(
@@ -439,7 +401,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               )),
                               child: TextFormField(
                                 onSaved: (value) {
-                                  colorsList.add(ColorAnd(value));
+                                  colorsList.add(value);
                                 },
                                 validator: (value) {
                                   if (value.isEmpty) {
@@ -459,7 +421,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               )),
                               child: TextFormField(
                                 onSaved: (value) {
-                                  colorsList.add(ColorAnd(value));
+                                  colorsList.add(value);
                                 },
                                 validator: (value) {
                                   return null;
@@ -476,7 +438,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                             )),
                             child: TextFormField(
                               onSaved: (value) {
-                                colorsList.add(ColorAnd(value));
+                                colorsList.add(value);
                               },
                               validator: (value) {
                                 return null;
@@ -487,6 +449,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       ),
                     ),
                     SizedBox(height: 10),
+                    // avilable
                     Container(
                       width: size.width,
                       child: Row(
@@ -499,15 +462,45 @@ class _EditProductScreenState extends State<EditProductScreen> {
                           ),
                           SizedBox(width: 5),
                           Expanded(
-                              child: TextFormField(
-                            onSaved: (value) {},
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return 'Can\'t be blank';
-                              }
-                              return null;
-                            },
-                          ))
+                            child: TextFormField(
+                              initialValue: _initValues['available'],
+                              decoration: InputDecoration(
+                                  labelText: 'Available Product'),
+                              keyboardType: TextInputType.number,
+                              onFieldSubmitted: (_) {
+                                FocusScope.of(context)
+                                    .requestFocus(_descriptionFocusNode);
+                              },
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return 'Please enter a value';
+                                }
+                                // .tryParse(value) == null  mane invalid nuber boshano hoise
+                                else if (int.tryParse(value) == null) {
+                                  return 'Please enter a valid number';
+                                }
+                                // .parse(value) price er limit set kora
+                                else if (int.parse(value) <= 0) {
+                                  return 'Please enter a number greater than zero';
+                                }
+                                return null;
+                              },
+                              onSaved: (value) {
+                                _editedProduct = Product(
+                                  title: _editedProduct.title,
+                                  description: _editedProduct.description,
+                                  price: _editedProduct.price,
+                                  available: int.parse(value),
+                                  imageUrl1: _editedProduct.imageUrl1,
+                                  imageUrl2: _editedProduct.imageUrl2,
+                                  imageUrl3: _editedProduct.imageUrl3,
+                                  id: _editedProduct.id,
+                                  isFavorite: _editedProduct.isFavorite,
+                                  category: _editedProduct.category,
+                                );
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -690,14 +683,4 @@ class _EditProductScreenState extends State<EditProductScreen> {
             ),
     );
   }
-}
-
-class SizeAnd {
-  final String name;
-  SizeAnd(this.name);
-}
-
-class ColorAnd {
-  final String name;
-  ColorAnd(this.name);
 }
