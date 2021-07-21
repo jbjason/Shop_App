@@ -465,10 +465,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               decoration: InputDecoration(
                                   labelText: 'Available Product'),
                               keyboardType: TextInputType.number,
-                              onFieldSubmitted: (_) {
-                                FocusScope.of(context)
-                                    .requestFocus(_descriptionFocusNode);
-                              },
+                              textInputAction: TextInputAction.done,
                               validator: (value) {
                                 if (value.isEmpty) {
                                   return 'Please enter a value';
