@@ -310,6 +310,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         );
                       },
                     ),
+                    SizedBox(height: 10),
                     // size List
                     Container(
                       width: size.width,
@@ -499,6 +500,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ],
                       ),
                     ),
+                    SizedBox(height: 10),
                     Row(
                       // make all children starting from very below of the row's height
                       crossAxisAlignment: CrossAxisAlignment.end,
