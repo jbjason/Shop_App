@@ -22,6 +22,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
   final _imageUrlController1 = TextEditingController();
   final _imageUrlController2 = TextEditingController();
   final _imageUrlController3 = TextEditingController();
+  List<ColorAnd> colorsList = [];
+  List<SizeAnd> sizeList = [];
   // Gloabally key declare for Form widget's children can be accessible
   final _form = GlobalKey<FormState>();
   var _editedProduct = Product(
@@ -153,6 +155,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: Text('Edit Product'),
@@ -349,6 +352,165 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         );
                       },
                     ),
+                    Container(
+                      width: size.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            width: size.width * .3,
+                            child: Text('Size', style: TextStyle(fontSize: 20)),
+                          ),
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Colors.black26,
+                                width: 3,
+                              )),
+                              child: TextFormField(
+                                onSaved: (value) {
+                                  sizeList.add(SizeAnd(value));
+                                },
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Can\'t be blank';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Colors.black26,
+                                width: 3,
+                              )),
+                              child: TextFormField(
+                                onSaved: (value) {
+                                  sizeList.add(SizeAnd(value));
+                                },
+                                validator: (value) {
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                              child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              color: Colors.black26,
+                              width: 3,
+                            )),
+                            child: TextFormField(
+                              onSaved: (value) {
+                                sizeList.add(SizeAnd(value));
+                              },
+                              validator: (value) {
+                                return null;
+                              },
+                            ),
+                          )),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: size.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Container(
+                            alignment: Alignment.center,
+                            width: size.width * .3,
+                            child:
+                                Text('Color', style: TextStyle(fontSize: 20)),
+                          ),
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Colors.black26,
+                                width: 3,
+                              )),
+                              child: TextFormField(
+                                onSaved: (value) {
+                                  colorsList.add(ColorAnd(value));
+                                },
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return 'Can\'t be blank';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                color: Colors.black26,
+                                width: 3,
+                              )),
+                              child: TextFormField(
+                                onSaved: (value) {
+                                  colorsList.add(ColorAnd(value));
+                                },
+                                validator: (value) {
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                              child: Container(
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              color: Colors.black26,
+                              width: 3,
+                            )),
+                            child: TextFormField(
+                              onSaved: (value) {
+                                colorsList.add(ColorAnd(value));
+                              },
+                              validator: (value) {
+                                return null;
+                              },
+                            ),
+                          )),
+                        ],
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Container(
+                      width: size.width,
+                      child: Row(
+                        children: [
+                          Container(
+                            width: size.width * .3,
+                            alignment: Alignment.center,
+                            child: Text('Quantity',
+                                style: TextStyle(fontSize: 20)),
+                          ),
+                          SizedBox(width: 5),
+                          Expanded(
+                              child: TextFormField(
+                            onSaved: (value) {},
+                            validator: (value) {
+                              if (value.isEmpty) {
+                                return 'Can\'t be blank';
+                              }
+                              return null;
+                            },
+                          ))
+                        ],
+                      ),
+                    ),
                     Row(
                       // make all children starting from very below of the row's height
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -528,4 +690,14 @@ class _EditProductScreenState extends State<EditProductScreen> {
             ),
     );
   }
+}
+
+class SizeAnd {
+  final String name;
+  SizeAnd(this.name);
+}
+
+class ColorAnd {
+  final String name;
+  ColorAnd(this.name);
 }
