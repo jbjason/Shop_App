@@ -10,6 +10,7 @@ class Product with ChangeNotifier {
   double isRating;
   int isReview, available;
   bool isFavorite;
+  final List<String> colorList, sizeList;
   Product({
     @required this.id,
     @required this.title,
@@ -24,6 +25,8 @@ class Product with ChangeNotifier {
     @required this.category,
     @required this.available,
     this.extra = "no",
+    @required this.sizeList,
+    @required this.colorList,
   });
 
   Future<void> toggleFavoriteStatus(String token, String userId) async {
@@ -42,4 +45,29 @@ class Product with ChangeNotifier {
       notifyListeners();
     }
   }
+}
+
+class EditProduct {
+  final String id, title, description, category;
+  final String imageUrl1, imageUrl2, imageUrl3;
+  final double price;
+  String extra;
+  double isRating;
+  int isReview, available;
+  bool isFavorite;
+  EditProduct({
+    @required this.id,
+    @required this.title,
+    @required this.description,
+    @required this.price,
+    @required this.imageUrl1,
+    this.imageUrl2,
+    this.imageUrl3,
+    this.isFavorite = false,
+    this.isRating = 5.0,
+    this.isReview = 10,
+    @required this.category,
+    @required this.available,
+    this.extra = "no",
+  });
 }

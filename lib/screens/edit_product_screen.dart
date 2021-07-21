@@ -26,7 +26,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
   List<String> sizeList = [];
   // Gloabally key declare for Form widget's children can be accessible
   final _form = GlobalKey<FormState>();
-  var _editedProduct = Product(
+  var _editedProduct = EditProduct(
     id: null,
     title: '',
     available: 0,
@@ -63,21 +63,21 @@ class _EditProductScreenState extends State<EditProductScreen> {
     if (_isInit) {
       final productId = ModalRoute.of(context).settings.arguments as String;
       if (productId != null) {
-        _editedProduct =
+        final p =
             Provider.of<Products>(context, listen: false).findById(productId);
         _initValues = {
-          'title': _editedProduct.title,
-          'description': _editedProduct.description,
-          'price': _editedProduct.price.toString(),
-          'available': _editedProduct.available.toString(),
-          'category': _editedProduct.category,
+          'title': p.title,
+          'description': p.description,
+          'price': p.price.toString(),
+          'available': p.available.toString(),
+          'category': p.category,
           'imageUrl1': '',
           'imageUrl2': '',
           'imageUrl3': '',
         };
-        _imageUrlController1.text = _editedProduct.imageUrl1;
-        _imageUrlController2.text = _editedProduct.imageUrl2;
-        _imageUrlController3.text = _editedProduct.imageUrl3;
+        _imageUrlController1.text = p.imageUrl1;
+        _imageUrlController2.text = p.imageUrl2;
+        _imageUrlController3.text = p.imageUrl3;
       }
     }
     _isInit = false;
@@ -193,7 +193,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _editedProduct = Product(
+                        _editedProduct = EditProduct(
                           id: _editedProduct.id,
                           title: value,
                           available: _editedProduct.available,
@@ -224,7 +224,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _editedProduct = Product(
+                        _editedProduct = EditProduct(
                           id: _editedProduct.id,
                           title: value,
                           available: _editedProduct.available,
@@ -264,7 +264,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _editedProduct = Product(
+                        _editedProduct = EditProduct(
                           title: _editedProduct.title,
                           description: _editedProduct.description,
                           available: _editedProduct.available,
@@ -298,7 +298,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         return null;
                       },
                       onSaved: (value) {
-                        _editedProduct = Product(
+                        _editedProduct = EditProduct(
                           title: _editedProduct.title,
                           description: value,
                           price: _editedProduct.price,
@@ -486,7 +486,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                                 return null;
                               },
                               onSaved: (value) {
-                                _editedProduct = Product(
+                                _editedProduct = EditProduct(
                                   title: _editedProduct.title,
                                   description: _editedProduct.description,
                                   price: _editedProduct.price,
@@ -550,7 +550,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               return null;
                             },
                             onSaved: (value) {
-                              _editedProduct = Product(
+                              _editedProduct = EditProduct(
                                 title: _editedProduct.title,
                                 available: _editedProduct.available,
                                 description: _editedProduct.description,
@@ -604,7 +604,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               return null;
                             },
                             onSaved: (value) {
-                              _editedProduct = Product(
+                              _editedProduct = EditProduct(
                                 title: _editedProduct.title,
                                 description: _editedProduct.description,
                                 price: _editedProduct.price,
@@ -660,7 +660,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                               return null;
                             },
                             onSaved: (value) {
-                              _editedProduct = Product(
+                              _editedProduct = EditProduct(
                                 title: _editedProduct.title,
                                 description: _editedProduct.description,
                                 available: _editedProduct.available,

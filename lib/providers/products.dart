@@ -196,23 +196,32 @@ class Products with ChangeNotifier {
       final favoriteData = json.decode(favoriteResponse.body);
 
       extractedData.forEach((proId, prodData) {
-        loadedProducts.add(Product(
-          id: proId,
-          title: prodData['title'],
-          description: prodData['description'],
-          price: prodData['price'],
-          available: prodData['available'],
-          imageUrl1: prodData['imageUrl1'],
-          imageUrl2: prodData['imageUrl2'],
-          imageUrl3: prodData['imageUrl3'],
-          // if favoriteData or no_entry_for_this_user then return false(unchecked)
-          isFavorite:
-              favoriteData == null ? false : favoriteData[proId] ?? false,
-          isRating: prodData['isRating'],
-          isReview: prodData['isReview'],
-          category: prodData['category'],
-          extra: prodData['extra'],
-        ));
+        loadedProducts.add(
+          Product(
+            id: proId,
+            title: prodData['title'],
+            description: prodData['description'],
+            price: prodData['price'],
+            available: prodData['available'],
+            imageUrl1: prodData['imageUrl1'],
+            imageUrl2: prodData['imageUrl2'],
+            imageUrl3: prodData['imageUrl3'],
+            // if favoriteData or no_entry_for_this_user then return false(unchecked)
+            isFavorite:
+                favoriteData == null ? false : favoriteData[proId] ?? false,
+            isRating: prodData['isRating'],
+            isReview: prodData['isReview'],
+            category: prodData['category'],
+            extra: prodData['extra'],
+            sizeList: (prodData['size'] as List<dynamic>)
+                .map((e) => {if (e['size1'].isNotEmpty) e['size1']}.toString())
+                .toList(),
+            colorList: (prodData['color'] as List<dynamic>)
+                .map(
+                    (e) => {if (e['color1'].isNotEmpty) e['color1']}.toString())
+                .toList(),
+          ),
+        );
         _searcHints.add(prodData['title']);
       });
       _items = loadedProducts;
@@ -222,8 +231,8 @@ class Products with ChangeNotifier {
     }
   }
 
-  Future<void> addProduct(
-      Product product, List<String> sizeList, List<String> colorList) async {
+  Future<void> addProduct(EditProduct product, List<String> sizeList,
+      List<String> colorList) async {
     final url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/products.json?auth=$authToken');
     try {
@@ -242,24 +251,26 @@ class Products with ChangeNotifier {
           'isReview': product.isReview,
           'category': product.category,
           'extra': product.extra,
+          'size': sizeList.map((e) => {'size1': e}).toList(),
+          'color': colorList.map((e) => {'color1': e}).toList(),
         }),
       );
-      final newProduct = Product(
-        title: product.title,
-        description: product.description,
-        price: product.price,
-        available: product.available,
-        imageUrl1: product.imageUrl1,
-        imageUrl2: product.imageUrl2,
-        imageUrl3: product.imageUrl3,
-        id: json.decode(response.body)['name'],
-        isRating: product.isRating,
-        isReview: product.isReview,
-        category: product.category,
-        extra: product.extra,
-      );
-      // adding
-      _items.add(newProduct);
+      // final newProduct = Product(
+      //   title: product.title,
+      //   description: product.description,
+      //   price: product.price,
+      //   available: product.available,
+      //   imageUrl1: product.imageUrl1,
+      //   imageUrl2: product.imageUrl2,
+      //   imageUrl3: product.imageUrl3,
+      //   id: json.decode(response.body)['name'],
+      //   isRating: product.isRating,
+      //   isReview: product.isReview,
+      //   category: product.category,
+      //   extra: product.extra,
+      // );
+      // // adding
+      // _items.add(newProduct);
       notifyListeners();
     } catch (error) {
       print(error);
@@ -285,7 +296,7 @@ class Products with ChangeNotifier {
     exProduct = null;
   }
 
-  Future<void> updateProduct(String id, Product newProduct) async {
+  Future<void> updateProduct(String id, EditProduct newProduct) async {
     final url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken');
     await http.patch(url,
@@ -296,7 +307,7 @@ class Products with ChangeNotifier {
           //'imageUrl': newProduct.imageUrl,
         }));
     final prodIndex = _items.indexWhere((element) => element.id == id);
-    _items[prodIndex] = newProduct;
+    //_items[prodIndex] = newProduct;
     notifyListeners();
   }
 
