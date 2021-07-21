@@ -14,6 +14,7 @@ class ProductDetailScreenItem extends StatefulWidget {
   final String _title, _description;
   final double price;
   final int _available;
+  final List<String> colorList, sizeList;
   double rating;
   int review;
   String currentImageUrl;
@@ -32,6 +33,8 @@ class ProductDetailScreenItem extends StatefulWidget {
     this.extra,
     this._available,
     this.category,
+    this.sizeList,
+    this.colorList,
   );
   @override
   _ProductDetailScreenItemState createState() =>
@@ -41,7 +44,6 @@ class ProductDetailScreenItem extends StatefulWidget {
 class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
   final primaryColor = const Color(0xFF0C9869);
   final backgroundColor = const Color(0xFFF9F8FD);
-  List<String> _locations = ['M', 'L', 'XL', 'XXL'];
   List<String> _comments = [];
   String _selectedLocation;
   int _isComment = 1;
@@ -226,7 +228,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                     value: _selectedLocation,
-                    items: _locations.map((e) {
+                    items: widget.colorList.map((e) {
                       return DropdownMenuItem(
                         child: Row(
                           children: [
@@ -252,7 +254,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
                     value: _selectedLocation,
-                    items: _locations.map((e) {
+                    items: widget.sizeList.map((e) {
                       return DropdownMenuItem(
                         child: Row(
                           children: [
@@ -354,6 +356,7 @@ class RelatedProducts extends StatelessWidget {
           Container(
             height: 304.0,
             child: ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
