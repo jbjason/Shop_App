@@ -11,7 +11,6 @@ class EditProductScreen extends StatefulWidget {
 
 class _EditProductScreenState extends State<EditProductScreen> {
   final _priceFocusNode = FocusNode();
-  final _availableFocusNode = FocusNode();
   final _descriptionFocusNode = FocusNode();
   final _imageUrlFocusNode1 = FocusNode();
   final _imageUrlFocusNode2 = FocusNode();
@@ -90,7 +89,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
     _priceFocusNode.dispose();
     _descriptionFocusNode.dispose();
     _titleFocusNode.dispose();
-    _availableFocusNode.dispose();
     _categoryFocusNode.dispose();
     _imageUrlFocusNode1.removeListener(_updateImageUrl);
     _imageUrlFocusNode2.removeListener(_updateImageUrl);
