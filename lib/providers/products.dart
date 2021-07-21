@@ -214,11 +214,10 @@ class Products with ChangeNotifier {
             category: prodData['category'],
             extra: prodData['extra'],
             sizeList: (prodData['size'] as List<dynamic>)
-                .map((e) => {if (e['size1'].isNotEmpty) e['size1']}.toString())
+                .map((e) => {e['size1']}.toString())
                 .toList(),
             colorList: (prodData['color'] as List<dynamic>)
-                .map(
-                    (e) => {if (e['color1'].isNotEmpty) e['color1']}.toString())
+                .map((e) => {e['color1']}.toString())
                 .toList(),
           ),
         );
