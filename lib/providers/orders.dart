@@ -96,11 +96,14 @@ class Orders with ChangeNotifier {
         // products come from Cart(which stored in CartItem)
         products: (orderData['products'] as List<dynamic>)
             .map((item) => CartItem(
-                id: item['id'],
-                title: item['title'],
-                imageUrl: item['imageUrl'],
-                quantity: item['quantity'],
-                price: item['price']))
+                  id: item['id'],
+                  title: item['title'],
+                  imageUrl: item['imageUrl'],
+                  quantity: item['quantity'],
+                  price: item['price'],
+                  color: item['color'],
+                  size: item['size'],
+                ))
             .toList(),
       ));
     });
@@ -123,6 +126,8 @@ class Orders with ChangeNotifier {
                     'title': cp.title,
                     'quantity': cp.quantity,
                     'price': cp.price,
+                    'size': cp.size,
+                    'color': cp.color,
                   })
               .toList(),
         }));
@@ -166,6 +171,8 @@ class Orders with ChangeNotifier {
                     imageUrl: item['imageUrl'],
                     quantity: item['quantity'],
                     price: item['price'],
+                    color: item['color'],
+                    size: item['size'],
                   ))
               .toList(),
         ));
