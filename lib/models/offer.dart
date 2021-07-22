@@ -11,9 +11,10 @@ class Offer {
 }
 
 class OffersImagesList {
-  final String id, imageUrl;
+  final String id, imageUrl, offerName;
   OffersImagesList({
     @required this.id,
     @required this.imageUrl,
+    @required this.offerName,
   });
 }

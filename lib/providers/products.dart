@@ -386,11 +386,12 @@ class Products with ChangeNotifier {
         final String id = json.decode(response.body)['name'];
         url = Uri.parse(
             'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken');
-        await http.put(
+        await http.post(
           url,
-          body: json.encode(
-            imageUrl,
-          ),
+          body: json.encode({
+            'imageUrl': imageUrl,
+            'offerName': 'uptoAmount',
+          }),
         );
       }
     } catch (error) {
@@ -414,11 +415,12 @@ class Products with ChangeNotifier {
       final String id = json.decode(response.body)['name'];
       url = Uri.parse(
           'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken');
-      await http.put(
+      await http.post(
         url,
-        body: json.encode(
-          imageUrl,
-        ),
+        body: json.encode({
+          'imageUrl': imageUrl,
+          'offerName': name,
+        }),
       );
     } catch (error) {
       throw error;
@@ -460,9 +462,25 @@ class Products with ChangeNotifier {
     final extractedImages = json.decode(response1.body) as Map<String, dynamic>;
     if (extractedImages == null) return;
     extractedImages.forEach((id, value) {
-      _offersImages.add(OffersImagesList(id: id, imageUrl: value));
+      _offersImages.add(OffersImagesList(
+          id: id, imageUrl: value['imageUrl'], offerName: value['offerName']));
     });
     notifyListeners();
+  }
+
+  Future<void> deleteOffers(OffersImagesList selectedOffer) async {
+    final String _name = selectedOffer.offerName;
+    final String _id = selectedOffer.id;
+    var url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/offers/$_name.json?auth=$authToken');
+    final response = await http.delete(url);
+    url = Uri.parse(
+        'https://flutter-update-67f54.firebaseio.com/offers/images/$_id.json?auth=$authToken');
+    await http.delete(url);
+    notifyListeners();
+    if (response.statusCode >= 400) {
+      throw HttpException('Could not delete product');
+    }
   }
 
   Future<void> updateOfferProduct(

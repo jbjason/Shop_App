@@ -49,6 +49,7 @@ class OffersImagesItem extends StatefulWidget {
 }
 
 class _OffersImagesItemState extends State<OffersImagesItem> {
+  bool _isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -59,12 +60,39 @@ class _OffersImagesItemState extends State<OffersImagesItem> {
           Navigator.of(context)
               .pushNamed(ViewOfferScreen.routeName, arguments: 'offer');
         },
-        child: Image.network(
-          widget.product.imageUrl,
-          fit: BoxFit.fill,
-          height: 300,
-          width: double.infinity,
-        ),
+        child: Stack(children: [
+          Image.network(
+            widget.product.imageUrl,
+            fit: BoxFit.fill,
+            height: 300,
+            width: double.infinity,
+          ),
+          _isLoading
+              ? CircularProgressIndicator(backgroundColor: Colors.pink)
+              : Positioned(
+                  right: 5,
+                  bottom: 5,
+                  child: IconButton(
+                      icon: Icon(Icons.delete_sharp),
+                      onPressed: () async {
+                        setState(() {
+                          _isLoading = true;
+                        });
+                        await Provider.of<Products>(context, listen: false)
+                            .deleteOffers(widget.product)
+                            .then((value) {
+                          setState(() {
+                            _isLoading = false;
+                            showDialog(
+                                context: context,
+                                builder: (ctx) => AlertDialog(
+                                    title: Text('Alert !'),
+                                    content: Text('Successfully Deleted..!')));
+                          });
+                        });
+                      }),
+                )
+        ]),
       ),
     );
   }
