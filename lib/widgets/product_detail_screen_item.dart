@@ -346,6 +346,7 @@ class RelatedProducts extends StatelessWidget {
       height: 370,
       padding: EdgeInsets.all(15),
       child: ListView(
+        physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 5.0),
@@ -367,7 +368,6 @@ class RelatedProducts extends StatelessWidget {
           Container(
             height: 304.0,
             child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
