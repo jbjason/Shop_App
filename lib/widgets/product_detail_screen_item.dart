@@ -45,7 +45,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
   final primaryColor = const Color(0xFF0C9869);
   final backgroundColor = const Color(0xFFF9F8FD);
   List<String> _comments = [];
-  String _selectedLocation;
+  String selectedColor, selectedSize;
+  int sColor = 0, sSize = 0;
   int _isComment = 1;
 
   double percentageCount() {
@@ -227,7 +228,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
-                    value: _selectedLocation,
+                    value: selectedColor,
                     items: widget.colorList.map((e) {
                       return DropdownMenuItem(
                         child: Row(
@@ -244,7 +245,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                     }).toList(),
                     onChanged: (newVal) {
                       setState(() {
-                        _selectedLocation = newVal;
+                        selectedColor = newVal;
+                        sColor = 1;
                       });
                     }),
                 DropdownButton(
@@ -253,7 +255,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                       style: TextStyle(
                           color: Colors.black, fontWeight: FontWeight.bold),
                     ),
-                    value: _selectedLocation,
+                    value: selectedSize,
                     items: widget.sizeList.map((e) {
                       return DropdownMenuItem(
                         child: Row(
@@ -270,7 +272,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                     }).toList(),
                     onChanged: (newVal) {
                       setState(() {
-                        _selectedLocation = newVal;
+                        selectedSize = newVal;
+                        sSize = 1;
                       });
                     }),
               ],
@@ -279,7 +282,15 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
           //offer coundown timer
           _offerAvailable ? CountDownClock(product: product) : Container(),
           // add_to_cart button
-          AddToCartButton(cart: cart, widget: widget, size: size),
+          AddToCartButton(
+            cart: cart,
+            widget: widget,
+            size: size,
+            selectedColor: selectedColor,
+            selectedSize: selectedSize,
+            sColor: sColor,
+            sSize: sSize,
+          ),
           // relatedProducts list
           RelatedProducts(widget._title, widget.category, widget.id),
           // comments
@@ -635,11 +646,17 @@ class AddToCartButton extends StatelessWidget {
     @required this.cart,
     @required this.widget,
     @required this.size,
+    @required this.selectedColor,
+    @required this.selectedSize,
+    @required this.sColor,
+    @required this.sSize,
   }) : super(key: key);
 
   final Cart cart;
   final ProductDetailScreenItem widget;
   final Size size;
+  final String selectedSize, selectedColor;
+  final int sSize, sColor;
 
   @override
   Widget build(BuildContext context) {
@@ -648,17 +665,28 @@ class AddToCartButton extends StatelessWidget {
         : widget.price;
     return InkWell(
       onTap: () => {
-        cart.addItem(
-          widget.id,
-          _currentPrice,
-          widget.image1,
-          widget._title,
-          1,
-        ),
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text('Added item to Cart!'),
-          duration: Duration(seconds: 1),
-        )),
+        if (sSize == 1 && sColor == 1)
+          {
+            cart.addItem(
+              widget.id,
+              _currentPrice,
+              widget.image1,
+              widget._title,
+              1,
+            ),
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text('Added item to Cart.!'),
+              duration: Duration(seconds: 1),
+            )),
+          }
+        else
+          {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text('Plzz select Color & Size..!'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Colors.red,
+            ))
+          }
       },
       child: widget._available < 1
           ? ButtonOutOfStock(size: size)
