@@ -28,8 +28,7 @@ class OffersScreen extends StatelessWidget {
             if (dataSnapShot.error != null) {
               return Center(child: Text('An error occured'));
             } else {
-              final _imageslist =
-                  Provider.of<Products>(context, listen: false).offersImages;
+              final _imageslist = Provider.of<Products>(context).offersImages;
               return ListView.builder(
                 itemBuilder: (ctx, index) =>
                     OffersImagesItem(_imageslist[index]),

@@ -385,7 +385,7 @@ class Products with ChangeNotifier {
       if (_uptoOffersList.length < 1) {
         final String id = json.decode(response.body)['name'];
         url = Uri.parse(
-            'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken');
+            'https://flutter-update-67f54.firebaseio.com/offers/images.json?auth=$authToken');
         await http.post(
           url,
           body: json.encode({
@@ -405,13 +405,14 @@ class Products with ChangeNotifier {
     var url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/offers/$name.json?auth=$authToken');
     try {
-      await http.post(
+      final response = await http.post(
         url,
         body: json.encode({
           'imageUrl': imageUrl,
           'deadline': dateTime.toIso8601String(),
         }),
       );
+      final s = json.decode(response.body)['name'];
       url = Uri.parse(
           'https://flutter-update-67f54.firebaseio.com/offers/images.json?auth=$authToken');
       await http.post(
@@ -475,9 +476,9 @@ class Products with ChangeNotifier {
     final response = await http.delete(url);
     url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/offers/images/$_id.json?auth=$authToken');
-    await http.delete(url);
+    final response1 = await http.delete(url);
     notifyListeners();
-    if (response.statusCode >= 400) {
+    if (response.statusCode >= 400 && response1.statusCode >= 400) {
       throw HttpException('Could not delete product');
     }
   }
