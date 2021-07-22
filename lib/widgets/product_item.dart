@@ -51,25 +51,25 @@ class ProductItem extends StatelessWidget {
           // title text
           title: Text(product.title),
           // cart icon
-          trailing: IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {
-              cart.addItem(product.id, _currentPrice, product.imageUrl1,
-                  product.title, 1);
-              Scaffold.of(context).hideCurrentSnackBar();
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text('Added item to Cart!'),
-                duration: Duration(seconds: 1),
-                action: SnackBarAction(
-                  label: 'UNDO',
-                  onPressed: () {
-                    cart.removeSingleItem(product.id);
-                  },
-                ),
-              ));
-            },
-            color: Colors.green,
-          ),
+          // trailing: IconButton(
+          //   icon: Icon(Icons.shopping_cart),
+          //   onPressed: () {
+          //     cart.addItem(product.id, _currentPrice, product.imageUrl1,
+          //         product.title, 1);
+          //     Scaffold.of(context).hideCurrentSnackBar();
+          //     Scaffold.of(context).showSnackBar(SnackBar(
+          //       content: Text('Added item to Cart!'),
+          //       duration: Duration(seconds: 1),
+          //       action: SnackBarAction(
+          //         label: 'UNDO',
+          //         onPressed: () {
+          //           cart.removeSingleItem(product.id);
+          //         },
+          //       ),
+          //     ));
+          //   },
+          //   color: Colors.green,
+          // ),
         ),
       ),
     );

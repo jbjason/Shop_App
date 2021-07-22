@@ -80,6 +80,8 @@ class _CartScreenState extends State<CartScreen> {
               cart.items.values.toList()[i].quantity,
               cart.items.values.toList()[i].imageUrl,
               updateCart,
+              cart.items.values.toList()[i].color,
+              cart.items.values.toList()[i].size,
             ),
             itemCount: cart.itemCount,
           )),

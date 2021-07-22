@@ -3,13 +3,13 @@ import 'package:provider/provider.dart';
 import '../providers/cart.dart';
 
 class CartItem extends StatefulWidget {
-  final String id, title, productId, imageUrl;
+  final String id, title, productId, imageUrl, size, color;
   final int quantity;
   final double price;
   final Function updateFunction;
 
   CartItem(this.id, this.productId, this.title, this.price, this.quantity,
-      this.imageUrl, this.updateFunction);
+      this.imageUrl, this.updateFunction, this.color, this.size);
   @override
   _CartItemState createState() => _CartItemState();
 }
@@ -78,7 +78,8 @@ class _CartItemState extends State<CartItem> {
               ),
             ),
             title: Text(widget.title),
-            subtitle: Text('Price : \$ ${(widget.price)}'),
+            subtitle: Text(
+                'Price: \$${(widget.price)}   ${widget.size} ${widget.color}'),
             trailing: Container(
               width: 80,
               child: Row(

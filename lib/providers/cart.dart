@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 class CartItem {
-  final String id, title, imageUrl;
+  final String id, title, imageUrl, color, size;
   final int quantity;
   final double price;
   CartItem({
@@ -10,6 +10,8 @@ class CartItem {
     @required this.quantity,
     @required this.price,
     @required this.imageUrl,
+    @required this.color,
+    @required this.size,
   });
 }
 
@@ -31,8 +33,8 @@ class Cart with ChangeNotifier {
     return a;
   }
 
-  void addItem(
-      String productId, double price, String imageUrl, String title, int quan) {
+  void addItem(String productId, double price, String imageUrl, String title,
+      int quan, String selectedColor, String selectedSize) {
     _items.putIfAbsent(
       productId,
       () => CartItem(
@@ -41,6 +43,8 @@ class Cart with ChangeNotifier {
         imageUrl: imageUrl,
         price: price,
         quantity: quan,
+        color: selectedColor,
+        size: selectedSize,
       ),
     );
     notifyListeners();
@@ -55,6 +59,8 @@ class Cart with ChangeNotifier {
         imageUrl: existingItem.imageUrl,
         price: existingItem.price,
         quantity: quan,
+        color: existingItem.color,
+        size: existingItem.size,
       ),
     );
     notifyListeners();
@@ -72,11 +78,14 @@ class Cart with ChangeNotifier {
       _items.update(
           proId,
           (value) => CartItem(
-              id: value.id,
-              title: value.title,
-              imageUrl: value.imageUrl,
-              quantity: value.quantity - 1,
-              price: value.price));
+                id: value.id,
+                title: value.title,
+                imageUrl: value.imageUrl,
+                quantity: value.quantity - 1,
+                price: value.price,
+                color: value.color,
+                size: value.size,
+              ));
     } else {
       _items.remove(proId);
     }

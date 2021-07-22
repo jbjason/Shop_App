@@ -673,6 +673,8 @@ class AddToCartButton extends StatelessWidget {
               widget.image1,
               widget._title,
               1,
+              selectedColor,
+              selectedSize,
             ),
             Scaffold.of(context).showSnackBar(SnackBar(
               content: Text('Added item to Cart.!'),
