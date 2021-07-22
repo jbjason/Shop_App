@@ -66,31 +66,31 @@ class _OffersImagesItemState extends State<OffersImagesItem> {
             height: 300,
             width: double.infinity,
           ),
-          _isLoading
-              ? CircularProgressIndicator(backgroundColor: Colors.pink)
-              : Positioned(
-                  right: 5,
-                  bottom: 5,
-                  child: IconButton(
-                      icon: Icon(Icons.delete_sharp),
-                      onPressed: () async {
+          Positioned(
+            right: 5,
+            bottom: 5,
+            child: _isLoading
+                ? CircularProgressIndicator(backgroundColor: Colors.pink)
+                : IconButton(
+                    icon: Icon(Icons.delete_sharp),
+                    onPressed: () async {
+                      setState(() {
+                        _isLoading = true;
+                      });
+                      await Provider.of<Products>(context, listen: false)
+                          .deleteOffers(widget.product)
+                          .then((value) {
                         setState(() {
-                          _isLoading = true;
+                          _isLoading = false;
+                          showDialog(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                  title: Text('Alert !'),
+                                  content: Text('Successfully Deleted..!')));
                         });
-                        await Provider.of<Products>(context, listen: false)
-                            .deleteOffers(widget.product)
-                            .then((value) {
-                          setState(() {
-                            _isLoading = false;
-                            showDialog(
-                                context: context,
-                                builder: (ctx) => AlertDialog(
-                                    title: Text('Alert !'),
-                                    content: Text('Successfully Deleted..!')));
-                          });
-                        });
-                      }),
-                )
+                      });
+                    }),
+          )
         ]),
       ),
     );
