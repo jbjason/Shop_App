@@ -405,16 +405,15 @@ class Products with ChangeNotifier {
     var url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/offers/$name.json?auth=$authToken');
     try {
-      final response = await http.post(
+      await http.post(
         url,
         body: json.encode({
           'imageUrl': imageUrl,
           'deadline': dateTime.toIso8601String(),
         }),
       );
-      final String id = json.decode(response.body)['name'];
       url = Uri.parse(
-          'https://flutter-update-67f54.firebaseio.com/offers/images/$id.json?auth=$authToken');
+          'https://flutter-update-67f54.firebaseio.com/offers/images.json?auth=$authToken');
       await http.post(
         url,
         body: json.encode({
