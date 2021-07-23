@@ -275,7 +275,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                           SizedBox(height: 40),
                           // Just a text before the pointsBar
                           Text(
-                            'Your Bonus Points ($fp)',
+                            'Your Bonus Points ( $fp )',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.red,
@@ -502,6 +502,7 @@ class TermsAndCondition extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 430,
+      margin: EdgeInsets.only(top: 10),
       width: double.infinity,
       child: Card(
         color: Colors.blue[50],
