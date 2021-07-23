@@ -110,6 +110,7 @@ class _OrderScreenState extends State<OrderScreen> {
               return Stack(children: [
                 YellowDesignForOrder(size: size),
                 Column(children: [
+                  SizedBox(height: 15),
                   Row(children: [
                     IconButton(
                       alignment: Alignment.topLeft,
@@ -177,6 +178,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   ]),
                   Text(
                     connection[1] == null ? '' : connection[1],
+                    textAlign: TextAlign.left,
                     style: TextStyle(
                         fontFamily: 'Montserrat',
                         fontSize: 30.0,
