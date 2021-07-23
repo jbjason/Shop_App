@@ -29,65 +29,6 @@ class _OrderScreenState extends State<OrderScreen> {
     final product = Provider.of<Orders>(context, listen: false);
     return Scaffold(
       key: _scaffoldKey,
-      // appBar: AppBar(
-      //   backgroundColor: Color(0xFFC8E6C9),
-      //   title: Text(connection[1] == null ? '' : connection[1]),
-      //   actions: [
-      //     PopupMenuButton(
-      //       onSelected: (int selectedIndex) {
-      //         if (selectedIndex == 0) {
-      //           setState(() {
-      //             widget._showAll = false;
-      //             // checking orders.length is lesser than 5 or not
-      //             int _existingOrders = product.orders.length;
-      //             if (widget._selectCount > _existingOrders) {
-      //               widget._selectCount = _existingOrders;
-      //             }
-      //             widget._selectDays = 0;
-      //           });
-      //         } else if (selectedIndex == 3) {
-      //           setState(() {
-      //             widget._showAll = true;
-      //             widget._selectDays = 0;
-      //             widget._length = product.orders.length;
-      //           });
-      //         } else if (selectedIndex == 2) {
-      //           setState(() {
-      //             widget._selectDays = 15;
-      //             widget._userTransaction = product.recentTransactions(15);
-      //             widget._length = widget._userTransaction.length;
-      //           });
-      //         } else {
-      //           setState(() {
-      //             widget._selectDays = 30;
-      //             widget._userTransaction = product.recentTransactions(30);
-      //             widget._length = widget._userTransaction.length;
-      //           });
-      //         }
-      //       },
-      //       icon:
-      //           connection[0] == "profile" ? Icon(null) : Icon(Icons.more_vert),
-      //       itemBuilder: (_) => [
-      //         PopupMenuItem(
-      //           child: Text('Last Five Orders'),
-      //           value: 0,
-      //         ),
-      //         PopupMenuItem(
-      //           child: Text('Last 15 days'),
-      //           value: 1,
-      //         ),
-      //         PopupMenuItem(
-      //           child: Text('Last 30 days'),
-      //           value: 2,
-      //         ),
-      //         PopupMenuItem(
-      //           child: Text('All'),
-      //           value: 3,
-      //         ),
-      //       ],
-      //     ),
-      //   ],
-      // ),
       drawer: AppDrawer(),
       body: FutureBuilder(
         future: product.fetchAndSetOrders(),
@@ -110,7 +51,7 @@ class _OrderScreenState extends State<OrderScreen> {
               return Stack(children: [
                 YellowDesignForOrder(size: size),
                 Column(children: [
-                  SizedBox(height: 15),
+                  SizedBox(height: MediaQuery.of(context).padding.top + 6),
                   Row(children: [
                     IconButton(
                       alignment: Alignment.topLeft,
