@@ -429,8 +429,7 @@ class YellowDesign extends StatelessWidget {
       decoration: BoxDecoration(
         color: Color(0xFFFDD148),
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(50.0),
-          bottomRight: Radius.circular(100.0),
+          bottomRight: Radius.circular(180.0),
         ),
       ),
       child: Stack(children: [
@@ -446,7 +445,7 @@ class YellowDesign extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: 15.0,
+          bottom: 10.0,
           left: size.width * .4,
           child: Container(
               height: 300.0,
