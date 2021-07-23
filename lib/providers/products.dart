@@ -217,7 +217,7 @@ class Products with ChangeNotifier {
                 .map((e) => e['size1'].toString())
                 .toList(),
             colorList: (prodData['color'] as List<dynamic>)
-                .map((e) => {e['color1']}.toString())
+                .map((e) => e['color1'].toString())
                 .toList(),
           ),
         );
