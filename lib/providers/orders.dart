@@ -213,6 +213,8 @@ class Orders with ChangeNotifier {
                     'title': cp.title,
                     'quantity': cp.quantity,
                     'price': cp.price,
+                    'color': cp.color,
+                    'size': cp.size,
                   })
               .toList(),
         }),
