@@ -119,36 +119,35 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
       body: Stack(
         children: [
           YellowDesignForHome(size: size),
-          Positioned(
-            top: size.height * .04,
-            left: 10,
-            child: IconButton(
-              alignment: Alignment.topLeft,
-              icon: Icon(Icons.menu, size: 20),
-              onPressed: () {
-                _scaffoldKey.currentState.openDrawer();
-              },
-            ),
-          ),
-          Positioned(
-            top: size.height * .04,
-            right: 20,
-            child: Consumer<Cart>(
-              builder: (_, cart, ch) =>
-                  Badge(child: ch, value: cart.itemCount.toString()),
-              child: IconButton(
-                alignment: Alignment.topRight,
-                icon: Icon(
-                  Icons.shopping_basket,
-                  size: 20,
+          Column(
+            children: [
+              Row(children: [
+                IconButton(
+                  icon: Icon(Icons.menu, size: 24),
+                  onPressed: () {
+                    _scaffoldKey.currentState.openDrawer();
+                  },
                 ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(CartScreen.routeName);
-                },
-              ),
-            ),
+                Spacer(),
+                Consumer<Cart>(
+                  builder: (_, cart, ch) =>
+                      Badge(child: ch, value: cart.itemCount.toString()),
+                  child: IconButton(
+                    alignment: Alignment.topRight,
+                    icon: Icon(
+                      Icons.shopping_basket,
+                      size: 24,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(CartScreen.routeName);
+                    },
+                  ),
+                ),
+              ]),
+              ProductsGrid(
+                  currentNavigateIndex == 0 ? false : true, _isLoading),
+            ],
           ),
-          ProductsGrid(currentNavigateIndex == 0 ? false : true, _isLoading),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
