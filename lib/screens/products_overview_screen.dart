@@ -124,7 +124,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
             left: 10,
             child: IconButton(
               alignment: Alignment.topLeft,
-              icon: Icon(Icons.menu),
+              icon: Icon(Icons.menu, size: 20),
               onPressed: () {
                 _scaffoldKey.currentState.openDrawer();
               },
@@ -138,7 +138,10 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                   Badge(child: ch, value: cart.itemCount.toString()),
               child: IconButton(
                 alignment: Alignment.topRight,
-                icon: Icon(Icons.shopping_basket),
+                icon: Icon(
+                  Icons.shopping_basket,
+                  size: 20,
+                ),
                 onPressed: () {
                   Navigator.of(context).pushNamed(CartScreen.routeName);
                 },
