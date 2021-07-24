@@ -145,7 +145,7 @@ class _ProductsGridState extends State<ProductsGrid> {
                 ),
                 //OfferPic
                 offerPic.length == 0
-                    ? Container()
+                    ? Container(height: 15)
                     : Container(
                         margin: EdgeInsets.only(top: 5, bottom: 5),
                         height: 230,
