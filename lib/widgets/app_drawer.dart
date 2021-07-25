@@ -721,15 +721,11 @@ class _OffersListState extends State<OffersList> {
               children: [
                 // special offer & next day delivery is connected on pic uploading
                 ListTile(
-                  leading: Icon(Icons.minimize_rounded),
-                  title: Text(
-                    'Special Offer',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
+                  leading: Icon(
+                    Icons.minimize_rounded,
+                    color: Colors.white,
                   ),
+                  title: Text('Special Offer', style: t),
                   onTap: () {
                     Navigator.of(context).pushNamed(
                         SetNextDayOfferScreen.routeName,
@@ -737,29 +733,21 @@ class _OffersListState extends State<OffersList> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.minimize_rounded),
-                  title: Text(
-                    'Upto \'N\' Tk Offer',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
+                  leading: Icon(
+                    Icons.minimize_rounded,
+                    color: Colors.white,
                   ),
+                  title: Text('Upto \'N\' Tk Offer', style: t),
                   onTap: () {
                     Navigator.of(context).pushNamed(SetOffersScreen.routeName);
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.minimize_rounded),
-                  title: Text(
-                    'Next Day Delivery',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
+                  leading: Icon(
+                    Icons.minimize_rounded,
+                    color: Colors.white,
                   ),
+                  title: Text('Next Day Delivery', style: t),
                   onTap: () {
                     Navigator.of(context).pushNamed(
                         SetNextDayOfferScreen.routeName,
@@ -767,15 +755,11 @@ class _OffersListState extends State<OffersList> {
                   },
                 ),
                 ListTile(
-                  leading: Icon(Icons.minimize_rounded),
-                  title: Text(
-                    'Combo Offer',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
+                  leading: Icon(
+                    Icons.minimize_rounded,
+                    color: Colors.white,
                   ),
+                  title: Text('Combo Offer', style: t),
                   onTap: () {
                     Navigator.of(context).pushNamed(
                         SetNextDayOfferScreen.routeName,
