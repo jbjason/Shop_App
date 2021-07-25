@@ -1,4 +1,5 @@
 import 'package:Shop_App/providers/product.dart';
+import 'package:Shop_App/screens/offers_scrren.dart';
 import 'package:Shop_App/screens/product_detail_screen.dart';
 import '../widgets/product_item.dart';
 import '../providers/cart.dart';
@@ -230,16 +231,22 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                       //OfferPic
                       offerPic.length == 0
                           ? Container(height: 15)
-                          : Container(
-                              margin: EdgeInsets.only(top: 5, bottom: 5),
-                              height: 230,
-                              width: size.width * .7,
-                              child: _isLoading
-                                  ? CircularProgressIndicator()
-                                  : Image.network(
-                                      offerPic[0].imageUrl,
-                                      fit: BoxFit.contain,
-                                    ),
+                          : InkWell(
+                              onTap: () {
+                                Navigator.of(context)
+                                    .pushNamed(OffersScreen.routeName);
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(top: 5, bottom: 5),
+                                height: 230,
+                                width: size.width * .7,
+                                child: _isLoading
+                                    ? CircularProgressIndicator()
+                                    : Image.asset(
+                                        'assets/images/offPic.png',
+                                        fit: BoxFit.contain,
+                                      ),
+                              ),
                             ),
                       // category List
                       Container(
