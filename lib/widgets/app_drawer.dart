@@ -21,57 +21,62 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
+    final d = Divider(
+      color: Colors.white.withOpacity(0.5),
+      thickness: 1,
+    );
     return SingleChildScrollView(
       child: Container(
         color: Color.fromRGBO(31, 58, 47, 1.0),
         child: Column(
           children: [
             Header(auth: auth),
+            Divider(color: Colors.black, thickness: 3),
             // Myshop
             MyShop(),
-            Divider(),
+            d,
             // Offers_screen
             OffersZone(),
-            Divider(),
+            d,
             //sortBy
             SortByClass(),
-            Divider(),
+            d,
             // manage products
             ManageProducts(),
-            Divider(),
+            d,
             // Offers List
             OffersList(),
-            Divider(),
+            d,
             // Manage Special/Combo Pric
             ManageSpecialComboPrice(),
-            Divider(),
+            d,
             // my Profile
             MyProfile(auth: auth),
-            Divider(),
+            d,
             // My Orders
             MyOrders(),
-            Divider(),
+            d,
             // cutomer orders
             CustomerOrders(),
-            Divider(),
+            d,
             // Return Product Form
             ReturnProductForm(auth: auth),
-            Divider(),
+            d,
             // Return Prod List
             ReturnProductList(),
-            Divider(),
+            d,
             // Business Statistic
             StatisTic(),
-            Divider(),
+            d,
             // Suggestion or Report form
             SuggestionOrReport(auth: auth),
-            Divider(),
+            d,
             //About Us
             AboutUs(),
-            Divider(),
+            d,
             // HelpLine
             HelpLine(),
-            Divider(),
+            d,
             // LogOut
             LogOut(),
           ],
@@ -88,16 +93,14 @@ class StatisTic extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
       leading: Icon(Icons.bar_chart, color: Colors.white),
-      title: Text(
-        'Business Statistic',
-        style: TextStyle(
-          fontFamily: 'Montserrat',
-          fontSize: 16,
-          color: Colors.white,
-        ),
-      ),
+      title: Text('Business Statistic', style: t),
       onTap: () {
         Navigator.of(context).pushNamed(StatisticScreen.routeName);
       },
@@ -154,6 +157,11 @@ class _SortByClassState extends State<SortByClass> {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     final List<String> _category =
         Provider.of<Products>(context, listen: false).categories;
     return Container(
@@ -162,8 +170,11 @@ class _SortByClassState extends State<SortByClass> {
           // SearchBy title
           ListTile(
             tileColor: _isExpand ? Colors.green[200] : Colors.transparent,
-            leading: Icon(Icons.sort_sharp),
-            title: Text('Search By...'),
+            leading: Icon(Icons.sort_sharp, color: Colors.white),
+            title: Text(
+              'Search By...',
+              style: t,
+            ),
             onTap: () {
               setState(() {
                 _isExpand = !_isExpand;
@@ -183,6 +194,7 @@ class _SortByClassState extends State<SortByClass> {
                     'Sort By *(Price)',
                     style: TextStyle(
                       fontSize: 18,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -277,9 +289,14 @@ class ReturnProductForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.sanitizer),
-      title: Text('Return Product Form'),
+      leading: Icon(Icons.sanitizer, color: Colors.white),
+      title: Text('Return Product Form', style: t),
       onTap: () {
         Navigator.of(context).pushNamed(ReturnProductScreen.routeName,
             arguments: auth.userEmail);
@@ -298,9 +315,17 @@ class SuggestionOrReport extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.help),
-      title: Text('Suggestion or Report'),
+      leading: Icon(Icons.help, color: Colors.white),
+      title: Text(
+        'Suggestion or Report',
+        style: t,
+      ),
       onTap: () {
         Navigator.of(context).pushNamed(SuggestionReportScreen.routeName,
             arguments: auth.userEmail);
@@ -319,9 +344,17 @@ class MyProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.people_alt_outlined),
-      title: Text('Profile'),
+      leading: Icon(Icons.people_alt_outlined, color: Colors.white),
+      title: Text(
+        'Profile',
+        style: t,
+      ),
       onTap: () {
         Navigator.of(context).pushNamed(OrderScreen.routeName, arguments: [
           "profile",
@@ -345,13 +378,20 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UserAccountsDrawerHeader(
-      accountName: Text('Jb Jason'),
-      accountEmail: Text(auth.userEmail == null ? '' : auth.userEmail),
-      currentAccountPicture: CircleAvatar(
-        child: FlutterLogo(
-          size: 50,
-        ),
+      accountName: Text('User1'),
+      accountEmail: Text(
+        auth.userEmail == null ? '' : auth.userEmail,
+        style: TextStyle(fontWeight: FontWeight.w200),
       ),
+      currentAccountPicture: CircleAvatar(
+          backgroundColor: Colors.black12,
+          child: Image.asset(
+            'assets/images/homeLogo2.jpeg',
+            height: 70,
+            width: 70,
+            fit: BoxFit.cover,
+          )),
+      decoration: BoxDecoration(color: Colors.transparent),
     );
   }
 }
@@ -363,9 +403,17 @@ class ReturnProductList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.sanitizer),
-      title: Text('Return Prod List'),
+      leading: Icon(Icons.sanitizer, color: Colors.white),
+      title: Text(
+        'Return Prod List',
+        style: t,
+      ),
       onTap: () {
         Navigator.of(context).pushNamed(ReturnProductsListScreen.routeName);
       },
@@ -380,9 +428,17 @@ class MyShop extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 18,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.shop),
-      title: Text('Shop'),
+      leading: Icon(Icons.home, color: Colors.white),
+      title: Text(
+        'Shop',
+        style: t,
+      ),
       onTap: () {
         Navigator.of(context).pushNamed(ProductsOverviewScreen.routename);
       },
@@ -397,9 +453,17 @@ class CustomerOrders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.corporate_fare),
-      title: Text('Customer Orders'),
+      leading: Icon(Icons.corporate_fare, color: Colors.white),
+      title: Text(
+        'Customer Orders',
+        style: t,
+      ),
       onTap: () {
         Navigator.of(context).pushNamed(CustomerOrdersScreen.routeName);
       },
@@ -414,9 +478,17 @@ class MyOrders extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.payment),
-      title: Text('My Orders'),
+      leading: Icon(Icons.payment, color: Colors.white),
+      title: Text(
+        'My Orders',
+        style: t,
+      ),
       onTap: () {
         Navigator.of(context).pushNamed(OrderScreen.routeName,
             arguments: ["order", "Your Orders"]);
@@ -432,9 +504,17 @@ class ManageSpecialComboPrice extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.edit),
-      title: Text('Manage Special/Combo Price'),
+      leading: Icon(Icons.edit, color: Colors.white),
+      title: Text(
+        'Manage Special/Combo Price',
+        style: t,
+      ),
       onTap: () {
         Navigator.of(context)
             .pushNamed(UserProductsScreen.routeName, arguments: 'offer');
@@ -450,9 +530,17 @@ class ManageProducts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.edit),
-      title: Text('Manage Products'),
+      leading: Icon(Icons.edit, color: Colors.white),
+      title: Text(
+        'Manage Products',
+        style: t,
+      ),
       onTap: () {
         Navigator.of(context)
             .pushNamed(UserProductsScreen.routeName, arguments: 'product');
@@ -468,9 +556,17 @@ class OffersZone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.card_giftcard),
-      title: Text('Offer\'s Zone'),
+      leading: Icon(Icons.card_giftcard, color: Colors.white),
+      title: Text(
+        'Offer\'s Zone',
+        style: t,
+      ),
       onTap: () {
         Navigator.of(context).pushNamed(OffersScreen.routeName);
       },
@@ -486,9 +582,13 @@ class LogOut extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.exit_to_app),
+      leading: Icon(Icons.exit_to_app, color: Colors.white),
       title: Text('LogOut',
-          style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w700)),
+          style: TextStyle(
+              fontFamily: 'Montserrat',
+              fontSize: 18,
+              color: Colors.white70,
+              fontWeight: FontWeight.w700)),
       onTap: () {
         Navigator.of(context).pop();
         Navigator.of(context).pushReplacementNamed('/');
@@ -506,9 +606,17 @@ class HelpLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.mediation),
-      title: Text('HelpLine..'),
+      leading: Icon(Icons.mediation, color: Colors.white),
+      title: Text(
+        'HelpLine..',
+        style: t,
+      ),
       onTap: () {
         return showDialog(
           context: context,
@@ -540,9 +648,17 @@ class AboutUs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return ListTile(
-      leading: Icon(Icons.album_outlined),
-      title: Text('About Us'),
+      leading: Icon(Icons.album_outlined, color: Colors.white),
+      title: Text(
+        'About Us',
+        style: t,
+      ),
       onTap: () {
         return showDialog(
             context: context,
@@ -575,14 +691,22 @@ class _OffersListState extends State<OffersList> {
   bool _isExpand = false;
   @override
   Widget build(BuildContext context) {
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
     return Container(
       height: _isExpand ? (60 * 5.0) : 60,
       child: Column(
         //itemExtent: 46,
         children: [
           ListTile(
-            leading: Icon(Icons.edit),
-            title: Text('Manage Offer\'s'),
+            leading: Icon(Icons.edit, color: Colors.white),
+            title: Text(
+              'Manage Offer\'s',
+              style: t,
+            ),
             onTap: () {
               setState(() {
                 _isExpand = !_isExpand;
@@ -598,7 +722,14 @@ class _OffersListState extends State<OffersList> {
                 // special offer & next day delivery is connected on pic uploading
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
-                  title: Text('Special Offer'),
+                  title: Text(
+                    'Special Offer',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
                   onTap: () {
                     Navigator.of(context).pushNamed(
                         SetNextDayOfferScreen.routeName,
@@ -607,14 +738,28 @@ class _OffersListState extends State<OffersList> {
                 ),
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
-                  title: Text('Upto \'N\' Tk Offer'),
+                  title: Text(
+                    'Upto \'N\' Tk Offer',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
                   onTap: () {
                     Navigator.of(context).pushNamed(SetOffersScreen.routeName);
                   },
                 ),
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
-                  title: Text('Next Day Delivery'),
+                  title: Text(
+                    'Next Day Delivery',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
                   onTap: () {
                     Navigator.of(context).pushNamed(
                         SetNextDayOfferScreen.routeName,
@@ -623,7 +768,14 @@ class _OffersListState extends State<OffersList> {
                 ),
                 ListTile(
                   leading: Icon(Icons.minimize_rounded),
-                  title: Text('Combo Offer'),
+                  title: Text(
+                    'Combo Offer',
+                    style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 16,
+                      color: Colors.white,
+                    ),
+                  ),
                   onTap: () {
                     Navigator.of(context).pushNamed(
                         SetNextDayOfferScreen.routeName,
