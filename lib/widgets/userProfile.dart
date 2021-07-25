@@ -12,10 +12,20 @@ class UserProfile extends StatelessWidget {
     final _userTransactions =
         Provider.of<Orders>(context, listen: false).recentTransactions(7);
     final size = MediaQuery.of(context).size;
-    return Container(
-      margin: EdgeInsets.only(top: 5, bottom: 10),
+    return SingleChildScrollView(
       child: Column(
         children: [
+          SizedBox(height: 30),
+          Row(children: [
+            IconButton(
+              // alignment: Alignment.topLeft,
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            Spacer()
+          ]),
           //profile image
           Container(
             height: 150,
