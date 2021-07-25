@@ -69,23 +69,26 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 26),
-                    ListTile(
-                      title: Text(
-                        '     Conditions of Return',
-                        style: TextStyle(
-                            color: Colors.red, fontWeight: FontWeight.bold),
+                    SizedBox(height: 40),
+                    Card(
+                      color: Colors.white.withOpacity(0.8),
+                      child: ListTile(
+                        title: Text(
+                          '     Conditions of Return',
+                          style: TextStyle(
+                              color: Colors.red, fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Text('( Check you match these conditions )'),
+                        trailing: IconButton(
+                            icon: Icon(_expanded
+                                ? Icons.expand_less
+                                : Icons.expand_more),
+                            onPressed: () {
+                              setState(() {
+                                _expanded = !_expanded;
+                              });
+                            }),
                       ),
-                      subtitle: Text('( Check you match these conditions )'),
-                      trailing: IconButton(
-                          icon: Icon(_expanded
-                              ? Icons.expand_less
-                              : Icons.expand_more),
-                          onPressed: () {
-                            setState(() {
-                              _expanded = !_expanded;
-                            });
-                          }),
                     ),
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 5),
@@ -235,7 +238,7 @@ class CondtionsForReturns extends StatelessWidget {
             TextSpan(
                 text: 'Conditions :\n\n\n',
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: 20,
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
                 )),
