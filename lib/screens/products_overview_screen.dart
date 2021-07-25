@@ -91,7 +91,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
           transform: Matrix4.translationValues(xOffset, yOffset, 0)
             ..scale(isDrawerOpen ? 0.85 : 1.00)
             ..rotateZ(isDrawerOpen ? -50 : 0),
-          duration: Duration(milliseconds: 220),
+          duration: Duration(milliseconds: 200),
           color: Colors.white,
           child: Stack(
             children: [
