@@ -60,6 +60,7 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
               child: Form(
                 key: _form,
                 child: ListView(
+                  shrinkWrap: true,
                   children: [
                     //Condition & terms of return
                     ListTile(
