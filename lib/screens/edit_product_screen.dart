@@ -311,6 +311,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       },
                     ),
                     SizedBox(height: 10),
+                    Text('** Type \'No\' If dont need color,size or either..!'),
+                    SizedBox(height: 10),
                     // size List
                     Container(
                       width: size.width,

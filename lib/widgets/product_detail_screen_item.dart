@@ -107,8 +107,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
     final product = Provider.of<Products>(context);
     final bool _offerAvailable = widget.extra == "no" ? false : true;
     _comments = product.commentsList;
-    final String firstColor = widget.colorList[0],
-        firstSize = widget.sizeList[0];
+    final String firstColor = widget.colorList[0].toLowerCase(),
+        firstSize = widget.sizeList[0].toLowerCase();
     return SingleChildScrollView(
       child: Column(
         children: [
