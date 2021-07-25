@@ -235,6 +235,7 @@ class CondtionsForReturns extends StatelessWidget {
                 text: 'Conditions :\n\n\n',
                 style: TextStyle(
                   fontSize: 25,
+                  color: Colors.black,
                   fontWeight: FontWeight.bold,
                 )),
             WidgetSpan(
