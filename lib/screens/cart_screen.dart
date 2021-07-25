@@ -33,53 +33,7 @@ class _CartScreenState extends State<CartScreen> {
         width: size.width,
         child: Stack(children: [
           ListView(children: [
-            Container(
-              height: size.height * .32,
-              width: size.width,
-              color: Color(0xFFFDD148),
-              child: Stack(children: [
-                Positioned(
-                  right: 100.0,
-                  child: Container(
-                    height: 400.0,
-                    width: 400.0,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(200.0),
-                      color: Color(0xFFFEE16D),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  bottom: 5.0,
-                  left: 150.0,
-                  child: Container(
-                      height: 300.0,
-                      width: 300.0,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(150.0),
-                          color: Color(0xFFFEE16D).withOpacity(0.5))),
-                ),
-                Padding(
-                  padding: EdgeInsets.only(top: 15.0),
-                  child: IconButton(
-                      alignment: Alignment.topLeft,
-                      icon: Icon(Icons.arrow_back),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      }),
-                ),
-                Positioned(
-                    top: 75.0,
-                    left: 15.0,
-                    child: Text(
-                      'Shopping Cart',
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold),
-                    )),
-              ]),
-            ),
+            YellowForCart(size: size),
             Container(
               height: size.height * .64,
               color: Colors.white,
@@ -139,29 +93,91 @@ class _CartScreenState extends State<CartScreen> {
           ]),
           Positioned(
             bottom: size.height * .1,
-            child: Container(
-                height: size.height * .64,
-                width: size.width,
-                child: ListView.builder(
-                  itemBuilder: (ctx, i) => CartItem(
-                    // if we wanna fetch a value from selected Map item then we
-                    // need to add .values.toList()
-                    cart.items.values.toList()[i].id,
-                    // special keyword to get the selected id's random key ,which will be needed to update,delete the cart items
-                    cart.items.keys.toList()[i],
-                    cart.items.values.toList()[i].title,
-                    cart.items.values.toList()[i].price,
-                    cart.items.values.toList()[i].quantity,
-                    cart.items.values.toList()[i].imageUrl,
-                    updateCart,
-                    cart.items.values.toList()[i].color,
-                    cart.items.values.toList()[i].size,
-                  ),
-                  itemCount: cart.itemCount,
-                )),
+            child: cart.itemCount < 1
+                ? Center(child: Text('No items available yet :('))
+                : Container(
+                    height: size.height * .64,
+                    width: size.width,
+                    child: ListView.builder(
+                      itemBuilder: (ctx, i) => CartItem(
+                        // if we wanna fetch a value from selected Map item then we
+                        // need to add .values.toList()
+                        cart.items.values.toList()[i].id,
+                        // special keyword to get the selected id's random key ,which will be needed to update,delete the cart items
+                        cart.items.keys.toList()[i],
+                        cart.items.values.toList()[i].title,
+                        cart.items.values.toList()[i].price,
+                        cart.items.values.toList()[i].quantity,
+                        cart.items.values.toList()[i].imageUrl,
+                        updateCart,
+                        cart.items.values.toList()[i].color,
+                        cart.items.values.toList()[i].size,
+                      ),
+                      itemCount: cart.itemCount,
+                    )),
           ),
         ]),
       ),
+    );
+  }
+}
+
+class YellowForCart extends StatelessWidget {
+  const YellowForCart({
+    Key key,
+    @required this.size,
+  }) : super(key: key);
+
+  final Size size;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: size.height * .32,
+      width: size.width,
+      color: Color(0xFFFDD148),
+      child: Stack(children: [
+        Positioned(
+          right: 100.0,
+          child: Container(
+            height: 400.0,
+            width: 400.0,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(200.0),
+              color: Color(0xFFFEE16D),
+            ),
+          ),
+        ),
+        Positioned(
+          bottom: 5.0,
+          left: 150.0,
+          child: Container(
+              height: 300.0,
+              width: 300.0,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(150.0),
+                  color: Color(0xFFFEE16D).withOpacity(0.5))),
+        ),
+        Padding(
+          padding: EdgeInsets.only(top: 15.0),
+          child: IconButton(
+              alignment: Alignment.topLeft,
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.of(context).pop();
+              }),
+        ),
+        Positioned(
+            top: 75.0,
+            left: 15.0,
+            child: Text(
+              'Shopping Cart',
+              style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 30.0,
+                  fontWeight: FontWeight.bold),
+            )),
+      ]),
     );
   }
 }
