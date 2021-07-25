@@ -302,7 +302,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                             fontSize: 23.0,
                             fontWeight: FontWeight.bold),
                       ),
-                      PopularProducts(productsData.items),
+                      PopularProducts(productsData.getPopularProducts),
                       Text(
                         'Reccomended For You',
                         style: TextStyle(
@@ -480,23 +480,24 @@ class PopularProducts extends StatelessWidget {
                                             style: TextStyle(
                                                 fontSize: 15.0,
                                                 fontWeight: FontWeight.w600,
-                                                // decoration: _relatedList[index]
-                                                //             .extra !=
-                                                //         "no"
-                                                //     ? TextDecoration.lineThrough
-                                                //     : TextDecoration.none,
+                                                decoration: _relatedList[index]
+                                                            .extra !=
+                                                        "no"
+                                                    ? TextDecoration.lineThrough
+                                                    : TextDecoration.none,
                                                 decorationThickness: 2,
                                                 decorationColor: Colors.red),
                                           ),
                                           Spacer(),
-                                          //_relatedList[index].extra != "no" ?
-                                          Text(
-                                            '\$ 45',
-                                            style: TextStyle(
-                                              fontSize: 15.0,
-                                              fontWeight: FontWeight.w800,
-                                            ),
-                                          )
+                                          _relatedList[index].extra != "no"
+                                              ? Text(
+                                                  '\$ ${_relatedList[index].extra}',
+                                                  style: TextStyle(
+                                                    fontSize: 15.0,
+                                                    fontWeight: FontWeight.w800,
+                                                  ),
+                                                )
+                                              : Text(''),
                                         ],
                                       ),
                                       // icon & Reviews
