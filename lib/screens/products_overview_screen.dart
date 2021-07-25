@@ -92,6 +92,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
             ..scale(isDrawerOpen ? 0.85 : 1.00)
             ..rotateZ(isDrawerOpen ? -50 : 0),
           duration: Duration(milliseconds: 220),
+          color: Colors.white,
           child: Stack(
             children: [
               YellowDesignForHome(size: size),
