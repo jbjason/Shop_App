@@ -1,6 +1,8 @@
 import 'package:Shop_App/providers/orders.dart';
+import 'package:Shop_App/screens/order_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 class ReturnProductScreen extends StatefulWidget {
   static const routeName = '/return-product';
@@ -41,158 +43,169 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Color(0xFFFDD148),
+      statusBarBrightness: Brightness.light,
+    ));
+    final size = MediaQuery.of(context).size;
     final userEmail = ModalRoute.of(context).settings.arguments as String;
+
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFFC8E6C9),
-        title: Text('Return Form',
-            style: TextStyle(fontSize: 20, color: Colors.black)),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Form(
-          key: _form,
-          child: ListView(
-            children: [
-              //Condition & terms of return
-              ListTile(
-                title: Text(
-                  '     Conditions of Return',
-                  style:
-                      TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+      body: Stack(children: [
+        YellowDesign(size),
+        Column(children: [
+          Expanded(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Form(
+                key: _form,
+                child: ListView(
+                  children: [
+                    //Condition & terms of return
+                    ListTile(
+                      title: Text(
+                        '     Conditions of Return',
+                        style: TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text('( Check you match these conditions )'),
+                      trailing: IconButton(
+                          icon: Icon(_expanded
+                              ? Icons.expand_less
+                              : Icons.expand_more),
+                          onPressed: () {
+                            setState(() {
+                              _expanded = !_expanded;
+                            });
+                          }),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 5),
+                      height: _expanded == false ? 5 : 370,
+                      width: double.infinity,
+                      child: Card(
+                        color: Colors.blueGrey[900],
+                        child: CondtionsForReturns(),
+                      ),
+                    ),
+                    // email
+                    TextFormField(
+                      initialValue: userEmail,
+                      readOnly: true,
+                      decoration: InputDecoration(labelText: 'Email'),
+                      textInputAction: TextInputAction.next,
+                      onFieldSubmitted: (_) {
+                        FocusScope.of(context).requestFocus(_orderIdFocusNode);
+                      },
+                      validator: (value) {
+                        return null;
+                      },
+                    ),
+                    // Order-Id
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Order Id'),
+                      textInputAction: TextInputAction.next,
+                      focusNode: _orderIdFocusNode,
+                      onFieldSubmitted: (_) {
+                        FocusScope.of(context)
+                            .requestFocus(_productIdFocusNode);
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please provide the subject';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) => _orderId = value,
+                    ),
+                    // product-id
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'product-id'),
+                      textInputAction: TextInputAction.next,
+                      focusNode: _productIdFocusNode,
+                      onFieldSubmitted: (_) {
+                        FocusScope.of(context).requestFocus(_contactFocusNode);
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please provide the exact product-id';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) => _productId = value,
+                    ),
+                    // contact no
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'contact number'),
+                      textInputAction: TextInputAction.next,
+                      focusNode: _contactFocusNode,
+                      keyboardType: TextInputType.number,
+                      onFieldSubmitted: (_) {
+                        FocusScope.of(context).requestFocus(_addressFocusNode);
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please provide contact number';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) => _contact = value,
+                    ),
+                    // address
+                    TextFormField(
+                      decoration: InputDecoration(labelText: 'Address details'),
+                      textInputAction: TextInputAction.newline,
+                      focusNode: _addressFocusNode,
+                      maxLines: 2,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please provide current address in details';
+                        }
+                        return null;
+                      },
+                      onSaved: (value) => _address = value,
+                    ),
+                    // problem details
+                    TextFormField(
+                        decoration:
+                            InputDecoration(labelText: 'Problem in Details'),
+                        textInputAction: TextInputAction.newline,
+                        focusNode: _descriptionFocusNode,
+                        maxLines: 7,
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter some text';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) => _description = value),
+                    SizedBox(height: 60),
+                    Container(
+                      height: 50,
+                      //alignment: Alignment.centerRight,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.green,
+                          onPrimary: Colors.white,
+                          shadowColor: Colors.greenAccent,
+                          elevation: 10,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32.0)),
+                        ),
+                        onPressed: () => _saveForm(userEmail),
+                        child: Text(
+                          'Submit',
+                          style: TextStyle(fontSize: 25),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                subtitle: Text('( Check you match these conditions )'),
-                trailing: IconButton(
-                    icon:
-                        Icon(_expanded ? Icons.expand_less : Icons.expand_more),
-                    onPressed: () {
-                      setState(() {
-                        _expanded = !_expanded;
-                      });
-                    }),
               ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 5),
-                height: _expanded == false ? 5 : 370,
-                width: double.infinity,
-                child: Card(
-                  color: Colors.blueGrey[900],
-                  child: CondtionsForReturns(),
-                ),
-              ),
-              // email
-              TextFormField(
-                initialValue: userEmail,
-                readOnly: true,
-                decoration: InputDecoration(labelText: 'Email'),
-                textInputAction: TextInputAction.next,
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_orderIdFocusNode);
-                },
-                validator: (value) {
-                  return null;
-                },
-              ),
-              // Order-Id
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Order Id'),
-                textInputAction: TextInputAction.next,
-                focusNode: _orderIdFocusNode,
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_productIdFocusNode);
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please provide the subject';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _orderId = value,
-              ),
-              // product-id
-              TextFormField(
-                decoration: InputDecoration(labelText: 'product-id'),
-                textInputAction: TextInputAction.next,
-                focusNode: _productIdFocusNode,
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_contactFocusNode);
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please provide the exact product-id';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _productId = value,
-              ),
-              // contact no
-              TextFormField(
-                decoration: InputDecoration(labelText: 'contact number'),
-                textInputAction: TextInputAction.next,
-                focusNode: _contactFocusNode,
-                keyboardType: TextInputType.number,
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).requestFocus(_addressFocusNode);
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please provide contact number';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _contact = value,
-              ),
-              // address
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Address details'),
-                textInputAction: TextInputAction.newline,
-                focusNode: _addressFocusNode,
-                maxLines: 2,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please provide current address in details';
-                  }
-                  return null;
-                },
-                onSaved: (value) => _address = value,
-              ),
-              // problem details
-              TextFormField(
-                  decoration: InputDecoration(labelText: 'Problem in Details'),
-                  textInputAction: TextInputAction.newline,
-                  focusNode: _descriptionFocusNode,
-                  maxLines: 7,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter some text';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) => _description = value),
-              SizedBox(height: 60),
-              Container(
-                height: 50,
-                //alignment: Alignment.centerRight,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    primary: Colors.green,
-                    onPrimary: Colors.white,
-                    shadowColor: Colors.greenAccent,
-                    elevation: 10,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32.0)),
-                  ),
-                  onPressed: () => _saveForm(userEmail),
-                  child: Text(
-                    'Submit',
-                    style: TextStyle(fontSize: 25),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
+        ]),
+      ]),
     );
   }
 }
