@@ -113,22 +113,46 @@ class _OffersImagesItemState extends State<OffersImagesItem> {
                 ? CircularProgressIndicator(backgroundColor: Colors.pink)
                 : IconButton(
                     icon: Icon(Icons.delete_sharp),
-                    onPressed: () async {
+                    onPressed: () {
                       setState(() {
                         _isLoading = true;
                       });
-                      await Provider.of<Products>(context, listen: false)
-                          .deleteOffers(widget.product)
-                          .then((value) {
-                        setState(() {
-                          _isLoading = false;
-                          showDialog(
-                              context: context,
-                              builder: (ctx) => AlertDialog(
-                                  title: Text('Alert !'),
-                                  content: Text('Successfully Deleted..!')));
-                        });
-                      });
+                      return showDialog(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                          title: Text('Alert !'),
+                          content: Text('Do u wanna delete the Offer..?'),
+                          actions: [
+                            FlatButton(
+                              onPressed: () async {
+                                await Provider.of<Products>(context,
+                                        listen: false)
+                                    .deleteOffers(widget.product)
+                                    .then((value) {
+                                  setState(() {
+                                    _isLoading = false;
+                                    showDialog(
+                                      context: context,
+                                      builder: (ctx) => AlertDialog(
+                                        title: Text('Alert !'),
+                                        content:
+                                            Text('Successfully Deleted..!'),
+                                      ),
+                                    );
+                                  });
+                                });
+                              },
+                              child: Text('Yes'),
+                            ),
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(context).pop(false);
+                              },
+                              child: Text('No'),
+                            ),
+                          ],
+                        ),
+                      );
                     }),
           )
         ]),
