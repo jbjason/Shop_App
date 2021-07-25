@@ -4,6 +4,7 @@ import 'package:Shop_App/providers/products.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 class ThanksScreen extends StatelessWidget {
   final String name, address, contact;
@@ -14,32 +15,32 @@ class ThanksScreen extends StatelessWidget {
       this.finalAmount, this.name, this.address, this.contact);
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.light,
+    ));
     final String orderId =
         Provider.of<Orders>(context, listen: false).customerOrderId;
     final size = MediaQuery.of(context).size;
-    return SafeArea(
-      child: Scaffold(
-        body: Center(
-          child: Padding(
-            padding: EdgeInsets.all(10.0),
-            child: ListView(
-              shrinkWrap: true,
-              children: [
-                SuccessFullText(),
-                InvoiceTitleAndOrderId(orderId: orderId),
-                UserInfoDetails(
-                    size: size, name: name, address: address, contact: contact),
-                TitlePriceAsTitleText(),
-                ProductsDetails(finalProduct: finalProduct),
-                SubTotalOfferAmount(
-                    finalAmount: finalAmount,
-                    finalPoint: finalPoint,
-                    finalVoucher: finalVoucher),
-                SizedBox(height: 15),
-                GoBackButton(finalProduct: finalProduct),
-              ],
-            ),
-          ),
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.all(10.0),
+        child: ListView(
+          shrinkWrap: true,
+          children: [
+            SuccessFullText(),
+            InvoiceTitleAndOrderId(orderId: orderId),
+            UserInfoDetails(
+                size: size, name: name, address: address, contact: contact),
+            TitlePriceAsTitleText(),
+            ProductsDetails(finalProduct: finalProduct),
+            SubTotalOfferAmount(
+                finalAmount: finalAmount,
+                finalPoint: finalPoint,
+                finalVoucher: finalVoucher),
+            SizedBox(height: 15),
+            GoBackButton(finalProduct: finalProduct),
+          ],
         ),
       ),
     );
@@ -60,15 +61,17 @@ class ProductsDetails extends StatelessWidget {
       elevation: 8,
       child: Container(
         padding: EdgeInsets.all(5),
-        height: finalProduct.length * 24.0 + 10,
+        height: finalProduct.length * 24.0 + 7,
         child: ListView(
           physics: NeverScrollableScrollPhysics(),
           children: finalProduct
               .map((prod) => Row(
                     children: [
+                      SizedBox(width: 3),
                       Text('${prod.title}', overflow: TextOverflow.fade),
                       Spacer(),
                       Text('${prod.quantity}x  \$${prod.price}'),
+                      SizedBox(width: 3),
                     ],
                   ))
               .toList(),
@@ -107,7 +110,7 @@ class SuccessFullText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.pink,
-      height: 28,
+      height: 30,
       child: Text(
         'Your order has been placed successfully !',
         style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -136,25 +139,26 @@ class SubTotalOfferAmount extends StatelessWidget {
         RichText(
           text: TextSpan(children: [
             TextSpan(
-                text: '    Sub Total : \$ $finalAmount\n\n',
+                text: 'Sub Total : \$ $finalAmount\n\n',
                 style: TextStyle(
                     decoration: TextDecoration.underline,
                     color: Colors.black,
-                    fontSize: 20)),
+                    fontSize: 16)),
             TextSpan(
-                text: '    Discount : \$ ${finalPoint + finalVoucher}\n\n',
+                text: 'Discount : \$ ${finalPoint + finalVoucher}\n\n',
                 style: TextStyle(
                     decoration: TextDecoration.underline,
                     color: Colors.black,
-                    fontSize: 20)),
+                    fontSize: 16)),
             TextSpan(
                 text:
-                    '    Grand Total : \$ ${finalAmount - (finalPoint + finalVoucher)}\n\n',
+                    'Grand Total : \$ ${finalAmount - (finalPoint + finalVoucher)}\n\n',
                 style: TextStyle(
                     decoration: TextDecoration.underline,
+                    decorationColor: Colors.red,
                     decorationThickness: 2.3,
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold)),
           ]),
         ),
@@ -339,13 +343,7 @@ class _GoBackButtonState extends State<GoBackButton> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Container(
-                    child: Image.asset(
-                      'assets/images/back_arrow_1.jpg',
-                      fit: BoxFit.fill,
-                      height: 32,
-                    ),
-                  ),
+                  Icon(Icons.arrow_circle_up_sharp),
                   SizedBox(width: 14),
                   SizedBox(child: Text('|')),
                   SizedBox(width: 20),
