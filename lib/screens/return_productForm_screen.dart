@@ -62,6 +62,15 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
                 child: ListView(
                   shrinkWrap: true,
                   children: [
+                    Row(children: [
+                      IconButton(
+                        icon: Icon(Icons.menu, size: 24),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                      Spacer(),
+                    ]),
                     Text(
                       ' Return Form',
                       style: TextStyle(

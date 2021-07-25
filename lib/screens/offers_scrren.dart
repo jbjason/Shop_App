@@ -35,22 +35,29 @@ class OffersScreen extends StatelessWidget {
                 YellowDesign(size),
                 Column(children: [
                   SizedBox(height: MediaQuery.of(context).padding.top + 6),
-                  IconButton(
-                    alignment: Alignment.topLeft,
-                    icon: Icon(Icons.arrow_back),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  ),
+                  Row(children: [
+                    IconButton(
+                      // alignment: Alignment.topLeft,
+                      icon: Icon(Icons.arrow_back),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                    Spacer()
+                  ]),
+
                   //Available Offers
-                  Text(
-                    'Available Offers',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold),
-                  ),
+                  Row(children: [
+                    Text(
+                      'Available Offers',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Spacer(),
+                  ]),
                   SizedBox(height: 40),
                   Expanded(
                     child: Padding(

@@ -110,7 +110,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                         alignment: Alignment.topRight,
                         icon: Icon(
                           Icons.shopping_basket,
-                          size: 24,
+                          size: 26,
                         ),
                         onPressed: () {
                           Navigator.of(context).pushNamed(CartScreen.routeName);
