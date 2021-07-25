@@ -107,6 +107,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
     final product = Provider.of<Products>(context);
     final bool _offerAvailable = widget.extra == "no" ? false : true;
     _comments = product.commentsList;
+    final String firstColor = widget.colorList[0],
+        firstSize = widget.sizeList[0];
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -222,60 +224,64 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                DropdownButton(
-                    hint: Text(
-                      'Choose Color',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                    value: selectedColor,
-                    items: widget.colorList.map((e) {
-                      return DropdownMenuItem(
-                        child: Row(
-                          children: [
-                            Icon(Icons.format_size),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text(e),
-                          ],
+                widget.colorList[0] == "no"
+                    ? Container()
+                    : DropdownButton(
+                        hint: Text(
+                          'Choose Color',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
                         ),
-                        value: e,
-                      );
-                    }).toList(),
-                    onChanged: (newVal) {
-                      setState(() {
-                        selectedColor = newVal;
-                        sColor = 1;
-                      });
-                    }),
-                DropdownButton(
-                    hint: Text(
-                      'Choose Size',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                    value: selectedSize,
-                    items: widget.sizeList.map((e) {
-                      return DropdownMenuItem(
-                        child: Row(
-                          children: [
-                            Icon(Icons.format_size),
-                            SizedBox(
-                              width: 15,
+                        value: selectedColor,
+                        items: widget.colorList.map((e) {
+                          return DropdownMenuItem(
+                            child: Row(
+                              children: [
+                                Icon(Icons.format_size),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Text(e),
+                              ],
                             ),
-                            Text(e),
-                          ],
+                            value: e,
+                          );
+                        }).toList(),
+                        onChanged: (newVal) {
+                          setState(() {
+                            selectedColor = newVal;
+                            sColor = 1;
+                          });
+                        }),
+                widget.sizeList[0] == "no"
+                    ? Container()
+                    : DropdownButton(
+                        hint: Text(
+                          'Choose Size',
+                          style: TextStyle(
+                              color: Colors.black, fontWeight: FontWeight.bold),
                         ),
-                        value: e,
-                      );
-                    }).toList(),
-                    onChanged: (newVal) {
-                      setState(() {
-                        selectedSize = newVal;
-                        sSize = 1;
-                      });
-                    }),
+                        value: selectedSize,
+                        items: widget.sizeList.map((e) {
+                          return DropdownMenuItem(
+                            child: Row(
+                              children: [
+                                Icon(Icons.format_size),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Text(e),
+                              ],
+                            ),
+                            value: e,
+                          );
+                        }).toList(),
+                        onChanged: (newVal) {
+                          setState(() {
+                            selectedSize = newVal;
+                            sSize = 1;
+                          });
+                        }),
               ],
             ),
           ),
@@ -290,6 +296,8 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
             selectedSize: selectedSize,
             sColor: sColor,
             sSize: sSize,
+            fisrtColor: firstColor,
+            firstSize: firstSize,
           ),
           // relatedProducts list
           RelatedProducts(widget._title, widget.category, widget.id),
@@ -650,12 +658,14 @@ class AddToCartButton extends StatelessWidget {
     @required this.selectedSize,
     @required this.sColor,
     @required this.sSize,
+    @required this.fisrtColor,
+    @required this.firstSize,
   }) : super(key: key);
 
   final Cart cart;
   final ProductDetailScreenItem widget;
   final Size size;
-  final String selectedSize, selectedColor;
+  final String selectedSize, selectedColor, fisrtColor, firstSize;
   final int sSize, sColor;
 
   @override
@@ -665,7 +675,18 @@ class AddToCartButton extends StatelessWidget {
         : widget.price;
     return InkWell(
       onTap: () => {
-        if (sSize == 1 && sColor == 1)
+        if ((fisrtColor != "no" && sColor != 1) ||
+            (firstSize != "no" && sSize != 1) ||
+            ((fisrtColor != "no" && firstSize != "no") && sColor != 1 ||
+                sSize != 1))
+          {
+            Scaffold.of(context).showSnackBar(SnackBar(
+              content: Text('Plzz select Color & Size..!'),
+              duration: Duration(seconds: 1),
+              backgroundColor: Colors.red,
+            ))
+          }
+        else
           {
             cart.addItem(
               widget.id,
@@ -680,14 +701,6 @@ class AddToCartButton extends StatelessWidget {
               content: Text('Added item to Cart.!'),
               duration: Duration(seconds: 1),
             )),
-          }
-        else
-          {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text('Plzz select Color & Size..!'),
-              duration: Duration(seconds: 1),
-              backgroundColor: Colors.red,
-            ))
           }
       },
       child: widget._available < 1
