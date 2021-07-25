@@ -59,17 +59,22 @@ class OffersScreen extends StatelessWidget {
                     Spacer(),
                   ]),
                   SizedBox(height: 40),
-                  Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.all(10),
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemBuilder: (ctx, index) =>
-                            OffersImagesItem(_imageslist[index]),
-                        itemCount: _imageslist.length,
-                      ),
-                    ),
-                  ),
+                  _imageslist.length < 1
+                      ? Container(
+                          height: 300,
+                          alignment: Alignment.center,
+                          child: Text('No offers available right now :)'))
+                      : Expanded(
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemBuilder: (ctx, index) =>
+                                  OffersImagesItem(_imageslist[index]),
+                              itemCount: _imageslist.length,
+                            ),
+                          ),
+                        ),
                 ]),
               ]);
             }

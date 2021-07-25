@@ -118,28 +118,38 @@ class _OrderScreenState extends State<OrderScreen> {
                               ),
                             ]),
                   ]),
-                  Text(
-                    connection[1] == null ? '' : connection[1],
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold),
-                  ),
+                  Row(children: [
+                    Text(
+                      connection[1] == null ? '' : connection[1],
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    Spacer(),
+                  ]),
                   SizedBox(height: 64),
                   Expanded(
                     child: Padding(
                       padding: EdgeInsets.all(10),
                       child: Consumer<Orders>(
-                        builder: (ctx, orderData, child) => ListView.builder(
-                            itemBuilder: (ctx, i) => OrderItem(
-                                widget._selectDays == 0
-                                    ? orderData.orders[i]
-                                    : widget._userTransaction[i],
-                                i),
-                            itemCount: widget._showAll == false
-                                ? widget._selectCount
-                                : widget._length),
+                        builder: (ctx, orderData, child) =>
+                            orderData.orders.length < 1
+                                ? Container(
+                                    height: 300,
+                                    alignment: Alignment.center,
+                                    child:
+                                        Text('You didn\'t orders anything :('))
+                                : ListView.builder(
+                                    itemBuilder: (ctx, i) => OrderItem(
+                                        widget._selectDays == 0
+                                            ? orderData.orders[i]
+                                            : widget._userTransaction[i],
+                                        i),
+                                    itemCount: widget._showAll == false
+                                        ? widget._selectCount
+                                        : widget._length),
                       ),
                     ),
                   ),
