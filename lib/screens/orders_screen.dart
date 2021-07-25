@@ -30,7 +30,9 @@ class _OrderScreenState extends State<OrderScreen> {
     final product = Provider.of<Orders>(context, listen: false);
     return Scaffold(
       key: _scaffoldKey,
-      drawer: AppDrawer(),
+      drawer: Drawer(
+        child: AppDrawer(),
+      ),
       body: FutureBuilder(
         future: product.fetchAndSetOrders(),
         builder: (ctx, dataSnapshot) {
