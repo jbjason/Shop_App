@@ -1,5 +1,6 @@
-import 'package:Shop_App/screens/view_offer_screen.dart';
-
+import '../screens/order_details_screen.dart';
+import '../screens/view_offer_screen.dart';
+import 'package:flutter/services.dart';
 import '../models/offer.dart';
 import '../providers/products.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +11,12 @@ class OffersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Color(0xFFFDD148),
+      statusBarBrightness: Brightness.light,
+    ));
+    final size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFFC8E6C9),
-        title: Text('Available Offers'),
-      ),
       body: FutureBuilder(
           future: Provider.of<Products>(context, listen: false)
               .fetchOffersImagesList(),
@@ -26,14 +28,43 @@ class OffersScreen extends StatelessWidget {
               ));
             }
             if (dataSnapShot.error != null) {
-              return Center(child: Text('An error occured'));
+              return Container(height: 300, child: Text('An error occured'));
             } else {
               final _imageslist = Provider.of<Products>(context).offersImages;
-              return ListView.builder(
-                itemBuilder: (ctx, index) =>
-                    OffersImagesItem(_imageslist[index]),
-                itemCount: _imageslist.length,
-              );
+              return Stack(children: [
+                YellowDesign(size),
+                Column(children: [
+                  SizedBox(height: MediaQuery.of(context).padding.top + 6),
+                  IconButton(
+                    alignment: Alignment.topLeft,
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  //Available Offers
+                  Text(
+                    'Available Offers',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  SizedBox(height: 40),
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.all(10),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemBuilder: (ctx, index) =>
+                            OffersImagesItem(_imageslist[index]),
+                        itemCount: _imageslist.length,
+                      ),
+                    ),
+                  ),
+                ]),
+              ]);
             }
           }),
     );
