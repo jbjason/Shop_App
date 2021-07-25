@@ -21,63 +21,60 @@ class AppDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
-    return Drawer(
-      child: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.all(8),
-          //color: Color(0xFF4A4A58),
-          child: Column(
-            children: [
-              Header(auth: auth),
-              // Myshop
-              MyShop(),
-              Divider(),
-              // Offers_screen
-              OffersZone(),
-              Divider(),
-              //sortBy
-              SortByClass(),
-              Divider(),
-              // manage products
-              ManageProducts(),
-              Divider(),
-              // Offers List
-              OffersList(),
-              Divider(),
-              // Manage Special/Combo Pric
-              ManageSpecialComboPrice(),
-              Divider(),
-              // my Profile
-              MyProfile(auth: auth),
-              Divider(),
-              // My Orders
-              MyOrders(),
-              Divider(),
-              // cutomer orders
-              CustomerOrders(),
-              Divider(),
-              // Return Product Form
-              ReturnProductForm(auth: auth),
-              Divider(),
-              // Return Prod List
-              ReturnProductList(),
-              Divider(),
-              // Business Statistic
-              StatisTic(),
-              Divider(),
-              // Suggestion or Report form
-              SuggestionOrReport(auth: auth),
-              Divider(),
-              //About Us
-              AboutUs(),
-              Divider(),
-              // HelpLine
-              HelpLine(),
-              Divider(),
-              // LogOut
-              LogOut(),
-            ],
-          ),
+    return SingleChildScrollView(
+      child: Container(
+        color: Color.fromRGBO(31, 58, 47, 1.0),
+        child: Column(
+          children: [
+            Header(auth: auth),
+            // Myshop
+            MyShop(),
+            Divider(),
+            // Offers_screen
+            OffersZone(),
+            Divider(),
+            //sortBy
+            SortByClass(),
+            Divider(),
+            // manage products
+            ManageProducts(),
+            Divider(),
+            // Offers List
+            OffersList(),
+            Divider(),
+            // Manage Special/Combo Pric
+            ManageSpecialComboPrice(),
+            Divider(),
+            // my Profile
+            MyProfile(auth: auth),
+            Divider(),
+            // My Orders
+            MyOrders(),
+            Divider(),
+            // cutomer orders
+            CustomerOrders(),
+            Divider(),
+            // Return Product Form
+            ReturnProductForm(auth: auth),
+            Divider(),
+            // Return Prod List
+            ReturnProductList(),
+            Divider(),
+            // Business Statistic
+            StatisTic(),
+            Divider(),
+            // Suggestion or Report form
+            SuggestionOrReport(auth: auth),
+            Divider(),
+            //About Us
+            AboutUs(),
+            Divider(),
+            // HelpLine
+            HelpLine(),
+            Divider(),
+            // LogOut
+            LogOut(),
+          ],
         ),
       ),
     );
@@ -92,8 +89,15 @@ class StatisTic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Icon(Icons.bar_chart),
-      title: Text('Business Statistic'),
+      leading: Icon(Icons.bar_chart, color: Colors.white),
+      title: Text(
+        'Business Statistic',
+        style: TextStyle(
+          fontFamily: 'Montserrat',
+          fontSize: 16,
+          color: Colors.white,
+        ),
+      ),
       onTap: () {
         Navigator.of(context).pushNamed(StatisticScreen.routeName);
       },
