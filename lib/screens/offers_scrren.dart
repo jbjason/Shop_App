@@ -47,17 +47,14 @@ class OffersScreen extends StatelessWidget {
                   ]),
 
                   //Available Offers
-                  Row(children: [
-                    Text(
-                      'Available Offers',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Spacer(),
-                  ]),
+                  Text(
+                    'Available Offers',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold),
+                  ),
                   SizedBox(height: 40),
                   _imageslist.length < 1
                       ? Container(

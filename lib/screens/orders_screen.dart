@@ -118,17 +118,14 @@ class _OrderScreenState extends State<OrderScreen> {
                               ),
                             ]),
                   ]),
-                  Row(children: [
-                    Text(
-                      connection[1] == null ? '' : connection[1],
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 30.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Spacer(),
-                  ]),
+                  Text(
+                    connection[1] == null ? '' : connection[1],
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 30.0,
+                        fontWeight: FontWeight.bold),
+                  ),
                   SizedBox(height: 64),
                   Expanded(
                     child: Padding(

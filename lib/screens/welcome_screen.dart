@@ -2,6 +2,7 @@ import 'package:Shop_App/providers/products.dart';
 import 'package:Shop_App/screens/products_overview_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const routeName = '/thanks-screen';
@@ -27,6 +28,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.light,
+    ));
     final size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(

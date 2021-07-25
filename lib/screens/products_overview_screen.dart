@@ -107,9 +107,9 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                       builder: (_, cart, ch) =>
                           Badge(child: ch, value: cart.itemCount.toString()),
                       child: IconButton(
-                        alignment: Alignment.topRight,
+                        //alignment: Alignment.topRight,
                         icon: Icon(
-                          Icons.shopping_basket,
+                          Icons.shopping_cart,
                           size: 26,
                         ),
                         onPressed: () {
