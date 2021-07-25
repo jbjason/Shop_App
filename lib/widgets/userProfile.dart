@@ -12,7 +12,8 @@ class UserProfile extends StatelessWidget {
     final _userTransactions =
         Provider.of<Orders>(context, listen: false).recentTransactions(7);
     final size = MediaQuery.of(context).size;
-    return SingleChildScrollView(
+    return Container(
+      margin: EdgeInsets.only(top: 5, bottom: 10),
       child: Column(
         children: [
           //profile image

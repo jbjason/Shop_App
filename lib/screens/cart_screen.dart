@@ -22,7 +22,7 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
+      statusBarColor: Color(0xFFFDD148),
       statusBarBrightness: Brightness.light,
     ));
     final cart = Provider.of<Cart>(context);
@@ -94,7 +94,8 @@ class _CartScreenState extends State<CartScreen> {
           Positioned(
             bottom: size.height * .1,
             child: cart.itemCount < 1
-                ? Center(child: Text('No items available yet :('))
+                ? Container(
+                    height: 300, child: Text('No items available yet :('))
                 : Container(
                     height: size.height * .64,
                     width: size.width,
