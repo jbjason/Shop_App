@@ -94,6 +94,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                 padding: EdgeInsets.all(13),
                 child: ListView(shrinkWrap: true, children: []),
               )),
+              // drawer & cartIcon
               Row(children: [
                 IconButton(
                   icon: Icon(Icons.menu, size: 24),
