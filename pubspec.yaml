@@ -66,6 +66,7 @@ flutter:
     - assets/images/light1.png
     - assets/images/light2.png
     - assets/images/background.png
+    - assets/images/homeLogo2.jpeg
     - assets/images/offPic.png
   #   - images/a_dot_ham.jpeg
 
