@@ -92,6 +92,12 @@ class Products with ChangeNotifier {
     return _items.firstWhere((element) => element.id == id);
   }
 
+  List<Product> get getPopularProducts {
+    var f = items;
+    f.sort((a, b) => a.isReview.compareTo(b.isReview));
+    return f;
+  }
+
   int availableProduct(String id) {
     Product p = _items.firstWhere((element) => element.id == id);
     return p.available;
