@@ -12,7 +12,7 @@ class OffersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Color(0xFFFDD148),
+      statusBarColor: Colors.transparent,
       statusBarBrightness: Brightness.light,
     ));
     final size = MediaQuery.of(context).size;

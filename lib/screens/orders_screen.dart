@@ -1,5 +1,4 @@
-import 'package:Shop_App/screens/order_details_screen.dart';
-
+import '../screens/order_details_screen.dart';
 import '../widgets/userProfile.dart';
 import '../widgets/app_drawer.dart';
 import '../providers/orders.dart' show Orders;
@@ -22,7 +21,7 @@ class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Color(0xFFFDD148),
+      statusBarColor: Colors.transparent,
       statusBarBrightness: Brightness.light,
     ));
     final size = MediaQuery.of(context).size;
