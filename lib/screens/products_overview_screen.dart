@@ -84,7 +84,6 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                 : productsData.items;
     return Scaffold(
       key: _scaffoldKey,
-      // drawer: AppDrawer(),
       body: Stack(children: [
         AppDrawer(),
         AnimatedContainer(
