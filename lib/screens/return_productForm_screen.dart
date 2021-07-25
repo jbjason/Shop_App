@@ -63,13 +63,13 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
                   shrinkWrap: true,
                   children: [
                     Text(
-                      ' Confirm Orders',
+                      ' Return Form',
                       style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontSize: 30.0,
                           fontWeight: FontWeight.bold),
                     ),
-                    SizedBox(height: 64),
+                    SizedBox(height: 26),
                     ListTile(
                       title: Text(
                         '     Conditions of Return',
@@ -227,8 +227,9 @@ class CondtionsForReturns extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      color: Colors.blue[50],
+      color: Colors.blue[200],
       child: Card(
+        color: Colors.blue[50],
         child: RichText(
           text: TextSpan(children: [
             TextSpan(
