@@ -93,197 +93,200 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
               Expanded(
                   child: Padding(
                 padding: EdgeInsets.all(13),
-                child: ListView(shrinkWrap: true, children: []),
-              )),
-              // drawer & cartIcon
-              Row(children: [
-                IconButton(
-                  icon: Icon(Icons.menu, size: 24),
-                  onPressed: () {
-                    _scaffoldKey.currentState.openDrawer();
-                  },
-                ),
-                Spacer(),
-                Consumer<Cart>(
-                  builder: (_, cart, ch) =>
-                      Badge(child: ch, value: cart.itemCount.toString()),
-                  child: IconButton(
-                    alignment: Alignment.topRight,
-                    icon: Icon(
-                      Icons.shopping_basket,
-                      size: 24,
+                child: ListView(shrinkWrap: true, children: [
+                  // drawer & cartIcon
+                  Row(children: [
+                    IconButton(
+                      icon: Icon(Icons.menu, size: 24),
+                      onPressed: () {
+                        _scaffoldKey.currentState.openDrawer();
+                      },
                     ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(CartScreen.routeName);
-                    },
-                  ),
-                ),
-              ]),
-              Container(
-                height: size.height * .1,
-                child: Row(
-                  children: [
-                    SizedBox(width: 5.0),
-                    Container(
-                      alignment: Alignment.topLeft,
-                      height: 50.0,
-                      width: 50.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(25.0),
-                        border: Border.all(
-                            color: Colors.white,
-                            style: BorderStyle.solid,
-                            width: 2.0),
-                        image: DecorationImage(
-                            image: AssetImage(
-                              'assets/images/pinch2.png',
-                            ),
-                            fit: BoxFit.cover),
-                      ),
-                    ),
-                    SizedBox(width: 4),
-                    Text(
-                      ' Hii there..!',
-                      style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              ),
-              // what u like Text
-              Container(
-                height: size.height * .03,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 20, right: 20),
-                  child: Text(
-                    'What do You Like to Buy ?',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 16.0,
-                      wordSpacing: 5,
-                      letterSpacing: 2,
-                    ),
-                  ),
-                ),
-              ),
-              // SearchBar
-              Padding(
-                padding: EdgeInsets.only(left: 15.0, right: 15.0),
-                child: Material(
-                  elevation: 7.0,
-                  borderRadius: BorderRadius.circular(5.0),
-                  child: TextFormField(
-                    readOnly: true,
-                    decoration: InputDecoration(
-                        border: InputBorder.none,
-                        prefixIcon: Icon(Icons.search,
-                            color: Color(getColorHexFromStr('#FEDF62')),
-                            size: 30.0),
-                        contentPadding: EdgeInsets.only(left: 15.0, top: 15.0),
-                        hintText: 'Search',
-                        hintStyle: TextStyle(
-                            color: Colors.grey, fontFamily: 'Quicksand')),
-                    onTap: () async {
-                      final result = await showSearch(
-                          context: context,
-                          delegate: DataSearch(productsData.searcHints));
-                      if (result != null) {
-                        setState(() {
-                          productsData.setSerachForProduct(result);
-                          _isSearch = true;
-                        });
-                      }
-                    },
-                  ),
-                ),
-              ),
-              //OfferPic
-              offerPic.length == 0
-                  ? Container(height: 15)
-                  : Container(
-                      margin: EdgeInsets.only(top: 5, bottom: 5),
-                      height: 230,
-                      width: size.width * .7,
-                      child: _isLoading
-                          ? CircularProgressIndicator()
-                          : Image.network(
-                              offerPic[0].imageUrl,
-                              fit: BoxFit.contain,
-                            ),
-                    ),
-              // category List
-              Container(
-                height: 50,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (ctx, index) => InkWell(
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = index;
-                        productsData.setSelectedCategoryIndex(selectedIndex);
-                        _isCategory = true;
-                      });
-                    },
-                    child: Container(
-                      alignment: Alignment.center,
-                      margin: EdgeInsets.only(
-                          left: 3,
-                          right: index == _category.length - 1 ? 20 : 20),
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black12),
-                        color: index == selectedIndex
-                            ? Color(0xFFFEE16D)
-                            : Colors.white,
-                        borderRadius: BorderRadius.circular(7),
-                      ),
-                      child: Row(children: [
-                        Icon(
-                          Icons.donut_small_sharp,
-                          color: Colors.black12,
+                    Spacer(),
+                    Consumer<Cart>(
+                      builder: (_, cart, ch) =>
+                          Badge(child: ch, value: cart.itemCount.toString()),
+                      child: IconButton(
+                        alignment: Alignment.topRight,
+                        icon: Icon(
+                          Icons.shopping_basket,
+                          size: 24,
                         ),
-                        SizedBox(width: 10),
+                        onPressed: () {
+                          Navigator.of(context).pushNamed(CartScreen.routeName);
+                        },
+                      ),
+                    ),
+                  ]),
+                  Container(
+                    height: size.height * .1,
+                    child: Row(
+                      children: [
+                        SizedBox(width: 5.0),
+                        Container(
+                          alignment: Alignment.topLeft,
+                          height: 50.0,
+                          width: 50.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25.0),
+                            border: Border.all(
+                                color: Colors.white,
+                                style: BorderStyle.solid,
+                                width: 2.0),
+                            image: DecorationImage(
+                                image: AssetImage(
+                                  'assets/images/pinch2.png',
+                                ),
+                                fit: BoxFit.cover),
+                          ),
+                        ),
+                        SizedBox(width: 4),
                         Text(
-                          _category[index],
+                          ' Hii there..!',
                           style: TextStyle(
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w600),
+                              fontFamily: 'Montserrat',
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.bold),
                         ),
-                      ]),
+                      ],
                     ),
                   ),
-                  itemCount: _category.length,
-                ),
-              ),
-              SizedBox(height: 15),
-              Text(
-                'Popular',
-                style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 23.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              PopularProducts(productsData.items),
-              Text(
-                'Reccomended For You',
-                style: TextStyle(
-                    fontFamily: 'Montserrat',
-                    fontSize: 23.0,
-                    fontWeight: FontWeight.bold),
-              ),
-              Container(
-                height: products.length * 195.0,
-                child: ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  padding: EdgeInsets.only(top: 7.0, bottom: 7.0),
-                  itemBuilder: (BuildContext ctx, int index) =>
-                      ProductItem(products[index]),
-                  itemCount: products.length,
-                ),
-              ),
-              SizedBox(height: 20),
+                  // what u like Text
+                  Container(
+                    height: size.height * .03,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 20, right: 20),
+                      child: Text(
+                        'What do You Like to Buy ?',
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 16.0,
+                          wordSpacing: 5,
+                          letterSpacing: 2,
+                        ),
+                      ),
+                    ),
+                  ),
+                  // SearchBar
+                  Padding(
+                    padding: EdgeInsets.only(left: 15.0, right: 15.0),
+                    child: Material(
+                      elevation: 7.0,
+                      borderRadius: BorderRadius.circular(5.0),
+                      child: TextFormField(
+                        readOnly: true,
+                        decoration: InputDecoration(
+                            border: InputBorder.none,
+                            prefixIcon: Icon(Icons.search,
+                                color: Color(getColorHexFromStr('#FEDF62')),
+                                size: 30.0),
+                            contentPadding:
+                                EdgeInsets.only(left: 15.0, top: 15.0),
+                            hintText: 'Search',
+                            hintStyle: TextStyle(
+                                color: Colors.grey, fontFamily: 'Quicksand')),
+                        onTap: () async {
+                          final result = await showSearch(
+                              context: context,
+                              delegate: DataSearch(productsData.searcHints));
+                          if (result != null) {
+                            setState(() {
+                              productsData.setSerachForProduct(result);
+                              _isSearch = true;
+                            });
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                  //OfferPic
+                  offerPic.length == 0
+                      ? Container(height: 15)
+                      : Container(
+                          margin: EdgeInsets.only(top: 5, bottom: 5),
+                          height: 230,
+                          width: size.width * .7,
+                          child: _isLoading
+                              ? CircularProgressIndicator()
+                              : Image.network(
+                                  offerPic[0].imageUrl,
+                                  fit: BoxFit.contain,
+                                ),
+                        ),
+                  // category List
+                  Container(
+                    height: 50,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (ctx, index) => InkWell(
+                        onTap: () {
+                          setState(() {
+                            selectedIndex = index;
+                            productsData
+                                .setSelectedCategoryIndex(selectedIndex);
+                            _isCategory = true;
+                          });
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.only(
+                              left: 3,
+                              right: index == _category.length - 1 ? 20 : 20),
+                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black12),
+                            color: index == selectedIndex
+                                ? Color(0xFFFEE16D)
+                                : Colors.white,
+                            borderRadius: BorderRadius.circular(7),
+                          ),
+                          child: Row(children: [
+                            Icon(
+                              Icons.donut_small_sharp,
+                              color: Colors.black12,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              _category[index],
+                              style: TextStyle(
+                                  color: Colors.black87,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ]),
+                        ),
+                      ),
+                      itemCount: _category.length,
+                    ),
+                  ),
+                  SizedBox(height: 15),
+                  Text(
+                    'Popular',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 23.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  PopularProducts(productsData.items),
+                  Text(
+                    'Reccomended For You',
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 23.0,
+                        fontWeight: FontWeight.bold),
+                  ),
+                  Container(
+                    height: products.length * 195.0,
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      padding: EdgeInsets.only(top: 7.0, bottom: 7.0),
+                      itemBuilder: (BuildContext ctx, int index) =>
+                          ProductItem(products[index]),
+                      itemCount: products.length,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                ]),
+              )),
             ],
           ),
         ],
