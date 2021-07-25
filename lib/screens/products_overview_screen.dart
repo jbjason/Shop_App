@@ -1,4 +1,5 @@
 import 'package:Shop_App/providers/product.dart';
+import 'package:Shop_App/screens/product_detail_screen.dart';
 import '../widgets/product_item.dart';
 import '../providers/cart.dart';
 import '../screens/cart_screen.dart';
@@ -398,10 +399,10 @@ class PopularProducts extends StatelessWidget {
               itemBuilder: (BuildContext context, int index) {
                 return InkWell(
                   onTap: () {
-                    // Navigator.of(context).pushNamed(
-                    //   ProductDetailScreen.routeName,
-                    //   arguments: _relatedList[index].id,
-                    // );
+                    Navigator.of(context).pushNamed(
+                      ProductDetailScreen.routeName,
+                      arguments: _relatedList[index].id,
+                    );
                   },
                   child: Padding(
                     padding: EdgeInsets.all(10),
