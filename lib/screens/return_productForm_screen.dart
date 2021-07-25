@@ -204,45 +204,63 @@ class CondtionsForReturns extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(children: [
-        TextSpan(
-            text: 'Conditions :\n\n\n',
-            style: TextStyle(
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            )),
-        WidgetSpan(
-            child: Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
-        TextSpan(
-          text:
-              '   1.  The product must be unused, unworn, unwashed and without any flaws. Fashion products can be tried on to see if they fit and will still be considered unworn. \n\n',
+    return Container(
+      width: double.infinity,
+      color: Colors.blue[50],
+      child: Card(
+        child: RichText(
+          text: TextSpan(children: [
+            TextSpan(
+                text: 'Conditions :\n\n\n',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                )),
+            WidgetSpan(
+                child: Icon(Icons.donut_small,
+                    size: 16, color: Colors.deepOrange)),
+            TextSpan(
+                text:
+                    '   1.  The product must be unused, unworn, unwashed and without any flaws. Fashion products can be tried on to see if they fit and will still be considered unworn. \n\n',
+                style: TextStyle(color: Colors.black)),
+            WidgetSpan(
+                child: Icon(Icons.donut_small,
+                    size: 16, color: Colors.deepOrange)),
+            TextSpan(
+                text:
+                    '   2.  The product must include the original tags, user manual, warranty cards, freebies and accessories.\n\n',
+                style: TextStyle(color: Colors.black)),
+            WidgetSpan(
+                child: Icon(Icons.donut_small,
+                    size: 16, color: Colors.deepOrange)),
+            TextSpan(
+                text:
+                    '   3. The product must be returned in the original and undamaged manufacturer packaging / box.\n\n',
+                style: TextStyle(color: Colors.black)),
+            WidgetSpan(
+                child: Icon(Icons.donut_small,
+                    size: 16, color: Colors.deepOrange)),
+            TextSpan(
+                text:
+                    '    4. If a product is returned to us in an inadequate condition, we reserve the right to send it back to you.\n\n',
+                style: TextStyle(color: Colors.black)),
+            WidgetSpan(
+                child: Icon(Icons.donut_small,
+                    size: 16, color: Colors.deepOrange)),
+            TextSpan(
+                text:
+                    '   5. If you are located in Dhaka city, then you will be able to pick up and drop off both facilities from specific areas. If you are located outside Dhaka, we have customer return drop off points in different locations where you can drop your return product.\n\n',
+                style: TextStyle(color: Colors.black)),
+            WidgetSpan(
+                child: Icon(Icons.donut_small,
+                    size: 16, color: Colors.deepOrange)),
+            TextSpan(
+                text:
+                    '   6. Plz send a current picture of the product to this email itisjubayer@gmail.com\n',
+                style: TextStyle(color: Colors.black)),
+          ]),
         ),
-        WidgetSpan(
-            child: Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
-        TextSpan(
-          text:
-              '   2.  The product must include the original tags, user manual, warranty cards, freebies and accessories.\n\n',
-        ),
-        WidgetSpan(
-            child: Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
-        TextSpan(
-          text:
-              '   3. The product must be returned in the original and undamaged manufacturer packaging / box.\n\n',
-        ),
-        WidgetSpan(
-            child: Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
-        TextSpan(
-          text:
-              '    4. If a product is returned to us in an inadequate condition, we reserve the right to send it back to you.\n\n',
-        ),
-        WidgetSpan(
-            child: Icon(Icons.donut_small, size: 16, color: Colors.deepOrange)),
-        TextSpan(
-          text:
-              '   5. If you are located in Dhaka city, then you will be able to avail pick up and drop off both facilities from specific areas. If you are located outside Dhaka, we have customer return drop off points in different locations where you can drop your return product.\n\n\n',
-        ),
-      ]),
+      ),
     );
   }
 }
