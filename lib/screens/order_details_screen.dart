@@ -172,7 +172,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               child: CircularProgressIndicator(),
             )
           : Stack(children: [
-              YellowDesign(size: size),
+              YellowDesign(size),
               Column(children: [
                 Expanded(
                   child: Padding(
@@ -414,10 +414,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 }
 
 class YellowDesign extends StatelessWidget {
-  const YellowDesign({
-    Key key,
-    @required this.size,
-  }) : super(key: key);
+  YellowDesign(this.size);
 
   final Size size;
 

@@ -1,3 +1,5 @@
+import 'package:Shop_App/screens/order_details_screen.dart';
+
 import '../widgets/userProfile.dart';
 import '../widgets/app_drawer.dart';
 import '../providers/orders.dart' show Orders;
@@ -49,7 +51,7 @@ class _OrderScreenState extends State<OrderScreen> {
                   child: UserProfile(connection[2], connection[3]));
             } else {
               return Stack(children: [
-                YellowDesignForOrder(size: size),
+                YellowDesign(size),
                 Column(children: [
                   SizedBox(height: MediaQuery.of(context).padding.top + 6),
                   Row(children: [
@@ -152,59 +154,59 @@ class _OrderScreenState extends State<OrderScreen> {
   }
 }
 
-class YellowDesignForOrder extends StatelessWidget {
-  const YellowDesignForOrder({
-    Key key,
-    @required this.size,
-  }) : super(key: key);
+// class YellowDesignForOrder extends StatelessWidget {
+//   const YellowDesignForOrder({
+//     Key key,
+//     @required this.size,
+//   }) : super(key: key);
 
-  final Size size;
+//   final Size size;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: size.height * .32,
-      width: size.width,
-      decoration: BoxDecoration(
-        color: Color(0xFFFDD148),
-        borderRadius: BorderRadius.only(
-          //bottomLeft: Radius.circular(50.0),
-          bottomRight: Radius.circular(180.0),
-        ),
-      ),
-      child: Stack(children: [
-        Positioned(
-          right: size.width * .4,
-          child: Container(
-            height: 400.0,
-            width: 400.0,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(200.0),
-              color: Color(0xFFFEE16D),
-            ),
-          ),
-        ),
-        Positioned(
-          bottom: 10.0,
-          left: size.width * .4,
-          child: Container(
-              height: 300.0,
-              width: 300.0,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(150.0),
-                  color: Color(0xFFFEE16D).withOpacity(0.5))),
-        ),
-        Positioned(
-          bottom: size.height * .13,
-          left: size.width * .1,
-          child: Container(
-              height: 300.0,
-              width: 300.0,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(150.0),
-                  color: Color(0xFFFDD148).withOpacity(0.7))),
-        ),
-      ]),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: size.height * .32,
+//       width: size.width,
+//       decoration: BoxDecoration(
+//         color: Color(0xFFFDD148),
+//         borderRadius: BorderRadius.only(
+//           //bottomLeft: Radius.circular(50.0),
+//           bottomRight: Radius.circular(180.0),
+//         ),
+//       ),
+//       child: Stack(children: [
+//         Positioned(
+//           right: size.width * .4,
+//           child: Container(
+//             height: 400.0,
+//             width: 400.0,
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(200.0),
+//               color: Color(0xFFFEE16D),
+//             ),
+//           ),
+//         ),
+//         Positioned(
+//           bottom: 10.0,
+//           left: size.width * .4,
+//           child: Container(
+//               height: 300.0,
+//               width: 300.0,
+//               decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(150.0),
+//                   color: Color(0xFFFEE16D).withOpacity(0.5))),
+//         ),
+//         Positioned(
+//           bottom: size.height * .13,
+//           left: size.width * .1,
+//           child: Container(
+//               height: 300.0,
+//               width: 300.0,
+//               decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(150.0),
+//                   color: Color(0xFFFDD148).withOpacity(0.7))),
+//         ),
+//       ]),
+//     );
+//   }
+// }
