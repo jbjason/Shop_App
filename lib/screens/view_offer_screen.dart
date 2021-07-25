@@ -284,25 +284,31 @@ class ViewOfferItem extends StatelessWidget {
                                 },
                                 color: Colors.red,
                               ),
-                              // IconButton(
-                              //   icon: Icon(Icons.shopping_cart),
-                              //   onPressed: () {
-                              //     cart.addItem(item.id, _currentPrice,
-                              //         item.imageUrl1, item.title, 1);
-                              //     Scaffold.of(context).hideCurrentSnackBar();
-                              //     Scaffold.of(context).showSnackBar(SnackBar(
-                              //       content: Text('Added item to Cart!'),
-                              //       duration: Duration(seconds: 1),
-                              //       action: SnackBarAction(
-                              //         label: 'UNDO',
-                              //         onPressed: () {
-                              //           cart.removeSingleItem(item.id);
-                              //         },
-                              //       ),
-                              //     ));
-                              //   },
-                              //   color: Colors.green,
-                              // ),
+                              IconButton(
+                                icon: Icon(Icons.shopping_cart),
+                                onPressed: () {
+                                  cart.addItem(
+                                      item.id,
+                                      _currentPrice,
+                                      item.imageUrl1,
+                                      item.title,
+                                      1,
+                                      item.colorList[0],
+                                      item.sizeList[0]);
+                                  Scaffold.of(context).hideCurrentSnackBar();
+                                  Scaffold.of(context).showSnackBar(SnackBar(
+                                    content: Text('Added item to Cart!'),
+                                    duration: Duration(seconds: 1),
+                                    action: SnackBarAction(
+                                      label: 'UNDO',
+                                      onPressed: () {
+                                        cart.removeSingleItem(item.id);
+                                      },
+                                    ),
+                                  ));
+                                },
+                                color: Colors.green,
+                              ),
                             ],
                           ),
                         ]),
