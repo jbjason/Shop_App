@@ -54,7 +54,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
   void didChangeDependencies() {
     if (_isInit == false) return;
     //Provider.of<Products>(context, listen: false).fetchAndSetDeadLines();
-    Provider.of<Products>(context)
+    Provider.of<Products>(context, listen: false)
       ..fetchOffersImagesList().then((_) {
         Provider.of<Products>(context, listen: false).fetchAndSetDeadLines();
         setState(() {
