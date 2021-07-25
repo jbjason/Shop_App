@@ -44,7 +44,7 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: Color(0xFFFDD148),
+      statusBarColor: Colors.transparent,
       statusBarBrightness: Brightness.light,
     ));
     final size = MediaQuery.of(context).size;
@@ -62,7 +62,14 @@ class _ReturnProductScreenState extends State<ReturnProductScreen> {
                 child: ListView(
                   shrinkWrap: true,
                   children: [
-                    //Condition & terms of return
+                    Text(
+                      ' Confirm Orders',
+                      style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 30.0,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(height: 64),
                     ListTile(
                       title: Text(
                         '     Conditions of Return',
