@@ -82,6 +82,14 @@ class _ViewOfferScreenState extends State<ViewOfferScreen> {
                     ),
                   ),
                 ]),
+                Text(
+                  ' Exciting Offers',
+                  style: TextStyle(
+                      fontFamily: 'Montserrat',
+                      fontSize: 30.0,
+                      fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 40),
                 _check == "sortBy"
                     ? Container()
                     : Row(
