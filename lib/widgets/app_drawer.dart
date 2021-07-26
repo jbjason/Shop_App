@@ -1,7 +1,6 @@
 import 'package:Shop_App/screens/products_overview_screen.dart';
 import 'package:Shop_App/screens/statistic_screen.dart';
 import 'package:Shop_App/screens/view_offer_screen.dart';
-
 import '../providers/products.dart';
 import '../screens/set_nextDayOffer_screen.dart';
 import '../screens/set_offers_screen.dart';
@@ -18,6 +17,13 @@ import 'package:flutter/material.dart';
 import '../providers/auth.dart';
 
 class AppDrawer extends StatelessWidget {
+  bool _check(String s) {
+    if (s.contains('jst') && s.contains('690') && s.contains('#')) {
+      return true;
+    } else
+      return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final auth = Provider.of<Auth>(context, listen: false);
@@ -25,6 +31,7 @@ class AppDrawer extends StatelessWidget {
       color: Colors.white.withOpacity(0.5),
       thickness: 1,
     );
+    final bool _isAdmin = _check(auth.userEmail.toLowerCase());
     return SingleChildScrollView(
       child: Container(
         color: Color.fromRGBO(31, 58, 47, 1.0),
@@ -42,13 +49,16 @@ class AppDrawer extends StatelessWidget {
             SortByClass(),
             d,
             // manage products
+            Visibility(visible: _isAdmin, child: ManageProducts()),
             ManageProducts(),
             d,
             // Offers List
-            OffersList(),
+            Visibility(visible: _isAdmin, child: OffersList()),
+
             d,
             // Manage Special/Combo Pric
-            ManageSpecialComboPrice(),
+            Visibility(visible: _isAdmin, child: ManageSpecialComboPrice()),
+
             d,
             // my Profile
             MyProfile(auth: auth),
@@ -57,16 +67,25 @@ class AppDrawer extends StatelessWidget {
             MyOrders(),
             d,
             // cutomer orders
-            CustomerOrders(),
+            Visibility(
+              visible: _isAdmin,
+              child: CustomerOrders(),
+            ),
             d,
             // Return Product Form
             ReturnProductForm(auth: auth),
             d,
             // Return Prod List
-            ReturnProductList(),
+            Visibility(
+              visible: _isAdmin,
+              child: ReturnProductList(),
+            ),
             d,
             // Business Statistic
-            StatisTic(),
+            Visibility(
+              visible: _isAdmin,
+              child: StatisTic(),
+            ),
             d,
             // Suggestion or Report form
             SuggestionOrReport(auth: auth),
