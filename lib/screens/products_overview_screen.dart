@@ -595,9 +595,7 @@ class DataSearch extends SearchDelegate<String> {
   final List<String> _hints;
   DataSearch(this._hints);
   final recentCities = [
-    "Red T-shirt",
-    "Munich",
-    "Paris",
+    "T-shirt",
   ];
   @override
   List<Widget> buildActions(BuildContext context) {
