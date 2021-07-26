@@ -87,7 +87,7 @@ class _UserProductsScreenState extends State<UserProductsScreen> {
                 ),
         ],
       ),
-      drawer: AppDrawer(),
+      drawer: Drawer(child: AppDrawer()),
       body: RefreshIndicator(
         onRefresh: () => _refreshProducts(context),
         child: Padding(

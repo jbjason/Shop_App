@@ -16,7 +16,6 @@ class StatisticScreen extends StatelessWidget {
         title: Text('Customer Orders',
             style: TextStyle(fontSize: 20, color: Colors.black)),
       ),
-      drawer: AppDrawer(),
       body: FutureBuilder(
           future: Provider.of<Orders>(context, listen: false)
               .fetchAndSetStatistic(),
