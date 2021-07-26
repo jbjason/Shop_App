@@ -116,20 +116,29 @@ class _AuthCardState extends State<AuthCard> {
   }
 
   void _showErrorDialog(String msg) {
-    showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              title: Text('Error Occured'),
-              content: Text(msg),
-              actions: [
-                FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('okay'),
-                )
-              ],
-            ));
+    Scaffold.of(context).hideCurrentSnackBar();
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text('Added item to Cart!'),
+      duration: Duration(seconds: 1),
+      action: SnackBarAction(
+        label: msg,
+        onPressed: () {},
+      ),
+    ));
+    // showDialog(
+    //     context: context,
+    //     builder: (_) => AlertDialog(
+    //           title: Text('Error Occured'),
+    //           content: Text(msg),
+    //           actions: [
+    //             FlatButton(
+    //               onPressed: () {
+    //                 Navigator.of(context).pop();
+    //               },
+    //               child: Text('okay'),
+    //             )
+    //           ],
+    //         ));
   }
 
   Future<void> _submit() async {
@@ -141,6 +150,9 @@ class _AuthCardState extends State<AuthCard> {
       _isLoading = true;
     });
     try {
+      FocusScopeNode currentFocus = FocusScope.of(context);
+      currentFocus.unfocus();
+      await Future.delayed(Duration(milliseconds: 300));
       if (_authMode == AuthMode.Login) {
         // Log user in
         await Provider.of<Auth>(context, listen: false)
@@ -178,7 +190,7 @@ class _AuthCardState extends State<AuthCard> {
       });
       _showErrorDialog('Could not authinticate you. Please try again later');
     }
-    await Future.delayed(Duration(milliseconds: 400));
+    await Future.delayed(Duration(milliseconds: 300));
     setState(() {
       _isLoading = false;
     });
