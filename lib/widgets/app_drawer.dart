@@ -46,7 +46,10 @@ class AppDrawer extends StatelessWidget {
             OffersZone(),
             d,
             //sortBy
-            SortByClass(),
+            Visibility(
+              visible: !_isAdmin,
+              child: SortByClass(),
+            ),
             d,
             // manage products
             Visibility(visible: _isAdmin, child: ManageProducts()),
@@ -60,10 +63,16 @@ class AppDrawer extends StatelessWidget {
 
             d,
             // my Profile
-            MyProfile(auth: auth),
+            Visibility(
+              visible: !_isAdmin,
+              child: MyProfile(auth: auth),
+            ),
             d,
             // My Orders
-            MyOrders(),
+            Visibility(
+              visible: !_isAdmin,
+              child: MyOrders(),
+            ),
             d,
             // cutomer orders
             Visibility(
@@ -72,7 +81,10 @@ class AppDrawer extends StatelessWidget {
             ),
             d,
             // Return Product Form
-            ReturnProductForm(auth: auth),
+            Visibility(
+              visible: !_isAdmin,
+              child: ReturnProductForm(auth: auth),
+            ),
             d,
             // Return Prod List
             Visibility(
@@ -87,7 +99,10 @@ class AppDrawer extends StatelessWidget {
             ),
             d,
             // Suggestion or Report form
-            SuggestionOrReport(auth: auth),
+            Visibility(
+              visible: !_isAdmin,
+              child: SuggestionOrReport(auth: auth),
+            ),
             d,
             //About Us
             AboutUs(),
