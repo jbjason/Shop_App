@@ -266,7 +266,7 @@ class _ProductDetailScreenItemState extends State<ProductDetailScreenItem> {
                           return DropdownMenuItem(
                             child: Row(
                               children: [
-                                Icon(Icons.format_size),
+                                Icon(Icons.colorize),
                                 SizedBox(
                                   width: 15,
                                 ),
