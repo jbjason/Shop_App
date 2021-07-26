@@ -50,7 +50,6 @@ class AppDrawer extends StatelessWidget {
             d,
             // manage products
             Visibility(visible: _isAdmin, child: ManageProducts()),
-            ManageProducts(),
             d,
             // Offers List
             Visibility(visible: _isAdmin, child: OffersList()),
