@@ -30,6 +30,7 @@ dependencies:
   smooth_star_rating: ^1.1.1
   pinch_zoom: ^0.1.0
   slide_countdown_clock: ^1.0.0
+  flare_flutter: ^3.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -68,6 +69,7 @@ flutter:
     - assets/images/background.png
     - assets/images/homeLogo2.jpeg
     - assets/images/offPic.png
+    - assets/images/Teddy.flr
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
