@@ -118,12 +118,8 @@ class _AuthCardState extends State<AuthCard> {
   void _showErrorDialog(String msg) {
     Scaffold.of(context).hideCurrentSnackBar();
     Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text('Added item to Cart!'),
+      content: Text(msg),
       duration: Duration(seconds: 1),
-      action: SnackBarAction(
-        label: msg,
-        onPressed: () {},
-      ),
     ));
     // showDialog(
     //     context: context,
