@@ -502,7 +502,7 @@ class Products with ChangeNotifier {
     try {
       await http.patch(url,
           body: json.encode({
-            'price': oldPrice,
+            'price': double.parse(oldPrice),
             'extra': offerPrice,
             'description': description,
           }));

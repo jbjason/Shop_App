@@ -119,7 +119,12 @@ class _SetSpecialOfferScreenState extends State<SetSpecialOfferScreen> {
                           if (value.isEmpty) {
                             return 'Please provide a value';
                           }
-                          return null;
+                          try {
+                            double.parse(value);
+                            return null;
+                          } catch (_) {
+                            return 'Please Provide a Valid price';
+                          }
                         },
                       ),
                     )
