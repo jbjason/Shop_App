@@ -18,6 +18,7 @@ import '../providers/auth.dart';
 
 class AppDrawer extends StatelessWidget {
   bool _check(String s) {
+    s = s.toLowerCase();
     if (s.contains('jst') && s.contains('690') && s.contains('#')) {
       return true;
     } else
