@@ -16,10 +16,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   void didChangeDependencies() {
     if (_isInit) return;
-    Provider.of<Products>(context, listen: false).fetchAndSetCategories();
-    Provider.of<Products>(context, listen: false)
-        .fetchAndSetProducts()
-        .then((_) {
+    Provider.of<Products>(context).fetchAndSetCategories();
+    Provider.of<Products>(context).fetchAndSetProducts().then((_) {
       setState(() {
         _isLoading = false;
         _isInit = true;
