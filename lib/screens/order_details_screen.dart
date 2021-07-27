@@ -144,7 +144,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     return RangeSlider(
       values: values,
       min: 0,
-      max: 100,
+      max: 200,
       divisions: 50,
       labels: RangeLabels(
         values.start.round().toString(),
