@@ -33,14 +33,13 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   @override
   void didChangeDependencies() {
     if (k != 0) return;
-    Provider.of<Orders>(context, listen: false).fetchPoint();
-    Provider.of<Products>(context, listen: false)
-        .fetchOffersUptoAmount()
-        .then((_) {
-      setState(() {
-        _isfetching = false;
+    Provider.of<Orders>(context)
+      ..fetchPoint().then((_) {
+        Provider.of<Products>(context, listen: false).fetchOffersUptoAmount();
+        setState(() {
+          _isfetching = false;
+        });
       });
-    });
     k++;
     super.didChangeDependencies();
   }
