@@ -213,21 +213,21 @@ class _AuthCardState extends State<AuthCard> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: 200,
-              width: 300,
-              child: FlareActor(
-                'assets/images/Teddy.flr',
-                alignment: Alignment.bottomCenter,
-                fit: BoxFit.contain,
-                animation: this._anitmationType,
-                callback: (_) {
-                  setState(() {
-                    this._anitmationType = 'idle';
-                  });
-                },
-              ),
-            ),
+            // Container(
+            //   height: 200,
+            //   width: 300,
+            //   child: FlareActor(
+            //     'assets/images/Teddy.flr',
+            //     alignment: Alignment.bottomCenter,
+            //     fit: BoxFit.contain,
+            //     animation: this._anitmationType,
+            //     callback: (_) {
+            //       setState(() {
+            //         this._anitmationType = 'idle';
+            //       });
+            //     },
+            //   ),
+            // ),
             Container(
               padding:
                   EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
