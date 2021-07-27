@@ -33,7 +33,7 @@ class AppDrawer extends StatelessWidget {
       thickness: 1,
     );
     final bool _isAdmin =
-        auth.userEmail == null ? '' : _check(auth.userEmail.toLowerCase());
+        auth.userEmail == null ? false : _check(auth.userEmail.toLowerCase());
     return SingleChildScrollView(
       child: Container(
         color: Color.fromRGBO(31, 58, 47, 1.0),
