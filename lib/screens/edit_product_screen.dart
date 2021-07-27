@@ -193,7 +193,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       onSaved: (value) {
                         _editedProduct = EditProduct(
                           id: _editedProduct.id,
-                          title: value,
+                          title: _editedProduct.title,
                           available: _editedProduct.available,
                           description: _editedProduct.description,
                           price: _editedProduct.price,
