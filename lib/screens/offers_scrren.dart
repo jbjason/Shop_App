@@ -16,67 +16,51 @@ class OffersScreen extends StatelessWidget {
       statusBarBrightness: Brightness.light,
     ));
     final size = MediaQuery.of(context).size;
+    final _imageslist = Provider.of<Products>(context).offersImages;
     return Scaffold(
-      body: FutureBuilder(
-          future: Provider.of<Products>(context, listen: false)
-              .fetchOffersImagesList(),
-          builder: (ctx, dataSnapShot) {
-            if (ConnectionState.waiting == dataSnapShot.connectionState) {
-              return Center(
-                  child: CircularProgressIndicator(
-                backgroundColor: Colors.green,
-              ));
-            }
-            if (dataSnapShot.error != null) {
-              return Container(height: 300, child: Text('An error occured'));
-            } else {
-              final _imageslist = Provider.of<Products>(context).offersImages;
-              return Stack(children: [
-                YellowDesign(size),
-                Column(children: [
-                  SizedBox(height: MediaQuery.of(context).padding.top + 6),
-                  Row(children: [
-                    IconButton(
-                      // alignment: Alignment.topLeft,
-                      icon: Icon(Icons.arrow_back),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                    Spacer()
-                  ]),
+        body: Stack(children: [
+      YellowDesign(size),
+      Column(children: [
+        SizedBox(height: MediaQuery.of(context).padding.top + 6),
+        Row(children: [
+          IconButton(
+            // alignment: Alignment.topLeft,
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+          Spacer()
+        ]),
 
-                  //Available Offers
-                  Text(
-                    'Available Offers',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold),
+        //Available Offers
+        Text(
+          'Available Offers',
+          textAlign: TextAlign.left,
+          style: TextStyle(
+              fontFamily: 'Montserrat',
+              fontSize: 30.0,
+              fontWeight: FontWeight.bold),
+        ),
+        SizedBox(height: 40),
+        _imageslist.length < 1
+            ? Container(
+                height: 300,
+                alignment: Alignment.center,
+                child: Text('No offers available right now :)'))
+            : Expanded(
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (ctx, index) =>
+                        OffersImagesItem(_imageslist[index]),
+                    itemCount: _imageslist.length,
                   ),
-                  SizedBox(height: 40),
-                  _imageslist.length < 1
-                      ? Container(
-                          height: 300,
-                          alignment: Alignment.center,
-                          child: Text('No offers available right now :)'))
-                      : Expanded(
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemBuilder: (ctx, index) =>
-                                  OffersImagesItem(_imageslist[index]),
-                              itemCount: _imageslist.length,
-                            ),
-                          ),
-                        ),
-                ]),
-              ]);
-            }
-          }),
-    );
+                ),
+              ),
+      ]),
+    ]));
   }
 }
 
@@ -160,3 +144,63 @@ class _OffersImagesItemState extends State<OffersImagesItem> {
     );
   }
 }
+
+// body: FutureBuilder(
+//           future: Provider.of<Products>(context, listen: false)
+//               .fetchOffersImagesList(),
+//           builder: (ctx, dataSnapShot) {
+//             if (ConnectionState.waiting == dataSnapShot.connectionState) {
+//               return Center(
+//                   child: CircularProgressIndicator(
+//                 backgroundColor: Colors.green,
+//               ));
+//             }
+//             if (dataSnapShot.error != null) {
+//               return Container(height: 300, child: Text('An error occured'));
+//             } else {
+//               final _imageslist = Provider.of<Products>(context).offersImages;
+//               return Stack(children: [
+//                 YellowDesign(size),
+//                 Column(children: [
+//                   SizedBox(height: MediaQuery.of(context).padding.top + 6),
+//                   Row(children: [
+//                     IconButton(
+//                       // alignment: Alignment.topLeft,
+//                       icon: Icon(Icons.arrow_back),
+//                       onPressed: () {
+//                         Navigator.of(context).pop();
+//                       },
+//                     ),
+//                     Spacer()
+//                   ]),
+
+//                   //Available Offers
+//                   Text(
+//                     'Available Offers',
+//                     textAlign: TextAlign.left,
+//                     style: TextStyle(
+//                         fontFamily: 'Montserrat',
+//                         fontSize: 30.0,
+//                         fontWeight: FontWeight.bold),
+//                   ),
+//                   SizedBox(height: 40),
+//                   _imageslist.length < 1
+//                       ? Container(
+//                           height: 300,
+//                           alignment: Alignment.center,
+//                           child: Text('No offers available right now :)'))
+//                       : Expanded(
+//                           child: Padding(
+//                             padding: EdgeInsets.all(10),
+//                             child: ListView.builder(
+//                               shrinkWrap: true,
+//                               itemBuilder: (ctx, index) =>
+//                                   OffersImagesItem(_imageslist[index]),
+//                               itemCount: _imageslist.length,
+//                             ),
+//                           ),
+//                         ),
+//                 ]),
+//               ]);
+//             }
+//           }),
