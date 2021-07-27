@@ -163,7 +163,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       statusBarBrightness: Brightness.light,
     ));
     final size = MediaQuery.of(context).size;
-    final fp = Provider.of<Orders>(context).pointt;
+    final fp = Provider.of<Orders>(context, listen: false).pointt;
     return Scaffold(
       key: _scaffoldKey,
       body: _isfetching
