@@ -33,13 +33,12 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   @override
   void didChangeDependencies() {
     if (k != 0) return;
-    Provider.of<Orders>(context)
-      ..fetchPoint().then((_) {
-        Provider.of<Products>(context, listen: false).fetchOffersUptoAmount();
-        setState(() {
-          _isfetching = false;
-        });
+    Provider.of<Products>(context, listen: false).fetchOffersUptoAmount();
+    Provider.of<Orders>(context, listen: false).fetchPoint().then((_) {
+      setState(() {
+        _isfetching = false;
       });
+    });
     k++;
     super.didChangeDependencies();
   }
@@ -163,7 +162,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       statusBarBrightness: Brightness.light,
     ));
     final size = MediaQuery.of(context).size;
-    final fp = Provider.of<Orders>(context, listen: false).pointt;
+    final fp = Provider.of<Orders>(context).pointt;
     return Scaffold(
       key: _scaffoldKey,
       body: _isfetching
