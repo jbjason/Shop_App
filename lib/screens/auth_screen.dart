@@ -158,14 +158,14 @@ class _AuthCardState extends State<AuthCard> {
         await Provider.of<Auth>(context, listen: false)
             .signup(_authData['email'], _authData['password']);
 
-        setState(() {
-          _anitmationType = 'success';
-        });
+        // setState(() {
+        //   _anitmationType = 'success';
+        // });
       }
     } on HttpException catch (error) {
-      setState(() {
-        _anitmationType = 'fail';
-      });
+      // setState(() {
+      //   _anitmationType = 'fail';
+      // });
       // Manual error/Exception Handling
       var errorMsg = 'Authentication failed';
       if (error.toString().contains('EMAIL_EXISTS')) {
@@ -181,12 +181,12 @@ class _AuthCardState extends State<AuthCard> {
       }
       _showErrorDialog(errorMsg);
     } catch (error) {
-      setState(() {
-        _anitmationType = 'fail';
-      });
+      // setState(() {
+      //   _anitmationType = 'fail';
+      // });
       _showErrorDialog('Could not authinticate you. Please try again later');
     }
-    await Future.delayed(Duration(milliseconds: 300));
+    //await Future.delayed(Duration(milliseconds: 300));
     setState(() {
       _isLoading = false;
     });
