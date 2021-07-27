@@ -277,6 +277,9 @@ class Orders with ChangeNotifier {
         _pointt = 2;
       } else {
         _pointt = extract['M1234567'];
+        if (_pointt > 200) {
+          _pointt = 200;
+        }
       }
     } catch (error) {
       _pointt = 2;

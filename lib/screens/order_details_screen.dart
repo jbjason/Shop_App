@@ -477,11 +477,11 @@ class PointDemoRow extends StatelessWidget {
       children: [
         Text('  0',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
-        Text('20', style: TextStyle(fontSize: 11)),
         Text('40', style: TextStyle(fontSize: 11)),
-        Text('60', style: TextStyle(fontSize: 11)),
         Text('80', style: TextStyle(fontSize: 11)),
-        Text('100',
+        Text('120', style: TextStyle(fontSize: 11)),
+        Text('160', style: TextStyle(fontSize: 11)),
+        Text('200',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12)),
       ],
     );
