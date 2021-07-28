@@ -301,7 +301,8 @@ class Products with ChangeNotifier {
     exProduct = null;
   }
 
-  Future<void> updateProduct(String id, EditProduct newProduct) async {
+  Future<void> updateProduct(String id, EditProduct newProduct,
+      List<String> sizeList, List<String> colorList) async {
     final url = Uri.parse(
         'https://flutter-update-67f54.firebaseio.com/products/$id.json?auth=$authToken');
     await http.patch(url,
@@ -309,9 +310,14 @@ class Products with ChangeNotifier {
           'title': newProduct.title,
           'description': newProduct.description,
           'price': newProduct.price,
-          //'imageUrl': newProduct.imageUrl,
+          'imageUrl1': newProduct.imageUrl1,
+          'imageUrl2': newProduct.imageUrl2,
+          'imageUrl3': newProduct.imageUrl3,
+          'available': newProduct.available,
+          'size': sizeList.map((e) => {'size1': e}).toList(),
+          'color': colorList.map((e) => {'color1': e}).toList(),
         }));
-    final prodIndex = _items.indexWhere((element) => element.id == id);
+    //final prodIndex = _items.indexWhere((element) => element.id == id);
     //_items[prodIndex] = newProduct;
     notifyListeners();
   }

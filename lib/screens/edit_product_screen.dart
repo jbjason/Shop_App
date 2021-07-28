@@ -142,8 +142,8 @@ class _EditProductScreenState extends State<EditProductScreen> {
                     ]));
       }
     } else {
-      await Provider.of<Products>(context, listen: false)
-          .updateProduct(_editedProduct.id, _editedProduct);
+      await Provider.of<Products>(context, listen: false).updateProduct(
+          _editedProduct.id, _editedProduct, sizeList, colorsList);
     }
     setState(() {
       isLoading = false;
@@ -503,6 +503,7 @@ class _EditProductScreenState extends State<EditProductScreen> {
                       ),
                     ),
                     SizedBox(height: 10),
+                    // Image field e Control & initialValue options je kono 1ta thakte pare eksathe
                     Row(
                       // make all children starting from very below of the row's height
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -525,7 +526,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
-                            // initialValue: _initValues['imageUrl'],
                             decoration: InputDecoration(labelText: 'Image Url'),
                             keyboardType: TextInputType.url,
                             controller: _imageUrlController1,
@@ -637,8 +637,6 @@ class _EditProductScreenState extends State<EditProductScreen> {
                         ),
                         Expanded(
                           child: TextFormField(
-                            // Image field e Control & initialValue options je kono 1ta thakte pare eksathe
-                            // initialValue: _initValues['imageUrl'],
                             decoration: InputDecoration(labelText: 'Image Url'),
                             keyboardType: TextInputType.url,
                             controller: _imageUrlController3,
