@@ -230,25 +230,21 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                         ),
                       ),
                       //OfferPic
-                      offerPic.length == 0
-                          ? Container(height: 15)
-                          : InkWell(
-                              onTap: () {
-                                Navigator.of(context)
-                                    .pushNamed(OffersScreen.routeName);
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(top: 5, bottom: 5),
-                                height: 230,
-                                width: size.width * .7,
-                                child: _isLoading
-                                    ? CircularProgressIndicator()
-                                    : Image.asset(
-                                        'assets/images/offPic.png',
-                                        fit: BoxFit.contain,
-                                      ),
-                              ),
-                            ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed(OffersScreen.routeName);
+                        },
+                        child: Container(
+                          margin: EdgeInsets.only(top: 5),
+                          height: 230,
+                          width: size.width * .7,
+                          child: Image.asset(
+                            'assets/images/offPic.png',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
                       // category List
                       Container(
                         height: 50,
