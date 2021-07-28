@@ -49,7 +49,7 @@ class AppDrawer extends StatelessWidget {
               visible: !_isAdmin,
               child: Column(
                 children: [
-                  SortByClass(),
+                  SearchByTitle(),
                   d,
                   MyProfile(auth: auth),
                   d,
@@ -95,6 +95,39 @@ class AppDrawer extends StatelessWidget {
   }
 }
 
+class SearchByTitle extends StatelessWidget {
+  const SearchByTitle({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final t = TextStyle(
+      fontFamily: 'Montserrat',
+      fontSize: 16,
+      color: Colors.white,
+    );
+    return ListTile(
+      leading: Icon(Icons.sort_sharp, color: Colors.white),
+      title: Text('Search By...', style: t),
+      onTap: () {
+        return showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: Text('SEARCH By...'),
+            content: Container(
+              height: 400,
+              width: size.width * .8,
+              child: SortByClass(),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
 class StatisTic extends StatelessWidget {
   const StatisTic({
     Key key,
@@ -123,7 +156,6 @@ class SortByClass extends StatefulWidget {
 }
 
 class _SortByClassState extends State<SortByClass> {
-  bool _isExpand = false;
   double lowValue = 0, highValue = 1000;
   int _selectedIndex = 0;
 
@@ -173,120 +205,173 @@ class _SortByClassState extends State<SortByClass> {
     );
     final List<String> _category =
         Provider.of<Products>(context, listen: false).categories;
-    return Container(
-      child: Column(
-        children: [
-          // SearchBy title
-          ListTile(
-            tileColor: _isExpand ? Colors.green[200] : Colors.transparent,
-            leading: Icon(Icons.sort_sharp, color: Colors.white),
-            title: Text(
-              'Search By...',
-              style: t,
-            ),
-            onTap: () {
-              setState(() {
-                _isExpand = !_isExpand;
-              });
-            },
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          color: Colors.black12,
+          alignment: Alignment.center,
+          height: 30,
+          child: Text(
+            'Sort By *(Price)',
+            style: t,
           ),
-          Container(
-            height: _isExpand ? 550 : 0,
-            child: Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(top: 20, left: 18, bottom: 20),
-                  color: Colors.black12,
-                  alignment: Alignment.center,
-                  height: 40,
-                  child: Text(
-                    'Sort By *(Price)',
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text('0',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 18)),
-                    Text('1000', style: TextStyle(fontSize: 15)),
-                    Text('2000', style: TextStyle(fontSize: 15)),
-                    Text('+',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                  ],
-                ),
-                pointBar(),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text(''),
-                    Text('500'),
-                    Text('1500', style: TextStyle(fontSize: 15)),
-                    Text('2500', style: TextStyle(fontSize: 15)),
-                  ],
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 35, left: 18, bottom: 20),
-                  color: Colors.black12,
-                  alignment: Alignment.center,
-                  height: 40,
-                  child: Text(
-                    'Sort By *(Category)',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(bottom: 20),
-                  padding: EdgeInsets.only(left: 25),
-                  height: 150,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    itemBuilder: (context, index) => ListTile(
-                      tileColor: index == _selectedIndex
-                          ? Colors.orange[200]
-                          : Colors.orange[50].withOpacity(0.8),
-                      leading: Text('${index + 1}. '),
-                      title: Text(_category[index]),
-                      onTap: () {
-                        setState(() {
-                          _selectedIndex = index;
-                        });
-                      },
-                    ),
-                    itemCount: _category.length,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Spacer(),
-                    ElevatedButton.icon(
-                      icon: Icon(Icons.swap_vert),
-                      label: Text('   Apply'),
-                      onPressed: () {
-                        _save(_category[_selectedIndex]);
-                      },
-                    ),
-                  ],
-                ),
-              ],
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text('0',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10)),
+            Text('1k', style: TextStyle(fontSize: 11)),
+            Text('2k', style: TextStyle(fontSize: 11)),
+            Text('+',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
+          ],
+        ),
+        pointBar(),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Text('', style: TextStyle(fontSize: 10)),
+            Text('.5k', style: TextStyle(fontSize: 11)),
+            Text('1.5K', style: TextStyle(fontSize: 11)),
+            Text('2.5K', style: TextStyle(fontSize: 11)),
+            Text('', style: TextStyle(fontSize: 11)),
+          ],
+        ),
+        SizedBox(height: 20),
+        Container(
+          // margin: EdgeInsets.only(top: 10, bottom: 5),
+          color: Colors.black12,
+          alignment: Alignment.center,
+          height: 30,
+          child: Text('Sort By *(Category)', style: t),
+        ),
+        SizedBox(height: 8),
+        Container(
+          padding: EdgeInsets.only(left: 3, bottom: 6),
+          margin: EdgeInsets.only(left: 10, right: 10),
+          height: 170,
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemBuilder: (context, index) => ListTile(
+              tileColor: index == _selectedIndex
+                  ? Colors.orange[200]
+                  : Colors.orange[50].withOpacity(0.8),
+              leading: Text('${index + 1}. '),
+              title: Text(_category[index]),
+              onTap: () {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
             ),
+            itemCount: _category.length,
           ),
-        ],
-      ),
+        ),
+        Row(
+          children: [
+            Spacer(),
+            ElevatedButton.icon(
+              icon: Icon(Icons.swap_vert),
+              label: Text('   Apply'),
+              onPressed: () {
+                _save(_category[_selectedIndex]);
+              },
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
+// Container(
+//                   margin: EdgeInsets.only(top: 20, left: 18, bottom: 20),
+//                   color: Colors.black12,
+//                   alignment: Alignment.center,
+//                   height: 40,
+//                   child: Text(
+//                     'Sort By *(Price)',
+//                     style: TextStyle(
+//                       fontSize: 18,
+//                       color: Colors.white,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   ),
+//                 ),
+//                 Row(
+//                   crossAxisAlignment: CrossAxisAlignment.end,
+//                   mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                   children: [
+//                     Text('0',
+//                         style: TextStyle(
+//                             fontWeight: FontWeight.bold, fontSize: 18)),
+//                     Text('1000', style: TextStyle(fontSize: 15)),
+//                     Text('2000', style: TextStyle(fontSize: 15)),
+//                     Text('+',
+//                         style: TextStyle(
+//                             fontWeight: FontWeight.bold, fontSize: 20)),
+//                   ],
+//                 ),
+//                 pointBar(),
+//                 Row(
+//                   crossAxisAlignment: CrossAxisAlignment.end,
+//                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                   children: [
+//                     Text(''),
+//                     Text('500'),
+//                     Text('1500', style: TextStyle(fontSize: 15)),
+//                     Text('2500', style: TextStyle(fontSize: 15)),
+//                   ],
+//                 ),
+//                 Container(
+//                   margin: EdgeInsets.only(top: 35, left: 18, bottom: 20),
+//                   color: Colors.black12,
+//                   alignment: Alignment.center,
+//                   height: 40,
+//                   child: Text(
+//                     'Sort By *(Category)',
+//                     style: TextStyle(
+//                       fontSize: 18,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   ),
+//                 ),
+//                 Container(
+//                   margin: EdgeInsets.only(bottom: 20),
+//                   padding: EdgeInsets.only(left: 25),
+//                   height: 150,
+//                   child: ListView.builder(
+//                     shrinkWrap: true,
+//                     itemBuilder: (context, index) => ListTile(
+//                       tileColor: index == _selectedIndex
+//                           ? Colors.orange[200]
+//                           : Colors.orange[50].withOpacity(0.8),
+//                       leading: Text('${index + 1}. '),
+//                       title: Text(_category[index]),
+//                       onTap: () {
+//                         setState(() {
+//                           _selectedIndex = index;
+//                         });
+//                       },
+//                     ),
+//                     itemCount: _category.length,
+//                   ),
+//                 ),
+//                 Row(
+//                   children: [
+//                     Spacer(),
+//                     ElevatedButton.icon(
+//                       icon: Icon(Icons.swap_vert),
+//                       label: Text('   Apply'),
+//                       onPressed: () {
+//                         _save(_category[_selectedIndex]);
+//                       },
+//                     ),
+//                   ],
+//                 ),
 
 class ReturnProductForm extends StatelessWidget {
   const ReturnProductForm({
