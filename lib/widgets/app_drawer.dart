@@ -41,77 +41,51 @@ class AppDrawer extends StatelessWidget {
           children: [
             Header(auth: auth),
             Divider(color: Colors.black, thickness: 3),
-            // Myshop
             MyShop(),
             d,
-            // Offers_screen
             OffersZone(),
             d,
-            //sortBy
             Visibility(
               visible: !_isAdmin,
-              child: SortByClass(),
+              child: Column(
+                children: [
+                  SortByClass(),
+                  d,
+                  MyProfile(auth: auth),
+                  d,
+                  MyOrders(),
+                  d,
+                  ReturnProductForm(auth: auth),
+                  d,
+                ],
+              ),
             ),
-            d,
-            // manage products
-            Visibility(visible: _isAdmin, child: ManageProducts()),
-            d,
-            // Offers List
-            Visibility(visible: _isAdmin, child: OffersList()),
-
-            d,
-            // Manage Special/Combo Pric
-            Visibility(visible: _isAdmin, child: ManageSpecialComboPrice()),
-
-            d,
-            // my Profile
             Visibility(
-              visible: !_isAdmin,
-              child: MyProfile(auth: auth),
-            ),
-            d,
-            // My Orders
-            Visibility(
-              visible: !_isAdmin,
-              child: MyOrders(),
-            ),
-            d,
-            // cutomer orders
-            Visibility(
-              visible: _isAdmin,
-              child: CustomerOrders(),
-            ),
-            d,
-            // Return Product Form
-            Visibility(
-              visible: !_isAdmin,
-              child: ReturnProductForm(auth: auth),
-            ),
-            d,
-            // Return Prod List
-            Visibility(
-              visible: _isAdmin,
-              child: ReturnProductList(),
-            ),
-            d,
-            // Business Statistic
-            Visibility(
-              visible: _isAdmin,
-              child: StatisTic(),
-            ),
-            d,
+                visible: _isAdmin,
+                child: Column(
+                  children: [
+                    ManageProducts(),
+                    d,
+                    OffersList(),
+                    d,
+                    ManageSpecialComboPrice(),
+                    d,
+                    ReturnProductList(),
+                    d,
+                    CustomerOrders(),
+                    d,
+                    StatisTic(),
+                    d,
+                  ],
+                )),
             // Suggestion or Report form
-            Visibility(
-              visible: !_isAdmin,
-              child: SuggestionOrReport(auth: auth),
-            ),
-            d,
+            SuggestionOrReport(auth: auth),
             //About Us
             AboutUs(),
             d,
             // HelpLine
             HelpLine(),
-            d,
+            Divider(color: Colors.black, thickness: 3),
             // LogOut
             LogOut(),
           ],
