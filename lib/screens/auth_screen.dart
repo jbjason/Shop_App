@@ -199,7 +199,7 @@ class _AuthCardState extends State<AuthCard> {
     final deviceSize = MediaQuery.of(context).size;
     return Container(
       width: deviceSize.width,
-      padding: EdgeInsets.only(left: 20, right: 20, bottom: 20),
+      padding: EdgeInsets.only(left: 20, right: 20),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -219,8 +219,7 @@ class _AuthCardState extends State<AuthCard> {
               ),
             ),
             Container(
-              padding:
-                  EdgeInsets.only(left: 15, right: 15, top: 10, bottom: 10),
+              padding: EdgeInsets.only(left: 15, right: 15, top: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
                 color: Colors.white,
@@ -295,9 +294,7 @@ class _AuthCardState extends State<AuthCard> {
                             }
                           : null,
                     ),
-                  SizedBox(
-                    height: 20,
-                  ),
+                  SizedBox(height: 15),
                   if (_isLoading)
                     CircularProgressIndicator()
                   else
@@ -305,7 +302,7 @@ class _AuthCardState extends State<AuthCard> {
                       width: double.infinity,
                       height: 60,
                       padding:
-                          EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
+                          EdgeInsets.symmetric(horizontal: 30.0, vertical: 6.0),
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             primary: Colors.pink,
