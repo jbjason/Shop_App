@@ -38,7 +38,7 @@ class ThanksScreen extends StatelessWidget {
                 finalAmount: finalAmount,
                 finalPoint: finalPoint,
                 finalVoucher: finalVoucher),
-            SizedBox(height: 15),
+            SizedBox(height: 25),
             GoBackButton(finalProduct: finalProduct),
           ],
         ),
@@ -155,7 +155,7 @@ class SubTotalOfferAmount extends StatelessWidget {
                     'Grand Total : \$ ${finalAmount - (finalPoint + finalVoucher)}\n\n',
                 style: TextStyle(
                     decoration: TextDecoration.underline,
-                    decorationColor: Colors.red,
+                    decorationColor: Colors.red[200],
                     decorationThickness: 2.3,
                     color: Colors.black,
                     fontSize: 22,

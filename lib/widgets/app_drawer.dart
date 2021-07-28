@@ -80,12 +80,13 @@ class AppDrawer extends StatelessWidget {
                 )),
             // Suggestion or Report form
             SuggestionOrReport(auth: auth),
+            d,
             //About Us
             AboutUs(),
             d,
             // HelpLine
             HelpLine(),
-            Divider(color: Colors.black, thickness: 3),
+            Divider(color: Colors.black, thickness: 4),
             // LogOut
             LogOut(),
           ],
@@ -105,7 +106,7 @@ class SearchByTitle extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -137,7 +138,7 @@ class StatisTic extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -385,7 +386,7 @@ class ReturnProductForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -411,7 +412,7 @@ class SuggestionOrReport extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -440,7 +441,7 @@ class MyProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -499,7 +500,7 @@ class ReturnProductList extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -524,7 +525,7 @@ class MyShop extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 18,
+      fontSize: 16,
       color: Colors.white,
     );
     return ListTile(
@@ -549,7 +550,7 @@ class CustomerOrders extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -574,7 +575,7 @@ class MyOrders extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -600,7 +601,7 @@ class ManageSpecialComboPrice extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -626,7 +627,7 @@ class ManageProducts extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -652,7 +653,7 @@ class OffersZone extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -680,7 +681,7 @@ class LogOut extends StatelessWidget {
       title: Text('LogOut',
           style: TextStyle(
               fontFamily: 'Montserrat',
-              fontSize: 18,
+              fontSize: 16,
               color: Colors.white70,
               fontWeight: FontWeight.w700)),
       onTap: () {
@@ -702,7 +703,7 @@ class HelpLine extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -744,7 +745,7 @@ class AboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return ListTile(
@@ -787,7 +788,7 @@ class _OffersListState extends State<OffersList> {
   Widget build(BuildContext context) {
     final t = TextStyle(
       fontFamily: 'Montserrat',
-      fontSize: 16,
+      fontSize: 14,
       color: Colors.white,
     );
     return Container(

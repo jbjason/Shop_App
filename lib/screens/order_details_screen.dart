@@ -496,6 +496,7 @@ class TermsAndCondition extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.blue[200],
       height: 430,
       margin: EdgeInsets.only(top: 10),
       width: double.infinity,
