@@ -3,6 +3,7 @@ import '../providers/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'package:flutter/services.dart';
 
 enum AuthMode { Signup, Login }
 
@@ -11,8 +12,10 @@ class AuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
-    // final transformConfig = Matrix4.rotationZ(-8 * pi / 180);
-    // transformConfig.translate(-10.0);
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarBrightness: Brightness.light,
+    ));
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -25,23 +28,24 @@ class AuthScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                // Container(
+                //   height: deviceSize.height * .2,
+                //   width: 250,
+                //   margin: EdgeInsets.only(bottom: 20.0),
+                //   decoration: BoxDecoration(
+                //     borderRadius: BorderRadius.circular(20),
+                //     color: Colors.deepOrange.shade900,
+                //     image: DecorationImage(
+                //       image: AssetImage(
+                //         'assets/images/homeLogo2.jpeg',
+                //       ),
+                //       fit: BoxFit.contain,
+                //     ),
+                //   ),
+                // ),
+                SizedBox(height: deviceSize.height * .28),
                 Container(
-                  height: deviceSize.height * .2,
-                  width: 250,
-                  margin: EdgeInsets.only(bottom: 20.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.deepOrange.shade900,
-                    image: DecorationImage(
-                      image: AssetImage(
-                        'assets/images/homeLogo2.jpeg',
-                      ),
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
-                Container(
-                  height: deviceSize.height * .65 + 15.0,
+                  height: deviceSize.height * .6 + 15.0,
                   color: Colors.transparent,
                   child: AuthCard(),
                 )
@@ -121,20 +125,6 @@ class _AuthCardState extends State<AuthCard> {
       content: Text(msg),
       duration: Duration(seconds: 1),
     ));
-    // showDialog(
-    //     context: context,
-    //     builder: (_) => AlertDialog(
-    //           title: Text('Error Occured'),
-    //           content: Text(msg),
-    //           actions: [
-    //             FlatButton(
-    //               onPressed: () {
-    //                 Navigator.of(context).pop();
-    //               },
-    //               child: Text('okay'),
-    //             )
-    //           ],
-    //         ));
   }
 
   Future<void> _submit() async {
@@ -311,19 +301,38 @@ class _AuthCardState extends State<AuthCard> {
                   if (_isLoading)
                     CircularProgressIndicator()
                   else
-                    RaisedButton(
-                      child: Text(
-                          _authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
-                      onPressed: _submit,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
+                    Container(
+                      width: double.infinity,
+                      height: 60,
                       padding:
                           EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
-                      color: Theme.of(context).primaryColor,
-                      textColor:
-                          Theme.of(context).primaryTextTheme.button.color,
+                      child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.pink,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                          onPressed: _submit,
+                          child: Text(
+                            _authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP',
+                            style: TextStyle(color: Colors.white),
+                          )),
                     ),
+
+                  // RaisedButton(
+                  //   child: Text(
+                  //       _authMode == AuthMode.Login ? 'LOGIN' : 'SIGN UP'),
+                  //   onPressed: _submit,
+                  //   shape: RoundedRectangleBorder(
+                  //     borderRadius: BorderRadius.circular(30),
+                  //   ),
+                  //   padding:
+                  //       EdgeInsets.symmetric(horizontal: 30.0, vertical: 8.0),
+                  //   color: Theme.of(context).primaryColor,
+                  //   textColor:
+                  //       Theme.of(context).primaryTextTheme.button.color,
+                  // ),
                   FlatButton(
                     child: Text(
                         '${_authMode == AuthMode.Login ? 'SIGNUP' : 'LOGIN'} INSTEAD'),
